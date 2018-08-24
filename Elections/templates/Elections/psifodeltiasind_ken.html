@@ -26,8 +26,9 @@
          </select>
 
          <select   name="orderoption"  onchange="kentra.submit()">
+             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Σύνολο Ψήφων </option>
-             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμα</option>
+             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό</option>
          </select>
 
 

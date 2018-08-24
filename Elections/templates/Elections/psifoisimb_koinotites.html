@@ -27,13 +27,12 @@
          </select>
 
          <select   name="orderoption"  onchange="koinotites.submit()">
-
+            <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
             {% if all_psifoi.0.eidoskoinotitas != 3 %}
-             <option  value="5" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
             {% else %}
-            <option  value="4" {% if selected_order ==  2  %}selected{%endif%}>ΚΑτά Επώνυμο</option>
+            <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Επώνυμο</option>
             {% endif %}
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
