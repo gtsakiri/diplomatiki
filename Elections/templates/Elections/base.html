@@ -116,7 +116,6 @@
 
                 </div>
 
-
                     <!-- overflow-y: scroll; -->
                 <ul class="nav nav-list">
                      <div class="divmargin"> </div>
@@ -159,7 +158,9 @@
                     </li>
                 </ul>
             </div>
+
             <!--
+
 
                  <p id="demo1" class="hidden" ></p>
 -->
@@ -183,6 +184,11 @@
                     });
 
                   });
+
+
+
+
+
 
             </script>
 
@@ -216,53 +222,19 @@
 
 
   <script>
+    $("#livesearch").keyup(function () {
+                    var value = this.value.toLowerCase().trim();
 
-      $(function() {
-        //$.removeCookie("active");
-        var activeMenu = $.cookie("active");
-        console.log(activeMenu);
-        if (typeof activeMenu === 'undefined') {
-            $("#m1").addClass("active");
-        } else {
-            $('#' + activeMenu).addClass('active');
-        }
-        $('li a').click(function(e) {
-            e.preventDefault();
-
-            var listItems = $("#navPrimary li a");
-            listItems.each(function(idx, li) {
-                $(li).removeClass('active');
-            });
-
-            $(this).addClass('active');
-            var id = $(this).attr('id');
-            $.cookie("active", id);
-        });
-    })
-/*
-     // var vars = [], hash;
-    var output=document.getElementById('demo1');
-    var sel=document.getElementById("eklogesoption");
-
-    var query = document.URL.split('?')[1];
-    output.innerText=query;
-
-    var vars = query.split("?");
-    sel.value = 1;
-    alert(document.getElementById("eklogesoption").value);
-
-     for (var i=0;i<vars.length;i++) {
-         var pair = vars[i].split("=");
-         //output.innerText=pair;
-         //alert(pair[1]);
-         //if (pair[0] === "eklogesoption") {
-
-            // output.innerText = pair[1];
-
-         //}
-
-     }
-*/
+                    $("table tr").each(function (index) {
+                        if (!index) return;
+                        $(this).find("td").each(function () {
+                            var id = $(this).text().toLowerCase().trim();
+                            var not_found = (id.indexOf(value) == -1);
+                            $(this).closest('tr').toggle(!not_found);
+                            return not_found;
+                        });
+                    });
+    });
 
   </script>
 

@@ -26,15 +26,21 @@
          </select>
 
          <select   name="orderoption"  onchange="kentra.submit()">
-             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Ανα Συνδυασμό/Σύνολο Ψήφων(φθίνουσα διάταξη)</option>
-             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Ανα Συνδυασμό/Επώνυμο(Αλφαβητικά)</option>
-             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Επώνυμο(Αλφαβητικά)</option>
+             <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
+             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
+             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
          </select>
+
+        <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
 
 
         <div class="divmargin"><a href={% url 'export_psifoisimbken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
 
-        <br>
+        <br/>
+
+        <div class="divmargin"></div>
+
         </form>
 
 
@@ -60,15 +66,32 @@
            </tbody>
       </table>
 
+
+
+    <br />
+
+
+
    </div>
+
+<script>
+
+
+</script>
 
 
 
  </div>
 
+
+
 {% endblock %}
 
+
+
+
   </body>
+
 </html>
 
 

@@ -289,13 +289,13 @@ def psifoisimb_perifereies(request, eklid):
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = 1  # default perid  αν δεν δοθεί
+        paramstr = 1 # default perid  αν δεν δοθεί
 
 
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 3  # default ταξινόμηση
+        paramorder = 4  # default ταξινόμηση
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -312,7 +312,7 @@ def psifoisimb_perifereies(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
-    if paramorder==1:
+    if paramorder==1 or paramorder==4:
         all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr).order_by('sindiasmos','-sumvotes')
     elif paramorder==2 :
         all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr).order_by('sindiasmos','surname')
@@ -345,7 +345,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 3  # default ταξινόμηση
+        paramorder = 5  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -371,7 +371,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
-    if paramorder==1:
+    if paramorder==1 or paramorder==5:
         all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('sindiasmos','-sumvotes')
     elif paramorder==2 :
         all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('sindiasmos','surname')
@@ -455,7 +455,7 @@ def psifoisimb_ken(request, eklid):
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 2  # default ταξινόμηση
+        paramorder = 4  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -472,7 +472,7 @@ def psifoisimb_ken(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
-    if paramorder == 1:
+    if paramorder==1 or paramorder==4:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','-votes')
     elif paramorder == 2:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','surname')
