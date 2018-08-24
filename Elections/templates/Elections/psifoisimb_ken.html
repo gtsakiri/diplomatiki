@@ -7,7 +7,7 @@
  {% block content %}
 
 <div class="divmargin">
-<label class="label4">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο</label>
+<label class="label4">Ψήφοι υποψηφίων συμβούλων ανά κέντρο</label>
 </div>
 
 <div class="divmargin"> </div>
@@ -26,8 +26,9 @@
          </select>
 
          <select   name="orderoption"  onchange="kentra.submit()">
-             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Ανα Σύνολο Ψήφων (φθίνουσα διάταξη)</option>
-             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Ανα Συνδυασμό Αλφαβητικά</option>
+             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Ανα Συνδυασμό/Σύνολο Ψήφων(φθίνουσα διάταξη)</option>
+             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Ανα Συνδυασμό/Επώνυμο(Αλφαβητικά)</option>
+             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Επώνυμο(Αλφαβητικά)</option>
          </select>
 
 
@@ -41,12 +42,18 @@
 
            <tbody >
            <tr>
-                   <td class="thick">Συνδυασμός </td>
-                   <td class="thick">Ψηφοδέλτια </td>
+                   <td class="thick">Επώνυμο</td>
+                   <td class="thick">Όνομα </td>
+                   <td class="thick">Όν. Πατρός</td>
+                   <td class="thick">Συνδυασμός</td>
+                   <td class="thick">Ψηφοδέλτια</td>
            </tr>
-           {% for p in all_psifodeltia %}
+           {% for p in all_psifoi %}
                  <tr>
-                    <td >{{ p.sindiasmos }}</td>
+                    <td >{{ p.surname }}</td>
+                    <td >{{ p.firstname }}</td>
+                    <td >{{ p.fathername }}</td>
+                    <td >{% if p.sindiasmos == None %} {% else %}{{ p.sindiasmos }} {% endif %}</td>
                     <td class="myfontsize">{{ p.votes }}</td>
                  </tr>
              {% endfor %}

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
-      Kentra
+      Kentra, EklPsifoisimbVw
 from django.db import connection
 
 def export_psifoiper_xls(request,eklid, selected_order):
@@ -386,4 +386,54 @@ def psifodeltiasind_ken(request, eklid):
                }
     return render(request, 'Elections/psifodeltiasind_ken.html',context)
 
-#24/08/2018
+def psifoisimb_ken(request, eklid):
+
+# ΨΗΦΟΙ ΣΥΝΔΥΑΣΜΩΝ ΑΝΑ ΕΚΛ. ΚΕΝΤΡΟ
+
+    paramstr = request.GET.get('kentrooption','')
+    paramorder = request.GET.get('orderoption','')
+
+    try:
+        paramstr = int(paramstr)
+    except:
+        p = EklPsifoisimbVw.objects.filter(eklid=eklid).order_by('kentro')
+        paramstr=p[0].kenid  # default kenid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
+
+    try:
+        paramorder = int(paramorder)
+    except:
+        paramorder = 2  # default ταξινόμηση
+
+    # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    # φιλτράρισμα επιλεγμένου κέντρου
+    selected_kentro = Kentra.objects.filter(kenid=paramstr)
+
+    selected_order = paramorder
+
+    #ανάκτηση όλων των κέντρων της εκλ. αναμέτρησης
+    all_kentra=Kentra.objects.filter(eklid=eklid)
+    #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
+    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
+
+    if paramorder == 1:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','-votes')
+    elif paramorder == 2:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','surname')
+    else:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname')
+
+
+    context = {'all_psifoi':all_psifoi,
+                'all_pososta':all_pososta,
+               'all_ekloges':all_ekloges,
+               'selected_ekloges':selected_ekloges,
+               'all_kentra':all_kentra,
+               'selected_kentro': selected_kentro,
+               'selected_order':selected_order,
+               }
+    return render(request, 'Elections/psifoisimb_ken.html',context)
+
