@@ -1,0 +1,85 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+<div class="divmargin">
+<label class="label4">Κατάταξη υποψηφίων συμβούλων κοινοτήτων {{ selected_menu }}</label>
+</div>
+
+
+<div class="divmargin"> </div>
+
+
+
+<div class="container-fluid" align="center">
+    <div class="row">
+
+        <form method="get" name="koinotites">
+
+         <select  class="sel2" id="mydir" name="koinotitaoption"  onchange="koinotites.submit()">
+            {% for p in all_koinotites %}
+             <option  value="{{  p.koinid }}" {% if selected_koinotita.0.koinid ==  p.koinid  %}selected{%endif%}>{{ p.descr }}</option>
+            {% endfor %}
+         </select>
+
+         <select   name="orderoption"  onchange="koinotites.submit()">
+            {% if all_psifoi.0.eidoskoinotitas != 3 %}
+             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Ανα Συνδυασμό/Σύνολο Ψήφων(φθίνουσα διάταξη)</option>
+             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Ανα Συνδυασμό/Επώνυμα Αλφαβητικά</option>
+            {% else %}
+            <option  value="4" {% if selected_order ==  2  %}selected{%endif%}>Αλφαβητικά</option>
+            {% endif %}
+             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Ανα Σύνολο ψήφων(φθίνουσα διάταξη)</option>
+         </select>
+
+        <div class="divmargin"><a href="{% url 'export_psifoikoin_xls' selected_ekloges.0.eklid selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
+        <br>
+
+        </form>
+
+    <div class="divmargin">
+
+    </div>
+    <!-- <div class="container-fluid" overflow:auto> -->
+
+      <table class="b table table-bordered table-striped table-condensed ">
+
+           <tbody >
+           <tr>
+                   <td class="thick">Επίθετο </td>
+                   <td class="thick">Όνομα </td>
+                    <td class="thick"> Ον. πατρός </td>
+                {% if all_psifoi.0.eidoskoinotitas != 3 %}
+                    <td class="thick"> Συνδυασμός </td>
+                {% endif %}
+                    <td class="thick"> Ψήφοι </td>
+
+           </tr>
+           {% for p in all_psifoi %}
+                 <tr>
+                    <td>{{ p.surname }} </td>
+                    <td >{{ p.firstname }}</td>
+                    <td>{{ p.fathername }} </td>
+                     {% if p.eidoskoinotitas != 3 %}
+                     <td >{{ p.sindiasmos }}</td>
+                     {% endif %}
+                    <td class="myfontsize">{{ p.sumvotes }}</td>
+                 </tr>
+             {% endfor %}
+           </tbody>
+      </table>
+
+     </div>
+   </div>
+
+
+{% endblock %}
+
+  </body>
+</html>
+
+
