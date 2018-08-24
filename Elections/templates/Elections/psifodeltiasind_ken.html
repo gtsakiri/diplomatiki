@@ -1,0 +1,67 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+<div class="divmargin">
+<label class="label4">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο</label>
+</div>
+
+<div class="divmargin"> </div>
+
+
+
+<div class="container-fluid" align="center">
+    <div class="row">
+
+        <form method="get" name="kentra">
+
+         <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+            {% for p in all_kentra %}
+             <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
+            {% endfor %}
+         </select>
+
+         <select   name="orderoption"  onchange="kentra.submit()">
+             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Ανα Σύνολο Ψήφων (φθίνουσα διάταξη)</option>
+             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Ανα Συνδυασμό Αλφαβητικά</option>
+         </select>
+
+
+        <div class="divmargin"><a href={% url 'export_psifodeltiasind_ken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
+
+        <br>
+        </form>
+
+
+         <table class="b table table-bordered table-striped table-condensed ">
+
+           <tbody >
+           <tr>
+                   <td class="thick">Συνδυασμός </td>
+                   <td class="thick">Ψηφοδέλτια </td>
+           </tr>
+           {% for p in all_psifodeltia %}
+                 <tr>
+                    <td >{{ p.sindiasmos }}</td>
+                    <td class="myfontsize">{{ p.votes }}</td>
+                 </tr>
+             {% endfor %}
+           </tbody>
+      </table>
+
+   </div>
+
+
+
+ </div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+
