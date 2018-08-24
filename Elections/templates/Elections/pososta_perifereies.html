@@ -1,0 +1,108 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+<div class="divmargin"> </div>
+
+<div id="div2">
+<form method="get" name="perifereies">
+
+ <select  class="sel2" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
+    {% for p in all_perifereies %}
+     <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
+    {% endfor %}
+ </select>
+
+
+<div class="divmargin"> </div>
+
+</form>
+
+</div>
+
+
+<div id="container"></div>
+
+ <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+ <script>
+
+   Highcharts.chart('container', {
+       chart: {
+           type: 'column'
+       },
+       title: {
+           text: 'Ποσοστά συνδυασμών ΑΝΑ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑ στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων',
+           style: {
+               color: 'red',
+               fontSize: '20px'
+           },
+       },
+       xAxis: {
+           categories: [
+           {% for entry in all_posostaper %}'{{ entry.shortdescr }} '{% if not forloop.last %}, {% endif %}{% endfor %}
+         ],
+           labels: {
+           style: {
+               color: 'red',
+               fontSize:'16px'
+            }
+           }
+
+       },
+       series: [{
+           name: 'Ποσοστά υποψηφίων',
+         data: [
+           {% for entry in all_posostaper %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
+         ],
+         color: 'blue',
+       }],
+       plotOptions: {
+           series: {
+           dataLabels: {
+               enabled: true,
+               fontSize:'34px',
+               format:"{y} %"
+           }
+        }
+
+       }
+   });
+ </script>
+
+   <div class="a container-fluid" overflow:auto align="center">
+
+
+              <table class="a table table-bordered table-striped table-condensed">
+
+                   <tbody >
+                   <tr>
+                           <td class="thick">Συνδυασμός</td>
+                           <td class="thick">Ποσοστό </td>
+                   </tr>
+                   {% for p in all_posostaper %}
+                         <tr>
+                           <td >{{ p.sindiasmos }}</td>
+                           <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
+                         </tr>
+                     {% endfor %}
+                   </tbody>
+              </table>
+
+   </div>
+
+  </div>
+
+
+
+
+{% endblock %}
+
+  </body>
+</html>
+
+

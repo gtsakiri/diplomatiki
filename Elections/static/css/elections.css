@@ -1,0 +1,244 @@
+h3 a {
+    color: red;
+}
+
+body {
+    padding-left : 15px;
+    font-family : 'Arial' ;
+    background-color: rgba(164, 209, 252, 0.01); /* Black Gray */
+}
+
+#div1 {
+    text-align: left;
+    background-colorcolor: red;
+	/* border-bottom:1px solid #2e81ff;*/
+}
+
+.bg-4 {
+    background-color: #040604; /* Black Gray */
+    color: #fdffff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar-default {
+    background-color: #5f6bef;
+    border-color: #E7E7E7;
+}
+
+
+.navbar-default .navbar-brand {
+    color: #f7f7f9;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f7f7f9;
+}
+
+
+.container {
+      max-width: 100%;
+	  max-height: 50%;
+      display: inline-block;
+	  background-color: gold;
+      vertical-align: top;  /* vertical alignment of the inline element */
+	  
+    }
+	
+.site-footer {
+  background: orange;
+}
+
+#footer-content {
+  background: #5f6bef;
+  color: #f7f7f9;
+  text-align: center;
+}
+
+.vertical-menu {
+    width: 200px;
+    overflow-y: auto;
+}
+
+.vertical-menu a {
+    background-color: #f7fdfb;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc;
+}
+
+.vertical-menu a.active {
+    /*background-color: #000000;*/
+    color: white;
+    font: bold 16px sans-serif !important;
+}
+
+a.current {
+  /*background:#000000;*/
+  color:black;
+}
+
+label.label1 {
+    width:300px;
+    text-align:center;
+    font-size: 14px;
+}
+
+label.label2 {
+    width:50px;
+    text-align:left;
+    font-size: 14px;
+}
+
+label.label3 {
+    width:100%;
+    text-align:center;
+    font-size: 24px;
+}
+label.label4 {
+    width:100%;
+    text-align:center;
+    font-size: 18px;
+	color: red;
+}
+
+
+label.menulabel {
+    float:bottom;
+    width:150px;
+    text-align:left;
+    margin-left: 13px;
+    margin-top:5px;
+    font: bold 12px sans-serif !important;
+}
+
+.squaredOne {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    margin: 16px auto;
+    background: #fcfff4;
+    background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+}
+
+.divmargin {
+    margin-top: 25px;
+}
+
+#slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #117caf;
+    cursor: pointer;
+}
+
+hr.style11 {
+		height: 6px;
+	background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
+    border: 0;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #117caf;
+    cursor: pointer;
+}
+
+#sort {
+/*display: inline-block;*/
+float: right;
+/*padding-bottom: 50px;*/
+
+}
+
+td.thick {
+    font-weight: bold;
+}
+
+td.myfontsize { 
+font-size: 13px ; 
+font-weight: bold;
+white-space: nowrap;
+}
+
+.element {
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(50%);
+}
+
+div.bg1 {
+    background-color: rgba(242, 242, 242, 1);
+}
+
+.thumbnail {
+    height:485px;
+    width:100%;
+}
+
+select.sel1 {
+font-size: 18px;
+font: bold;
+background-repeat:no-repeat;
+background-position:300px;
+width:250px;
+padding:6px;
+margin-top:8px;
+font-family:Calibri;
+line-height:2;
+border-radius:5px;
+background-color:#b9d1f7;
+color:#1c1a1a;
+
+
+}
+select.sel2{
+font-size: 14px;
+font: bold;
+color:blue;
+}
+
+table.a {
+table-layout: auto;
+ width: 50%; 
+}
+
+table.b {
+table-layout: auto;
+ width: 70%; 
+}
+
+.table-condensed{
+  font-size: 12px;
+}
+
+
