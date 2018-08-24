@@ -386,4 +386,4 @@ def psifodeltiasind_ken(request, eklid):
                }
     return render(request, 'Elections/psifodeltiasind_ken.html',context)
 
-#24/08/2018
+#25/08/2018
