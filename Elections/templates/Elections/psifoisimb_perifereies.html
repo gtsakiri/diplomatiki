@@ -1,0 +1,73 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+<div class="divmargin">
+<label class="label4">Κατάταξη υποψηφίων δημοτικών συμβούλων </label>
+</div>
+
+<div class="divmargin"> </div>
+
+
+
+<div class="container-fluid" align="center">
+    <div class="row">
+
+        <form method="get" name="perifereies">
+
+         <select  class="sel2" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
+            {% for p in all_perifereies %}
+             <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
+            {% endfor %}
+         </select>
+
+         <select   name="orderoption"  onchange="perifereies.submit()">
+             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Ανα Συνδυασμό και Σύνολο Ψήφων (φθίνουσα διάταξη)</option>
+             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Ανα Συνδυασμό και Επώνυμα Αλφαβητικά</option>
+             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Ανα Σύνολο ψήφων (φθίνουσα διάταξη)</option>
+         </select>
+
+
+        <div class="divmargin"><a href="{% url 'export_psifoiper_xls' selected_ekloges.0.eklid selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
+        <br>
+        </form>
+
+
+         <table class="b table table-bordered table-striped table-condensed ">
+
+           <tbody >
+           <tr>
+                   <td class="thick">Επίθετο</td>
+                   <td class="thick">Όνομα </td>
+                    <td class="thick">Ον. πατρός  </td>
+                    <td class="thick"> Συνδυασμός  </td>
+                    <td class="thick">Ψήφοι </td>
+           </tr>
+           {% for p in all_psifoi %}
+                 <tr>
+                    <td>{{ p.surname }} </td>
+                    <td >{{ p.firstname }}</td>
+                    <td>{{ p.fathername }} </td>
+                     <td >{{ p.sindiasmos }}</td>
+                    <td class="myfontsize">{{ p.sumvotes }}</td>
+                 </tr>
+             {% endfor %}
+           </tbody>
+      </table>
+
+   </div>
+
+
+
+ </div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+
