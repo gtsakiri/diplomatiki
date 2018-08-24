@@ -26,10 +26,11 @@
          </select>
 
          <select   name="orderoption"  onchange="kentra.submit()">
-             <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+             <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
+             <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
 
         <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>

@@ -443,7 +443,7 @@ def psifodeltiasind_ken(request, eklid):
 
 def psifoisimb_ken(request, eklid):
 
-# ΨΗΦΟΙ ΣΥΝΔΥΑΣΜΩΝ ΑΝΑ ΕΚΛ. ΚΕΝΤΡΟ
+# ΨΗΦΟΙ ΣΥΜΒΟΥΛΩΝ ΑΝΑ ΕΚΛ. ΚΕΝΤΡΟ
 
     paramstr = request.GET.get('kentrooption','')
     paramorder = request.GET.get('orderoption','')
@@ -457,7 +457,7 @@ def psifoisimb_ken(request, eklid):
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 4  # default ταξινόμηση
+        paramorder = 5  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -474,12 +474,14 @@ def psifoisimb_ken(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
-    if paramorder==1 or paramorder==4:
+    if paramorder==1 or paramorder==5:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','-votes')
     elif paramorder == 2:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','surname')
-    else:
+    elif paramorder == 3:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname')
+    else:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
 
 
     context = {'all_psifoi':all_psifoi,
