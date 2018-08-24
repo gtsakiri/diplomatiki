@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,16 +30,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="566" />
-          <entry key="py" value="452" />
+          <entry key="html" value="593" />
+          <entry key="py" value="787" />
           <entry key="txt" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="566" />
+          <entry key="HTML" value="593" />
           <entry key="PLAIN_TEXT" value="42" />
-          <entry key="Python" value="452" />
+          <entry key="Python" value="787" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -63,7 +61,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
+            <state relative-caret-position="-19">
               <caret line="30" column="94" lean-forward="true" selection-start-line="30" selection-start-column="94" selection-end-line="30" selection-end-column="94" />
             </state>
           </provider>
@@ -84,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="28" column="63" lean-forward="true" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+            <state relative-caret-position="253">
+              <caret line="32" column="97" selection-start-line="32" selection-start-column="97" selection-end-line="32" selection-end-column="97" />
             </state>
           </provider>
         </entry>
@@ -102,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="28" column="120" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="120" />
+            <state relative-caret-position="272">
+              <caret line="31" column="106" lean-forward="true" selection-start-line="31" selection-start-column="106" selection-end-line="31" selection-end-column="106" />
             </state>
           </provider>
         </entry>
@@ -120,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-543">
-              <caret line="382" column="103" selection-start-line="382" selection-start-column="103" selection-end-line="382" selection-end-column="103" />
+            <state relative-caret-position="-3364">
+              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -133,7 +131,7 @@
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="415" column="6" selection-start-line="415" selection-start-column="6" selection-end-line="415" selection-end-column="6" />
+              <caret line="553" column="4" selection-start-line="553" selection-start-column="4" selection-end-line="553" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -164,11 +162,11 @@
       <list>
         <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
       </list>
     </option>
   </component>
@@ -516,7 +514,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535140735182</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="home commit 21:45">
+      <created>1535143166783</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1535143166783</updated>
+    </task>
+    <task id="LOCAL-00016" summary="home commit 21:45">
+      <created>1535143735145</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1535143735145</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -617,27 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="415" column="6" selection-start-line="415" selection-start-column="6" selection-end-line="415" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="28" column="120" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="28" column="63" lean-forward="true" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -645,17 +636,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="31" column="106" lean-forward="true" selection-start-line="31" selection-start-column="106" selection-end-line="31" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="32" column="97" selection-start-line="32" selection-start-column="97" selection-end-line="32" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="-19">
           <caret line="30" column="94" lean-forward="true" selection-start-line="30" selection-start-column="94" selection-end-line="30" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="553" column="4" selection-start-line="553" selection-start-column="4" selection-end-line="553" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-543">
-          <caret line="382" column="103" selection-start-line="382" selection-start-column="103" selection-end-line="382" selection-end-column="103" />
+        <state relative-caret-position="-3364">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
