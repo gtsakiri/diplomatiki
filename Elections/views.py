@@ -385,3 +385,5 @@ def psifodeltiasind_ken(request, eklid):
                'selected_order':selected_order,
                }
     return render(request, 'Elections/psifodeltiasind_ken.html',context)
+
+#24/08/2018
