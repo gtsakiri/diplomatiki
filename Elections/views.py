@@ -4,6 +4,8 @@ from django.shortcuts import render,get_object_or_404
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
       Kentra, EklPsifoisimbVw
+from .forms import EdresForm
+
 from django.db import connection
 
 def export_psifoiper_xls(request,eklid, selected_order):
@@ -502,3 +504,24 @@ def psifoisimb_ken(request, eklid):
                }
     return render(request, 'Elections/psifoisimb_ken.html',context)
 
+#FORMS
+def add_edres(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = EdresForm(request.POST)
+        if form.is_valid():
+            edres_item = form.save(commit=False)
+            edres_item.save()
+    else:
+        form=EdresForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/edres_form.html',context)
