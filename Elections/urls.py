@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
 path('', views.Elections_list, name='Elections_list'),
+path('edres/<int:eklid>/', views.edres_list, name='edres_list'),
 path('add/edres/<int:eklid>/', views.add_edres, name='add_edres'),
 path('pososta/<int:eklid>/', views.pososta_telika, name='pososta_telika'),
 path('posostaper/<int:eklid>/', views.pososta_perifereies, name='pososta_perifereies'),

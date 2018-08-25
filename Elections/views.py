@@ -1,9 +1,9 @@
 import xlwt
 from django.http import HttpResponse
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
-      Kentra, EklPsifoisimbVw
+      Kentra, EklPsifoisimbVw, Edres
 from .forms import EdresForm
 
 from django.db import connection
@@ -504,6 +504,25 @@ def psifoisimb_ken(request, eklid):
                }
     return render(request, 'Elections/psifoisimb_ken.html',context)
 
+#ΠΑΡΑΜΕΤΡΙΚΑ
+
+def edres_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_edres=Edres.objects.all()
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_edres':all_edres
+               }
+
+    return render(request, 'Elections/edres_list.html', context)
+
+
+
+
 #FORMS
 def add_edres(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -516,11 +535,13 @@ def add_edres(request, eklid):
         if form.is_valid():
             edres_item = form.save(commit=False)
             edres_item.save()
+            return redirect('Edres_list', pk=Edres.pk)
     else:
         form=EdresForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
                 'selected_ekloges': selected_ekloges,
+                'all_ekloges': all_ekloges,
                 'form': form
                }
 

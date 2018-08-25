@@ -4,15 +4,21 @@
 
 
  {% block content %}
-     <form method="POST" name="edresform" action=".">
-        {% csrf_token %}
+     <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                     <form method="POST" class="post-form" name="edresform" action=".">
+                        {% csrf_token %}
 
-        {{ form }}
+                        {{ form.as_p }}
 
-        <input type="submit" value="Save">
+                        <input type="submit" value="Save">
 
 
-     </form>
+                     </form>
+                </div>
+            </div>
+     </div>
 
  {% endblock %}
 

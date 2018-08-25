@@ -1,0 +1,59 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="page-header">
+
+            <h3 align="center">Κατανομή εδρών</h3>
+     </div>
+
+ <div class="content container" >
+        <div class="wrapper">
+
+
+                   <table class="a table table-bordered table-striped">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Περιγραφή</td>
+                                <td class="thick">Σύνολο εδρών </td>
+                                <td class="thick">Έδρες Πρώτου</td>
+                                <td class="thick">Έδρες Υπολοίπων </td>
+                        </tr>
+                        {% for p in all_edres %}
+                              <tr>
+                                <td > {{ p.descr }} </td>
+                                <td >{{ p.sinoloedrwn }} </td>
+                                <td > {{ p.edresprwtou }} </td>
+                                <td >{{ p.edresypoloipwn }} </td>
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table class="a">
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="#" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+
+
+        </div>
+</div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+
