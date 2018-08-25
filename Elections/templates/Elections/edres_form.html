@@ -1,0 +1,30 @@
+{% extends 'Elections/Elections_list.html' %}
+
+{% load staticfiles %}
+
+
+ {% block content %}
+     <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                     <form method="POST" class="post-form" name="edresform" action=".">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <input type="submit" value="Save">
+
+
+                     </form>
+                </div>
+            </div>
+     </div>
+
+ {% endblock %}
+
+
+ </body>
+
+</html>
+
+

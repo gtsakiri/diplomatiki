@@ -39,10 +39,12 @@ body {
 
 
 .container {
+	position: relative;
       max-width: 100%;
 	  max-height: 50%;
       display: inline-block;
-	  background-color: gold;
+	  padding:10px;
+	  background-color: #f9f9f9;
       vertical-align: top;  /* vertical alignment of the inline element */
 	  
     }
@@ -228,14 +230,25 @@ color:blue;
 }
 
 table.a {
-table-layout: auto;
- width: 50%; 
+
+ width: 50%;
+ margin: 0 auto;  
+ 
 }
+
+tr.hide_all > td, td.hide_all{
+        border-style:hidden;
+      }
 
 table.b {
 table-layout: auto;
  width: 70%; 
 }
+
+.noborder
+      {
+        border:none;
+      }
 
 .table-condensed{
   font-size: 12px;
@@ -246,5 +259,14 @@ table-layout: auto;
  height:20px;
  width:150px;
  }
+ 
+ #wrapper {
+    position: absolute;
+    left: 50%; top: 50%; /*move the object to the center of the parent object*/
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
 
