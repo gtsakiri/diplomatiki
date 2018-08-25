@@ -161,8 +161,6 @@ def export_psifodeltiasind_ken(request,eklid, selected_order):
     else:
         rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('sindiasmos','kentro',)
 
-
-
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
