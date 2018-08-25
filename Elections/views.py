@@ -518,13 +518,13 @@ def edres_list(request, eklid):
                'all_edres':all_edres
                }
 
-    return render(request, 'Elections/edres_list.html', context)
+    return render(request, 'Elections/edres_list.html' , context)
 
 
 
 
 #FORMS
-def add_edres(request, eklid):
+def edres_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -535,7 +535,7 @@ def add_edres(request, eklid):
         if form.is_valid():
             edres_item = form.save(commit=False)
             edres_item.save()
-            return redirect('Edres_list', pk=Edres.pk)
+            return redirect('edres_list', eklid)
     else:
         form=EdresForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
@@ -546,3 +546,26 @@ def add_edres(request, eklid):
                }
 
     return render(request, 'Elections/edres_form.html',context)
+
+def edres_edit(request, eklid, edrid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    item=get_object_or_404(Edres, edrid=edrid)
+
+    form = EdresForm(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('edres_list', eklid)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'all_ekloges': all_ekloges,
+        'form': form
+    }
+
+    return render(request, 'Elections/edres_form.html', context)
+
+

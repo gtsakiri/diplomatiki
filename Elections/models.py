@@ -2,10 +2,10 @@ from django.db import models
 
 class Edres(models.Model):
     edrid = models.AutoField(db_column='edrID', primary_key=True)  # Field name made lowercase.
-    descr = models.CharField(max_length=45)
-    sinoloedrwn = models.IntegerField(db_column='sinoloEdrwn')  # Field name made lowercase.
-    edresprwtou = models.IntegerField(db_column='edresPrwtou')  # Field name made lowercase.
-    edresypoloipwn = models.IntegerField(db_column='edresYpoloipwn')  # Field name made lowercase.
+    descr = models.CharField(max_length=45, verbose_name='Περιγραφή')
+    sinoloedrwn = models.IntegerField(db_column='sinoloEdrwn', verbose_name='Σύνολο εδρών')  # Field name made lowercase.
+    edresprwtou = models.IntegerField(db_column='edresPrwtou', verbose_name='Έδρες Πρώτου')  # Field name made lowercase.
+    edresypoloipwn = models.IntegerField(db_column='edresYpoloipwn', verbose_name='Έδρες Υπολοίπων')  # Field name made lowercase.
 
     def __str__(self):
         return self.descr + ' - ' + str(self.sinoloedrwn)
