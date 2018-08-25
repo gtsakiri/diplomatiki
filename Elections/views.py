@@ -431,7 +431,7 @@ def psifodeltiasind_ken(request, eklid):
 
     if paramorder == 1 or paramorder == 4:
         all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).order_by('-votes')
-    if paramorder == 2:
+    elif paramorder == 2:
         all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).order_by('sindiasmos')
     else:
         all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).order_by('sindiasmos','kentro')
