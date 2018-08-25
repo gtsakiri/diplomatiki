@@ -412,7 +412,7 @@ def psifodeltiasind_ken(request, eklid):
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 3  # default ταξινόμηση
+        paramorder = 4  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -429,10 +429,12 @@ def psifodeltiasind_ken(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
-    if paramorder == 1 or paramorder == 3:
+    if paramorder == 1 or paramorder == 4:
         all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).order_by('-votes')
-    else:
+    if paramorder == 2:
         all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).order_by('sindiasmos')
+    else:
+        all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).order_by('sindiasmos','kentro')
 
 
     context = {'all_psifodeltia':all_psifodeltia,
