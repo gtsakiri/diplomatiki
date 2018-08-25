@@ -154,10 +154,14 @@ def export_psifodeltiasind_ken(request,eklid, selected_order):
     font_style = xlwt.XFStyle()
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
-    if selected_order == 1 or selected_order == 3:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('kenid','-votes')
+    if selected_order == 1 or selected_order == 4:
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('kentro','-votes')
+    elif selected_order == 1 or selected_order == 4:
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos','votes').order_by('kentro', 'sindiasmos')
     else:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('kenid','sindiasmos')
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('sindiasmos','kentro',)
+
+
 
     for row in rows:
         row_num += 1
