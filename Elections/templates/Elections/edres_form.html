@@ -5,18 +5,27 @@
 
  {% block content %}
      <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
+            <div class="wrapper">
+
+
                      <form method="POST" class="post-form" name="edresform" action=".">
                         {% csrf_token %}
+                         <table class="a table table-striped">
 
-                        {{ form.as_p }}
+                        {{ form.as_table }}
 
-                        <input type="submit" value="Save">
+                             <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save"> </td></tr>
+
+
+                          </table>
+
+
 
 
                      </form>
-                </div>
+
+
+
             </div>
      </div>
 
