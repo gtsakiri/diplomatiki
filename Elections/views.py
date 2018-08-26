@@ -1,5 +1,6 @@
 import xlwt
-from django.http import HttpResponse
+from django.contrib import  messages
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
@@ -233,7 +234,8 @@ def Elections_list(request):
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = 2 #default eklid (εκλογες 2019) αν δεν δοθεί
+        paramstr = Eklogestbl.objects.filter(defaultelection=1).values_list('eklid',flat=True)[0]
+        #παίρνω το eklid της default εκλ. αναμέτρησης..ΠΡΟΣΟΧΗ!!! ΜΟΝΟ ΜΙΑ ΠΡΕΠΕΙ ΝΑ ΕΙΝΑΙ DEFAULT
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
     selected_ekloges = Eklogestbl.objects.filter(eklid=paramstr)
@@ -568,4 +570,19 @@ def edres_edit(request, eklid, edrid):
 
     return render(request, 'Elections/edres_form.html', context)
 
+def edres_delete(request, eklid, edrid ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
+    obj=get_object_or_404(Edres, edrid=edrid)
+    if request.method == 'POST':
+        #parent_obj_url=obj.content_object.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('edres_list', eklid)
+    context={'selected_ekloges': selected_ekloges,
+             'all_ekloges': all_ekloges,
+             'object':obj
+             }
+    return render(request, 'Elections/edres_confirm_delete.html', context)
