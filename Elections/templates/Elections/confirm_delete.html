@@ -1,0 +1,31 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="col-sm-6 col-sm-oofset-3">
+
+         <h3> Επιβεβαίωση διαγραφής</h3>
+              <form method="POST" action=".">
+                  {% csrf_token %}
+                  <div class="divmargin"></div>
+                  <p>Είσαι σίγουρος/η για τη διαγραφή?</p>
+                  <div CLASS="divmargin"></div>
+                  <input type="submit" value="Ναι, διέγραψέ το" class="btn btn-warning">
+                  <a href="{% url 'edres_list' selected_ekloges.0.eklid%}" class="btn btn-default">Ακύρωση</a>
+
+
+             </form>
+
+
+     </div>
+
+
+ {% endblock %}
+
+
+ </body>
+
+</html>

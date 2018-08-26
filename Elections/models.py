@@ -57,7 +57,9 @@ class Eklogestbl(models.Model):
     dimos = models.CharField(max_length=100, blank=True)
     sisid = models.ForeignKey('Sistima', models.DO_NOTHING, db_column='sisID')  # Field name made lowercase.
     edrid = models.ForeignKey(Edres, models.DO_NOTHING, db_column='edrID')  # Field name made lowercase.
-    visible=models.IntegerField(default=1)
+    visible=models.IntegerField(db_column='visible', default=1)
+    defaultelection=models.IntegerField(db_column='defaultElection', default=1)
+
 
     def __str__(self):
         return  self.descr + ' - ' + str(self.sisid) + ' - ' + str(self.edrid)
