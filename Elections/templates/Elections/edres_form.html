@@ -10,7 +10,7 @@
 
                      <form method="POST" class="post-form" name="edresform" action=".">
                         {% csrf_token %}
-                         <table class="a table table-striped">
+                         <table class="a table table-striped"> <!-- Για να φέρει τη φόρμα σε πραγματική μορφή πίνακα -->
 
                         {{ form.as_table }}
 
@@ -18,9 +18,6 @@
 
 
                           </table>
-
-
-
 
                      </form>
 

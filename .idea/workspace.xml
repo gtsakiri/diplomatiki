@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0002_auto_20180820_1442.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0003_auto_20180820_1827.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0004_auto_20180825_2302.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/edres_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/edres_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +18,7 @@
     <session id="1801119297">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
@@ -34,25 +26,26 @@
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.30" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Django Console" value="56" />
-          <entry key="html" value="1737" />
-          <entry key="py" value="2248" />
+          <entry key="html" value="1821" />
+          <entry key="py" value="2464" />
           <entry key="py@diplomatiki" value="22" />
-          <entry key="txt" value="56" />
+          <entry key="txt" value="57" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CommandLine" value="22" />
-          <entry key="HTML" value="1737" />
-          <entry key="PLAIN_TEXT" value="56" />
-          <entry key="Python" value="2304" />
+          <entry key="HTML" value="1821" />
+          <entry key="PLAIN_TEXT" value="57" />
+          <entry key="Python" value="2520" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -76,38 +69,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
+            <state relative-caret-position="437">
               <caret line="573" selection-start-line="573" selection-end-line="573" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1535277669332" expanded="true" signature="22253:22261" ph="..." />
-                <marker date="1535277669332" expanded="true" signature="22537:22542" ph="..." />
-                <marker date="1535277669332" expanded="true" signature="24078:24549" ph="..." />
+                <marker date="1535278486973" expanded="true" signature="22253:22261" ph="..." />
+                <marker date="1535278486973" expanded="true" signature="22537:22542" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="35" column="141" lean-forward="true" selection-start-line="35" selection-start-column="141" selection-end-line="35" selection-end-column="167" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_form.html">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_confirm_delete.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
               <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
@@ -116,10 +90,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" column="141" selection-start-line="35" selection-start-column="141" selection-end-line="35" selection-end-column="167" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_form.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="12" column="120" selection-start-line="12" selection-start-column="120" selection-end-line="12" selection-end-column="120" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="83" selection-start-line="10" selection-start-column="83" selection-end-line="10" selection-end-column="83" />
+            <state relative-caret-position="153">
+              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -130,8 +122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+            <state relative-caret-position="1173">
+              <caret line="69" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
@@ -140,9 +132,10 @@
         <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
               <folding>
-                <marker date="1535196174114" expanded="true" signature="101:106" ph="..." />
+                <element signature="e#0#41#0" expanded="true" />
+                <marker date="1535311435768" expanded="true" signature="108:113" ph="..." />
               </folding>
             </state>
           </provider>
@@ -186,14 +179,14 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
-        <option value="$PROJECT_DIR$/Elections/forms.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" />
         <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_list.html" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html" />
+        <option value="$PROJECT_DIR$/Elections/forms.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" />
       </list>
     </option>
   </component>
@@ -283,6 +276,117 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\PycharmProjects\diplomatiki\Elections\templates\Elections" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/dataSources.local.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Elections/forms.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -508,20 +612,34 @@
       <option name="project" value="LOCAL" />
       <updated>1535228227360</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="home commit 26_8_2018">
+      <created>1535278340318</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1535278340318</updated>
+    </task>
+    <task id="LOCAL-00027" summary="home commit 26_8_2018">
+      <created>1535278542104</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1535278542104</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2181208" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22147651" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -590,7 +708,19 @@
     <MESSAGE value="home commit 19:50" />
     <MESSAGE value="home commit 21:45" />
     <MESSAGE value="home commit 25_8_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home commit 25_8_2018" />
+    <MESSAGE value="home commit 26_8_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="home commit 26_8_2018" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Elections/views.py</url>
+          <line>552</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
@@ -648,49 +778,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding>
-            <marker date="1535196174114" expanded="true" signature="101:106" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2482">
-          <caret line="146" column="85" selection-start-line="146" selection-start-column="61" selection-end-line="146" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="83" selection-start-line="10" selection-start-column="83" selection-end-line="10" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/exception.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -706,30 +795,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_confirm_delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="35" column="141" lean-forward="true" selection-start-line="35" selection-start-column="141" selection-end-line="35" selection-end-column="167" />
+        <state relative-caret-position="595">
+          <caret line="35" column="141" selection-start-line="35" selection-start-column="141" selection-end-line="35" selection-end-column="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2482">
+          <caret line="146" column="85" selection-start-line="146" selection-start-column="61" selection-end-line="146" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1535311435768" expanded="true" signature="108:113" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
+        <state relative-caret-position="437">
           <caret line="573" selection-start-line="573" selection-end-line="573" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1535277669332" expanded="true" signature="22253:22261" ph="..." />
-            <marker date="1535277669332" expanded="true" signature="22537:22542" ph="..." />
-            <marker date="1535277669332" expanded="true" signature="24078:24549" ph="..." />
+            <marker date="1535278486973" expanded="true" signature="22253:22261" ph="..." />
+            <marker date="1535278486973" expanded="true" signature="22537:22542" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <caret line="12" column="120" selection-start-line="12" selection-start-column="120" selection-end-line="12" selection-end-column="120" />
         </state>
       </provider>
     </entry>
