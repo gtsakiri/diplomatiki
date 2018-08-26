@@ -585,4 +585,4 @@ def edres_delete(request, eklid, edrid ):
              'all_ekloges': all_ekloges,
              'object':obj
              }
-    return render(request, 'Elections/confirm_delete.html', context)
+    return render(request, 'Elections/edres_confirm_delete.html', context)
