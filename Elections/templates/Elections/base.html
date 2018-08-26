@@ -120,7 +120,7 @@
                 <ul class="nav nav-list">
                      <div class="divmargin"> </div>
 
-                    <li><label class="tree-toggler nav-header">ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
+                    <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-stats"></span> ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
                         <ul class="nav nav-list tree">
                             <li><a href="{% url 'pososta_telika' selected_ekloges.0.eklid %} " id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
                             <li><a href="{% url 'pososta_perifereies' selected_ekloges.0.eklid  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια</a></li>
@@ -141,7 +141,7 @@
                     </li>
 
                     <li class="divider"></li>
-                    <li><label class="tree-toggler nav-header">ΠΑΡΑΜΕΤΡΙΚΑ</label>
+                    <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
                         <ul class="nav nav-list tree"  >
                             <li><a href="#">Εκλογικά Συστήματα</a></li>
                             <li><a href="{% url 'edres_list' selected_ekloges.0.eklid  %}" >Συστήματα κατανομής εδρών σε Δήμους</a></li>
