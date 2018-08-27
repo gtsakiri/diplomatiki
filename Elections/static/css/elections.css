@@ -245,9 +245,15 @@ table-layout: auto;
  width: 70%; 
 }
 
+table.c {
+
+ width: 30%;
+ margin: 0 auto;  
+}
+
 .noborder
       {
-        border:none;
+        border:0;
       }
 
 .table-condensed{

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, forms
-from .models import Edres, Eklogestbl
+from .models import Edres, Sistima
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -19,4 +19,13 @@ class EdresForm(ModelForm):
         # if not name and not email and not message:
         if sinoloedrwn != (edresprwtou + edresypoloipwn):
             raise forms.ValidationError('Το σύνολο των εδρών πρέπει να ισούται με το άθροισμα των δύο άλλων σχετικών πεδίων!')
+
+class SistimaForm(ModelForm):
+    class Meta:
+        model=Sistima
+        fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super(SistimaForm, self).clean()
+        descr = cleaned_data.get('descr')
 

@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
-      Kentra, EklPsifoisimbVw, Edres
-from .forms import EdresForm
+      Kentra, EklPsifoisimbVw, Edres, Sistima
+from .forms import EdresForm, SistimaForm
 
 from django.db import connection
 
@@ -522,13 +522,9 @@ def edres_list(request, eklid):
 
     return render(request, 'Elections/edres_list.html' , context)
 
-
-
-
-#FORMS
 def edres_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Νέα εγγραφή'
+    action_label = 'Κατανομή εδρών - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -554,11 +550,11 @@ def edres_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/edres_form.html',context)
+    return render(request, 'Elections/basicform.html', context)
 
 def edres_edit(request, eklid, edrid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Αλλαγή εγγραφής'
+    action_label = 'Κατανομή εδρών - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -578,7 +574,7 @@ def edres_edit(request, eklid, edrid):
         'form': form
     }
 
-    return render(request, 'Elections/edres_form.html', context)
+    return render(request, 'Elections/basicform.html', context)
 
 def edres_delete(request, eklid, edrid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -595,4 +591,90 @@ def edres_delete(request, eklid, edrid ):
              'all_ekloges': all_ekloges,
              'object':obj
              }
-    return render(request, 'Elections/edres_confirm_delete.html', context)
+    return render(request, 'Elections/confirm_delete.html', context)
+
+def sistima_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_sistima=Sistima.objects.all()
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_sistima':all_sistima
+               }
+
+    return render(request, 'Elections/sistima_list.html' , context)
+
+def sistima_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = SistimaForm(request.POST)
+        if form.is_valid():
+            sistima_item = form.save(commit=False)
+            sistima_item.save()
+            form = SistimaForm()
+            '''
+            if "Save_and_add_another" in request.POST:
+                return redirect('edres_add', eklid)
+            else:
+                return redirect('edres_list', eklid)'''
+    else:
+        form=SistimaForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def sistima_edit(request, eklid, sisid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    item=get_object_or_404(Sistima, sisid=sisid)
+
+    form = SistimaForm(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('sistima_list', eklid)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form
+    }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def sistima_delete(request, eklid, sisid ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj=get_object_or_404(Edres, sisid=sisid)
+    if request.method == 'POST':
+        #parent_obj_url=obj.content_object.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('sistima_list', eklid)
+    context={'selected_ekloges': selected_ekloges,
+             'all_ekloges': all_ekloges,
+             'object':obj
+             }
+
+    return render(request, 'Elections/confirm_delete.html', context)

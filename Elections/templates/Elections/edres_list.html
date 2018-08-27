@@ -23,7 +23,7 @@
                                 <td class="thick">Έδρες Πρώτου</td>
                                 <td class="thick">Έδρες Υπολοίπων </td>
                                 <td class="thick"></td>
-                                <td class="thick"></td>
+
 
                         </tr>
                         {% for p in all_edres %}
@@ -32,8 +32,10 @@
                                 <td >{{ p.sinoloedrwn }} </td>
                                 <td > {{ p.edresprwtou }} </td>
                                 <td >{{ p.edresypoloipwn }} </td>
-                                <td ><a class="btn btn-default" href="{% url 'edres_edit' selected_ekloges.0.eklid p.edrid%}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
-                                <td ><a class="btn btn-default" href="{% url 'edres_delete' selected_ekloges.0.eklid p.edrid%}"><span class="glyphicon glyphicon-minus"></span></a> </td>
+                                <td >
+                                    <a class="btn btn-default" href="{% url 'edres_edit' selected_ekloges.0.eklid p.edrid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'edres_delete' selected_ekloges.0.eklid p.edrid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
                               </tr>
                           {% endfor %}
 

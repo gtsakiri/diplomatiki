@@ -1,0 +1,61 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="page-header">
+
+            <h3 align="center">Συστήματα εκλ. αναμετρήσεων</h3>
+     </div>
+
+ <div class="content container" >
+        <div class="wrapper">
+
+
+                   <table class="c table table-striped">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Περιγραφή</td>
+                                <td class="noborder"></td>
+
+
+                        </tr>
+                        {% for p in all_sistima %}
+                              <tr>
+                                <td > {{ p.descr }} </td>
+                                <td .noborder>
+                                    <a class="btn btn-default" href="{% url 'sistima_edit' selected_ekloges.0.eklid p.sisid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'sistima_delete' selected_ekloges.0.eklid p.sisid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
+
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table class="c">
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'sistima_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+
+
+        </div>
+</div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+
