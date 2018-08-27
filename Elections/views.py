@@ -528,6 +528,7 @@ def edres_list(request, eklid):
 #FORMS
 def edres_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -537,12 +538,18 @@ def edres_add(request, eklid):
         if form.is_valid():
             edres_item = form.save(commit=False)
             edres_item.save()
-            return redirect('edres_list', eklid)
+            form = EdresForm()
+            '''
+            if "Save_and_add_another" in request.POST:
+                return redirect('edres_add', eklid)
+            else:
+                return redirect('edres_list', eklid)'''
     else:
         form=EdresForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
                 'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
                }
@@ -551,6 +558,8 @@ def edres_add(request, eklid):
 
 def edres_edit(request, eklid, edrid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Αλλαγή εγγραφής'
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -564,6 +573,7 @@ def edres_edit(request, eklid, edrid):
 
     context = {
         'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
     }

@@ -1,10 +1,14 @@
 from django.forms import ModelForm, forms
 from .models import Edres, Eklogestbl
+from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
     class Meta:
         model=Edres
         fields = '__all__'
+        help_texts = {
+            'sinoloedrwn': _('Το σύνολο εδρών πρέπει να ισούται με το άθροισμα των δύο επόμενων πεδίων'),
+        }
 
     def clean(self):
         cleaned_data = super(EdresForm, self).clean()
