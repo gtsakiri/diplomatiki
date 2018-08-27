@@ -1,11 +1,12 @@
 import xlwt
 from django.contrib import  messages
+from django.forms import  DateInput
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
       Kentra, EklPsifoisimbVw, Edres, Sistima
-from .forms import EdresForm, SistimaForm
+from .forms import EdresForm, SistimaForm, EklogestblForm
 
 from django.db import connection
 
@@ -672,6 +673,91 @@ def sistima_delete(request, eklid, sisid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('sistima_list', eklid)
+    context={'selected_ekloges': selected_ekloges,
+             'all_ekloges': all_ekloges,
+             'object':obj
+             }
+
+    return render(request, 'Elections/confirm_delete.html', context)
+
+def ekloges_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    #all_sistima=Sistima.objects.all()
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               }
+
+    return render(request, 'Elections/ekloges_list.html' , context)
+
+def ekloges_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = EklogestblForm(request.POST)
+        if form.is_valid():
+            ekl_item = form.save(commit=False)
+            ekl_item.save()
+            form = EklogestblForm()
+            '''
+            if "Save_and_add_another" in request.POST:
+                return redirect('edres_add', eklid)
+            else:
+                return redirect('edres_list', eklid)'''
+    else:
+        form=EklogestblForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def ekloges_edit(request, eklid, cureklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    item=get_object_or_404(Eklogestbl, eklid=cureklid)
+
+    form = EklogestblForm(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('ekloges_list', eklid)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form
+    }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def ekloges_delete(request, eklid, cureklid ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj=get_object_or_404(Eklogestbl, eklid=cureklid)
+    if request.method == 'POST':
+        #parent_obj_url=obj.content_object.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('ekloges_list', eklid)
     context={'selected_ekloges': selected_ekloges,
              'all_ekloges': all_ekloges,
              'object':obj

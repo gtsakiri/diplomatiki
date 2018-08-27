@@ -143,6 +143,7 @@
                     <li class="divider"></li>
                     <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
                         <ul class="nav nav-list tree"  >
+                            <li><a href="{% url 'ekloges_list' selected_ekloges.0.eklid  %}">Εκλ. αναμετρήσεις</a></li>
                             <li><a href="{% url 'sistima_list' selected_ekloges.0.eklid  %}">Εκλογικά Συστήματα</a></li>
                             <li><a href="{% url 'edres_list' selected_ekloges.0.eklid  %}" >Περιπτώσεις κατανομής εδρών σε Δήμους</a></li>
                             <li><a href="#">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>

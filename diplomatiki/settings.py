@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Elections',
     'widget_tweaks',
-
 ]
 
 MIDDLEWARE = [
@@ -124,6 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Athens'
+
 
 USE_I18N = True
 

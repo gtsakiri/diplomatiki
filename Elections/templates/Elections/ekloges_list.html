@@ -1,0 +1,70 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="page-header">
+
+            <h3 align="center">Εκλ. αναμετρήσεις</h3>
+     </div>
+
+ <div class="content container" >
+        <div class="wrapper">
+
+
+                   <table class="d table table-bordered table-striped">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Περιγραφή</td>
+                                <td class="thick">Ημερομηνία</td>
+                                <td class="thick">Δήμος</td>
+                                <td class="thick">Εκλ. Σύστημα</td>
+                                <td class="thick">Σύστημα κατανομής εδρών</td>
+                                <td class="thick">Προεπιλεγμένη</td>
+                                <td class="thick"></td>
+
+
+                        </tr>
+                        {% for p in all_ekloges %}
+                              <tr>
+                                <td > {{ p.descr }} </td>
+                                <td >{{ p.dateofelection|date:"d/m/Y" }} </td>
+                                <td > {{ p.dimos }} </td>
+                                <td >{{ p.sisid }} </td>
+                                <td >{{ p.edrid }} </td>
+                                <td >{% if p.defaultelection == 1 %} ΝΑΙ {% else %} ΟΧΙ {% endif %} </td>
+                                <td >
+                                    <a class="btn btn-default" href="{% url 'ekloges_edit' selected_ekloges.0.eklid p.eklid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'ekloges_delete' selected_ekloges.0.eklid p.eklid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table class="d">
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'ekloges_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+
+
+        </div>
+</div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+

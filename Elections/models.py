@@ -8,7 +8,7 @@ class Edres(models.Model):
     edresypoloipwn = models.IntegerField(db_column='edresYpoloipwn', verbose_name='Έδρες Υπολοίπων')  # Field name made lowercase.
 
     def __str__(self):
-        return self.descr + ' - ' + str(self.sinoloedrwn)
+        return self.descr
 
     class Meta:
         managed = True
@@ -53,7 +53,7 @@ class Typeofkoinotita(models.Model):
 class Eklogestbl(models.Model):
     eklid = models.AutoField(db_column='eklID', primary_key=True)  # Field name made lowercase.
     descr = models.CharField(unique=True, max_length=100)
-    dateofelection = models.DateTimeField(db_column='dateOfElection', blank=True, null=True)  # Field name made lowercase.
+    dateofelection = models.DateField(db_column='dateOfElection', blank=True, null=True)  # Field name made lowercase.
     dimos = models.CharField(max_length=100, blank=True)
     sisid = models.ForeignKey('Sistima', models.DO_NOTHING, db_column='sisID')  # Field name made lowercase.
     edrid = models.ForeignKey(Edres, models.DO_NOTHING, db_column='edrID')  # Field name made lowercase.
@@ -62,7 +62,7 @@ class Eklogestbl(models.Model):
 
 
     def __str__(self):
-        return  self.descr + ' - ' + str(self.sisid) + ' - ' + str(self.edrid)
+        return  self.descr
 
     class Meta:
         managed = True
