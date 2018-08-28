@@ -20,6 +20,11 @@ path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='si
 path('sindiasmoiadd/<int:eklid>/', views.sindiasmoi_add, name='sindiasmoi_add'),
 path('sindiasmoidelete/<int:eklid>/<int:sindid>/', views.sindiasmoi_delete, name='sindiasmoi_delete'),
 
+path('eklsind/<int:eklid>/', views.eklsind_list, name='eklsind_list'),
+path('eklsindedit/<int:eklid>/<int:id>/', views.eklsind_edit, name='eklsind_edit'),
+path('eklsindadd/<int:eklid>/', views.eklsind_add, name='eklsind_add'),
+path('eklsinddelete/<int:eklid>/<int:id>/', views.eklsind_delete, name='eklsind_delete'),
+
 path('ekloges/<int:eklid>/', views.ekloges_list, name='ekloges_list'),
 path('eklogesedit/<int:eklid>/<int:cureklid>/', views.ekloges_edit, name='ekloges_edit'),
 path('eklogesadd/<int:eklid>/', views.ekloges_add, name='ekloges_add'),

@@ -5,8 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
-      Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi
-from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm
+      Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind
+from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm
 
 from django.db import connection
 
@@ -765,7 +765,6 @@ def ekloges_delete(request, eklid, cureklid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-#####
 
 def sindiasmoi_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -853,4 +852,96 @@ def sindiasmoi_delete(request, eklid, sindid ):
                }
 
     return render(request, 'Elections/confirm_delete.html', context)
+
+#####
+
+
+
+def eklsind_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_eklsind = Eklsind.objects.all()
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_eklsind': all_eklsind,
+               }
+
+    return render(request, 'Elections/eklsind_list.html' , context)
+
+def eklsind_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Υποψήφιοι Συνδυασμοί - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = EklsindForm(request.POST, request.FILES)
+        if form.is_valid():
+            sind_item = form.save(commit=False)
+            sind_item.save()
+            form = EklsindForm()
+            '''
+            if "Save_and_add_another" in request.POST:
+                return redirect('edres_add', eklid)
+            else:
+                return redirect('edres_list', eklid)'''
+    else:
+        form=EklsindForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def eklsind_edit(request, eklid, id):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    item = get_object_or_404(Eklsind, id=id)
+
+    form = EklsindForm(request.POST or None,  instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('eklsind_list', eklid)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form
+    }
+
+    return render(request, 'Elections/basicform.html', context)
+
+
+def eklsind_delete(request, eklid, id ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj = get_object_or_404(Sindiasmoi, id=id)
+    if request.method == 'POST':
+        # parent_obj_url=obj.content_object.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('eklsind_list', eklid)
+    context = {'selected_ekloges': selected_ekloges,
+               'all_ekloges': all_ekloges,
+               'object': obj
+               }
+
+    return render(request, 'Elections/confirm_delete.html', context)
+
 

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, forms,  DateInput
-from .models import Edres, Sistima, Eklogestbl, Sindiasmoi
+from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -89,3 +89,19 @@ class SindiasmoiForm(ModelForm):
         photo = cleaned_data.get('photo')
         if eidos != 1 and eidos !=0:
             raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')
+
+class EklsindForm(ModelForm):
+
+    class Meta:
+        model=Eklsind
+        fields = '__all__'
+
+
+    def clean(self):
+        cleaned_data = super(EklsindForm, self).clean()
+        eklid = cleaned_data.get('eklid')
+        sindid = cleaned_data.get('sindid')
+        edresa = cleaned_data.get('edresa')
+        edresa_ypol = cleaned_data.get('edresa_ypol')
+        edresa_teliko = cleaned_data.get('edresa_teliko')
+        ypol = cleaned_data.get('ypol')

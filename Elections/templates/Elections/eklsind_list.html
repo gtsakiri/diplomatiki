@@ -1,0 +1,75 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="page-header">
+
+            <h3 align="center">Υποψήφιοι Συνδυασμοί</h3>
+     </div>
+
+ <div class="content container" >
+        <div class="wrapper">
+
+
+                   <table class="b table table-striped">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Εκλ. αναμέτρηση</td>
+                                <td class="thick">Συνδυασμός</td>
+                                <td class="thick">αα</td>
+                                <td class="thick">Έδρες Α γύρου (αρχικές)</td>
+                                <td class="thick">Υπόλοιπο Εδρών Α γύρου</td>
+                                <td class="thick">Έδρες Α γύρου (τελικές)</td>
+                                <td class="thick"><td class="thick">Έδρες Β γύρου</td></td>
+                                <td class="thick"><td class="thick">Υπόλοιπο ψηφοδελτίων</td></td>
+                                <td >  </td>
+                        </tr>
+                        {% for p in all_eklsind %}
+                              <tr>
+                                <td > {{ p.eklid }}  </td>
+                                <td > {{ p.sindid }} </td>
+                                <td > {{ p.aa }} </td>
+                                 <td > {{ p.edresa }} </td>
+                                <td > {{ p.edresa_ypol }} </td>
+                                <td > {{ p.edresa_teliko }} </td>
+                                 <td > {{ p.edresb }} </td>
+                                <td > {{ p.ypol }} </td>
+                                <td > {{ p.aa }} </td>
+                                <td >  </td>
+                                <td .noborder>
+                                    <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'sindiasmoi_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
+
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table class="b">
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'eklsind_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+
+
+        </div>
+</div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+
