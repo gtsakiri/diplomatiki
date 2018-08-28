@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmos_add_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +17,7 @@
     <session id="1801119297">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
@@ -43,14 +37,14 @@
           <entry key="html" value="2543" />
           <entry key="py" value="4656" />
           <entry key="py@diplomatiki" value="40" />
-          <entry key="txt" value="64" />
+          <entry key="txt" value="69" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CommandLine" value="40" />
           <entry key="HTML" value="2543" />
-          <entry key="PLAIN_TEXT" value="64" />
+          <entry key="PLAIN_TEXT" value="69" />
           <entry key="Python" value="4781" />
         </counts>
       </usages-collector>
@@ -661,7 +655,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535448087028</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="home 28/08/2018">
+      <created>1535493664907</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1535493664907</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -744,7 +745,8 @@
     <MESSAGE value="home commit 25_8_2018" />
     <MESSAGE value="home commit 26_8_2018" />
     <MESSAGE value="work 28/08/2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="work 28/08/2018" />
+    <MESSAGE value="home 28/08/2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="home 28/08/2018" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html">
