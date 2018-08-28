@@ -792,7 +792,20 @@ def sindiasmoi_add(request, eklid):
         if form.is_valid():
             sind_item = form.save(commit=False)
             sind_item.save()
-            form = SindiasmoiForm()
+            #print(form.cleaned_data)
+
+            #Αν είναι καθολικός συνδυασμός εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND
+            if form.cleaned_data['eidos'] == 1:
+                Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                       sindid=sind_item,
+                                       aa = form.cleaned_data['aa'],
+                                       edresa=0,
+                                       edresa_ypol=0,
+                                       edresa_teliko=0,
+                                       edresb=0,
+                                       ypol=0).save()
+           # form = SindiasmoiForm()
+
             '''
             if "Save_and_add_another" in request.POST:
                 return redirect('edres_add', eklid)
@@ -823,6 +836,11 @@ def sindiasmoi_edit(request, eklid, sindid):
 
     if form.is_valid():
         form.save()
+        #print(form.cleaned_data)
+        if form.cleaned_data['eidos'] == 1:
+            eklsind_item=get_object_or_404(Eklsind, eklid=eklid,sindid=sindid)
+            eklsind_item.aa= form.cleaned_data['aa']
+            eklsind_item.save()
         return redirect('sindiasmoi_list', eklid)
 
     context = {
@@ -862,7 +880,7 @@ def eklsind_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_eklsind = Eklsind.objects.all()
+    all_eklsind = Eklsind.objects.filter(eklid=eklid)
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,

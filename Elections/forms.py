@@ -1,4 +1,5 @@
-from django.forms import ModelForm, forms,  DateInput
+from django.forms import ModelForm,  DateInput, CharField
+
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind
 from django.utils.translation import gettext_lazy as _
 
@@ -65,9 +66,11 @@ class EklogestblForm(ModelForm):
 
 class SindiasmoiForm(ModelForm):
 
+    aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
+
     class Meta:
         model=Sindiasmoi
-        fields = '__all__'
+        fields = ['descr', 'shortdescr', 'eidos', 'photo', 'aa']
         labels = {
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
@@ -78,6 +81,7 @@ class SindiasmoiForm(ModelForm):
             'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
             'eidos': _('Αν είναι συνδυασμός που συμμετέχει σε όλο το Δήμο βάλε 1, αν συμμετέχει σε κοινότητα μόνο βάλε 0'),
         }
+
 
 
 

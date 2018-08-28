@@ -24,8 +24,8 @@
                                 <td class="thick">Έδρες Α γύρου (αρχικές)</td>
                                 <td class="thick">Υπόλοιπο Εδρών Α γύρου</td>
                                 <td class="thick">Έδρες Α γύρου (τελικές)</td>
-                                <td class="thick"><td class="thick">Έδρες Β γύρου</td></td>
-                                <td class="thick"><td class="thick">Υπόλοιπο ψηφοδελτίων</td></td>
+                                <td class="thick">Έδρες Β γύρου</td>
+                                <td class="thick">Υπόλοιπο ψηφοδελτίων</td>
                                 <td >  </td>
                         </tr>
                         {% for p in all_eklsind %}
@@ -33,12 +33,12 @@
                                 <td > {{ p.eklid }}  </td>
                                 <td > {{ p.sindid }} </td>
                                 <td > {{ p.aa }} </td>
-                                 <td > {{ p.edresa }} </td>
+                                <td > {{ p.edresa }} </td>
                                 <td > {{ p.edresa_ypol }} </td>
                                 <td > {{ p.edresa_teliko }} </td>
-                                 <td > {{ p.edresb }} </td>
+                                <td > {{ p.edresb }} </td>
                                 <td > {{ p.ypol }} </td>
-                                <td > {{ p.aa }} </td>
+
                                 <td >  </td>
                                 <td .noborder>
                                     <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
