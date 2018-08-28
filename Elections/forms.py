@@ -1,5 +1,5 @@
 from django.forms import ModelForm, forms,  DateInput
-from .models import Edres, Sistima, Eklogestbl
+from .models import Edres, Sistima, Eklogestbl, Sindiasmoi
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -56,10 +56,36 @@ class EklogestblForm(ModelForm):
         dateofelection = cleaned_data.get('dateofelection')
         dimos = cleaned_data.get('dimos')
         sisid = cleaned_data.get('sisid')
-        edrid = cleaned_data.get('edrid')  # Field name made lowercase.
+        edrid = cleaned_data.get('edrid')
         visible = cleaned_data.get('visible')
         defaultelection = cleaned_data.get('defaultElection')
         if visible != 1 and visible !=0:
-            raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Ορατή" μόνο 0 και 1!')
+            raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Ορατή" μόνο 0 ή 1!')
 
 
+class SindiasmoiForm(ModelForm):
+
+    class Meta:
+        model=Sindiasmoi
+        fields = '__all__'
+        labels = {
+            'descr': _('Περιγραφή'),
+            'shortdescr': _('Σύντομος τίτλος'),
+            'eidos': _('Κατηγορία'),
+            'photo': _('Φωτογραφία'),
+        }
+        help_texts = {
+            'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
+            'eidos': _('Αν είναι συνδυασμός που συμμετέχει σε όλο το Δήμο βάλε 1, αν συμμετέχει σε κοινότητα μόνο βάλε 0'),
+        }
+
+
+
+    def clean(self):
+        cleaned_data = super(SindiasmoiForm, self).clean()
+        descr = cleaned_data.get('descr')
+        shortdescr = cleaned_data.get('shortdescr')
+        eidos = cleaned_data.get('eidos')
+        photo = cleaned_data.get('photo')
+        if eidos != 1 and eidos !=0:
+            raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')

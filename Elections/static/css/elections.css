@@ -241,7 +241,7 @@ tr.hide_all > td, td.hide_all{
       }
 
 table.b {
-table-layout: auto;
+ margin: 0 auto;  
  width: 70%; 
 }
 

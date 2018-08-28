@@ -25,7 +25,7 @@
                         </tr>
                         {% for p in all_sistima %}
                               <tr>
-                                <td > {{ p.descr }} </td>
+                                <td > {{ p.descr}} </td>
                                 <td .noborder>
                                     <a class="btn btn-default" href="{% url 'sistima_edit' selected_ekloges.0.eklid p.sisid%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'sistima_delete' selected_ekloges.0.eklid p.sisid%}"><span class="glyphicon glyphicon-minus"></span></a>

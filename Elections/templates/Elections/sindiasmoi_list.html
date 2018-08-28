@@ -1,0 +1,64 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="page-header">
+
+            <h3 align="center">Υποψήφιοι Συνδυασμοί</h3>
+     </div>
+
+ <div class="content container" >
+        <div class="wrapper">
+
+
+                   <table class="b table table-striped">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Περιγραφή</td>
+                                <td class="thick">Σύντομος τίτλος</td>
+                                <td class="thick">Κατηγορία</td>
+                                <td >  </td>
+                        </tr>
+                        {% for p in all_sindiasmoi %}
+                              <tr>
+                                <td > {{ p.descr }} </td>
+                                <td > {{ p.shortdescr }} </td>
+                                <td > {{ p.eidos }} </td>
+
+                                <td .noborder>
+                                    <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges.0.eklid p.sindid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'sindiasmoi_delete' selected_ekloges.0.eklid p.sindid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
+
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table class="b">
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'sindiasmoi_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+
+
+        </div>
+</div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+

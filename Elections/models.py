@@ -108,10 +108,10 @@ class Simbouloi(models.Model):
 
 
 class Sindiasmoi(models.Model):
-    sindid = models.IntegerField(db_column='sindID', primary_key=True)  # Field name made lowercase.
+    sindid = models.AutoField(db_column='sindID', primary_key=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
-    photo = models.ImageField(db_column='photo',null=True)
+    photo = models.ImageField(db_column='photo',null=True, blank=True)
     eidos = models.IntegerField(default=1)
 
     def __str__(self):
