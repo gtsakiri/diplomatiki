@@ -793,14 +793,12 @@ def sindiasmoi_add(request, eklid):
 
         if all([form.is_valid(), sub_form.is_valid()]):
             sind_item = form.save(commit=False)
+            #το πεδίο eidos παίρνει την τιμή 1 (καθολικός συνδυασμός για το δημοτικό συμβούλιο)
+            sind_item.eidos = 1
             sind_item.save()
-            #eklsind_item = sub_form.save(commit=False)
-           # sub_form.save()
-            ##print(form.cleaned_data)
 
-            #Αν είναι καθολικός συνδυασμός εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND
-            if form.cleaned_data['eidos'] == 1:
-                Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+            #Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND
+            Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
                                        aa = sub_form.cleaned_data['aa'],
                                        edresa=0,
@@ -808,13 +806,8 @@ def sindiasmoi_add(request, eklid):
                                        edresa_teliko=0,
                                        edresb=0,
                                        ypol=0).save()
-           # form = SindiasmoiForm()
-
-            '''
-            if "Save_and_add_another" in request.POST:
-                return redirect('edres_add', eklid)
-            else:
-                return redirect('edres_list', eklid)'''
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!', extra_tags='alert alert-success alert-dismissible fade show' )
+            return redirect('sindiasmoi_add', eklid)
     else:
         form=SindiasmoiForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
         sub_form = EklsindFormPartial()

@@ -70,16 +70,14 @@ class SindiasmoiForm(ModelForm):
 
     class Meta:
         model=Sindiasmoi
-        fields = ['descr', 'shortdescr', 'eidos', 'photo']
+        fields = ['descr', 'shortdescr', 'photo']
         labels = {
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
-            'eidos': _('Κατηγορία'),
             'photo': _('Φωτογραφία'),
         }
         help_texts = {
             'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
-            'eidos': _('Αν είναι συνδυασμός που συμμετέχει σε όλο το Δήμο βάλε 1, αν συμμετέχει σε κοινότητα μόνο βάλε 0'),
         }
 
 
@@ -89,10 +87,9 @@ class SindiasmoiForm(ModelForm):
         cleaned_data = super(SindiasmoiForm, self).clean()
         descr = cleaned_data.get('descr')
         shortdescr = cleaned_data.get('shortdescr')
-        eidos = cleaned_data.get('eidos')
         photo = cleaned_data.get('photo')
-        if eidos != 1 and eidos !=0:
-            raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')
+        #if eidos != 1 and eidos !=0:
+            #raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')
 
 class EklsindForm(ModelForm):
 

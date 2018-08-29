@@ -6,101 +6,118 @@
 
 
  {% block content %}
-     <div class="content container">
-            <div class="wrapper">
 
-                     <div class="page-header">
+       <div class="row">
+
+       <div class="col-md-4 col-md-offset-4">
+
+                    {% if messages %}
+                      <ul class="messages">
+                        {% for message in messages %}
+                          <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+
+
+
+
+                      <div class="text-center">
 
                             <h3 align="center">{{  action_label }} </h3>
                      </div>
-                     <form method="POST" class="post-form"  action="." enctype="multipart/form-data">
-                        {% csrf_token %}
 
-                         {% for hidden_field in form.hidden_fields %}
-                            {{ hidden_field }}
-                          {% endfor %}
 
-                          {% if form.non_field_errors %}
-                            <div class="alert alert-danger" role="alert">
-                              {% for error in form.non_field_errors %}
-                                {{ error }}
+
+                         <form method="POST" class="post-form"  action="." enctype="multipart/form-data">
+                            {% csrf_token %}
+                         <div class="form-group">
+
+                             {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
                               {% endfor %}
-                            </div>
-                          {% endif %}
 
-                     {% if sub_form.non_field_errors %}
-                            <div class="alert alert-danger" role="alert">
-                              {% for error in sub_form.non_field_errors %}
-                                {{ error }}
+                              {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                  {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                  {% endfor %}
+                                </div>
+                              {% endif %}
+
+                         {% if sub_form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                  {% for error in sub_form.non_field_errors %}
+                                    {{ error }}
+                                  {% endfor %}
+                                </div>
+                              {% endif %}
+
+
+                             <!--<table class="a table table-striped"> <!-- Για να φέρει τη φόρμα σε πραγματική μορφή πίνακα -->
+
+                              {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                  {{ field.label_tag }}
+                                  {% if form.is_bound %}
+                                    {% if field.errors %}
+                                            {% render_field field class="form-control is-invalid" %}
+                                            {% for error in field.errors %}
+                                            <div class="invalid-feedback">
+                                              {{ error }}
+                                            </div>
+                                          {% endfor %}
+                                        {% else %}
+                                            {% render_field field class="form-control is-valid" %}
+                                        {% endif %}
+                                  {% else %}
+                                        {% render_field field class="form-control" %}
+                                  {% endif %}
+
+                                  {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                  {% endif %}
+                                </div>
+
                               {% endfor %}
+
+                            {% for field in sub_form.visible_fields %}
+                                <div class="form-group">
+                                  {{ field.label_tag }}
+                                  {% if sub_form.is_bound %}
+                                    {% if field.errors %}
+                                            {% render_field field class="form-control is-invalid" %}
+                                            {% for error in field.errors %}
+                                            <div class="invalid-feedback">
+                                              {{ error }}
+                                            </div>
+                                          {% endfor %}
+                                        {% else %}
+                                            {% render_field field class="form-control is-valid" %}
+                                        {% endif %}
+                                  {% else %}
+                                        {% render_field field class="form-control" %}
+                                  {% endif %}
+
+                                  {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                  {% endif %}
+                                </div>
+
+                              {% endfor %}
+
+
+                                 <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary"> </td></tr>
+
+
+                              <!--</table> -->
                             </div>
-                          {% endif %}
-
-
-                         <!--<table class="a table table-striped"> <!-- Για να φέρει τη φόρμα σε πραγματική μορφή πίνακα -->
-
-                          {% for field in form.visible_fields %}
-                            <div class="form-group">
-                              {{ field.label_tag }}
-                              {% if form.is_bound %}
-                                {% if field.errors %}
-                                        {% render_field field class="form-control is-invalid" %}
-                                        {% for error in field.errors %}
-                                        <div class="invalid-feedback">
-                                          {{ error }}
-                                        </div>
-                                      {% endfor %}
-                                    {% else %}
-                                        {% render_field field class="form-control is-valid" %}
-                                    {% endif %}
-                              {% else %}
-                                    {% render_field field class="form-control" %}
-                              {% endif %}
-
-                              {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
-                              {% endif %}
-                            </div>
-
-                          {% endfor %}
-
-                        {% for field in sub_form.visible_fields %}
-                            <div class="form-group">
-                              {{ field.label_tag }}
-                              {% if sub_form.is_bound %}
-                                {% if field.errors %}
-                                        {% render_field field class="form-control is-invalid" %}
-                                        {% for error in field.errors %}
-                                        <div class="invalid-feedback">
-                                          {{ error }}
-                                        </div>
-                                      {% endfor %}
-                                    {% else %}
-                                        {% render_field field class="form-control is-valid" %}
-                                    {% endif %}
-                              {% else %}
-                                    {% render_field field class="form-control" %}
-                              {% endif %}
-
-                              {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
-                              {% endif %}
-                            </div>
-
-                          {% endfor %}
-
-
-                             <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary"> </td></tr>
-
-
-                          <!--</table> -->
-
-                     </form>
-
-
+                         </form>
 
             </div>
-     </div>
+
+       </div>
+
 
 
 
