@@ -6,7 +6,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
       Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind
-from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm
+from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, EklsindFormPartial
 
 from django.db import connection
 
@@ -789,16 +789,20 @@ def sindiasmoi_add(request, eklid):
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
         form = SindiasmoiForm(request.POST, request.FILES)
-        if form.is_valid():
+        sub_form = EklsindFormPartial(request.POST)
+
+        if all([form.is_valid(), sub_form.is_valid()]):
             sind_item = form.save(commit=False)
             sind_item.save()
-            #print(form.cleaned_data)
+            #eklsind_item = sub_form.save(commit=False)
+           # sub_form.save()
+            ##print(form.cleaned_data)
 
             #Αν είναι καθολικός συνδυασμός εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND
             if form.cleaned_data['eidos'] == 1:
                 Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
-                                       aa = form.cleaned_data['aa'],
+                                       aa = sub_form.cleaned_data['aa'],
                                        edresa=0,
                                        edresa_ypol=0,
                                        edresa_teliko=0,
@@ -813,12 +817,14 @@ def sindiasmoi_add(request, eklid):
                 return redirect('edres_list', eklid)'''
     else:
         form=SindiasmoiForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        sub_form = EklsindFormPartial()
 
     context = {
                 'selected_ekloges': selected_ekloges,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
-                'form': form
+                'form': form,
+                'sub_form': sub_form,
                }
 
     return render(request, 'Elections/basicform.html', context)
@@ -830,24 +836,27 @@ def sindiasmoi_edit(request, eklid, sindid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    item = get_object_or_404(Sindiasmoi, sindid=sindid)
+    sind_item = get_object_or_404(Sindiasmoi, sindid=sindid)
+    eklsind_item = get_object_or_404(Eklsind, eklid=eklid, sindid=sindid) #φορτώνω και δεύτερη φόρμα που έχει πεδία από τον EKLSIND
 
-    form = SindiasmoiForm(request.POST or None, request.FILES or None,  instance=item)
+    if request.method == 'POST':
+        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
+        sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
 
-    if form.is_valid():
-        form.save()
-        #print(form.cleaned_data)
-        if form.cleaned_data['eidos'] == 1:
-            eklsind_item=get_object_or_404(Eklsind, eklid=eklid,sindid=sindid)
-            eklsind_item.aa= form.cleaned_data['aa']
-            eklsind_item.save()
-        return redirect('sindiasmoi_list', eklid)
+        if all([form.is_valid(), sub_form.is_valid()]):
+            form.save()
+            sub_form.save()
+            return redirect('sindiasmoi_list', eklid)
+    else:
+        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
+        sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
 
     context = {
         'selected_ekloges': selected_ekloges,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
-        'form': form
+        'form': form,
+        'sub_form': sub_form,
     }
 
     return render(request, 'Elections/basicform.html', context)

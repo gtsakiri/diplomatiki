@@ -1,4 +1,4 @@
-from django.forms import ModelForm,  DateInput, CharField
+from django.forms import ModelForm, forms,  DateInput, CharField
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind
 from django.utils.translation import gettext_lazy as _
@@ -66,11 +66,11 @@ class EklogestblForm(ModelForm):
 
 class SindiasmoiForm(ModelForm):
 
-    aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
+    #aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
 
     class Meta:
         model=Sindiasmoi
-        fields = ['descr', 'shortdescr', 'eidos', 'photo', 'aa']
+        fields = ['descr', 'shortdescr', 'eidos', 'photo']
         labels = {
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
@@ -109,3 +109,20 @@ class EklsindForm(ModelForm):
         edresa_ypol = cleaned_data.get('edresa_ypol')
         edresa_teliko = cleaned_data.get('edresa_teliko')
         ypol = cleaned_data.get('ypol')
+
+class EklsindFormPartial(ModelForm):
+
+    class Meta:
+        model=Eklsind
+        fields = ['aa']
+        labels = {
+            'aa': _('ΑΑ'),
+        }
+        help_texts = {
+            'aa': _('Με ποιο ΑΑ συμμετέχει o συνδυασμός στις εκλογές'),
+        }
+
+
+    def clean(self):
+        cleaned_data = super(EklsindFormPartial, self).clean()
+        aa = cleaned_data.get('aa')
