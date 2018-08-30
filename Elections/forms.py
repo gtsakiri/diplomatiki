@@ -22,6 +22,7 @@ class EdresForm(ModelForm):
             raise forms.ValidationError('Το σύνολο των εδρών πρέπει να ισούται με το άθροισμα των δύο άλλων σχετικών πεδίων!')
 
 class SistimaForm(ModelForm):
+
     class Meta:
         model=Sistima
         fields = '__all__'

@@ -181,7 +181,7 @@ class Eklsimbper(models.Model):
 class Eklsind(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, on_delete=models.CASCADE, db_column='sindID')  # Field name made lowercase.
     aa = models.CharField(max_length=45)
     edresa = models.IntegerField(db_column='edresA', default=0)  # Field name made lowercase.
     edresa_ypol = models.IntegerField(db_column='edresA_Ypol',default=0)  # Field name made lowercase.

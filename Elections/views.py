@@ -535,6 +535,7 @@ def edres_add(request, eklid):
         if form.is_valid():
             edres_item = form.save(commit=False)
             edres_item.save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = EdresForm()
             '''
             if "Save_and_add_another" in request.POST:
@@ -620,6 +621,7 @@ def sistima_add(request, eklid):
         if form.is_valid():
             sistima_item = form.save(commit=False)
             sistima_item.save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = SistimaForm()
             '''
             if "Save_and_add_another" in request.POST:
@@ -705,6 +707,7 @@ def ekloges_add(request, eklid):
         if form.is_valid():
             ekl_item = form.save(commit=False)
             ekl_item.save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = EklogestblForm()
             '''
             if "Save_and_add_another" in request.POST:
@@ -806,7 +809,7 @@ def sindiasmoi_add(request, eklid):
                                        edresa_teliko=0,
                                        edresb=0,
                                        ypol=0).save()
-            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!', extra_tags='alert alert-success alert-dismissible fade show' )
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('sindiasmoi_add', eklid)
     else:
         form=SindiasmoiForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
