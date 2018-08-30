@@ -12,9 +12,9 @@
                   {% csrf_token %}
                   <div class="divmargin"></div>
                   <p>Είσαι σίγουρος/η για τη διαγραφή?</p>
-                  <div CLASS="divmargin"></div>
+                  <div class="divmargin"></div>
                   <input type="submit" value="Ναι, διέγραψέ το" class="btn btn-warning">
-                  <a href="{% url 'edres_list' selected_ekloges.0.eklid%}" class="btn btn-default">Ακύρωση</a>
+                  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
 
 
              </form>

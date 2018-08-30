@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 class Edres(models.Model):
     edrid = models.AutoField(db_column='edrID', primary_key=True)  # Field name made lowercase.

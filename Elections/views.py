@@ -669,9 +669,8 @@ def sistima_delete(request, eklid, sisid ):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    obj=get_object_or_404(Edres, sisid=sisid)
+    obj=get_object_or_404(Sistima, sisid=sisid)
     if request.method == 'POST':
-        #parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('sistima_list', eklid)
