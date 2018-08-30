@@ -791,35 +791,39 @@ def sindiasmoi_add(request, eklid):
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
         form = SindiasmoiForm(request.POST, request.FILES)
-        sub_form = EklsindFormPartial(request.POST)
+        #sub_form = EklsindFormPartial(request.POST)
 
-        if all([form.is_valid(), sub_form.is_valid()]):
+
+        #if all([form.is_valid(), sub_form.is_valid()]):
+        if form.is_valid():
             sind_item = form.save(commit=False)
-            #το πεδίο eidos παίρνει την τιμή 1 (καθολικός συνδυασμός για το δημοτικό συμβούλιο)
-            sind_item.eidos = 1
             sind_item.save()
 
-            #Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND
-            Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+            # Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND αν είναι καθολικός συνδυασμός
+            #Αν δεν είναι κρύβω στο template και το ΑΑ
+            if sind_item.eidos == 1:
+                Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
-                                       aa = sub_form.cleaned_data['aa'],
+                                       aa = form.cleaned_data['aa'],
                                        edresa=0,
                                        edresa_ypol=0,
                                        edresa_teliko=0,
                                        edresb=0,
                                        ypol=0).save()
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('sindiasmoi_add', eklid)
+
     else:
-        form=SindiasmoiForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
-        sub_form = EklsindFormPartial()
+        form=SindiasmoiForm(initial={'aa': 0})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+       # sub_form = EklsindFormPartial()
 
     context = {
                 'selected_ekloges': selected_ekloges,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form,
-                'sub_form': sub_form,
+                #'sub_form': sub_form,
                }
 
     return render(request, 'Elections/basicform.html', context)

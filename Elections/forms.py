@@ -1,4 +1,5 @@
 from django.forms import ModelForm, forms,  DateInput, CharField
+from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind
 from django.utils.translation import gettext_lazy as _
@@ -67,28 +68,37 @@ class EklogestblForm(ModelForm):
 
 class SindiasmoiForm(ModelForm):
 
-    #aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
+    aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
+
 
     class Meta:
         model=Sindiasmoi
-        fields = ['descr', 'shortdescr', 'photo']
+        fields = ['descr', 'shortdescr', 'eidos', 'photo', 'aa']
+        EIDOS_CHOICES = (
+            ('1', 'Δήμο'),
+            ('0', 'Κοινότητα'),
+
+        )
         labels = {
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
+            'eidos': _('Υποψήφιος συνδυασμός για όλο το Δήμο ή σε Τοπική Κοινότητα μόνο?'),
             'photo': _('Φωτογραφία'),
         }
         help_texts = {
             'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
         }
-
-
-
+        widgets = {
+            'eidos': forms.Select(choices=EIDOS_CHOICES, attrs={'class': 'form-control'}),
+        }
 
     def clean(self):
         cleaned_data = super(SindiasmoiForm, self).clean()
         descr = cleaned_data.get('descr')
         shortdescr = cleaned_data.get('shortdescr')
+        eidos = cleaned_data.get('eidos')
         photo = cleaned_data.get('photo')
+        aa = cleaned_data.get('aa')
         #if eidos != 1 and eidos !=0:
             #raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')
 

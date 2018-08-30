@@ -239,6 +239,22 @@
                         });
                     });
     });
+     //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
+        $('#aa').hide(); // destination field
+
+          $('#id_eidos').on('change', function(){
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            if (valueSelected == 1) {
+                $('#id_aa, label[for="#id_aa"]').show()
+                $('#id_aa, label[for="#id_aa"]').parent().show()
+            } else if (valueSelected == 0) {
+                $('#id_aa, label[for="#id_aa"]').hide()
+                document.getElementById("id_aa").value = "0";
+                $('#id_aa, label[for="#id_aa"]').parent().hide()
+            }
+            return false;
+          });
 
   </script>
 
