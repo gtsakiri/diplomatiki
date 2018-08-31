@@ -784,7 +784,8 @@ def sindiasmoi_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_sindiasmoi = Sindiasmoi.objects.all()
+    eklsind_items=Eklsind.objects.filter(eklid=eklid)
+    all_sindiasmoi = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
@@ -998,7 +999,7 @@ def perifereia_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_perifereies=Perifereies.objects.all()
+    all_perifereies=Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
