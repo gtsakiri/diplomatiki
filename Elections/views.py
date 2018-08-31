@@ -6,7 +6,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import  Eklogestbl, EklSumpsifodeltiasindVw,EklPosostasindPerVw,Perifereies, \
       EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
       Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind
-from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, EklsindFormPartial
+from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm
 
 from django.db import connection
 
@@ -706,6 +706,9 @@ def ekloges_add(request, eklid):
         if form.is_valid():
             ekl_item = form.save(commit=False)
             ekl_item.save()
+            #Αν γίνει αυτή η προεπειλεγμένη αναμέτρηση, όλες τις άλλες τις κάνω μη προεπιλεγμένες
+            if ekl_item.defaultelection == 1:
+                Eklogestbl.objects.exclude(eklid=ekl_item.eklid).update(defaultelection=0)
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = EklogestblForm()
             '''
@@ -738,6 +741,9 @@ def ekloges_edit(request, eklid, cureklid):
 
     if form.is_valid():
         form.save()
+        # Αν γίνει αυτή η προεπειλεγμένη αναμέτρηση, όλες τις άλλες τις κάνω μη προεπιλεγμένες
+        if item.defaultelection == 1:
+            Eklogestbl.objects.exclude(eklid=item.eklid).update(defaultelection=0)
         return redirect('ekloges_list', eklid)
 
     context = {
@@ -758,6 +764,10 @@ def ekloges_delete(request, eklid, cureklid ):
     if request.method == 'POST':
         #parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()
+        #Σε περίπτωση διαγραφής προεπιλεγμένης αναμέτρησης, κάνω default την αμέσως προηγούμενη
+        if obj.defaultelection == 1:
+            Eklogestbl.objects.filter(eklid=Eklogestbl.objects.latest('eklid').eklid).update(defaultelection=1)
+
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('ekloges_list', eklid)
     context={'selected_ekloges': selected_ekloges,

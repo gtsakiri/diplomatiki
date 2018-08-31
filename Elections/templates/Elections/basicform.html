@@ -11,6 +11,8 @@
 
        <div class="col-md-6 col-md-offset-3">
 
+       {% include 'Elections/messages.html' %}
+
 
                       <div class="text-center">
 
@@ -53,7 +55,7 @@
                                     {% if field.errors %}
                                             {% render_field field class="form-control is-invalid" %}
                                             {% for error in field.errors %}
-                                            <div class="invalid-feedback">
+                                            <div class="bg2 invalid-feedback">
                                               {{ error }}
                                             </div>
                                           {% endfor %}

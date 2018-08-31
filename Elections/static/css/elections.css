@@ -202,6 +202,10 @@ div.bg1 {
     background-color: rgba(242, 242, 242, 1);
 }
 
+div.bg2 {
+	background-color: #f78f88
+}
+
 .thumbnail {
     height:485px;
     width:100%;
@@ -274,5 +278,8 @@ table.c {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-
-
+ }
+ 
+.field_error {
+ color:red;	
+}

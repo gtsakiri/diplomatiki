@@ -37,6 +37,19 @@ class EklogestblForm(ModelForm):
     class Meta:
         model=Eklogestbl
         fields = '__all__'
+
+        VISIBLE_CHOICES = (
+            ('1', 'ΝΑΙ'),
+            ('0', 'ΟΧΙ'),
+
+        )
+
+        DEFAULT_CHOICES = (
+            ('1', 'ΝΑΙ'),
+            ('0', 'ΟΧΙ'),
+
+        )
+
         labels = {
             'descr': _('Περιγραφή'),
             'dateofelection': _('Ημερ. διεξαγωγής'),
@@ -48,7 +61,11 @@ class EklogestblForm(ModelForm):
         }
         help_texts = {
             'dateofelection': _('η ημερομηνία στη μορφή Ετος-Μηνας-Μέρα παρακαλώ, π.χ. 2018-10-21'),
-            'visible': _('Βάλε 1 αν πρέπει να είναι ορατή στην εφαρμογή, αλλιώς βάλε 0'),
+            'visible': _('Επιλέξτε ΝΑΙ αν πρέπει να είναι ορατή στην εφαρμογή, αλλιώς επιλέξτε ΟΧΙ'),
+        }
+        widgets = {
+        'visible': forms.Select(choices=VISIBLE_CHOICES, attrs={'class': 'form-control'}),
+        'defaultelection': forms.Select(choices=DEFAULT_CHOICES, attrs={'class': 'form-control'}),
         }
 
 
@@ -61,9 +78,12 @@ class EklogestblForm(ModelForm):
         sisid = cleaned_data.get('sisid')
         edrid = cleaned_data.get('edrid')
         visible = cleaned_data.get('visible')
-        defaultelection = cleaned_data.get('defaultElection')
+        defaultelection = cleaned_data.get('defaultelection')
         if visible != 1 and visible !=0:
             raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Ορατή" μόνο 0 ή 1!')
+        if visible == 0 and defaultelection == 1:
+            raise forms.ValidationError('Δεν μπορεί να γίνει μη ορατή η προεπιλεγμένη εκλ. αναμέτρηση!')
+
 
 
 class SindiasmoiForm(ModelForm):
@@ -74,11 +94,13 @@ class SindiasmoiForm(ModelForm):
     class Meta:
         model=Sindiasmoi
         fields = ['descr', 'shortdescr', 'eidos', 'photo', 'aa']
+
         EIDOS_CHOICES = (
             ('1', 'Δήμο'),
             ('0', 'Κοινότητα'),
 
         )
+
         labels = {
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
@@ -87,6 +109,7 @@ class SindiasmoiForm(ModelForm):
         }
         help_texts = {
             'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
+            'aa': _('Με ποιο ΑΑ συμμετέχει o συνδυασμός στις εκλογές'),
         }
         widgets = {
             'eidos': forms.Select(choices=EIDOS_CHOICES, attrs={'class': 'form-control'}),
@@ -118,6 +141,7 @@ class EklsindForm(ModelForm):
         edresa_teliko = cleaned_data.get('edresa_teliko')
         ypol = cleaned_data.get('ypol')
 
+'''
 class EklsindFormPartial(ModelForm):
 
     class Meta:
@@ -134,3 +158,4 @@ class EklsindFormPartial(ModelForm):
     def clean(self):
         cleaned_data = super(EklsindFormPartial, self).clean()
         aa = cleaned_data.get('aa')
+'''
