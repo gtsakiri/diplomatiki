@@ -113,7 +113,7 @@ class Sindiasmoi(models.Model):
     sindid = models.AutoField(db_column='sindID', primary_key=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
-    photo = models.ImageField(db_column='photo',upload_to='sindiasmoi/',null=True, blank=True)
+    photo = models.ImageField(db_column='photo',upload_to='sindiasmoi/',default='elections.jpg',null=True, blank=True)
     eidos = models.IntegerField(default=1)
 
     def __str__(self):
@@ -126,7 +126,7 @@ class Sindiasmoi(models.Model):
 
 class Eklper(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID')  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID')  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - '  + str(self.perid)
@@ -183,7 +183,7 @@ class Eklsimbper(models.Model):
 class Eklsind(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    sindid = models.ForeignKey(Sindiasmoi, on_delete=models.CASCADE, db_column='sindID')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID')  # Field name made lowercase.
     aa = models.CharField(max_length=45)
     edresa = models.IntegerField(db_column='edresA', default=0)  # Field name made lowercase.
     edresa_ypol = models.IntegerField(db_column='edresA_Ypol',default=0)  # Field name made lowercase.

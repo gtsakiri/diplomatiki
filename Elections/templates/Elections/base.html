@@ -147,8 +147,8 @@
                             <li><a href="{% url 'sistima_list' selected_ekloges.0.eklid  %}">Εκλογικά Συστήματα</a></li>
                             <li><a href="{% url 'edres_list' selected_ekloges.0.eklid  %}" >Περιπτώσεις κατανομής εδρών σε Δήμους</a></li>
                             <li><a href="#">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
-                            <li><a href="#">Εκλογικές Αναμετρήσεις</a></li>
-                            <li><a href="#">Εκλογικές Περιφέρειες</a></li>
+                            <li><a href="{% url 'perifereia_list' selected_ekloges.0.eklid  %}">Εκλογικές Περιφέρειες</a></li>
+
                             <li><a href="#">Τύποι Κοινοτήτων</a></li>
                             <li><a href="#">Κοινότητες</a></li>
                             <li><a href="{% url 'sindiasmoi_list' selected_ekloges.0.eklid  %}">Συνδυασμοί</a></li>

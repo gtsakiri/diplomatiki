@@ -15,6 +15,11 @@ path('sistimaedit/<int:eklid>/<int:sisid>/', views.sistima_edit, name='sistima_e
 path('sistimaadd/<int:eklid>/', views.sistima_add, name='sistima_add'),
 path('sistimadelete/<int:eklid>/<int:sisid>/', views.sistima_delete, name='sistima_delete'),
 
+path('perifereia/<int:eklid>/', views.perifereia_list, name='perifereia_list'),
+path('perifereiaedit/<int:eklid>/<int:perid>/', views.perifereia_edit, name='perifereia_edit'),
+path('perifereiaadd/<int:eklid>/', views.perifereia_add, name='perifereia_add'),
+path('perifereiadelete/<int:eklid>/<int:perid>/', views.perifereia_delete, name='perifereia_delete'),
+
 path('sindiasmoi/<int:eklid>/', views.sindiasmoi_list, name='sindiasmoi_list'),
 path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='sindiasmoi_edit'),
 path('sindiasmoiadd/<int:eklid>/', views.sindiasmoi_add, name='sindiasmoi_add'),

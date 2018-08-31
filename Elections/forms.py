@@ -1,7 +1,7 @@
 from django.forms import ModelForm, forms,  DateInput, CharField
 from django import forms
 
-from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind
+from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -159,3 +159,16 @@ class EklsindFormPartial(ModelForm):
         cleaned_data = super(EklsindFormPartial, self).clean()
         aa = cleaned_data.get('aa')
 '''
+
+class PerifereiesForm(ModelForm):
+
+    class Meta:
+        model=Perifereies
+        fields = '__all__'
+        labels = {
+            'descr': _('Περιγραφή'),
+        }
+
+    def clean(self):
+        cleaned_data = super(PerifereiesForm, self).clean()
+        descr = cleaned_data.get('descr')
