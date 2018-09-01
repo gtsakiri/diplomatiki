@@ -1,7 +1,7 @@
 from django.forms import ModelForm, forms,  DateInput, CharField
 from django import forms
 
-from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies
+from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -22,15 +22,54 @@ class EdresForm(ModelForm):
         if sinoloedrwn != (edresprwtou + edresypoloipwn):
             raise forms.ValidationError('Το σύνολο των εδρών πρέπει να ισούται με το άθροισμα των δύο άλλων σχετικών πεδίων!')
 
+class EdresKoinForm(ModelForm):
+    class Meta:
+        model=Edreskoin
+        fields = '__all__'
+        labels = {
+            'descr': _('Περιγραφή'),
+            'sinolo': _('Σύνολο εδρών'),
+        }
+
+
+    def clean(self):
+        cleaned_data = super(EdresKoinForm, self).clean()
+        descr = cleaned_data.get('descr')
+        sinolo = cleaned_data.get('sinolo')
+
 class SistimaForm(ModelForm):
 
     class Meta:
         model=Sistima
         fields = '__all__'
+        labels = {
+            'descr': _('Περιγραφή'),
+        }
 
     def clean(self):
         cleaned_data = super(SistimaForm, self).clean()
         descr = cleaned_data.get('descr')
+
+class TypeofkoinotitaForm(ModelForm):
+
+    class Meta:
+        model=Typeofkoinotita
+        fields = '__all__'
+        labels = {
+            'tpkid': _('Κωδικός'),
+            'descr': _('Περιγραφή'),
+        }
+
+    def clean(self):
+        cleaned_data = super(TypeofkoinotitaForm, self).clean()
+        descr = cleaned_data.get('descr')
+        tpkid = self.cleaned_data['tpkid']
+'''
+        if Typeofkoinotita.objects.filter(tpkid=tpkid).exists():
+            raise forms.ValidationError(
+                "This key has already been entered, try to update it"
+            )
+'''
 
 class EklogestblForm(ModelForm):
 

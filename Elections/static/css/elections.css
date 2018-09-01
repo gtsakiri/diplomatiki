@@ -203,7 +203,7 @@ div.bg1 {
 }
 
 div.bg2 {
-	background-color: #f78f88
+	background-color: #f9e3ec
 }
 
 .thumbnail {
@@ -246,12 +246,18 @@ tr.hide_all > td, td.hide_all{
 
 table.b {
  margin: 0 auto;  
- width: 70%; 
+ width: 100%; 
 }
 
 table.c {
 
  width: 30%;
+ margin: 0 auto;  
+}
+
+table.d {
+
+ width: 100%;
  margin: 0 auto;  
 }
 
@@ -261,7 +267,7 @@ table.c {
       }
 
 .table-condensed{
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .heighttext{

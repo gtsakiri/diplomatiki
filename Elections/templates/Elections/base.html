@@ -95,7 +95,7 @@
               <!-- start of side bar -->
             <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-light sidebar">
 
-            <div style=" overflow-x: hidden; width: 350px; height : 100%;">
+            <div  style="overflow-x: hidden; width: 300px; height : 100%;">
 
                 <!--<p id="demo1" type="hidden" ></p> -->
                 <div id="div1">
@@ -118,11 +118,11 @@
 
                     <!-- overflow-y: scroll; -->
                 <ul class="nav nav-list">
-                     <div class="divmargin"> </div>
+
 
                     <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-stats"></span> ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
-                        <ul class="nav nav-list tree">
-                            <li><a href="{% url 'pososta_telika' selected_ekloges.0.eklid %} " id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
+                        <ul class=" nav nav-list tree" style="font-size: 13px; ">
+                            <li><a href="{% url 'pososta_telika' selected_ekloges.0.eklid %} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
                             <li><a href="{% url 'pososta_perifereies' selected_ekloges.0.eklid  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια</a></li>
                             <li><a href="{% url 'psifoisimb_perifereies' selected_ekloges.0.eklid  %}" id="m3">Κατάταξη υποψ. δημοτικών συμβούλων</a></li>
 
@@ -142,14 +142,13 @@
 
                     <li class="divider"></li>
                     <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
-                        <ul class="nav nav-list tree"  >
+                        <ul class="nav nav-list tree" style="font-size: 13px; " >
                             <li><a href="{% url 'ekloges_list' selected_ekloges.0.eklid  %}">Εκλ. αναμετρήσεις</a></li>
                             <li><a href="{% url 'sistima_list' selected_ekloges.0.eklid  %}">Εκλογικά Συστήματα</a></li>
                             <li><a href="{% url 'edres_list' selected_ekloges.0.eklid  %}" >Περιπτώσεις κατανομής εδρών σε Δήμους</a></li>
-                            <li><a href="#">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
+                            <li><a href="{% url 'edreskoin_list' selected_ekloges.0.eklid  %}">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
+                            <li><a href="{% url 'typeofkoinotita_list' selected_ekloges.0.eklid  %}">Τύποι Κοινοτήτων</a></li>
                             <li><a href="{% url 'perifereia_list' selected_ekloges.0.eklid  %}">Εκλογικές Περιφέρειες</a></li>
-
-                            <li><a href="#">Τύποι Κοινοτήτων</a></li>
                             <li><a href="#">Κοινότητες</a></li>
                             <li><a href="{% url 'sindiasmoi_list' selected_ekloges.0.eklid  %}">Συνδυασμοί</a></li>
                             <li><a href="{% url 'eklsind_list' selected_ekloges.0.eklid  %}">Συνδυασμοί list</a></li>
@@ -226,6 +225,9 @@
 
 
   <script>
+
+      <!-- για το text-box Που κάνει Live αναζήτηση -->
+
     $("#livesearch").keyup(function () {
                     var value = this.value.toLowerCase().trim();
 
@@ -239,22 +241,7 @@
                         });
                     });
     });
-     //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
-        $('#aa').hide(); // destination field
 
-          $('#id_eidos').on('change', function(){
-            var optionSelected = $("option:selected", this);
-            var valueSelected = this.value;
-            if (valueSelected == 1) {
-                $('#id_aa, label[for="#id_aa"]').show()
-                $('#id_aa, label[for="#id_aa"]').parent().show()
-            } else if (valueSelected == 0) {
-                $('#id_aa, label[for="#id_aa"]').hide()
-                document.getElementById("id_aa").value = "0";
-                $('#id_aa, label[for="#id_aa"]').parent().hide()
-            }
-            return false;
-          });
 
   </script>
 

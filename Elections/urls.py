@@ -5,10 +5,21 @@ from . import views
 
 urlpatterns = [
 path('', views.Elections_list, name='Elections_list'),
+
 path('edres/<int:eklid>/', views.edres_list, name='edres_list'),
 path('edresedit/<int:eklid>/<int:edrid>/', views.edres_edit, name='edres_edit'),
 path('edresadd/<int:eklid>/', views.edres_add, name='edres_add'),
 path('edresdelete/<int:eklid>/<int:edrid>/', views.edres_delete, name='edres_delete'),
+
+path('edreskoin/<int:eklid>/', views.edreskoin_list, name='edreskoin_list'),
+path('edreskoinedit/<int:eklid>/<int:edrid>/', views.edreskoin_edit, name='edreskoin_edit'),
+path('edreskoinadd/<int:eklid>/', views.edreskoin_add, name='edreskoin_add'),
+path('edreskoindelete/<int:eklid>/<int:edrid>/', views.edreskoin_delete, name='edreskoin_delete'),
+
+path('typeofkoinotita/<int:eklid>/', views.typeofkoinotita_list, name='typeofkoinotita_list'),
+path('typeofkoinotitaedit/<int:eklid>/<int:tpkid>/', views.typeofkoinotita_edit, name='typeofkoinotita_edit'),
+path('typeofkoinotitaadd/<int:eklid>/', views.typeofkoinotita_add, name='typeofkoinotita_add'),
+path('typeofkoinotitadelete/<int:eklid>/<int:tpkid>/', views.typeofkoinotita_delete, name='typeofkoinotita_delete'),
 
 path('sistima/<int:eklid>/', views.sistima_list, name='sistima_list'),
 path('sistimaedit/<int:eklid>/<int:sisid>/', views.sistima_edit, name='sistima_edit'),
