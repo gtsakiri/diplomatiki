@@ -597,7 +597,6 @@ def edres_delete(request, eklid, edrid ):
              }
     return render(request, 'Elections/confirm_delete.html', context)
 
-####
 def edreskoin_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -765,7 +764,6 @@ def sistima_delete(request, eklid, sisid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-#####
 
 def typeofkoinotita_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1307,17 +1305,37 @@ def koinotites_edit(request, eklid, koinid):
 
     item=get_object_or_404(Koinotites, koinid=koinid)
 
-    form = KoinotitesForm(request.POST or None, instance=item)
+    eklperkoin_item = Eklperkoin.objects.get(eklid=eklid, koinid=item.koinid)
+    per_id_item = eklperkoin_item.perid
+    edr_id_item = eklperkoin_item.edrid
 
-    if form.is_valid():
-        form.save()
-        return redirect('koinotites_list', eklid)
+    if request.method == 'POST':
+
+        form = KoinotitesForm(request.POST or None, instance=item)
+
+        if form.is_valid():
+            form.save()
+            Eklperkoin.objects.filter(eklid=eklid, koinid=koinid).update(perid=form.cleaned_data['perid'], edrid=form.cleaned_data['edrid'])
+            return redirect('koinotites_list', eklid)
+
+        context = {
+            'selected_ekloges': selected_ekloges,
+            'action_label': action_label,
+            'all_ekloges': all_ekloges,
+            'form': form
+        }
+
+        return render(request, 'Elections/basicform.html', context)
+    else:
+        # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
+        #print(per_id_item)
+        form = KoinotitesForm(request.POST or None, instance=item, initial={'edrid':edr_id_item, 'perid': per_id_item })
 
     context = {
         'selected_ekloges': selected_ekloges,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
-        'form': form
+        'form': form,
     }
 
     return render(request, 'Elections/basicform.html', context)

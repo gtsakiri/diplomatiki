@@ -229,8 +229,8 @@ class KoinotitesForm(ModelForm):
 
     def __init__(self, eklid, *args, **kwargs):
         super(KoinotitesForm, self).__init__(*args, **kwargs)
-
-        self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values('perid'))
+        #Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values('perid'))
+        self.fields['perid'].queryset = Perifereies.objects.all()
         self.fields['edrid'].queryset = Edreskoin.objects.all()
 
     def clean(self):
