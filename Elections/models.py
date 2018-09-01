@@ -139,9 +139,9 @@ class Eklper(models.Model):
 
 class Eklperkoin(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID')  # Field name made lowercase.
-    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID')  # Field name made lowercase.
-    edrid = models.ForeignKey(Edreskoin, models.DO_NOTHING, db_column='edrID', blank=True, null=True)  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID')  # Field name made lowercase.
+    koinid = models.ForeignKey(Koinotites, models.CASCADE, db_column='koinID')  # Field name made lowercase.
+    edrid = models.ForeignKey(Edreskoin, models.CASCADE, db_column='edrID', blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - '  + str(self.perid) + ' - '  + str(self.koinid)

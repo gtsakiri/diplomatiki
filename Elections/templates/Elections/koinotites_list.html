@@ -1,0 +1,63 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+     <div class="page-header">
+
+            <h3 align="center">Κοινότητες</h3>
+     </div>
+
+ <div class="row">
+
+       <div class="col-md-6 col-md-offset-3">
+
+                   <table class="table table-bordered table-striped table-condensed">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Περιγραφή</td>
+                                <td class="thick">Είδος</td>
+                                <td width="20%"></td>
+
+
+                        </tr>
+                        {% for p in all_koinotites %}
+                              <tr>
+                                <td > {{ p.descr}} </td>
+                                 <td > {{ p.eidos}} </td>
+                                <td .noborder>
+                                    <a class="btn btn-default" href="{% url 'koinotites_edit' selected_ekloges.0.eklid p.koinid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'koinotites_delete' selected_ekloges.0.eklid p.koinid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
+
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table>
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'koinotites_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+                <div class="divmargin"></div>
+
+        </div>
+</div>
+
+{% endblock %}
+
+  </body>
+</html>
+
+

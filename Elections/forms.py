@@ -1,7 +1,7 @@
-from django.forms import ModelForm, forms,  DateInput, CharField
+from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceField
 from django import forms
 
-from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita
+from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, Koinotites
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -211,3 +211,30 @@ class PerifereiesForm(ModelForm):
     def clean(self):
         cleaned_data = super(PerifereiesForm, self).clean()
         descr = cleaned_data.get('descr')
+
+class KoinotitesForm(ModelForm):
+
+    perid= ModelChoiceField (queryset=None, label='Περιφέρεια')
+    edrid = ModelChoiceField(queryset=None, label='Κατηγορία κατανομής εδρών')
+
+    class Meta:
+        model=Koinotites
+        fields = ['descr', 'eidos', 'perid', 'edrid']
+        labels = {
+            'descr': _('Περιγραφή'),
+            'eidos': _('Είδος'),
+
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(KoinotitesForm, self).__init__(*args, **kwargs)
+        self.fields['perid'].queryset = Eklsind.objects.filter(eklid=eklid)
+        self.fields['edrid'].queryset = Edreskoin.objects.all()
+
+    def clean(self):
+        cleaned_data = super(KoinotitesForm, self).clean()
+        descr = cleaned_data.get('descr')
+        eidos = cleaned_data.get('eidos')
+        perid = cleaned_data.get('perid')
+        edrid = cleaned_data.get('edrid')
+

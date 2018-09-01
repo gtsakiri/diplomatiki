@@ -31,6 +31,11 @@ path('perifereiaedit/<int:eklid>/<int:perid>/', views.perifereia_edit, name='per
 path('perifereiaadd/<int:eklid>/', views.perifereia_add, name='perifereia_add'),
 path('perifereiadelete/<int:eklid>/<int:perid>/', views.perifereia_delete, name='perifereia_delete'),
 
+path('koinotites/<int:eklid>/', views.koinotites_list, name='koinotites_list'),
+path('koinotitesedit/<int:eklid>/<int:koinid>/', views.koinotites_edit, name='koinotites_edit'),
+path('koinotitesdd/<int:eklid>/', views.koinotites_add, name='koinotites_add'),
+path('koinotitesdelete/<int:eklid>/<int:koinid>/', views.koinotites_delete, name='koinotites_delete'),
+
 path('sindiasmoi/<int:eklid>/', views.sindiasmoi_list, name='sindiasmoi_list'),
 path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='sindiasmoi_edit'),
 path('sindiasmoiadd/<int:eklid>/', views.sindiasmoi_add, name='sindiasmoi_add'),

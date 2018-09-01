@@ -149,7 +149,7 @@
                             <li><a href="{% url 'edreskoin_list' selected_ekloges.0.eklid  %}">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
                             <li><a href="{% url 'typeofkoinotita_list' selected_ekloges.0.eklid  %}">Τύποι Κοινοτήτων</a></li>
                             <li><a href="{% url 'perifereia_list' selected_ekloges.0.eklid  %}">Εκλογικές Περιφέρειες</a></li>
-                            <li><a href="#">Κοινότητες</a></li>
+                            <li><a href="{% url 'koinotites_list' selected_ekloges.0.eklid  %}">Κοινότητες</a></li>
                             <li><a href="{% url 'sindiasmoi_list' selected_ekloges.0.eklid  %}">Συνδυασμοί</a></li>
                             <li><a href="{% url 'eklsind_list' selected_ekloges.0.eklid  %}">Συνδυασμοί list</a></li>
                             <li><a href="#">Σύμβουλοι</a></li>

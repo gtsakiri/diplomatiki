@@ -5,9 +5,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
-    Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita
+    Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
-    TypeofkoinotitaForm
+    TypeofkoinotitaForm, KoinotitesForm
 from django.core.files.base import ContentFile
 
 from django.db import connection
@@ -1237,6 +1237,96 @@ def perifereia_delete(request, eklid, perid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('perifereia_list', eklid)
+    context={'selected_ekloges': selected_ekloges,
+             'all_ekloges': all_ekloges,
+             'object':obj
+             }
+
+    return render(request, 'Elections/confirm_delete.html', context)
+
+#################################################################
+
+def koinotites_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_koinotites=Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_koinotites':all_koinotites
+               }
+
+    return render(request, 'Elections/koinotites_list.html' , context)
+
+def koinotites_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Κοινότητες - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = KoinotitesForm(request.POST, eklid)
+        if form.is_valid():
+            koinotita_item = form.save(commit=False)
+            koinotita_item.save()
+            #Εισαγωγή εγγραφής και στον Eklperkoin
+            Eklperkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                   perid=form.cleaned_data['perid'],
+                                   koinid=koinotita_item,
+                                   edrid=form.cleaned_data['perid']
+                                   ).save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
+            form = KoinotitesForm()
+    else:
+        form=KoinotitesForm(eklid)  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def koinotites_edit(request, eklid, koinid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Κοινότητες - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    item=get_object_or_404(Koinotites, koinid=koinid)
+
+    form = KoinotitesForm(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('koinotites_list', eklid)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form
+    }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def koinotites_delete(request, eklid, koinid ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj=get_object_or_404(Koinotites, koinid=koinid)
+
+    if request.method == 'POST':
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('koinotites_list', eklid)
     context={'selected_ekloges': selected_ekloges,
              'all_ekloges': all_ekloges,
              'object':obj
