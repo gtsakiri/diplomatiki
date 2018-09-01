@@ -1268,18 +1268,24 @@ def koinotites_add(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = KoinotitesForm(request.POST, eklid)
+        form = KoinotitesForm(eklid, request.POST)
         if form.is_valid():
             koinotita_item = form.save(commit=False)
             koinotita_item.save()
+
+            print(form.cleaned_data['perid'])
+            print(form.cleaned_data['edrid'])
+            #return
             #Εισαγωγή εγγραφής και στον Eklperkoin
+
             Eklperkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                    perid=form.cleaned_data['perid'],
                                    koinid=koinotita_item,
-                                   edrid=form.cleaned_data['perid']
+                                   edrid=form.cleaned_data['edrid']
                                    ).save()
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
-            form = KoinotitesForm()
+            form = KoinotitesForm(eklid)
     else:
         form=KoinotitesForm(eklid)  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 

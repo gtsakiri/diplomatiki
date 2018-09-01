@@ -1,7 +1,8 @@
 from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceField
 from django import forms
 
-from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, Koinotites
+from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
+    Koinotites, Eklper
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -215,7 +216,7 @@ class PerifereiesForm(ModelForm):
 class KoinotitesForm(ModelForm):
 
     perid= ModelChoiceField (queryset=None, label='Περιφέρεια')
-    edrid = ModelChoiceField(queryset=None, label='Κατηγορία κατανομής εδρών')
+    edrid = ModelChoiceField(queryset=None, label='Κατηγορία κατανομής εδρών', required=False)
 
     class Meta:
         model=Koinotites
@@ -228,7 +229,8 @@ class KoinotitesForm(ModelForm):
 
     def __init__(self, eklid, *args, **kwargs):
         super(KoinotitesForm, self).__init__(*args, **kwargs)
-        self.fields['perid'].queryset = Eklsind.objects.filter(eklid=eklid)
+
+        self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values('perid'))
         self.fields['edrid'].queryset = Edreskoin.objects.all()
 
     def clean(self):
