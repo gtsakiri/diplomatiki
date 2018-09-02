@@ -1314,29 +1314,28 @@ def koinotites_edit(request, eklid, koinid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
+    #επιλογή της συγκεκριμένης κοινότητας
     item=get_object_or_404(Koinotites, koinid=koinid)
 
+    #παίρνω per_id, edr_id από τον Eklperkoin
     eklperkoin_item = Eklperkoin.objects.get(eklid=eklid, koinid=item.koinid)
     per_id_item = eklperkoin_item.perid
     edr_id_item = eklperkoin_item.edrid
-    form = KoinotitesForm(request.POST or None, instance=item)
 
     if request.method == 'POST':
+        form = KoinotitesForm(eklid, request.POST or None, instance=item)
+        if form.is_valid():
+            item=form.save(commit=False)
+            item.save()
 
-        #form = KoinotitesForm(request.POST or None, instance=item)
-        print(per_id_item)
-        print(edr_id_item)
-        #if form.is_valid():
-        item=form.save(commit=False)
-        item.save()
-
-        Eklperkoin.objects.filter(eklid=eklid, koinid=koinid).update(perid=form.cleaned_data['perid'], edrid=form.cleaned_data['edrid'])
-        return redirect('koinotites_list', eklid)
+            #ενημέρωση και του πίνακα Eklperkoin για τα πεδία perid, edrid
+            Eklperkoin.objects.filter(eklid=eklid, koinid=koinid).update(perid=form.cleaned_data['perid'], edrid=form.cleaned_data['edrid'])
+            return redirect('koinotites_list', eklid)
 
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
         #print(per_id_item)
-        form = KoinotitesForm(request.POST or None, instance=item, initial={'edrid':edr_id_item, 'perid': per_id_item })
+        form = KoinotitesForm(eklid, request.POST or None, instance=item, initial={'edrid':edr_id_item, 'perid': per_id_item })
 
     context = {
         'selected_ekloges': selected_ekloges,

@@ -140,7 +140,6 @@ class SindiasmoiForm(ModelForm):
             ('1', 'Δήμο'),
             ('0', 'Κοινότητα'),
         )
-
         labels = {
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
@@ -188,6 +187,7 @@ class EklsindForm(ModelForm):
 
     def __init__(self, eklid, *args, **kwargs):
         super(EklsindForm, self).__init__(*args, **kwargs)
+
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς που δεν έχουν εισαχθεί ακόμα στην τρέχουσα
         #εκλ. αναμέτρηση, ώστε να μην επαναεισάγει κατά λάθος ο χρήστης τον ίδιο συνδυασμό.
         self.fields['sindid'].queryset = Sindiasmoi.objects.exclude(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
@@ -203,7 +203,6 @@ class EklsindForm(ModelForm):
         edresa_teliko = cleaned_data.get('edresa_teliko')
         edresb = cleaned_data.get('edresb')
         ypol = cleaned_data.get('ypol')
-
 
 
 class PerifereiesForm(ModelForm):
@@ -230,12 +229,12 @@ class KoinotitesForm(ModelForm):
         labels = {
             'descr': _('Περιγραφή'),
             'eidos': _('Είδος'),
-
         }
 
     def __init__(self, eklid, *args, **kwargs):
         super(KoinotitesForm, self).__init__(*args, **kwargs)
-        #Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values('perid'))
+
+        # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, edrid
         self.fields['perid'].queryset = Perifereies.objects.all()
         self.fields['edrid'].queryset = Edreskoin.objects.all()
 
