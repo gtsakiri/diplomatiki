@@ -1,4 +1,4 @@
-from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceField
+from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceField, IntegerField
 from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
@@ -171,36 +171,40 @@ class EklsindForm(ModelForm):
 
     class Meta:
         model=Eklsind
-        fields = '__all__'
+        fields = ['eklid','sindid','aa', 'edresa', 'edresa_ypol', 'edresa_teliko', 'edresb', 'ypol']
+        labels = {
+            'sindid': _('Συνδυασμός'),
+            'aa': _('ΑΑ'),
+            'edresa': _('Έδρες Α γύρου (αρχικές)'),
+            'edresa_ypol': _('Υπόλοιπο Εδρών Α γύρου'),
+            'edresa_teliko': _('Έδρες Α γύρου (τελικές)'),
+            'edresb': _('Έδρες Β γύρου'),
+            'ypol': _('Υπόλοιπο ψηφοδελτίων')
+        }
+        widgets = {
+            #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
+            'eklid': forms.HiddenInput(),
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(EklsindForm, self).__init__(*args, **kwargs)
+        #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς που δεν έχουν εισαχθεί ακόμα στην τρέχουσα
+        #εκλ. αναμέτρηση, ώστε να μην επαναεισάγει κατά λάθος ο χρήστης τον ίδιο συνδυασμό.
+        self.fields['sindid'].queryset = Sindiasmoi.objects.exclude(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
 
 
     def clean(self):
         cleaned_data = super(EklsindForm, self).clean()
-        eklid = cleaned_data.get('eklid')
-        sindid = cleaned_data.get('sindid')
+        #eklid = cleaned_data.get('eklid')
+        descr = cleaned_data.get('descr')
+        shortdescr = cleaned_data.get('shortdescr')
         edresa = cleaned_data.get('edresa')
         edresa_ypol = cleaned_data.get('edresa_ypol')
         edresa_teliko = cleaned_data.get('edresa_teliko')
+        edresb = cleaned_data.get('edresb')
         ypol = cleaned_data.get('ypol')
 
-'''
-class EklsindFormPartial(ModelForm):
 
-    class Meta:
-        model=Eklsind
-        fields = ['aa']
-        labels = {
-            'aa': _('ΑΑ'),
-        }
-        help_texts = {
-            'aa': _('Με ποιο ΑΑ συμμετέχει o συνδυασμός στις εκλογές'),
-        }
-
-
-    def clean(self):
-        cleaned_data = super(EklsindFormPartial, self).clean()
-        aa = cleaned_data.get('aa')
-'''
 
 class PerifereiesForm(ModelForm):
 

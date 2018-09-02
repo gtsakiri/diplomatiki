@@ -1093,24 +1093,23 @@ def eklsind_list(request, eklid):
 
 def eklsind_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Υποψήφιοι Συνδυασμοί - Νέα εγγραφή'
+    action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = EklsindForm(request.POST, request.FILES)
+        form = EklsindForm(eklid, request.POST ) #ΠΡΟΣΟΧΗ! περνάω σαν παράμετρο το eklid, γιατί στη φόρμα γίνεται αρχικοποίηση με αυτή την παράμετρο
         if form.is_valid():
             sind_item = form.save(commit=False)
             sind_item.save()
-            form = EklsindForm()
-            '''
-            if "Save_and_add_another" in request.POST:
-                return redirect('edres_add', eklid)
-            else:
-                return redirect('edres_list', eklid)'''
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
+            #καλώ πάλι τη φόρμα με initial eklid την εκλ. αναμέτρηση στην οποία είμαστε συνδεδεμένο
+            form = EklsindForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
+
     else:
-        form=EklsindForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        #default eklid θέτω την εκλ. αναμέτρηση στην οποία είμαστε συνδεδεμένοι
+        form=EklsindForm(eklid,initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
                 'selected_ekloges': selected_ekloges,
@@ -1123,17 +1122,20 @@ def eklsind_add(request, eklid):
 
 def eklsind_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
+    action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     item = get_object_or_404(Eklsind, id=id)
 
-    form = EklsindForm(request.POST or None,  instance=item)
+    #περνάω παράμετρο eklid=0, για να μπορεί να εμφανίσει στο dropdown sindid το συνδυασμό
+    #γιατί διαφορετικά το αποκλείει σύμφωνα με την αρχικοποίηση που κάνω στη φόρμα EklsindForm
+    form = EklsindForm(0, request.POST or None,  instance=item)
 
     if form.is_valid():
         form.save()
+
         return redirect('eklsind_list', eklid)
 
     context = {
@@ -1151,7 +1153,7 @@ def eklsind_delete(request, eklid, id ):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    obj = get_object_or_404(Sindiasmoi, id=id)
+    obj = get_object_or_404(Eklsind, id=id)
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()

@@ -5,22 +5,25 @@
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
  {% block content %}
+
+      {% include 'Elections/messages.html' %}
+
      <div class="page-header">
 
-            <h3 align="center">Υποψήφιοι Συνδυασμοί</h3>
+            <h3 align="center">Συνδυασμοί και κατανομή εδρών</h3>
      </div>
 
- <div class="content container" >
-        <div class="wrapper">
+ <div class="row">
 
+       <div class="col-md-8 col-md-offset-2">
 
-                   <table class="b table table-striped">
+                   <table class="table table-bordered table-striped table-condensed">
 
                         <tbody >
                         <tr>
                                 <td class="thick">Εκλ. αναμέτρηση</td>
                                 <td class="thick">Συνδυασμός</td>
-                                <td class="thick">αα</td>
+                                <td class="thick">ΑΑ</td>
                                 <td class="thick">Έδρες Α γύρου (αρχικές)</td>
                                 <td class="thick">Υπόλοιπο Εδρών Α γύρου</td>
                                 <td class="thick">Έδρες Α γύρου (τελικές)</td>
@@ -39,10 +42,9 @@
                                 <td > {{ p.edresb }} </td>
                                 <td > {{ p.ypol }} </td>
 
-                                <td >  </td>
-                                <td .noborder>
-                                    <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'sindiasmoi_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                <td width="15%">
+                                    <a class="btn btn-default" href="{% url 'eklsind_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'eklsind_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>
@@ -53,7 +55,7 @@
 
                     <br/>
 
-                    <table class="b">
+                    <table>
 
                         <tbody >
 

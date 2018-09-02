@@ -194,6 +194,12 @@ class Eklsind(models.Model):
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.sindid) + ' - ' + str(self.edresa_teliko)
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # obj is not None, so this is an edit
+            return ['sindid', ]  # Return a list or tuple of readonly fields' names
+        else:  # This is an addition
+            return []
+
     class Meta:
         managed = True
         db_table = 'EKLSIND'
