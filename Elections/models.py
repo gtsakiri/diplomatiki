@@ -204,7 +204,7 @@ class Eklsindkoin(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID')  # Field name made lowercase.
     koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID')  # Field name made lowercase.
-    aa = models.CharField(max_length=45, blank=True)
+    aa = models.CharField(max_length=45)
     proedros = models.CharField(max_length=100, blank=True)
     edresk = models.IntegerField(db_column='edresK', default=0)  # Field name made lowercase.
     edresk_ypol = models.IntegerField(db_column='edresK_Ypol', default=0 )  # Field name made lowercase.

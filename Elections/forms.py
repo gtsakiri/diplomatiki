@@ -129,7 +129,8 @@ class EklogestblForm(ModelForm):
 class SindiasmoiForm(ModelForm):
 
     aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
-
+    #proedros=CharField(label='Πρόεδρος (σε περίπτωση Κοινότητας>300 κατ.',max_length=100)
+    #koin=ModelChoiceField(queryset=Koinotites.objects.filter(eidos=4), label='Κοινότητα')
 
     class Meta:
         model=Sindiasmoi
@@ -138,7 +139,6 @@ class SindiasmoiForm(ModelForm):
         EIDOS_CHOICES = (
             ('1', 'Δήμο'),
             ('0', 'Κοινότητα'),
-
         )
 
         labels = {
@@ -162,6 +162,8 @@ class SindiasmoiForm(ModelForm):
         eidos = cleaned_data.get('eidos')
         photo = cleaned_data.get('photo')
         aa = cleaned_data.get('aa')
+        #proedros = cleaned_data.get('proedros')
+        #koin = cleaned_data.get('koin')
         #if eidos != 1 and eidos !=0:
             #raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')
 
@@ -215,8 +217,8 @@ class PerifereiesForm(ModelForm):
 
 class KoinotitesForm(ModelForm):
 
-    perid= ModelChoiceField (queryset=None, label='Περιφέρεια')
-    edrid = ModelChoiceField(queryset=None, label='Κατηγορία κατανομής εδρών', required=False)
+    perid= ModelChoiceField (queryset=Perifereies.objects.all(), label='Περιφέρεια')
+    edrid = ModelChoiceField(queryset=Edreskoin.objects.all(), label='Κατηγορία κατανομής εδρών', required=False)
 
     class Meta:
         model=Koinotites

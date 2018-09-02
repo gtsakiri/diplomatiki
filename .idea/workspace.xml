@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Elections/migrations/0010_auto_20180902_1112.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +22,7 @@
     <session id="1801119297">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
@@ -32,38 +34,39 @@
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.30" value="2" />
+          <entry key="project.open.time.32" value="1" />
           <entry key="project.open.time.63" value="1" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Django Console" value="445" />
-          <entry key="html" value="3661" />
-          <entry key="py" value="7889" />
-          <entry key="py@diplomatiki" value="64" />
+          <entry key="Django Console" value="938" />
+          <entry key="html" value="3877" />
+          <entry key="py" value="9013" />
+          <entry key="py@diplomatiki" value="74" />
           <entry key="txt" value="86" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CommandLine" value="64" />
-          <entry key="HTML" value="3661" />
+          <entry key="CommandLine" value="74" />
+          <entry key="HTML" value="3877" />
           <entry key="PLAIN_TEXT" value="86" />
-          <entry key="Python" value="8334" />
+          <entry key="Python" value="9951" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="43" />
-          <entry key="py" value="24" />
+          <entry key="html" value="44" />
+          <entry key="py" value="30" />
           <entry key="rnc" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="43" />
-          <entry key="Python" value="24" />
+          <entry key="HTML" value="44" />
+          <entry key="Python" value="30" />
           <entry key="RNG Compact" value="1" />
         </counts>
       </usages-collector>
@@ -74,20 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="1278" column="50" selection-start-line="1278" selection-start-column="50" selection-end-line="1278" selection-end-column="50" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+            <state relative-caret-position="200">
+              <caret line="1022" column="11" selection-start-line="1022" selection-start-column="11" selection-end-line="1022" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -95,34 +86,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="459">
+              <caret line="207" column="39" selection-start-line="207" selection-start-column="39" selection-end-line="207" selection-end-column="39" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <marker date="1535817628074" expanded="true" signature="2539:2544" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Elections/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="218" column="93" selection-start-line="218" selection-start-column="93" selection-end-line="218" selection-end-column="93" />
-              <folding>
-                <element signature="e#0#77#0" expanded="true" />
-                <marker date="1535830616175" expanded="true" signature="3396:3405" ph="..." />
+                <marker date="1535875964419" expanded="true" signature="2539:2544" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+        <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="146" column="59" selection-start-line="146" selection-start-column="59" selection-end-line="146" selection-end-column="59" />
+            <state relative-caret-position="697">
+              <caret line="165" column="9" selection-start-line="165" selection-start-column="9" selection-end-line="165" selection-end-column="9" />
+              <folding>
+                <marker date="1535880097762" expanded="true" signature="3396:3405" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,17 +110,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2312">
+              <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
+            <state relative-caret-position="169">
+              <caret line="133" column="4" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -213,13 +202,13 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/ekloges_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_list.html" />
-        <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" />
-        <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/forms.py" />
+        <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" />
       </list>
     </option>
   </component>
@@ -640,7 +629,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535820515593</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="01/09/2018">
+      <created>1535830972056</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1535830972056</updated>
+    </task>
+    <task id="LOCAL-00042" summary="01/09/2018">
+      <created>1535838472176</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1535838472176</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView">
@@ -656,13 +659,13 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20604026" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20872483" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" weight="0.32577905" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" weight="0.39943343" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" visible="true" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -671,7 +674,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25838926" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" visible="true" weight="0.32719547" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
       <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.32719547" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -738,6 +741,14 @@
     <MESSAGE value="home 31/08/2018" />
     <MESSAGE value="01/09/2018" />
     <option name="LAST_COMMIT_MESSAGE" value="01/09/2018" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Python.DjangoServer">
+        <watch expression="per_id_item" />
+        <watch expression="edr_id_item" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
@@ -832,20 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="53" lean-forward="true" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/exception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -909,6 +906,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/messages.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -916,63 +920,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        <state relative-caret-position="124">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/utils/deprecation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="146" column="59" selection-start-line="146" selection-start-column="59" selection-end-line="146" selection-end-column="59" />
+        <state relative-caret-position="277">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
+        <state relative-caret-position="166">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        <state relative-caret-position="272">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="459">
+          <caret line="207" column="39" selection-start-line="207" selection-start-column="39" selection-end-line="207" selection-end-column="39" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <marker date="1535817628074" expanded="true" signature="2539:2544" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="1278" column="50" selection-start-line="1278" selection-start-column="50" selection-end-line="1278" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1535875964419" expanded="true" signature="2539:2544" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="218" column="93" selection-start-line="218" selection-start-column="93" selection-end-line="218" selection-end-column="93" />
+        <state relative-caret-position="697">
+          <caret line="165" column="9" selection-start-line="165" selection-start-column="9" selection-end-line="165" selection-end-column="9" />
           <folding>
-            <element signature="e#0#77#0" expanded="true" />
-            <marker date="1535830616175" expanded="true" signature="3396:3405" ph="..." />
+            <marker date="1535880097762" expanded="true" signature="3396:3405" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="1022" column="11" selection-start-line="1022" selection-start-column="11" selection-end-line="1022" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2312">
+          <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="133" column="4" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
         </state>
       </provider>
     </entry>

@@ -5,7 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
-    Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin
+    Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
+    Eklsindkoin
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm
 from django.core.files.base import ContentFile
@@ -948,8 +949,10 @@ def sindiasmoi_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    eklsind_items=Eklsind.objects.filter(eklid=eklid)
-    all_sindiasmoi = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+    #eklsind_items=Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+    #eklsindkoin_items=Sindiasmoi.objects.filter(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid'))
+    #all_sindiasmoi = eklsind_items.union(eklsindkoin_items).order_by('-eidos')
+    all_sindiasmoi = Sindiasmoi.objects.all().order_by('-eidos','-sindid')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
@@ -976,7 +979,7 @@ def sindiasmoi_add(request, eklid):
             sind_item.save()
 
             # Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND αν είναι καθολικός συνδυασμός
-            #Αν δεν είναι κρύβω στο template και το ΑΑ
+            #Αν δεν είναι καθολικός, κρύβω στο template και το ΑΑ
             if sind_item.eidos == 1:
                 Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
@@ -991,7 +994,8 @@ def sindiasmoi_add(request, eklid):
             return redirect('sindiasmoi_add', eklid)
 
     else:
-        form=SindiasmoiForm(initial={'aa': 0})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        # όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        form=SindiasmoiForm(initial={'aa': 0})
        # sub_form = EklsindFormPartial()
 
     context = {
@@ -1014,7 +1018,10 @@ def sindiasmoi_edit(request, eklid, sindid):
     sind_item = get_object_or_404(Sindiasmoi, sindid=sindid)
 
     #ΠΡΟΣΟΧΗ!!! Το extra πεδία aa το φορτώνω manually
-    aa_field = Eklsind.objects.get(sindid=sindid, eklid=eklid).aa
+    try:
+        aa_field = Eklsind.objects.get(sindid=sindid, eklid=eklid).aa
+    except:
+        aa_field=0
 
     if request.method == 'POST':
         form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
@@ -1033,6 +1040,8 @@ def sindiasmoi_edit(request, eklid, sindid):
             if sind_item.eidos == 1:
                 Eklsind.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'])
             #sub_form.save()
+            else:
+                Eklsind.objects.filter(eklid=eklid, sindid=sindid).delete()
             return redirect('sindiasmoi_list', eklid)
     else:
         #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και το extra πεδίο aa manually
@@ -1271,8 +1280,8 @@ def koinotites_add(request, eklid):
             koinotita_item = form.save(commit=False)
             koinotita_item.save()
 
-            print(form.cleaned_data['perid'])
-            print(form.cleaned_data['edrid'])
+            #print(form.cleaned_data['perid'])
+            #print(form.cleaned_data['edrid'])
             #return
             #Εισαγωγή εγγραφής και στον Eklperkoin
 
@@ -1308,24 +1317,20 @@ def koinotites_edit(request, eklid, koinid):
     eklperkoin_item = Eklperkoin.objects.get(eklid=eklid, koinid=item.koinid)
     per_id_item = eklperkoin_item.perid
     edr_id_item = eklperkoin_item.edrid
+    form = KoinotitesForm(request.POST or None, instance=item)
 
     if request.method == 'POST':
 
-        form = KoinotitesForm(request.POST or None, instance=item)
+        #form = KoinotitesForm(request.POST or None, instance=item)
+        print(per_id_item)
+        print(edr_id_item)
+        #if form.is_valid():
+        item=form.save(commit=False)
+        item.save()
 
-        if form.is_valid():
-            form.save()
-            Eklperkoin.objects.filter(eklid=eklid, koinid=koinid).update(perid=form.cleaned_data['perid'], edrid=form.cleaned_data['edrid'])
-            return redirect('koinotites_list', eklid)
+        Eklperkoin.objects.filter(eklid=eklid, koinid=koinid).update(perid=form.cleaned_data['perid'], edrid=form.cleaned_data['edrid'])
+        return redirect('koinotites_list', eklid)
 
-        context = {
-            'selected_ekloges': selected_ekloges,
-            'action_label': action_label,
-            'all_ekloges': all_ekloges,
-            'form': form
-        }
-
-        return render(request, 'Elections/basicform.html', context)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
         #print(per_id_item)
