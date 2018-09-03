@@ -46,6 +46,11 @@ path('eklsindedit/<int:eklid>/<int:id>/', views.eklsind_edit, name='eklsind_edit
 path('eklsindadd/<int:eklid>/', views.eklsind_add, name='eklsind_add'),
 path('eklsinddelete/<int:eklid>/<int:id>/', views.eklsind_delete, name='eklsind_delete'),
 
+path('eklsindkoin/<int:eklid>/', views.eklsindkoin_list, name='eklsindkoin_list'),
+path('eklsindkoinedit/<int:eklid>/<int:id>/', views.eklsindkoin_edit, name='eklsindkoin_edit'),
+path('eklsindkoinadd/<int:eklid>/', views.eklsindkoin_add, name='eklsindkoin_add'),
+path('eklsindkoindelete/<int:eklid>/<int:id>/', views.eklsindkoin_delete, name='eklsindkoin_delete'),
+
 path('ekloges/<int:eklid>/', views.ekloges_list, name='ekloges_list'),
 path('eklogesedit/<int:eklid>/<int:cureklid>/', views.ekloges_edit, name='ekloges_edit'),
 path('eklogesadd/<int:eklid>/', views.ekloges_add, name='ekloges_add'),

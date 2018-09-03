@@ -1378,7 +1378,7 @@ def eklsindkoin_list(request, eklid):
                'all_eklsindkoin': all_eklsindkoin,
                }
 
-    return render(request, 'Elections/eklsind_list.html' , context)
+    return render(request, 'Elections/eklsindkoin_list.html' , context)
 
 def eklsindkoin_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)

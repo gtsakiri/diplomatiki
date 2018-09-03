@@ -10,38 +10,42 @@
 
      <div class="page-header">
 
-            <h3 align="center">Συνδυασμοί και κατανομή εδρών</h3>
+            <h3 align="center">Τοπικοί Συνδυασμοί και κατανομή εδρών</h3>
      </div>
 
  <div class="row">
 
        <div class="col-md-8 col-md-offset-2">
 
-                   <table class="table table-bordered table-responsive table-striped table-condensed">
+                   <table class="table table-bordered table-striped table-condensed">
 
                         <tbody >
                         <tr>
                                 <td class="thick">Εκλ. αναμέτρηση</td>
                                 <td class="thick">Συνδυασμός</td>
+                                <td class="thick">Κοινότητα</td>
                                 <td class="thick">ΑΑ</td>
+                                <td class="thick">Πρόεδρος</td>
                                 <td class="thick">Έδρες Α γύρου (αρχικές)</td>
                                 <td class="thick">Υπόλοιπο Εδρών Α γύρου</td>
                                 <td class="thick">Έδρες Α γύρου (τελικές)</td>
-                                <td class="thick">Έδρες Β γύρου</td>
                                 <td class="thick">Υπόλοιπο ψηφοδελτίων</td>
-                                <td class="thick">Ενέργειες </td>
+                                <td class="thick">Ένδειξη ισοψηφίας</td>
+                                <td class="thick" width="11%">Ενέργειες </td>
+
                         </tr>
-                        {% for p in all_eklsind %}
+                        {% for p in all_eklsindkoin %}
                               <tr>
                                 <td > {{ p.eklid }}  </td>
                                 <td > {{ p.sindid }} </td>
+                                <td > {{ p.koinid }} </td>
                                 <td > {{ p.aa }} </td>
-                                <td > {{ p.edresa }} </td>
-                                <td > {{ p.edresa_ypol }} </td>
-                                <td > {{ p.edresa_teliko }} </td>
-                                <td > {{ p.edresb }} </td>
-                                <td > {{ p.ypol }} </td>
-
+                                <td > {{ p.proedros }} </td>
+                                <td > {{ p.edresk }} </td>
+                                <td > {{ p.edresk_ypol }} </td>
+                                <td > {{ p.edresk_teliko }} </td>
+                                <td > {{ p.ypolb }} </td>
+                                <td > {{ p.checkfordraw }} </td>
                                 <td >
                                     <a class="btn btn-default" href="{% url 'eklsind_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'eklsind_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
@@ -59,12 +63,10 @@
 
                         <tbody >
 
-                        <tr class="noborder"> <td colspan="4"><a href="{% url 'eklsind_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr> <td colspan="4"><a href="{% url 'eklsind_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>
-
-
 
         </div>
 </div>

@@ -270,6 +270,12 @@ table.d {
   font-size: 11px;
 }
 
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
 .heighttext{
  
  height:20px;
