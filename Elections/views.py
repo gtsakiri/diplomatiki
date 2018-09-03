@@ -8,7 +8,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
-    TypeofkoinotitaForm, KoinotitesForm
+    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm
 from django.core.files.base import ContentFile
 
 from django.db import connection
@@ -1253,7 +1253,6 @@ def perifereia_delete(request, eklid, perid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-#################################################################
 
 def koinotites_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1363,3 +1362,96 @@ def koinotites_delete(request, eklid, koinid ):
              }
 
     return render(request, 'Elections/confirm_delete.html', context)
+
+
+########eklsindkoin###############
+
+def eklsindkoin_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_eklsindkoin = Eklsindkoin.objects.filter(eklid=eklid)
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_eklsindkoin': all_eklsindkoin,
+               }
+
+    return render(request, 'Elections/eklsind_list.html' , context)
+
+def eklsindkoin_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = EklsindkoinForm(eklid, request.POST ) #ΠΡΟΣΟΧΗ! περνάω σαν παράμετρο το eklid, γιατί στη φόρμα γίνεται αρχικοποίηση με αυτή την παράμετρο
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
+            #καλώ πάλι τη φόρμα με initial eklid την εκλ. αναμέτρηση στην οποία είμαστε συνδεδεμένο
+            form = EklsindkoinForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
+
+    else:
+        #default eklid θέτω την εκλ. αναμέτρηση στην οποία είμαστε συνδεδεμένοι
+        form=EklsindkoinForm(eklid,initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/basicform.html', context)
+
+def eklsindkoin_edit(request, eklid, id):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    item = get_object_or_404(Eklsindkoin, id=id)
+
+    #περνάω παράμετρο eklid=0, για να μπορεί να εμφανίσει στο dropdown sindid το συνδυασμό
+    #γιατί διαφορετικά το αποκλείει σύμφωνα με την αρχικοποίηση που κάνω στη φόρμα EklsindForm
+    form = EklsindkoinForm(0, request.POST or None,  instance=item)
+
+    if form.is_valid():
+        form.save()
+
+        return redirect('eklsindkoin_list', eklid)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form
+    }
+
+    return render(request, 'Elections/basicform.html', context)
+
+
+def eklsindkoin_delete(request, eklid, id ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj = get_object_or_404(Eklsindkoin, id=id)
+    if request.method == 'POST':
+        # parent_obj_url=obj.content_object.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('eklsindkoin_list', eklid)
+    context = {'selected_ekloges': selected_ekloges,
+               'all_ekloges': all_ekloges,
+               'object': obj
+               }
+
+    return render(request, 'Elections/confirm_delete.html', context)
+

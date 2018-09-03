@@ -2,7 +2,7 @@ from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceFie
 from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
-    Koinotites, Eklper
+    Koinotites, Eklper, Eklsindkoin, Eklperkoin
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -192,17 +192,45 @@ class EklsindForm(ModelForm):
         #εκλ. αναμέτρηση, ώστε να μην επαναεισάγει κατά λάθος ο χρήστης τον ίδιο συνδυασμό.
         self.fields['sindid'].queryset = Sindiasmoi.objects.exclude(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
 
+class EklsindkoinForm(ModelForm):
+
+    class Meta:
+        model = Eklsindkoin
+        fields = ['eklid', 'sindid', 'koinid', 'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw']
+        labels = {
+            'sindid': _('Συνδυασμός'),
+            'koinid': _('Κοινότητα'),
+            'aa': _('ΑΑ'),
+            'proedros': _('Πρόεδρος'),
+            'edresk': _('Έδρες Α γύρου (αρχικές)'),
+            'edresk_ypol': _('Υπόλοιπο Εδρών Α γύρου'),
+            'edresk_teliko': _('Έδρες Α γύρου (τελικές)'),
+            'ypol': _('Υπόλοιπο ψηφοδελτίων'),
+            'checkfordraw': _('Ένδειξη ισοπαλίας')
+
+        }
+        widgets = {
+            # κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
+            'eklid': forms.HiddenInput(),
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(EklsindkoinForm, self).__init__(*args, **kwargs)
+
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        self.fields['koinid'].queryset = Koinotites.objects.filter(eidos=4).filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
 
     def clean(self):
-        cleaned_data = super(EklsindForm, self).clean()
-        #eklid = cleaned_data.get('eklid')
-        descr = cleaned_data.get('descr')
-        shortdescr = cleaned_data.get('shortdescr')
-        edresa = cleaned_data.get('edresa')
-        edresa_ypol = cleaned_data.get('edresa_ypol')
-        edresa_teliko = cleaned_data.get('edresa_teliko')
-        edresb = cleaned_data.get('edresb')
+        cleaned_data = super(EklsindkoinForm, self).clean()
+        sindid = cleaned_data.get('sindid')
+        koinid = cleaned_data.get('koinid')
+        aa=cleaned_data.get('aa')
+        proedros = cleaned_data.get('proedros')
+        edresk = cleaned_data.get('edresk')
+        edresk_ypol = cleaned_data.get('edresk_ypol')
+        edresk_teliko = cleaned_data.get('edresk_teliko')
         ypol = cleaned_data.get('ypol')
+        checkfordraw = cleaned_data.get('checkfordraw')
 
 
 class PerifereiesForm(ModelForm):
