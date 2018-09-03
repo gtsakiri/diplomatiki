@@ -87,7 +87,7 @@ class Koinotites(models.Model):
     eidos = models.ForeignKey('Typeofkoinotita', models.DO_NOTHING, db_column='eidos')
 
     def __str__(self):
-        return self.descr + ' - ' + str(self.eidos)
+        return self.descr
 
     class Meta:
         managed = True
@@ -117,7 +117,7 @@ class Sindiasmoi(models.Model):
     eidos = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.descr + ' - ' + str(self.eidos)
+        return self.descr
 
     class Meta:
         managed = True

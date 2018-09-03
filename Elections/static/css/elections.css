@@ -243,6 +243,13 @@ table.a {
 tr.hide_all > td, td.hide_all{
         border-style:hidden;
       }
+	  
+td
+{
+    width: 1px;
+    /*white-space: nowrap;*/
+}
+
 
 table.b {
  margin: 0 auto;  
@@ -270,11 +277,6 @@ table.d {
   font-size: 11px;
 }
 
-.table td.fit, 
-.table th.fit {
-    white-space: nowrap;
-    width: 1%;
-}
 
 .heighttext{
  

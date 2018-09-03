@@ -1420,7 +1420,7 @@ def eklsindkoin_edit(request, eklid, id):
 
     #περνάω παράμετρο eklid=0, για να μπορεί να εμφανίσει στο dropdown sindid το συνδυασμό
     #γιατί διαφορετικά το αποκλείει σύμφωνα με την αρχικοποίηση που κάνω στη φόρμα EklsindForm
-    form = EklsindkoinForm(0, request.POST or None,  instance=item)
+    form = EklsindkoinForm(eklid, request.POST or None,  instance=item)
 
     if form.is_valid():
         form.save()
