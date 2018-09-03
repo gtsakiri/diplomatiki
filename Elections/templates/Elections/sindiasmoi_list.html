@@ -26,7 +26,7 @@
                                 <td class="thick" width="30%">Περιγραφή</td>
                                 <td class="thick">Σύντομος τίτλος</td>
                                 <td class="thick" width="30%">Στον Δήμο ή σε Τοπική Κοινότητα?</td>
-                                <td >  </td>
+                                <td class="thick" width="11%">Ενέργειες</td>
                         </tr>
                         {% for p in all_sindiasmoi %}
                               <tr>
@@ -34,7 +34,7 @@
                                 <td > {{ p.shortdescr }} </td>
                                 <td > {% if p.eidos == 1 %}Δήμο{% else %}Κοινότητα{% endif %}</td>
 
-                                <td .noborder>
+                                <td>
                                     <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges.0.eklid p.sindid%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'sindiasmoi_delete' selected_ekloges.0.eklid p.sindid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>

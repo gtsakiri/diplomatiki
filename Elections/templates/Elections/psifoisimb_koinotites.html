@@ -14,9 +14,11 @@
 <div class="divmargin"> </div>
 
 
+<div class="row">
 
-<div class="container-fluid" align="center">
-    <div class="row">
+       <div class="col-md-8 col-md-offset-2">
+
+       <div class="text-center">
 
         <form method="get" name="koinotites">
 
@@ -37,12 +39,17 @@
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
 
-        <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
+        <input type="text" class="heighttext" id="livesearch" width="200px" placeholder="live search"></input>
 
-        <div class="divmargin"><a href="{% url 'export_psifoikoin_xls' selected_ekloges.0.eklid selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
         <br>
 
         </form>
+
+       <div class="divmargin"> </div>
+
+       <a href="{% url 'export_psifoikoin_xls' selected_ekloges.0.eklid selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+
+       </div>
 
     <div class="divmargin">
 

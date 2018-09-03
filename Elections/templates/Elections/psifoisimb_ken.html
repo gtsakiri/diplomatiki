@@ -14,35 +14,42 @@
 
 
 
-<div class="container-fluid" align="center">
-    <div class="row">
+<div class="row">
+
+       <div class="col-md-8 col-md-offset-2">
+
+        <div class="text-center">
 
         <form method="get" name="kentra">
 
-         <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
-            {% for p in all_kentra %}
-             <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
-            {% endfor %}
-         </select>
+             <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+                {% for p in all_kentra %}
+                 <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
+                {% endfor %}
+             </select>
 
-         <select   name="orderoption"  onchange="kentra.submit()">
-             <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
-             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
-             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
-             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
-             <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
-         </select>
+             <select   name="orderoption"  onchange="kentra.submit()">
+                 <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                 <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
+                 <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
+                 <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
+                 <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
+             </select>
 
-        <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
+            <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
 
+            <br>
 
-        <div class="divmargin"><a href={% url 'export_psifoisimbken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
+         </form>
 
-        <br/>
+        <div class="divmargin"> </div>
+
+        <a href={% url 'export_psifoisimbken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+
+        </div>
 
         <div class="divmargin"></div>
 
-        </form>
 
 
          <table class="b table table-bordered table-striped table-condensed ">
@@ -69,9 +76,10 @@
 
 
 
-    <br />
+     <br />
 
 
+         </div>
 
    </div>
 

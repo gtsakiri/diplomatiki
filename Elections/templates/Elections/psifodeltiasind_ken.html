@@ -14,29 +14,43 @@
 
 
 
-<div class="container-fluid" align="center">
-    <div class="row">
+<div class="row">
 
-        <form method="get" name="kentra">
+       <div class="col-md-8 col-md-offset-2">
 
-         <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
-            {% for p in all_kentra %}
-             <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
-            {% endfor %}
-         </select>
+        <div class="text-center">
 
-         <select   name="orderoption"  onchange="kentra.submit()">
-             <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
-             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Ψηφοδέλτια </option>
-             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Συνδυασμό</option>
-             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Εκλ. Κέντρο</option>
-         </select>
+            <form method="get" name="kentra">
+
+             <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+                {% for p in all_kentra %}
+                 <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
+                {% endfor %}
+             </select>
+
+             <select   name="orderoption"  onchange="kentra.submit()">
+                 <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                 <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Ψηφοδέλτια </option>
+                 <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Συνδυασμό</option>
+                 <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Εκλ. Κέντρο</option>
+             </select>
+
+            <br>
 
 
-        <div class="divmargin"><a href={% url 'export_psifodeltiasind_ken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
 
-        <br>
-        </form>
+            </form>
+
+         <div class="divmargin">
+
+          <a href={% url 'export_psifodeltiasind_ken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+
+        </div>
+
+      <div class="divmargin">
+
+
+
 
 
          <table class="b table table-bordered table-striped table-condensed ">
@@ -54,6 +68,7 @@
              {% endfor %}
            </tbody>
       </table>
+
 
    </div>
 

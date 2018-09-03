@@ -14,9 +14,11 @@
 
 
 
-<div class="container-fluid" align="center">
-    <div class="row">
+<div class="row">
 
+       <div class="col-md-8 col-md-offset-2">
+
+        <div class="text-center">
         <form method="get" name="perifereies">
 
          <select  class="sel2" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
@@ -31,17 +33,18 @@
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμα</option>
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
-
-        <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
-
-
-        <div class="divmargin"><a href="{% url 'export_psifoiper_xls' selected_ekloges.0.eklid selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a> </div>
-        <br>
+         <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
         </form>
 
+        <div class="divmargin"> </div>
 
-         <table class="b table table-bordered table-striped table-condensed ">
+        <a href="{% url 'export_psifoiper_xls' selected_ekloges.0.eklid selected_order %}"><i class="far fa-file-excel"></i>  Εξαγωγή όλων σε excel</a>
 
+
+       </div>
+        <br>
+
+        <table class="table table-bordered table-striped table-condensed">
            <tbody >
            <tr>
                    <td class="thick">Επίθετο</td>

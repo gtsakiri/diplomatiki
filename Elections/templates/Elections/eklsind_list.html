@@ -29,7 +29,7 @@
                                 <td class="thick">Έδρες Α γύρου (τελικές)</td>
                                 <td class="thick">Έδρες Β γύρου</td>
                                 <td class="thick">Υπόλοιπο ψηφοδελτίων</td>
-                                <td >  </td>
+                                <td class="thick" width="11%">Ενέργειες </td>
                         </tr>
                         {% for p in all_eklsind %}
                               <tr>
@@ -42,7 +42,7 @@
                                 <td > {{ p.edresb }} </td>
                                 <td > {{ p.ypol }} </td>
 
-                                <td width="15%">
+                                <td >
                                     <a class="btn btn-default" href="{% url 'eklsind_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'eklsind_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>

@@ -22,14 +22,14 @@
                         <tbody >
                         <tr>
                                 <td class="thick">Περιγραφή</td>
-                                <td width="15%"></td>
+                                <td class="thick" width="11%">Ενέργειες</td>
 
 
                         </tr>
                         {% for p in all_perifereies %}
                               <tr>
                                 <td > {{ p.descr}} </td>
-                                <td .noborder>
+                                <td>
                                     <a class="btn btn-default" href="{% url 'perifereia_edit' selected_ekloges.0.eklid p.perid%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'perifereia_delete' selected_ekloges.0.eklid p.perid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
