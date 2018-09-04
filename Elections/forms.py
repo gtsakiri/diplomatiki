@@ -2,7 +2,7 @@ from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceFie
 from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
-    Koinotites, Eklper, Eklsindkoin, Eklperkoin
+    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -161,10 +161,7 @@ class SindiasmoiForm(ModelForm):
         eidos = cleaned_data.get('eidos')
         photo = cleaned_data.get('photo')
         aa = cleaned_data.get('aa')
-        #proedros = cleaned_data.get('proedros')
-        #koin = cleaned_data.get('koin')
-        #if eidos != 1 and eidos !=0:
-            #raise forms.ValidationError('Δεκτές τιμές για το πεδίο "Κατηγορία" μόνο 0 ή 1!')
+
 
 class EklsindForm(ModelForm):
 
@@ -263,7 +260,8 @@ class KoinotitesForm(ModelForm):
         super(KoinotitesForm, self).__init__(*args, **kwargs)
 
         # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, edrid
-        self.fields['perid'].queryset = Perifereies.objects.all()
+        # Για το perid παίρνω μόνο τις περιφέρειες που έχουν καταχωρηθεί στην τρέχουσα εκλ. αναμέτρηση μόνο
+        self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
         self.fields['edrid'].queryset = Edreskoin.objects.all()
 
     def clean(self):
@@ -272,4 +270,34 @@ class KoinotitesForm(ModelForm):
         eidos = cleaned_data.get('eidos')
         perid = cleaned_data.get('perid')
         edrid = cleaned_data.get('edrid')
+
+class KentraForm(ModelForm):
+
+    class Meta:
+        model=Kentra
+        fields = ['descr', 'eggegrammenoia', 'psifisana', 'egkiraa', 'akiraa', 'lefkaa', 'sinoloakiralefkaa', 'comments', 'eklid', 'perid',
+                  'koinid', 'eggegrammenoib', 'psifisanb', 'egkirab', 'akirab', 'lefkab', 'sinoloakiralefkab', 'eggegrammenoik', 'psifisank',
+                  'egkirak', 'akirak', 'lefkak', 'sinoloakiralefkak']
+        labels = {
+            'descr': _('Περιγραφή'),'eggegrammenoia': _('Εγγεγραμμένοι (Α Κυριακή)'), 'psifisana': _('Ψήφισαν (Α Κυριακή)'), 'egkiraa': _('Έγκυρα (Α Κυριακή)'),
+            'akiraa': _('Άκυρα (Α Κυριακή)'), 'lefkaa': _('Λευκά (Α Κυριακή)'), 'sinoloakiralefkaa': _('Σύνολο Άκυρα+Λευκά (Α Κυριακή)'),
+            'comments': _('Επιπλέον περιγραφή'), 'eklid': _('Εκλ. Αναμέτρηση'),'perid': _('Εκλ. Περιφέρεια'), 'koinid': _('Κοινότητα'),
+            'eggegrammenoib': _('Εγγεγραμμένοι (Β Κυριακή)'),'psifisanb': _('Ψήφισαν (Β Κυριακή)'), 'egkirab': _('Έγκυρα (Β Κυριακή)'), 'akirab': _('Άκυρα (Β Κυριακή)'),
+            'lefkab': _('Λευκά (Β Κυριακή)'), 'sinoloakiralefkab': _('Σύνολο Άκυρα+Λευκά (Β Κυριακή)'),
+            'eggegrammenoik': _('Εγγεγραμμένοι (Εκλογές Κοινότητας)'), 'psifisank': _('Ψήφισαν (Εκλογές Κοινότητας)'),
+            'egkirak': _('Έγκυρα (Εκλογές Κοινότητας)'), 'akirak': _('Άκυρα (Εκλογές Κοινότητας)'),
+            'lefkak': _('Λευκά (Εκλογές Κοινότητας)'), 'sinoloakiralefkak': _('Σύνολο Άκυρα+Λευκά (Εκλογές Κοινότητας)'),
+        }
+        widgets = {
+            #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
+            'eklid': forms.HiddenInput(),
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(KentraForm, self).__init__(*args, **kwargs)
+
+        # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, koinid
+        self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
+        self.fields['koinid'].queryset = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
+
 

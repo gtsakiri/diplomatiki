@@ -540,11 +540,6 @@ def edres_add(request, eklid):
             edres_item.save()
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = EdresForm()
-            '''
-            if "Save_and_add_another" in request.POST:
-                return redirect('edres_add', eklid)
-            else:
-                return redirect('edres_list', eklid)'''
     else:
         form=EdresForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
@@ -1363,8 +1358,6 @@ def koinotites_delete(request, eklid, koinid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-
-########eklsindkoin###############
 
 def eklsindkoin_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
