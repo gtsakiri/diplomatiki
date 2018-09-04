@@ -14,63 +14,65 @@
 
 
 
-<div class="row">
+ <div class="row">
 
-       <div class="col-md-8 col-md-offset-2">
+       <div class="col-md-6 col-md-offset-3">
 
-        <div class="text-center">
+            <div class="text-center">
 
-            <form method="get" name="kentra">
+                        <form method="get" name="kentra">
 
-             <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
-                {% for p in all_kentra %}
-                 <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
-                {% endfor %}
-             </select>
+                         <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+                            {% for p in all_kentra %}
+                             <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
+                            {% endfor %}
+                         </select>
 
-             <select   name="orderoption"  onchange="kentra.submit()">
-                 <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
-                 <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Ψηφοδέλτια </option>
-                 <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Συνδυασμό</option>
-                 <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Εκλ. Κέντρο</option>
-             </select>
+                         <select   name="orderoption"  onchange="kentra.submit()">
+                             <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                             <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Ψηφοδέλτια </option>
+                             <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Συνδυασμό</option>
+                             <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Εκλ. Κέντρο</option>
+                         </select>
 
-            <br>
+                        <br>
 
 
 
-            </form>
+                        </form>
 
-         <div class="divmargin">
+                     <div class="divmargin">
 
-          <a href={% url 'export_psifodeltiasind_ken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                      <a href={% url 'export_psifodeltiasind_ken' selected_ekloges.0.eklid selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
 
+
+                    </div>
         </div>
 
-      <div class="divmargin">
+                   <div class="divmargin"></div>
 
 
 
 
 
-         <table class="b table table-bordered table-striped table-condensed ">
+                 <table class="table table-bordered table-striped  table-hover">
 
-           <tbody >
-           <tr>
-                   <td class="thick">Συνδυασμός </td>
-                   <td class="thick">Ψηφοδέλτια </td>
-           </tr>
-           {% for p in all_psifodeltia %}
-                 <tr>
-                    <td >{{ p.sindiasmos }}</td>
-                    <td class="myfontsize">{{ p.votes }}</td>
-                 </tr>
-             {% endfor %}
-           </tbody>
-      </table>
+                   <tbody >
+                   <tr>
+                           <td class="thick">Συνδυασμός </td>
+                           <td class="thick">Ψηφοδέλτια </td>
+                   </tr>
+                   {% for p in all_psifodeltia %}
+                         <tr>
+                            <td >{{ p.sindiasmos }}</td>
+                            <td class="myfontsize">{{ p.votes }}</td>
+                         </tr>
+                     {% endfor %}
+                   </tbody>
+                </table>
 
 
-   </div>
+     </div>
 
 
 
@@ -79,6 +81,7 @@
 {% endblock %}
 
   </body>
+
 </html>
 
 

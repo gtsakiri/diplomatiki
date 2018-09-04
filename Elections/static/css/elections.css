@@ -244,10 +244,16 @@ tr.hide_all > td, td.hide_all{
         border-style:hidden;
       }
 	  
-td
+table.styletd1 td
 {
     width: 1px;
-    /*white-space: nowrap;*/
+    /*white-space: nowrap;  /* ΜΕ ΑΝΑΠΙΔΠΩΣΗ του κειμένου μέσα στο κελί */ */
+}
+
+table.styletd2 td
+{
+    width: 1px;
+    white-space: nowrap; /* οχι αναδίπλωση του κειμένου μέσα στο κελί */
 }
 
 
