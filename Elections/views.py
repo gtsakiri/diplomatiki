@@ -1508,6 +1508,10 @@ def kentra_edit(request, eklid, kenid):
         form = KentraForm(eklid, request.POST or None, instance=item)
         if form.is_valid():
             item=form.save(commit=False)
+
+            #per_id_item=Perifereies.objects.filter(perid__in=Eklperkoin.objects.filter(eklid=eklid, koinid=koin_id_item).values_list('perid'))
+            #print(per_id_item)
+            #form.perid=per_id_item
             item.save()
             return redirect('kentra_list', eklid)
     else:

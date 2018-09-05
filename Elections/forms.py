@@ -291,6 +291,7 @@ class KentraForm(ModelForm):
         widgets = {
             #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
             'eklid': forms.HiddenInput(),
+            #'perid': forms.HiddenInput(),
         }
 
     def __init__(self, eklid, *args, **kwargs):

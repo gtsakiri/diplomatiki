@@ -33,14 +33,14 @@
                         <tr>
                                 <td class="thick">Περιγραφή</td>
                                 <td class="thick">Είδος</td>
+                                <td class="thick">Περιφέρεια</td>
                                 <td class="thick">Ενέργειες</td>
-
-
                         </tr>
                         {% for p in all_koinotites %}
                               <tr>
-                                <td > {{ p.descr}} </td>
+                                 <td > {{ p.descr}} </td>
                                  <td > {{ p.eidos}} </td>
+                                 <td > {{ p.}} </td>
                                 <td .noborder>
                                     <a class="btn btn-default" href="{% url 'koinotites_edit' selected_ekloges.0.eklid p.koinid%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'koinotites_delete' selected_ekloges.0.eklid p.koinid%}"><span class="glyphicon glyphicon-minus"></span></a>
