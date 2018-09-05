@@ -1447,7 +1447,17 @@ def koinotites_delete(request, eklid, koinid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-#######################kentra#
+
+##Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα koinid που σχετίζονται με ένα perid
+def load_koinotites(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    perid = request.GET.get('perid')
+    koinotites = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).filter(perid=perid).values_list('koinid')).order_by('descr')
+
+    return render(request, 'Elections/koinotites_dropdown_list_options.html', {'koinotites': koinotites})
+
 
 def kentra_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)

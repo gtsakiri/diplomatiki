@@ -301,6 +301,9 @@ class KentraForm(ModelForm):
         self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
         self.fields['koinid'].queryset = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
 
+        # ορίζω ένα custom όνομα για το πεδίο perid για να το διαχειριστώ με javascript στο template
+        self.fields['perid'].widget.attrs['id'] = 'perid_of_kentra'
+
     def clean(self):
         cleaned_data = super(KentraForm, self).clean()
         descr = cleaned_data.get('descr')
