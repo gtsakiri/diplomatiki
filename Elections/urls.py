@@ -36,6 +36,11 @@ path('koinotitesedit/<int:eklid>/<int:koinid>/', views.koinotites_edit, name='ko
 path('koinotitesdd/<int:eklid>/', views.koinotites_add, name='koinotites_add'),
 path('koinotitesdelete/<int:eklid>/<int:koinid>/', views.koinotites_delete, name='koinotites_delete'),
 
+path('kentra/<int:eklid>/', views.kentra_list, name='kentra_list'),
+path('kentraedit/<int:eklid>/<int:kenid>/', views.kentra_edit, name='kentra_edit'),
+path('kentradd/<int:eklid>/', views.kentra_add, name='kentra_add'),
+path('kentradelete/<int:eklid>/<int:kenid>/', views.kentra_delete, name='kentra_delete'),
+
 path('sindiasmoi/<int:eklid>/', views.sindiasmoi_list, name='sindiasmoi_list'),
 path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='sindiasmoi_edit'),
 path('sindiasmoiadd/<int:eklid>/', views.sindiasmoi_add, name='sindiasmoi_add'),
@@ -66,9 +71,6 @@ path('export/per/<int:eklid>/<int:selected_order>/', views.export_psifoiper_xls,
 path('export/koin/<int:eklid>/<int:selected_order>/', views.export_psifoikoin_xls, name='export_psifoikoin_xls'),
 path('export/psifodeltiasindken/<int:eklid>/<int:selected_order>/', views.export_psifodeltiasind_ken, name='export_psifodeltiasind_ken'),
 path('export/psifoisimbken/<int:eklid>/<int:selected_order>/', views.export_psifoisimb_ken, name='export_psifoisimbken'),
-
-
-
 
 ]
 

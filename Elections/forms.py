@@ -19,7 +19,7 @@ class EdresForm(ModelForm):
         sinoloedrwn = cleaned_data.get('sinoloedrwn')
         edresprwtou = cleaned_data.get('edresprwtou')
         edresypoloipwn = cleaned_data.get('edresypoloipwn')
-        # if not name and not email and not message:
+
         if sinoloedrwn != (edresprwtou + edresypoloipwn):
             raise forms.ValidationError('Το σύνολο των εδρών πρέπει να ισούται με το άθροισμα των δύο άλλων σχετικών πεδίων!')
 
@@ -299,5 +299,47 @@ class KentraForm(ModelForm):
         # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, koinid
         self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
         self.fields['koinid'].queryset = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
+
+    def clean(self):
+        cleaned_data = super(KentraForm, self).clean()
+        descr = cleaned_data.get('descr')
+        eggegrammenoia = cleaned_data.get('eggegrammenoia')
+        psifisana = cleaned_data.get('psifisana')
+        egkiraa = cleaned_data.get('egkiraa')
+        akiraa = cleaned_data.get('akiraa')
+        lefkaa = cleaned_data.get('lefkaa')
+        sinoloakiralefkaa = cleaned_data.get('sinoloakiralefkaa')
+        comments = cleaned_data.get('comments')
+        eklid = cleaned_data.get('eklid')
+        perid = cleaned_data.get('perid')
+        koinid = cleaned_data.get('koinid')
+        eggegrammenoib = cleaned_data.get('eggegrammenoib')
+        psifisanb = cleaned_data.get('psifisanb')
+        egkirab = cleaned_data.get('egkirab')
+        akirab = cleaned_data.get('akirab')
+        lefkab = cleaned_data.get('lefkab')
+        sinoloakiralefkab = cleaned_data.get('sinoloakiralefkab')
+        eggegrammenoik= cleaned_data.get('eggegrammenoik')
+        psifisank = cleaned_data.get('psifisank')
+        egkirak = cleaned_data.get('egkirak')
+        akirak = cleaned_data.get('akirak')
+        lefkak = cleaned_data.get('lefkak')
+        sinoloakiralefkak = cleaned_data.get('sinoloakiralefkak')
+
+        if psifisana != (egkiraa + akiraa + lefkaa):
+            raise forms.ValidationError('Το άθροισμα των πεδίων <<Έγκυρα>> + <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Ψήφισαν>> για την Α Κυριακή!')
+        if sinoloakiralefkaa != (akiraa + lefkaa):
+            raise forms.ValidationError('Το άθροισμα των πεδίων <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Σύνολο Άκυρα+Λευκά>> για την Α Κυριακή!')
+
+        if psifisanb != (egkirab + akirab + lefkab):
+            raise forms.ValidationError('Το άθροισμα των πεδίων <<Έγκυρα>> + <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Ψήφισαν>> για την Β Κυριακή!')
+        if sinoloakiralefkab != (akirab + lefkab):
+            raise forms.ValidationError('Το άθροισμα των πεδίων <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Σύνολο Άκυρα+Λευκά>> για την Β Κυριακή!')
+
+        if psifisank != (egkirak + akirak + lefkak):
+            raise forms.ValidationError('Το άθροισμα των πεδίων <<Έγκυρα>> + <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Ψήφισαν>> για τις εκλογές της Κοινότητας!')
+        if sinoloakiralefkak != (akirak + lefkak):
+            raise forms.ValidationError('Το άθροισμα των πεδίων <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Σύνολο Άκυρα+Λευκά>> για τις εκλογές της Κοινότητας!')
+
 
 
