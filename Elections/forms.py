@@ -2,7 +2,7 @@ from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceFie
 from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
-    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra
+    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -345,5 +345,28 @@ class KentraForm(ModelForm):
         if sinoloakiralefkak != (akirak + lefkak):
             raise forms.ValidationError('Το άθροισμα των πεδίων <<Άκυρα>> + <<Λευκά>> πρέπει να ισούται με το πεδίο <<Σύνολο Άκυρα+Λευκά>> για τις εκλογές της Κοινότητας!')
 
+class PsifodeltiaForm(ModelForm):
+
+    class Meta:
+        model=Psifodeltia
+        fields = ['sindid','kenid', 'votesa', 'votesb', 'votesk']
+        labels = {
+            'sindid': _('Συνδυασμός'),
+            'kenid': _('Εκλ. Κέντρο'),
+            'votesa': _('Ψηφοδέλτια (Α Κυριακής)'),
+            'votesb': _('Ψηφοδέλτια (Β Κυριακής)'),
+            'votesk': _('Ψηφοδέλτια (Εκλ. Κοινότητας)'),
+        }
+        #widgets = {
+            #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
+            #'eklid': forms.HiddenInput(),
+        #}
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(EklsindForm, self).__init__(*args, **kwargs)
+
+        #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
 
 

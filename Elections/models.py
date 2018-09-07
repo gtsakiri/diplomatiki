@@ -279,6 +279,7 @@ class Kentra(models.Model):
 
 
 class Psifodeltia(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID')  # Field name made lowercase.
     kenid = models.ForeignKey(Kentra, models.DO_NOTHING, db_column='kenID')  # Field name made lowercase.
     votesa = models.IntegerField(db_column='votesA', default=0)  # Field name made lowercase.

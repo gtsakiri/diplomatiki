@@ -48,6 +48,11 @@ path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='si
 path('sindiasmoiadd/<int:eklid>/', views.sindiasmoi_add, name='sindiasmoi_add'),
 path('sindiasmoidelete/<int:eklid>/<int:sindid>/', views.sindiasmoi_delete, name='sindiasmoi_delete'),
 
+path('psifodeltia/<int:eklid>/', views.psifodeltia_list, name='psifodeltia_list'),
+path('psifodeltiaedit/<int:eklid>/<int:id>/', views.psifodeltia_edit, name='psifodeltia_edit'),
+path('psifodeltiaadd/<int:eklid>/', views.psifodeltia_add, name='psifodeltia_add'),
+path('psifodeltiadelete/<int:eklid>/<int:id>/', views.psifodeltia_delete, name='psifodeltia_delete'),
+
 path('eklsind/<int:eklid>/', views.eklsind_list, name='eklsind_list'),
 path('eklsindedit/<int:eklid>/<int:id>/', views.eklsind_edit, name='eklsind_edit'),
 path('eklsindadd/<int:eklid>/', views.eklsind_add, name='eklsind_add'),
