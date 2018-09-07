@@ -363,10 +363,16 @@ class PsifodeltiaForm(ModelForm):
         #}
 
     def __init__(self, eklid, *args, **kwargs):
-        super(EklsindForm, self).__init__(*args, **kwargs)
+        super(PsifodeltiaForm, self).__init__(*args, **kwargs)
 
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
         self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
         self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
 
-
+    def clean(self):
+        cleaned_data = super(PsifodeltiaForm, self).clean()
+        sindid = cleaned_data.get('sindid')
+        kenid = cleaned_data.get('kenid')
+        votesa = cleaned_data.get('votesa')
+        votesb = cleaned_data.get('votesb')
+        votesk = cleaned_data.get('votesk')

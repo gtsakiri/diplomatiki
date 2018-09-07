@@ -270,7 +270,7 @@ class Kentra(models.Model):
 
 
     def __str__(self):
-        return self.descr + ' - ' + str(self.eklid) + ' - ' + str(self.koinid)
+        return self.descr + ' - ' + str(self.koinid)
 
     class Meta:
         managed = True
@@ -280,8 +280,8 @@ class Kentra(models.Model):
 
 class Psifodeltia(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
-    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID')  # Field name made lowercase.
-    kenid = models.ForeignKey(Kentra, models.DO_NOTHING, db_column='kenID')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID')  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID')  # Field name made lowercase.
     votesa = models.IntegerField(db_column='votesA', default=0)  # Field name made lowercase.
     votesb = models.IntegerField(db_column='votesB', default=0)  # Field name made lowercase.
     votesk = models.IntegerField(db_column='votesK', default=0)  # Field name made lowercase.

@@ -19,19 +19,17 @@
 
        <div class="col-md-6 col-md-offset-3">
 
-                   <table class="table table-condensed table-striped  table-hover">
+                   <table class="table styletd1 table-condensed table-striped  table-hover">
 
                         <tbody >
                         <tr>
-                                <td class="thick" width="30%">Περιγραφή</td>
-                                <td class="thick">Σύντομος τίτλος</td>
-                                <td class="thick" width="30%">Στον Δήμο ή σε Τοπική Κοινότητα?</td>
+                                <td class="thick">Περιγραφή</td>
+                                <td class="thick">Στον Δήμο ή σε Τοπική Κοινότητα?</td>
                                 <td class="thick">Ενέργειες</td>
                         </tr>
                         {% for p in all_sindiasmoi %}
                               <tr>
                                 <td > {{ p.descr }} </td>
-                                <td > {{ p.shortdescr }} </td>
                                 <td > {% if p.eidos == 1 %}Δήμο{% else %}Κοινότητα{% endif %}</td>
 
                                 <td>

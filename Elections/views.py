@@ -1265,7 +1265,7 @@ def eklsindkoin_list(request, eklid):
 
 def eklsindkoin_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
+    action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1294,7 +1294,7 @@ def eklsindkoin_add(request, eklid):
 
 def eklsindkoin_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
+    action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1497,7 +1497,7 @@ def kentra_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/kentraform.html', context)
 
 def kentra_edit(request, eklid, kenid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1535,7 +1535,7 @@ def kentra_edit(request, eklid, kenid):
         'form': form,
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/kentraform.html', context)
 
 def kentra_delete(request, eklid, kenid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1562,7 +1562,7 @@ def psifodeltia_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_psifodeltia=Psifodeltia.objects.all()
+    all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
@@ -1607,24 +1607,21 @@ def psifodeltia_edit(request, eklid, id):
     #επιλογή της συγκεκριμένης κοινότητας
     item=get_object_or_404(Psifodeltia, id=id)
 
-    #παίρνω per_id, koin_id από τον Eklperkoin
+    #παίρνω sind_id, ken_id από τον Eklsind
     eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
-    kenid_item=Kentra.objects.get(eklid=eklid, kenid=item.kenid)
-    sind_id_item = eklsind_item.sindid
-    ken_id_item = kenid_item.kenid
+    sind_id_item = eklsind_item.sindid.sindid
+
+    kentra_item = Kentra.objects.get(eklid=eklid, kenid=item.kenid.kenid)
+    ken_id_item = kentra_item.kenid
 
     if request.method == 'POST':
-        form = KentraForm(eklid, request.POST or None, instance=item)
+        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
         if form.is_valid():
             item=form.save(commit=False)
-
-            #per_id_item=Perifereies.objects.filter(perid__in=Eklperkoin.objects.filter(eklid=eklid, koinid=koin_id_item).values_list('perid'))
-            #print(per_id_item)
-            #form.perid=per_id_item
             item.save()
             return redirect('psifodeltia_list', eklid)
     else:
-        # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
+        # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
 
     context = {
@@ -1641,7 +1638,7 @@ def psifodeltia_delete(request, eklid, id ):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    obj=get_object_or_404(Kentra, id=id)
+    obj=get_object_or_404(Psifodeltia, id=id)
 
     if request.method == 'POST':
         obj.delete()
