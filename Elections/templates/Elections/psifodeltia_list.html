@@ -19,15 +19,23 @@
 
        <div class="col-md-8 col-md-offset-2">
 
-                    <table>
 
-                        <tbody >
 
-                        <tr class="noborder"> <td colspan="4"><a href="{% url 'psifodeltia_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+               <div id="div2">
+                    <form method="get" name="kentra">
+                        <label class="label5">Εκλογικό κέντρο</label>
+                     <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
+                        {% for p in all_kentra %}
+                         <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
+                        {% endfor %}
+                     </select>
 
-                        </tbody>
-                   </table>
-       <br/>
+
+                    <div class="divmargin"> </div>
+
+                    </form>
+
+                </div>
 
 
                    <table class="table styletd1 table-condensed table-striped  table-hover">

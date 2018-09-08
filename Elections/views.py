@@ -1558,15 +1558,30 @@ def kentra_delete(request, eklid, kenid ):
 #########
 
 def psifodeltia_list(request, eklid):
+
+    paramstr = request.GET.get('kentraoption', '')
+
+    try:
+        paramstr = int(paramstr)
+    except:
+        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default perid  αν δεν δοθεί
+
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
+    all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
+
+    selected_kentro = Kentra.objects.filter(kenid=paramstr)
+
+    #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
+    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
-               'all_psifodeltia':all_psifodeltia
+               'all_psifodeltia':all_psifodeltia,
+               'all_kentra':all_kentra,
+               'selected_kentro':selected_kentro
                }
 
     return render(request, 'Elections/psifodeltia_list.html' , context)
@@ -1608,11 +1623,11 @@ def psifodeltia_edit(request, eklid, id):
     item=get_object_or_404(Psifodeltia, id=id)
 
     #παίρνω sind_id, ken_id από τον Eklsind
-    eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
-    sind_id_item = eklsind_item.sindid.sindid
+    #eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
+    #sind_id_item = eklsind_item.sindid.sindid
 
-    kentra_item = Kentra.objects.get(eklid=eklid, kenid=item.kenid.kenid)
-    ken_id_item = kentra_item.kenid
+    #kentra_item = Kentra.objects.get(eklid=eklid, kenid=item.kenid.kenid)
+    #ken_id_item = kentra_item.kenid
 
     if request.method == 'POST':
         form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
@@ -1622,7 +1637,8 @@ def psifodeltia_edit(request, eklid, id):
             return redirect('psifodeltia_list', eklid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
-        form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
+        #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
+        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
 
     context = {
         'selected_ekloges': selected_ekloges,
