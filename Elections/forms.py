@@ -2,7 +2,7 @@ from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceFie
 from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
-    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia
+    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia, Simbouloi
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -357,10 +357,6 @@ class PsifodeltiaForm(ModelForm):
             'votesb': _('Ψηφοδέλτια (Β Κυριακής)'),
             'votesk': _('Ψηφοδέλτια (Εκλ. Κοινότητας)'),
         }
-        #widgets = {
-            #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
-            #'eklid': forms.HiddenInput(),
-        #}
 
     def __init__(self, eklid, *args, **kwargs):
         super(PsifodeltiaForm, self).__init__(*args, **kwargs)
@@ -376,3 +372,56 @@ class PsifodeltiaForm(ModelForm):
         votesa = cleaned_data.get('votesa')
         votesb = cleaned_data.get('votesb')
         votesk = cleaned_data.get('votesk')
+
+class SimbouloiForm(ModelForm):
+
+    EIDOS_CHOICES = (
+        ('1', 'Δήμο'),
+        ('0', 'Κοινότητα'),
+    )
+
+    aa = CharField(label='ΑΑ Συμβούλου', max_length=45)
+    sindid= ModelChoiceField (queryset=Sindiasmoi.objects.none(), label='Συνδυασμός', required=False)
+    perid = ModelChoiceField(queryset=Perifereies.objects.none(), label='Εκλ. Περιφεέρεια')
+    koinid = ModelChoiceField(queryset=Koinotites.objects.none(), label='Κοινότητα')
+    eidos = forms.ChoiceField(choices = EIDOS_CHOICES, label="Σε Δήμο ή Κοινότητα ?", widget=forms.Select(), required=True)
+
+    class Meta:
+        model=Simbouloi
+        fields = ['surname', 'firstname', 'fathername', 'eidos', 'comments', 'aa', 'sindid', 'perid', 'koinid']
+
+
+
+        labels = {
+            'surname': _('Επίθετο'),
+            'firstname': _('Όνομα'),
+            'fathername': _('Όν. Πατρός'),
+            'comments': _('Παρατηρήσεις'),
+            'aa': _('ΑΑ'),
+            'sindid': _('Συνδυασμός'),
+            'perid': _('Εκλ. Περιφέρεια'),
+            'koinid': _('Κοινότητα'),
+        }
+        help_texts = {
+            'aa': _('Με ποιο ΑΑ συμμετέχει o υποψήφιος στις εκλογές'),
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(SimbouloiForm, self).__init__(*args, **kwargs)
+
+        # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, sindid, koinid
+        # Παίρνω μόνο perid, sindid, koinid που έχουν καταχωρηθεί στην τρέχουσα εκλ. αναμέτρηση μόνο
+        self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        self.fields['koinid'].queryset = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
+
+    def clean(self):
+        cleaned_data = super(SimbouloiForm, self).clean()
+        surname = cleaned_data.get('surname')
+        firstname = cleaned_data.get('firstname')
+        fathername = cleaned_data.get('fathername')
+        comments = cleaned_data.get('comments')
+        aa = cleaned_data.get('aa')
+        sindid = cleaned_data.get('sindid')
+        perid = cleaned_data.get('perid')
+        koinid = cleaned_data.get('koinid')

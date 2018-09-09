@@ -6,9 +6,9 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
-    Eklsindkoin, Psifodeltia
+    Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
-    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm
+    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm
 from django.core.files.base import ContentFile
 
 from django.db import connection
@@ -1555,7 +1555,6 @@ def kentra_delete(request, eklid, kenid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-#########
 
 def psifodeltia_list(request, eklid):
 
@@ -1667,3 +1666,163 @@ def psifodeltia_delete(request, eklid, id ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
+##########
+
+def simbouloi_list(request, eklid):
+    paramorder = request.GET.get('orderoption', '')
+
+    try:
+        paramorder = int(paramorder)
+    except:
+        paramorder = 6  # default ταξινόμηση
+
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
+
+    if paramorder==1 or paramorder==6:
+        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('surname', 'firstname','fathername')
+    elif paramorder == 2:
+        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'surname', 'firstname','fathername')
+    elif paramorder == 3:
+        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
+    elif paramorder == 4:
+        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
+    else:
+        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('toposeklogis', 'surname','firstname', 'fathername')
+
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_simbouloi': all_simbouloi,
+               }
+
+    return render(request, 'Elections/simbouloi_list.html' , context)
+
+
+def simbouloi_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Υποψήφιοι Σύμβουλοι - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = SimbouloiForm(request.POST, request.FILES)
+        #sub_form = EklsindFormPartial(request.POST)
+
+
+        #if all([form.is_valid(), sub_form.is_valid()]):
+        if form.is_valid():
+            simb_item = form.save(commit=False)
+            simb_item.save()
+
+            Eklsindsimb.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                      sindid=form.cleaned_data['sindid'],
+                                      simbid=simb_item,
+                                      aa=form.cleaned_data['aa']
+                                      ).save()
+
+            # Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND αν είναι καθολικός συνδυασμός
+            #Αν δεν είναι καθολικός, κρύβω στο template και το ΑΑ
+            if simb_item.eidos == 1:
+                Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                       simbid=simb_item,
+                                       perid=form.cleaned_data['perid']
+                                       ).save()
+            else:
+                Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                          simbid=simb_item,
+                                          koinid=form.cleaned_data['koinid']
+                                          ).save()
+
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
+            return redirect('simbouloi_add', eklid)
+
+    else:
+        # όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        form=SimbouloiForm(eklid, initial={'aa': 0})
+       # sub_form = EklsindFormPartial()
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form,
+                #'sub_form': sub_form,
+               }
+
+    return render(request, 'Elections/simbouloiform.html', context)
+
+'''
+
+def sindiasmoi_edit(request, eklid, sindid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    sind_item = get_object_or_404(Sindiasmoi, sindid=sindid)
+
+    #ΠΡΟΣΟΧΗ!!! Το extra πεδία aa το φορτώνω manually
+    try:
+        aa_field = Eklsind.objects.get(sindid=sindid, eklid=eklid).aa
+    except:
+        aa_field=0
+
+    if request.method == 'POST':
+        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
+        #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
+
+        if form.is_valid():
+            sind_item = form.save(commit=False)
+
+            pic = form.cleaned_data['photo']
+            if not pic:
+                pic = 'sindiasmoi/elections.jpg'
+                sind_item.photo=pic
+
+            sind_item.save()
+
+            if sind_item.eidos == 1:
+                Eklsind.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'])
+            #sub_form.save()
+            else:
+                Eklsind.objects.filter(eklid=eklid, sindid=sindid).delete()
+            return redirect('sindiasmoi_list', eklid)
+    else:
+        #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και το extra πεδίο aa manually
+        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item, initial={'aa': aa_field})
+        #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form,
+    }
+
+    return render(request, 'Elections/basicform.html', context)
+
+
+def sindiasmoi_delete(request, eklid, sindid ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj = get_object_or_404(Sindiasmoi, sindid=sindid)
+    if request.method == 'POST':
+        # parent_obj_url=obj.content_object.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('sindiasmoi_list', eklid)
+    context = {'selected_ekloges': selected_ekloges,
+               'all_ekloges': all_ekloges,
+               'object': obj
+               }
+
+    return render(request, 'Elections/confirm_delete.html', context)
+'''

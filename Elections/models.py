@@ -604,7 +604,6 @@ class EklSumpsifoisimbPerVw(models.Model):
 
 
 class EklSumpsifoisimbVw(models.Model):
-    id = models.IntegerField(primary_key=True)
     eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
     simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
     surname = models.CharField(max_length=100)
@@ -624,6 +623,29 @@ class EklSumpsifoisimbVw(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_SUMPSIFOISIMB_VW'
+
+class EklSumpsifoisimbWithIdVw(models.Model):
+    id = models.IntegerField(primary_key=True)
+    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
+    simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
+    surname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100)
+    fathername = models.CharField(max_length=100)
+    toposeklogisid = models.IntegerField(db_column='toposEklogisID')  # Field name made lowercase.
+    toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
+    eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas', blank=True, null=True)  # Field name made lowercase.
+    sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    sindiasmos = models.CharField(max_length=100, blank=True, null=True)
+    sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+
+
+    def __str__(self):
+        return self.toposeklogis  + ' - ' +  self.surname  + ' - ' +  str(self.sumvotes)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'EKL_SUMPSIFOISIMB_WITHID_VW'
+
 
 
 class EklSumpsifoiKenVw(models.Model):
