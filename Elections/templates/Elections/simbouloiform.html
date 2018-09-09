@@ -116,12 +116,24 @@
 
     //κατά το φόρτωμα της φόρμας...
         $(document).ready(function () {
+               var optionSelected = $("#id_eidos", this);
+                var eidosSelected = $("#id_eidos").val();
+                if (eidosSelected == 0) {
+                    $('#id_koinid, label[for="#id_koinid"]').show()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                 }
+                else if (eidosSelected == 1) {
+                    $('#id_koinid, label[for="#id_koinid"]').hide()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                }
+
+
 
               //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
               var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
               var currentKoinid=$("#id_koinid").val();
               //alert(currentKoinid);
-              var perid = $("#perid_of_kentra").val();  // get the selected perid from the HTML input
+              var perid = $("#perid_of_simbouloi").val();  // get the selected perid from the HTML input
 
               $.ajax({                       // initialize an AJAX request
                 url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
@@ -140,8 +152,7 @@
             return false;
           });
 
-
-          $("#perid_of_kentra").change(function () {
+          $("#perid_of_simbouloi").change(function () {
               var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
               var perid = $(this).val();  // get the selected perid from the HTML input
 
@@ -156,6 +167,21 @@
               });
 
             });
+
+          //κατά την αλλαγή του dropdown eidos...
+          $('#id_eidos').on('change', function(){
+            var optionSelected = $("#id_eidos", this);
+            var eidosSelected = this.value;
+            if (eidosSelected == 0) {
+                    $('#id_koinid, label[for="#id_koinid"]').show()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                 }
+                else if (eidosSelected == 1) {
+                    $('#id_koinid, label[for="#id_koinid"]').hide()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                }
+            return false;
+          });
     </script>
 
 

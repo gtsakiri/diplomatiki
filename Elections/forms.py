@@ -376,14 +376,14 @@ class PsifodeltiaForm(ModelForm):
 class SimbouloiForm(ModelForm):
 
     EIDOS_CHOICES = (
-        ('1', 'Δήμο'),
-        ('0', 'Κοινότητα'),
+        (1, 'Δήμο'),
+        (0, 'Κοινότητα'),
     )
 
     aa = CharField(label='ΑΑ Συμβούλου', max_length=45)
     sindid= ModelChoiceField (queryset=Sindiasmoi.objects.none(), label='Συνδυασμός', required=False)
-    perid = ModelChoiceField(queryset=Perifereies.objects.none(), label='Εκλ. Περιφεέρεια')
-    koinid = ModelChoiceField(queryset=Koinotites.objects.none(), label='Κοινότητα')
+    perid = ModelChoiceField(queryset=Perifereies.objects.none(), label='Εκλ. Περιφέρεια')
+    koinid = ModelChoiceField(queryset=Koinotites.objects.none(), label='Κοινότητα', required=False)
     eidos = forms.ChoiceField(choices = EIDOS_CHOICES, label="Σε Δήμο ή Κοινότητα ?", widget=forms.Select(), required=True)
 
     class Meta:
@@ -415,13 +415,21 @@ class SimbouloiForm(ModelForm):
         self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
         self.fields['koinid'].queryset = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
 
+        self.fields['perid'].widget.attrs['id'] = 'perid_of_simbouloi'
+
     def clean(self):
         cleaned_data = super(SimbouloiForm, self).clean()
         surname = cleaned_data.get('surname')
         firstname = cleaned_data.get('firstname')
         fathername = cleaned_data.get('fathername')
+        eidos = cleaned_data['eidos']
         comments = cleaned_data.get('comments')
         aa = cleaned_data.get('aa')
         sindid = cleaned_data.get('sindid')
         perid = cleaned_data.get('perid')
         koinid = cleaned_data.get('koinid')
+        print(self.cleaned_data['eidos'])
+        print(self.cleaned_data['koinid'])
+
+        if eidos == '0' and koinid == None:
+            raise forms.ValidationError("Το πεδίο Κοινότητα πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Κοινότητας!")

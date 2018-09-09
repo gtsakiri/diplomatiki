@@ -229,8 +229,8 @@ class Eklsindkoin(models.Model):
 
 class Eklsindsimb(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', blank=True, null=True)  # Field name made lowercase.
-    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID')  # Field name made lowercase.
     aa = models.CharField(max_length=45, blank=True)
 
     def __str__(self):
@@ -645,6 +645,27 @@ class EklSumpsifoisimbWithIdVw(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_SUMPSIFOISIMB_WITHID_VW'
+
+class EklallsimbVw(models.Model):
+    id = models.IntegerField(primary_key=True)
+    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
+    simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
+    surname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100)
+    fathername = models.CharField(max_length=100)
+    toposeklogisid = models.IntegerField(db_column='toposEklogisID')  # Field name made lowercase.
+    toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
+    eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas', blank=True, null=True)  # Field name made lowercase.
+    sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    sindiasmos = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.toposeklogis  + ' - ' +  self.surname
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'EKL_ALLSIMB_VW'
+
 
 
 

@@ -6,7 +6,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
-    Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin
+    Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm
 from django.core.files.base import ContentFile
@@ -1680,18 +1680,18 @@ def simbouloi_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
+    all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
 
     if paramorder==1 or paramorder==6:
-        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname','fathername')
     elif paramorder == 2:
-        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'surname', 'firstname','fathername')
     elif paramorder == 3:
-        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
     elif paramorder == 4:
-        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
     else:
-        all_simbouloi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('toposeklogis', 'surname','firstname', 'fathername')
+        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('toposeklogis', 'surname','firstname', 'fathername')
 
 
     context = {'all_ekloges': all_ekloges,
@@ -1710,7 +1710,7 @@ def simbouloi_add(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = SimbouloiForm(request.POST, request.FILES)
+        form = SimbouloiForm(eklid, request.POST)
         #sub_form = EklsindFormPartial(request.POST)
 
 
@@ -1725,9 +1725,10 @@ def simbouloi_add(request, eklid):
                                       aa=form.cleaned_data['aa']
                                       ).save()
 
-            # Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND αν είναι καθολικός συνδυασμός
-            #Αν δεν είναι καθολικός, κρύβω στο template και το ΑΑ
-            if simb_item.eidos == 1:
+            # Εισάγω και μια νέα εγγραφή στον πίνακα Eklsimbper αν είναι ....
+            #Αν δεν είναι ...., κρύβω στο template και το ΑΑ
+            #print(form.cleaned_data['eidos'])
+            if form.cleaned_data['eidos'] == '1':
                 Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        simbid=simb_item,
                                        perid=form.cleaned_data['perid']
@@ -1743,7 +1744,7 @@ def simbouloi_add(request, eklid):
 
     else:
         # όταν ανοίγει η φόρμα για καταχώριση δεδομένων
-        form=SimbouloiForm(eklid, initial={'aa': 0})
+        form=SimbouloiForm(eklid, initial={'aa': 0, 'koinid':None})
        # sub_form = EklsindFormPartial()
 
     context = {
