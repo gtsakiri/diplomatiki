@@ -431,5 +431,6 @@ class SimbouloiForm(ModelForm):
         print(self.cleaned_data['eidos'])
         print(self.cleaned_data['koinid'])
 
+        #Έλεγχος αν ξέχασε να βάλει ο χρήστης Κονότητα, αν πρόκειται για σύμβουλο Κοινότητας
         if eidos == '0' and koinid == None:
             raise forms.ValidationError("Το πεδίο Κοινότητα πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Κοινότητας!")
