@@ -21,7 +21,7 @@
     <session id="1801119297">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="30" />
+          <entry key="project.closed" value="31" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
@@ -48,7 +48,7 @@
         <counts>
           <entry key="Django Console" value="1476" />
           <entry key="html" value="5652" />
-          <entry key="py" value="14587" />
+          <entry key="py" value="14601" />
           <entry key="py@diplomatiki" value="149" />
           <entry key="txt" value="102" />
         </counts>
@@ -58,7 +58,7 @@
           <entry key="CommandLine" value="149" />
           <entry key="HTML" value="5652" />
           <entry key="PLAIN_TEXT" value="102" />
-          <entry key="Python" value="16063" />
+          <entry key="Python" value="16077" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -82,8 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="1809" selection-start-line="1809" selection-end-line="1809" />
+            <state relative-caret-position="167">
+              <caret line="1816" column="111" selection-start-line="1816" selection-start-column="111" selection-end-line="1816" selection-end-column="111" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -599,7 +599,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536598698663</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="home 10/09/2018">
+      <created>1536615147154</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1536615147154</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TodoView">
@@ -613,7 +620,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26308724" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -621,7 +627,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.3243626" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" visible="true" weight="0.39943343" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -1038,8 +1044,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="1809" selection-start-line="1809" selection-end-line="1809" />
+        <state relative-caret-position="167">
+          <caret line="1816" column="111" selection-start-line="1816" selection-start-column="111" selection-end-line="1816" selection-end-column="111" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
