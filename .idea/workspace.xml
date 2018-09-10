@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="">
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work 05/09/2018">
+      <change afterPath="$PROJECT_DIR$/Elections/migrations/0015_auto_20180910_1456.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplomatiki/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplomatiki/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,89 +81,95 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="1736" selection-start-line="1736" selection-end-line="1736" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="438">
+              <caret line="1743" column="17" lean-forward="true" selection-start-line="1743" selection-start-column="17" selection-end-line="1743" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html">
+      <file leaf-file-name="koinotites_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="124" column="46" lean-forward="true" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
+            <state relative-caret-position="680">
+              <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1086">
-              <caret line="157" column="105" selection-start-line="157" selection-start-column="105" selection-end-line="157" selection-end-column="105" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="141" column="48" lean-forward="true" selection-start-line="141" selection-start-column="48" selection-end-line="141" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="626" column="21" selection-start-line="626" selection-start-column="6" selection-end-line="626" selection-end-column="30" />
+            <state relative-caret-position="612">
+              <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
               <folding>
-                <marker date="1536525879073" expanded="true" signature="2539:2544" ph="..." />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Elections/forms.py">
+      <file leaf-file-name="kentra_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/kentra_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="433" column="92" selection-start-line="433" selection-start-column="92" selection-end-line="433" selection-end-column="92" />
+            <state relative-caret-position="357">
+              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/forms.py">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="408" selection-start-line="408" selection-end-line="408" />
+            <state relative-caret-position="-925">
+              <caret line="301" column="139" selection-start-line="301" selection-start-column="139" selection-end-line="301" selection-end-column="139" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Elections/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="299" column="52" selection-start-line="299" selection-start-column="52" selection-end-line="299" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psifoisimb_perifereies.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="782">
+              <caret line="46" column="78" selection-start-line="46" selection-start-column="78" selection-end-line="46" selection-end-column="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psifoisimb_koinotites.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="986">
+              <caret line="58" column="76" selection-start-line="58" selection-start-column="76" selection-end-line="58" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2635">
+              <caret line="155" column="100" selection-start-line="155" selection-start-column="100" selection-end-line="155" selection-end-column="100" />
             </state>
           </provider>
         </entry>
@@ -176,8 +187,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>eklogestbl</find>
-      <find>edre</find>
       <find>eklo</find>
       <find>sindid</find>
       <find>sindiasmo</find>
@@ -188,7 +197,7 @@
       <find>lazy</find>
       <find>bg2</find>
       <find>get</find>
-      <find>id =</find>
+      <find />
       <find>eklsind</find>
       <find>Psifodel</find>
       <find>kentra</find>
@@ -206,6 +215,8 @@
       <find>perid_of</find>
       <find>SindiasmoiF</find>
       <find>ValidationError</find>
+      <find>EklallsimbVw</find>
+      <find>Psifoi</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -224,32 +235,28 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/messages.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/ekloges_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsind_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sistima_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html" />
+        <option value="$PROJECT_DIR$/Elections/forms.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_dropdown_list_options.html" />
+        <option value="$PROJECT_DIR$/Elections/urls.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/kentra_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" />
         <option value="$PROJECT_DIR$/diplomatiki/settings.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
-        <option value="$PROJECT_DIR$/Elections/urls.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/kentraform.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" />
-        <option value="$PROJECT_DIR$/Elections/models.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
-        <option value="$PROJECT_DIR$/Elections/forms.py" />
+        <option value="$PROJECT_DIR$/Elections/models.py" />
       </list>
     </option>
   </component>
@@ -258,6 +265,9 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-15" />
@@ -305,6 +315,13 @@
               <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
               <item name="Elections" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
+              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
+              <item name="Elections" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -318,11 +335,6 @@
               <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
-              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -376,7 +388,6 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
-      <method v="2" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -628,42 +639,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536061890024</updated>
     </task>
-    <task id="LOCAL-00035" summary="home 05/09/2018">
-      <created>1536178085377</created>
+    <task id="LOCAL-00035" summary="work 05/09/2018">
+      <created>1536127266281</created>
       <option name="number" value="00035" />
       <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1536178085377</updated>
+      <updated>1536127266282</updated>
     </task>
-    <task id="LOCAL-00036" summary="home 07/09/2018">
-      <created>1536351628726</created>
+    <task id="LOCAL-00036" summary="work 05/09/2018">
+      <created>1536147947106</created>
       <option name="number" value="00036" />
       <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1536351628726</updated>
+      <updated>1536147947106</updated>
     </task>
-    <task id="LOCAL-00037" summary="home 08/09/2018">
-      <created>1536392480187</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1536392480187</updated>
-    </task>
-    <task id="LOCAL-00038" summary="home 09/09/2018">
-      <created>1536487204496</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1536487204496</updated>
-    </task>
-    <task id="LOCAL-00039" summary="home 09/09/2018">
-      <created>1536531249901</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1536531249901</updated>
-    </task>
-    <option name="localTasksCounter" value="40" />
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView">
@@ -676,57 +666,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.3243626" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" visible="true" weight="0.39943343" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="manage.py@diplomatiki" order="13" visible="true" weight="0.32629356" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
+      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32629356" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.3252376" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32577905" />
-      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.32719547" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="14" weight="0.32946146" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21041666" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21946308" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.3243626" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" weight="0.39943343" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25838926" side_tool="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
-      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.32719547" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
-      <window_info anchor="right" id="Database" order="4" />
-    </layout-to-restore>
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32946146" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -789,11 +754,8 @@
     <MESSAGE value="work 30/08/2018" />
     <MESSAGE value="work 03/09/2018" />
     <MESSAGE value="work 04/09/2018" />
-    <MESSAGE value="home 05/09/2018" />
-    <MESSAGE value="home 07/09/2018" />
-    <MESSAGE value="home 08/09/2018" />
-    <MESSAGE value="home 09/09/2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home 09/09/2018" />
+    <MESSAGE value="work 05/09/2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="work 05/09/2018" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -815,6 +777,99 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Elections/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="78" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3111">
+          <caret line="185" column="58" selection-start-line="185" selection-start-column="58" selection-end-line="185" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmos_add_form.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2125">
+          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3468">
+          <caret line="204" column="56" selection-start-line="204" selection-start-column="56" selection-end-line="204" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/messages.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/Elections_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1722">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="538" column="64" selection-start-line="538" selection-start-column="64" selection-end-line="538" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/common.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -834,6 +889,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/diplomatiki/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmos_add_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
@@ -843,6 +905,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/confirm_delete.html">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6035">
+          <caret line="388" column="48" selection-start-line="388" selection-start-column="48" selection-end-line="388" selection-end-column="48" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -865,10 +934,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/messages.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -900,6 +983,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -909,8 +999,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sistima_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        <state relative-caret-position="238">
+          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
@@ -921,6 +1025,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="23" selection-start-line="54" selection-start-column="82" selection-end-line="54" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="78" selection-start-line="46" selection-start-column="78" selection-end-line="46" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
@@ -928,180 +1046,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html">
+    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="118" selection-start-line="33" selection-start-column="94" selection-end-line="33" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="54" column="82" selection-start-line="54" selection-start-column="82" selection-end-line="54" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/edres_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="40" column="57" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="6" selection-start-line="10" selection-end-line="24" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diplomatiki/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="612">
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/kentra_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+        <state relative-caret-position="357">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_perifereies.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="38" column="38" selection-start-line="21" selection-start-column="8" selection-end-line="38" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/koinotites_dropdown_list_options.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/kentraform.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="143" column="29" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-525">
-          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="626" column="21" selection-start-line="626" selection-start-column="6" selection-end-line="626" selection-end-column="30" />
-          <folding>
-            <marker date="1536525879073" expanded="true" signature="2539:2544" ph="..." />
-          </folding>
+        <state relative-caret-position="680">
+          <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1086">
-          <caret line="157" column="105" selection-start-line="157" selection-start-column="105" selection-end-line="157" selection-end-column="105" />
+        <state relative-caret-position="2635">
+          <caret line="155" column="100" selection-start-line="155" selection-start-column="100" selection-end-line="155" selection-end-column="100" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html">
+    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/basicform.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="141" column="48" lean-forward="true" selection-start-line="141" selection-start-column="48" selection-end-line="141" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="124" column="46" lean-forward="true" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="1736" selection-start-line="1736" selection-end-line="1736" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="408" selection-start-line="408" selection-end-line="408" />
+        <state relative-caret-position="221">
+          <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="433" column="92" selection-start-line="433" selection-start-column="92" selection-end-line="433" selection-end-column="92" />
+        <state relative-caret-position="-925">
+          <caret line="301" column="139" selection-start-line="301" selection-start-column="139" selection-end-line="301" selection-end-column="139" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="1743" column="17" lean-forward="true" selection-start-line="1743" selection-start-column="17" selection-end-line="1743" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="299" column="52" selection-start-line="299" selection-start-column="52" selection-end-line="299" selection-end-column="52" />
         </state>
       </provider>
     </entry>

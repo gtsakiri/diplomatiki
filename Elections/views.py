@@ -6,7 +6,8 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
-    Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw
+    Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
+    Psifoi
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm
 from django.core.files.base import ContentFile
@@ -1718,7 +1719,7 @@ def simbouloi_add(request, eklid):
         if form.is_valid():
             simb_item = form.save(commit=False)
             simb_item.save()
-
+            #Προσθήκη εγγραφής και στον πίνακα Eklsindsimb
             Eklsindsimb.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                       sindid=form.cleaned_data['sindid'],
                                       simbid=simb_item,
@@ -1729,11 +1730,19 @@ def simbouloi_add(request, eklid):
             #Αν δεν είναι ...., κρύβω στο template και το ΑΑ
             #print(form.cleaned_data['eidos'])
             if form.cleaned_data['eidos'] == '1':
+                # Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
                 Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        simbid=simb_item,
                                        perid=form.cleaned_data['perid']
                                        ).save()
+                for kentro in Kentra:
+                    Psifoi.objects.create(
+                        simbid=simb_item,
+                        kenid=kentro,
+                        votes=0
+                    ).save()
             else:
+                # Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Τοπικός
                 Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                           simbid=simb_item,
                                           koinid=form.cleaned_data['koinid']

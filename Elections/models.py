@@ -296,8 +296,8 @@ class Psifodeltia(models.Model):
 
 
 class Psifoi(models.Model):
-    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID')  # Field name made lowercase.
-    kenid = models.ForeignKey(Kentra, models.DO_NOTHING, db_column='kenID')  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID')  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID')  # Field name made lowercase.
     votes = models.IntegerField(default=0)
 
     def __str__(self):
