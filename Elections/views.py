@@ -1735,9 +1735,9 @@ def simbouloi_add(request, eklid):
                                        simbid=simb_item,
                                        perid=form.cleaned_data['perid']
                                        ).save()
-                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi για κάθε κέντρο,
-                # αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
-                for kentro in Kentra:
+                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi για κάθε κέντρο της
+                # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+                for kentro in Kentra.objects.filter(eklid=eklid):
                     Psifoi.objects.create(
                         simbid=simb_item,
                         kenid=kentro,
