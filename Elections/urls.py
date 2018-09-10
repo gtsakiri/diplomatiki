@@ -49,7 +49,7 @@ path('sindiasmoiadd/<int:eklid>/', views.sindiasmoi_add, name='sindiasmoi_add'),
 path('sindiasmoidelete/<int:eklid>/<int:sindid>/', views.sindiasmoi_delete, name='sindiasmoi_delete'),
 
 path('simbouloi/<int:eklid>/', views.simbouloi_list, name='simbouloi_list'),
-#path('simbouloiedit/<int:eklid>/<int:simbid>/', views.simbouloi_edit, name='simbouloi_edit'),
+path('simbouloiedit/<int:eklid>/<int:simbid>/', views.simbouloi_edit, name='simbouloi_edit'),
 path('simbouloiadd/<int:eklid>/', views.simbouloi_add, name='simbouloi_add'),
 #path('simbouloidelete/<int:eklid>/<int:simbid>/', views.simbouloi_delete, name='simbouloi_delete'),
 

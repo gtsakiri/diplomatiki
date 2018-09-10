@@ -1719,23 +1719,23 @@ def simbouloi_add(request, eklid):
         if form.is_valid():
             simb_item = form.save(commit=False)
             simb_item.save()
-            #Προσθήκη εγγραφής και στον πίνακα Eklsindsimb
+            #Προσθήκη εγγραφής και στον πίνακα Eklsindsimb για τη σύνδεση του Υποψηφίου με το Συνδυασμό του
             Eklsindsimb.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                       sindid=form.cleaned_data['sindid'],
                                       simbid=simb_item,
                                       aa=form.cleaned_data['aa']
                                       ).save()
 
-            # Εισάγω και μια νέα εγγραφή στον πίνακα Eklsimbper αν είναι ....
-            #Αν δεν είναι ...., κρύβω στο template και το ΑΑ
-            #print(form.cleaned_data['eidos'])
+            # Εισάγω και μια νέα εγγραφή στον πίνακα Eklsimbper αν είναι Δημοτικός
+            #Αν δεν είναι Δημοτικός, κρύβω στο template το πεδίο ΚΟινότητσ
             if form.cleaned_data['eidos'] == '1':
                 # Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
                 Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        simbid=simb_item,
                                        perid=form.cleaned_data['perid']
                                        ).save()
-                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi για κάθε κέντρο της
+
+                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο της
                 # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
                 for kentro in Kentra.objects.filter(eklid=eklid):
                     Psifoi.objects.create(
@@ -1744,12 +1744,13 @@ def simbouloi_add(request, eklid):
                         votes=0
                     ).save()
             else:
-                # Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Τοπικός
+                # Διαφορετικά προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin, αν είναι Τοπικός
                 Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                           simbid=simb_item,
                                           koinid=form.cleaned_data['koinid']
                                           ).save()
-                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+
+                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
                 # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
                 for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
                     Psifoi.objects.create(
@@ -1757,6 +1758,7 @@ def simbouloi_add(request, eklid):
                         kenid=kentro,
                         votes=0
                     ).save()
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('simbouloi_add', eklid)
 
@@ -1775,47 +1777,66 @@ def simbouloi_add(request, eklid):
 
     return render(request, 'Elections/simbouloiform.html', context)
 
-'''
 
-def sindiasmoi_edit(request, eklid, sindid):
+def simbouloi_edit(request, eklid, simbid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
+    action_label = 'Υποψήφιοι Σύμβουλοι - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    sind_item = get_object_or_404(Sindiasmoi, sindid=sindid)
+    simb_item = get_object_or_404(Simbouloi, simbid=simbid)
 
-    #ΠΡΟΣΟΧΗ!!! Το extra πεδία aa το φορτώνω manually
+    #ΠΡΟΣΟΧΗ!!! Τα extra πεδία  τα φορτώνω manually
     try:
-        aa_field = Eklsind.objects.get(sindid=sindid, eklid=eklid).aa
+        aa_field = Eklsindsimb.objects.get(simbid=simbid, eklid=eklid).aa
     except:
         aa_field=0
 
-    if request.method == 'POST':
-        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
-        #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
+    sindid_field = Eklsindsimb.objects.get(simbid=simbid, eklid=eklid).sindid
 
-        if form.is_valid():
-            sind_item = form.save(commit=False)
-
-            pic = form.cleaned_data['photo']
-            if not pic:
-                pic = 'sindiasmoi/elections.jpg'
-                sind_item.photo=pic
-
-            sind_item.save()
-
-            if sind_item.eidos == 1:
-                Eklsind.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'])
-            #sub_form.save()
-            else:
-                Eklsind.objects.filter(eklid=eklid, sindid=sindid).delete()
-            return redirect('sindiasmoi_list', eklid)
+    if Eklsimbper.objects.filter(simbid=simbid, eklid=eklid).exists():
+        perid_field = Eklsimbper.objects.get(simbid=simbid, eklid=eklid).perid
+        koinid_field = None
+        eidos_field = 1
     else:
-        #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και το extra πεδίο aa manually
-        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item, initial={'aa': aa_field})
-        #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
+        perid_field = Eklperkoin.objects.get(koinid=(Eklsimbkoin.objects.get(simbid=simbid, eklid=eklid).koinid)).perid
+        koinid_field = Eklperkoin.objects.get(koinid=(Eklsimbkoin.objects.get(simbid=simbid, eklid=eklid).koinid)).koinid
+        eidos_field = 0
+
+
+    if request.method == 'POST':
+        form = SimbouloiForm(eklid, request.POST or None, instance=simb_item)
+        if form.is_valid():
+            simb_item = form.save(commit=False)
+
+            simb_item.save()
+
+            Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(aa=form.cleaned_data['aa'])
+
+            Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(sindid=form.cleaned_data['sindid'])
+
+            if form.cleaned_data['eidos'] == 1:
+                Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).update(perid=form.cleaned_data['perid'])
+            else:
+                Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).update(koinid=form.cleaned_data['koinid'])
+            return redirect('simbouloi_list', eklid)
+    else:
+        #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
+        if Eklsimbper.objects.filter(simbid=simbid, eklid=eklid).exists():
+            form = SimbouloiForm(eklid, request.POST or None, instance=simb_item,
+                              initial={'aa': aa_field,
+                                       'perid':perid_field.perid,
+                                       'koinid':None,
+                                       'sindid':sindid_field.sindid,
+                                       'eidos': eidos_field})
+        else:
+            form = SimbouloiForm(eklid, request.POST or None, instance=simb_item,
+                                 initial={'aa': aa_field,
+                                          'perid': perid_field.perid,
+                                          'koinid': koinid_field.koinid,
+                                          'sindid': sindid_field.sindid,
+                                          'eidos': eidos_field})
 
     context = {
         'selected_ekloges': selected_ekloges,
@@ -1824,8 +1845,9 @@ def sindiasmoi_edit(request, eklid, sindid):
         'form': form,
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/simbouloiform.html', context)
 
+'''
 
 def sindiasmoi_delete(request, eklid, sindid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
