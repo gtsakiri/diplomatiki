@@ -1,0 +1,36 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+ <div class="row">
+
+       <div class="col-md-8 col-md-offset-4">
+
+         <h3> Επιβεβαίωση ενημέρωσης κατάστασης συμβούλου</h3>
+              <form method="POST" action=".">
+                  {% csrf_token %}
+                  <div class="divmargin"></div>
+                  <p>Η αλλαγή που ζητάτε πρόκειται να προκαλέσει σημαντικές μεταβολές, όπως τη διαγραφή εγγραφών από τον πίνακα κατανομής των ψήφων. Συμφωνείτε?</p>
+                  <div class="divmargin"></div>
+                  <input type="submit" value="Ναι" class="btn btn-warning">
+                  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+
+             </form>
+
+
+     </div>
+
+</div>
+
+
+
+ {% endblock %}
+
+
+ </body>
+
+</html>

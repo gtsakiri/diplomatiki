@@ -1816,10 +1816,63 @@ def simbouloi_edit(request, eklid, simbid):
 
             Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(sindid=form.cleaned_data['sindid'])
 
-            if form.cleaned_data['eidos'] == 1:
-                Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).update(perid=form.cleaned_data['perid'])
+            #Αν είναι Δημοτικός...
+            if form.cleaned_data['eidos'] == '1':
+                #αν είναι ήδη Δημοτικός, κάνω απλό update του perid
+                if eidos_field == 1:
+                    Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).update(perid=form.cleaned_data['perid'])
+
+                #ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Τοπικός έγινε Δημοτικός τότε απαιτούνται 3 ενέργειες
+                else:
+                    # 1) Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
+                    Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                              simbid=simb_item,
+                                              perid=form.cleaned_data['perid']
+                                              ).save()
+
+                    # 2) Διαγραφή Υποψηφίου από Eklsimbkoin
+                    Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).delete()
+
+                    # 3) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                    Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                    # 4) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο της τρέχουσας
+                    # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+                    for kentro in Kentra.objects.filter(eklid=eklid):
+                        Psifoi.objects.create(
+                            simbid=simb_item,
+                            kenid=kentro,
+                            votes=0
+                        ).save()
+
+            #Αν είναι Τοπικός..
             else:
-                Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).update(koinid=form.cleaned_data['koinid'])
+                if eidos_field == 0:
+                    # αν είναι ήδη Τοπικός, κάνω απλό update του koinid
+                    Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).update(koinid=form.cleaned_data['koinid'])
+                # ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Δημοτικός έγινε Τοπικός τότε απαιτούνται 4 ενέργειες
+                else:
+                    # 1) προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin, αν είναι Τοπικός
+                    Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                               simbid=simb_item,
+                                               koinid=form.cleaned_data['koinid']
+                                               ).save()
+
+                    # 2) Διαγραφή Υποψηφίου και από τον Eklsimbper
+                    Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).delete()
+
+                    # 3) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                    Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                    # 4) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                    # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+                    for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                        Psifoi.objects.create(
+                            simbid=simb_item,
+                            kenid=kentro,
+                            votes=0
+                        ).save()
+
             return redirect('simbouloi_list', eklid)
     else:
         #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
