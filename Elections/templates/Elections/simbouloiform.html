@@ -9,20 +9,22 @@
 
        <div class="row">
 
-       <div class="col-md-6 col-md-offset-3">
+       <div class="col-md-8 col-md-offset-3">
 
        {% include 'Elections/messages.html' %}
 
 
-                      <div class="text-center">
-
-                            <h3 align="center">{{  action_label }} </h3>
-                     </div>
 
 
+       <div class="column left">
 
-                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
+       <div class="text-center">
+                <h3 align="center">{{  action_label }} </h3>
+         </div>
+
+             <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
+
                          <div class="form-group">
 
                              {% for hidden_field in form.hidden_fields %}
@@ -36,6 +38,7 @@
                                   {% endfor %}
                                 </div>
                               {% endif %}
+                         </div>
 
                          {% if sub_form.non_field_errors %}
                                 <div class="alert alert-danger" role="alert">
@@ -101,15 +104,23 @@
 
                                  <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary"> </td></tr>
 
+            </form>
+
+        </div>
+
+     <div class="column right" style="background-color: #c4dce8">
+
+         <h4>dfgdfg bvnghhgjghjjhhj hjghhjghjgh ghjghjghjghjg ffdgfd</h4>
+         <h4>ffcvbcvbcvb bvnghhgjghjjhhj hjghhjghjgh ghjghjghjghjg ffdgfd</h4>
 
 
-                              <!--</table> -->
-                            </div>
-                         </form>
 
-            </div>
+     </div>
 
-       </div>
+
+    </div>
+
+   </div>
 
     <script>
     //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
