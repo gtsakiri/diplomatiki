@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
 path('', views.Elections_list, name='Elections_list'),
+#path('', views.simb_modal, name='simb_modal'),
 
 path('edres/<int:eklid>/', views.edres_list, name='edres_list'),
 path('edresedit/<int:eklid>/<int:edrid>/', views.edres_edit, name='edres_edit'),
@@ -42,6 +43,7 @@ path('kentradd/<int:eklid>/', views.kentra_add, name='kentra_add'),
 path('kentradelete/<int:eklid>/<int:kenid>/', views.kentra_delete, name='kentra_delete'),
 
 path('ajax/load-koinotites/<int:eklid>/', views.load_koinotites, name='ajax_load_koinotites'),
+path('ajax/load-modal/', views.simb_modal, name='simb_modal'),
 
 path('sindiasmoi/<int:eklid>/', views.sindiasmoi_list, name='sindiasmoi_list'),
 path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='sindiasmoi_edit'),

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Δημοτικές εκλογές</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+  </head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-primary btn-sm pull-right" data-target="#simbFound" data-toggle="modal">open modal</button>
+
+            <div class="modal" id="simbFound" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Πιθανοί Υποψήφιοι με παρόμοια στοιχεία</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="Surname">Επίθετο</label>
+                                    <input class="form-control" type="text" id="inputSurname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Firstname">Όνομα</label>
+                                    <input class="form-control" type="text" id="inputFirstname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Fathername">Όνομα Πατρός</label>
+                                    <input class="form-control" type="text" id="inputFathername">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Υποβολή</button>
+                            <button class="btn btn-primary" data-dismiss="modal">Άκυρο</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

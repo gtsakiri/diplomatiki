@@ -9,18 +9,17 @@
 
        <div class="row">
 
-       <div class="col-md-8 col-md-offset-3">
+       <div class="col-md-6 col-md-offset-3">
 
        {% include 'Elections/messages.html' %}
 
 
 
-
-       <div class="column left">
-
        <div class="text-center">
                 <h3 align="center">{{  action_label }} </h3>
          </div>
+
+       <button class="btn btn-primary btn-sm pull-right" id="open-modal" data-target="#simbFound" data-toggle="modal">open modal</button>
 
              <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
@@ -106,8 +105,8 @@
 
             </form>
 
-        </div>
 
+       <!--
      <div class="column right" style="background-color: #c4dce8">
 
          <h4>dfgdfg bvnghhgjghjjhhj hjghhjghjgh ghjghjghjghjg ffdgfd</h4>
@@ -116,9 +115,45 @@
 
 
      </div>
-
+-->
 
     </div>
+
+       <!-- Here we create this empty div for inserting modal -->
+           <div class="modal" id="simbFound" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Πιθανοί Υποψήφιοι με παρόμοια στοιχεία</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="Surname">Επίθετο</label>
+                                    <input class="form-control" type="text" id="inputSurname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Firstname">Όνομα</label>
+                                    <input class="form-control" type="text" id="inputFirstname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Fathername">Όνομα Πατρός</label>
+                                    <input class="form-control" type="text" id="inputFathername">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Υποβολή</button>
+                            <button class="btn btn-primary" data-dismiss="modal">Άκυρο</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+       <!-- Here we create this empty div for inserting modal -->
+<div class="modal-div"></div>
 
    </div>
 
@@ -193,6 +228,13 @@
                 }
             return false;
           });
+
+        var modalDiv = $("#modal-div");
+
+        $("#open-modal").on("click", function() {
+          $("#simbFound").modal('show');
+        });
+
     </script>
 
 

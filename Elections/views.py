@@ -1938,3 +1938,8 @@ def sindiasmoi_delete(request, eklid, sindid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 '''
+
+def simb_modal(request):
+    html=''
+    html += '<a href="Elections/modalSimbouloi.html</a>'
+    return render(request, 'Elections/modalSimbouloi.html', {})
