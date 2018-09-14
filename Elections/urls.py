@@ -43,7 +43,7 @@ path('kentradd/<int:eklid>/', views.kentra_add, name='kentra_add'),
 path('kentradelete/<int:eklid>/<int:kenid>/', views.kentra_delete, name='kentra_delete'),
 
 path('ajax/load-koinotites/<int:eklid>/', views.load_koinotites, name='ajax_load_koinotites'),
-path('ajax/load-modal/', views.simb_modal, name='simb_modal'),
+path('ajax/load-simbouloi/<int:eklid>/', views.load_simbouloi, name='ajax_load_simbouloi'),
 
 path('sindiasmoi/<int:eklid>/', views.sindiasmoi_list, name='sindiasmoi_list'),
 path('sindiasmoiedit/<int:eklid>/<int:sindid>/', views.sindiasmoi_edit, name='sindiasmoi_edit'),

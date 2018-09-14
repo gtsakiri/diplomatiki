@@ -1,0 +1,19 @@
+<table class="table table-condensed table-striped  table-hover">
+
+    <tbody >
+    <tr>
+            <td class="thick">Επώνυμο</td>
+            <td class="thick">Όνομα</td>
+            <td class="thick">Όνομα Πατρός</td>
+    </tr>
+    {% for p in simbouloi %}
+    <tr>
+        <td > {{ p.surname }}  </td>
+        <td > {{ p.firstname }} </td>
+        <td > {{ p.fathername }} </td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+
+</table>

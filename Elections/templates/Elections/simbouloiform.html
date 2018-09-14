@@ -21,7 +21,7 @@
 
        <button class="btn btn-primary btn-sm pull-right" id="open-modal" data-target="#simbFound" data-toggle="modal">open modal</button>
 
-             <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
+             <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" data-simbouloi-url="{% url 'ajax_load_simbouloi' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
 
                          <div class="form-group">
@@ -105,18 +105,6 @@
 
             </form>
 
-
-       <!--
-     <div class="column right" style="background-color: #c4dce8">
-
-         <h4>dfgdfg bvnghhgjghjjhhj hjghhjghjgh ghjghjghjghjg ffdgfd</h4>
-         <h4>ffcvbcvbcvb bvnghhgjghjjhhj hjghhjghjgh ghjghjghjghjg ffdgfd</h4>
-
-
-
-     </div>
--->
-
     </div>
 
        <!-- Here we create this empty div for inserting modal -->
@@ -128,21 +116,11 @@
                             <h4 class="modal-title">Πιθανοί Υποψήφιοι με παρόμοια στοιχεία</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="Surname">Επίθετο</label>
-                                    <input class="form-control" type="text" id="inputSurname">
-                                </div>
-                                <div class="form-group">
-                                    <label for="Firstname">Όνομα</label>
-                                    <input class="form-control" type="text" id="inputFirstname">
-                                </div>
-                                <div class="form-group">
-                                    <label for="Fathername">Όνομα Πατρός</label>
-                                    <input class="form-control" type="text" id="inputFathername">
-                                </div>
-                            </form>
+
+
+
+                       <!-- Στο body του modal θα έρθουν οι παρόμοιες εγγραφές συμβούλων -->
+
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary">Υποβολή</button>
@@ -229,11 +207,34 @@
             return false;
           });
 
-        var modalDiv = $("#modal-div");
+        //var modalDiv = $("#modal-div");
 
-        $("#open-modal").on("click", function() {
-          $("#simbFound").modal('show');
-        });
+        $("#id_surname, #id_firstname, #id_fathername").on('change', function(){
+            //alert('dfgdfgf');
+
+              var url = $("#dataForm").attr("data-simbouloi-url");  // get the url of the `load_koinotites` view
+              var surname = $("#id_surname").val();  // get the selected perid from the HTML input
+              var firstname = $("#id_firstname").val();  // get the selected perid from the HTML input
+              var fathername = $("#id_fathername").val();  // get the selected perid from the HTML input
+              //alert(surname);
+              $.ajax({                       // initialize an AJAX request
+                type: 'GET',
+                url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
+                data: {
+                  'surname': surname,      // add the perid to the GET parameters
+                  'firstname': firstname,
+                  'fathername': fathername
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $('#simbFound').find('.modal-body').html(data);
+                  $("#simbFound").modal('show');  // replace the contents of the koinid input with the data that came from the server
+                }
+              });
+
+            });
+
+
+
 
     </script>
 

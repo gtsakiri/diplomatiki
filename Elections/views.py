@@ -1449,17 +1449,6 @@ def koinotites_delete(request, eklid, koinid ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 
-##Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα koinid που σχετίζονται με ένα perid
-def load_koinotites(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-
-    perid = request.GET.get('perid')
-    koinotites = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).filter(perid=perid).values_list('koinid')).order_by('descr')
-
-    return render(request, 'Elections/koinotites_dropdown_list_options.html', {'koinotites': koinotites})
-
-
 def kentra_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1939,7 +1928,26 @@ def sindiasmoi_delete(request, eklid, sindid ):
     return render(request, 'Elections/confirm_delete.html', context)
 '''
 
-def simb_modal(request):
-    html=''
-    html += '<a href="Elections/modalSimbouloi.html</a>'
-    return render(request, 'Elections/modalSimbouloi.html', {})
+
+##Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα koinid που σχετίζονται με ένα perid
+def load_koinotites(request, eklid):
+    #selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    #all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    perid = request.GET.get('perid')
+    koinotites = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).filter(perid=perid).values_list('koinid')).order_by('descr')
+
+    return render(request, 'Elections/koinotites_dropdown_list_options.html', {'koinotites': koinotites})
+
+
+def load_simbouloi(request, eklid):
+
+    surname = request.GET.get('surname')
+    firstname = request.GET.get('firstname')
+    fathername = request.GET.get('fathername')
+
+    #simbouloi = Simbouloi.objects.filter(surname__icontains=surname)
+    simbouloi = Simbouloi.objects.filter(surname__icontains=surname).filter(firstname__icontains=firstname).filter(fathername__icontains=fathername)
+    #simbouloi = Simbouloi.objects.filter(surname__icontains=surname).filter(firstname__icontains=firstname)
+
+    return render(request, 'Elections/simbouloi_found.html', {'simbouloi': simbouloi})
