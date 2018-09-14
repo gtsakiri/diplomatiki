@@ -19,7 +19,7 @@
                 <h3 align="center">{{  action_label }} </h3>
          </div>
 
-       <button class="btn btn-primary btn-sm pull-right" id="open-modal" data-target="#simbFound" data-toggle="modal">open modal</button>
+       <!-- <button class="btn btn-primary btn-sm pull-right" id="open-modal" data-target="#simbFound" data-toggle="modal">open modal</button> -->
 
              <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" data-simbouloi-url="{% url 'ajax_load_simbouloi' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
@@ -227,7 +227,10 @@
                 },
                 success: function (data) {   // `data` is the return of the `load_koinotites` view function
                   $('#simbFound').find('.modal-body').html(data);
-                  $("#simbFound").modal('show');  // replace the contents of the koinid input with the data that came from the server
+                  if (data) {
+                       $("#simbFound").modal('show');
+                  }
+                   // replace the contents of the koinid input with the data that came from the server
                 }
               });
 

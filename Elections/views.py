@@ -1946,8 +1946,14 @@ def load_simbouloi(request, eklid):
     firstname = request.GET.get('firstname')
     fathername = request.GET.get('fathername')
 
-    #simbouloi = Simbouloi.objects.filter(surname__icontains=surname)
-    simbouloi = Simbouloi.objects.filter(surname__icontains=surname).filter(firstname__icontains=firstname).filter(fathername__icontains=fathername)
-    #simbouloi = Simbouloi.objects.filter(surname__icontains=surname).filter(firstname__icontains=firstname)
+    #Ψάχνω σε προηγούμενες εκλ. αναμετρήσεις υποψήφιο με ίδιο surname, firstname, fathername
+    simbouloi = EklallsimbVw.objects.filter(eklid__lt=eklid). \
+        filter(surname__icontains=surname).filter(firstname__icontains=firstname). \
+        filter(fathername__icontains=fathername).order_by('surname', 'firstname', 'fathername')
+        #simbouloi = Simbouloi.objects.filter(surname__icontains=surname).filter(firstname__icontains=firstname)
 
-    return render(request, 'Elections/simbouloi_found.html', {'simbouloi': simbouloi})
+    context = {
+        'simbouloi': simbouloi
+    }
+
+    return render(request, 'Elections/simbouloi_found.html', context)

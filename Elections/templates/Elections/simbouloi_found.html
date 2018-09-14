@@ -1,19 +1,29 @@
-<table class="table table-condensed table-striped  table-hover">
+{% if simbouloi.count > 0 %}
+    <table class="table table-condensed table-striped  table-hover">
 
-    <tbody >
-    <tr>
-            <td class="thick">Επώνυμο</td>
-            <td class="thick">Όνομα</td>
-            <td class="thick">Όνομα Πατρός</td>
-    </tr>
-    {% for p in simbouloi %}
-    <tr>
-        <td > {{ p.surname }}  </td>
-        <td > {{ p.firstname }} </td>
-        <td > {{ p.fathername }} </td>
-    </tr>
-    {% endfor %}
+        <tbody >
+        <tr>
+                <td class="thick">Εκλ. Αναμέτρηση</td>
+                <td class="thick">Επώνυμο</td>
+                <td class="thick">Όνομα</td>
+                <td class="thick">Όνομα Πατρός</td>
+                <td class="thick">Συνδυασμός</td>
+                <td class="thick">Τόπος εκλογής</td>
+        </tr>
+        {% for p in simbouloi %}
+        <tr>
+            <td > {{ p.eklid }}  </td>
+            <td > {{ p.surname }}  </td>
+            <td > {{ p.firstname }} </td>
+            <td > {{ p.fathername }} </td>
+            <td > {{ p.sindiasmos }} </td>
+            <td > {{ p.toposeklogis }} </td>
 
-    </tbody>
+        </tr>
+        {% endfor %}
 
-</table>
+        </tbody>
+
+    </table>
+
+{% endif %}
