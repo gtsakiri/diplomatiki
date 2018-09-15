@@ -1691,6 +1691,47 @@ def simbouloi_list(request, eklid):
 
     return render(request, 'Elections/simbouloi_list.html' , context)
 
+def simbouloi_insert_records(form, simb_item, eklid):
+    # Προσθήκη εγγραφής και στον πίνακα Eklsindsimb για τη σύνδεση του Υποψηφίου με το Συνδυασμό του
+    Eklsindsimb.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                               sindid=form.cleaned_data['sindid'],
+                               simbid=simb_item,
+                               aa=form.cleaned_data['aa']
+                               ).save()
+
+    # Εισάγω και μια νέα εγγραφή στον πίνακα Eklsimbper αν είναι Δημοτικός
+    # Αν δεν είναι Δημοτικός, κρύβω στο template το πεδίο Κοινότητσ
+    if form.cleaned_data['eidos'] == '1':
+        # Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
+        Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                  simbid=simb_item,
+                                  perid=form.cleaned_data['perid']
+                                  ).save()
+
+        # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο της
+        # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+        for kentro in Kentra.objects.filter(eklid=Eklogestbl.objects.get(eklid=eklid)):
+            Psifoi.objects.create(
+                simbid=simb_item,
+                kenid=kentro,
+                votes=0
+            ).save()
+    else:
+        # Διαφορετικά προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin, αν είναι Τοπικός
+        Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                   simbid=simb_item,
+                                   koinid=form.cleaned_data['koinid']
+                                   ).save()
+
+        # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+        # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+        for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+            Psifoi.objects.create(
+                simbid=simb_item,
+                kenid=kentro,
+                votes=0
+            ).save()
+
 
 def simbouloi_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1701,52 +1742,20 @@ def simbouloi_add(request, eklid):
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
         form = SimbouloiForm(eklid, request.POST)
-        #sub_form = EklsindFormPartial(request.POST)
-
 
         #if all([form.is_valid(), sub_form.is_valid()]):
         if form.is_valid():
-            simb_item = form.save(commit=False)
-            simb_item.save()
-            #Προσθήκη εγγραφής και στον πίνακα Eklsindsimb για τη σύνδεση του Υποψηφίου με το Συνδυασμό του
-            Eklsindsimb.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
-                                      sindid=form.cleaned_data['sindid'],
-                                      simbid=simb_item,
-                                      aa=form.cleaned_data['aa']
-                                      ).save()
-
-            # Εισάγω και μια νέα εγγραφή στον πίνακα Eklsimbper αν είναι Δημοτικός
-            #Αν δεν είναι Δημοτικός, κρύβω στο template το πεδίο ΚΟινότητσ
-            if form.cleaned_data['eidos'] == '1':
-                # Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
-                Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
-                                       simbid=simb_item,
-                                       perid=form.cleaned_data['perid']
-                                       ).save()
-
-                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο της
-                # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
-                for kentro in Kentra.objects.filter(eklid=eklid):
-                    Psifoi.objects.create(
-                        simbid=simb_item,
-                        kenid=kentro,
-                        votes=0
-                    ).save()
+            #ΠΡΟΣΟΧΗ!!! Αν πρόκειται για καθαρα νέο υποψήφιο, άρα το hidden είναι κενό, κάνω save κανονικά..
+            if form.cleaned_data['hiddenid'] is None:
+                simb_item = form.save(commit=False)
+                simb_item.save()
             else:
-                # Διαφορετικά προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin, αν είναι Τοπικός
-                Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
-                                          simbid=simb_item,
-                                          koinid=form.cleaned_data['koinid']
-                                          ).save()
+                #αλλιώς αν επιλέξω υποψήφιο από άλλη εκλογική αναμέτρηση, δεν τον δημιουργώ αλλά τον παίρνω από τον πίνακα Simbouloi
+                simb_item=Simbouloi.objects.get(simbid=form.cleaned_data['hiddenid'])
 
-                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
-                # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
-                for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
-                    Psifoi.objects.create(
-                        simbid=simb_item,
-                        kenid=kentro,
-                        votes=0
-                    ).save()
+            eklid=Eklogestbl.objects.get(eklid=eklid).eklid
+            #κλήση της παρακάτω συνάρτησης για την εισαγωγή στοιχείων και σε άλλους εξαρτώμενους πίνακες (Eklsindsimb, Eklsimbper, Eklsimbkoin, Psifoi
+            simbouloi_insert_records(form, simb_item, eklid)
 
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('simbouloi_add', eklid)
@@ -1774,6 +1783,7 @@ def simbouloi_edit(request, eklid, simbid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
+
     simb_item = get_object_or_404(Simbouloi, simbid=simbid)
 
     #ΠΡΟΣΟΧΗ!!! Τα extra πεδία  τα φορτώνω manually
@@ -1797,58 +1807,84 @@ def simbouloi_edit(request, eklid, simbid):
     if request.method == 'POST':
         form = SimbouloiForm(eklid, request.POST or None, instance=simb_item)
         if form.is_valid():
-            simb_item = form.save(commit=False)
 
-            simb_item.save()
+            # ΠΡΟΣΟΧΗ!!! Αν πρόκειται για τον αρχικό υποψήφιο που κάναμε edit, άρα το hidden είναι κενό, κάνω save κανονικά..
 
-            Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(aa=form.cleaned_data['aa'])
+            if form.cleaned_data['hiddenid'] is None:
+                simb_item = form.save(commit=False)
+                simb_item.save()
 
-            Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(sindid=form.cleaned_data['sindid'])
+                Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(aa=form.cleaned_data['aa'])
 
-            #Αν είναι Δημοτικός...
-            if form.cleaned_data['eidos'] == '1':
-                #αν είναι ήδη Δημοτικός, κάνω απλά update του perid
-                if eidos_field == 1:
-                    Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).update(perid=form.cleaned_data['perid'])
+                Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(sindid=form.cleaned_data['sindid'])
 
-                #ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Τοπικός έγινε Δημοτικός τότε απαιτούνται 3 ενέργειες
-                else:
-                    # 1) Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
-                    Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
-                                              simbid=simb_item,
-                                              perid=form.cleaned_data['perid']
-                                              ).save()
+                #Αν είναι Δημοτικός...
+                if form.cleaned_data['eidos'] == '1':
+                    #αν είναι ήδη Δημοτικός, κάνω απλά update του perid
+                    if eidos_field == 1:
+                        Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).update(perid=form.cleaned_data['perid'])
 
-                    # 2) Διαγραφή Υποψηφίου από Eklsimbkoin
-                    Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).delete()
+                    #ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Τοπικός έγινε Δημοτικός τότε απαιτούνται 3 ενέργειες
+                    else:
+                        # 1) Προσθήκη εγγραφής και στον πίνακα Eklsimbper, αν είναι Δημοτικός
+                        Eklsimbper.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                                  simbid=simb_item,
+                                                  perid=form.cleaned_data['perid']
+                                                  ).save()
 
-                    # 3) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
-                    Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+                        # 2) Διαγραφή Υποψηφίου από Eklsimbkoin
+                        Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).delete()
 
-                    # 4) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο της τρέχουσας
-                    # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
-                    for kentro in Kentra.objects.filter(eklid=eklid):
-                        Psifoi.objects.create(
-                            simbid=simb_item,
-                            kenid=kentro,
-                            votes=0
-                        ).save()
-
-            #Αν είναι Τοπικός..
-            else:
-                if eidos_field == 0:
-                    # αν είναι ήδη Τοπικός, ελέγχω/κάνω για 2 ενέργειες
-
-                    # 1) απλό update του koinid
-                    Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).update(koinid=form.cleaned_data['koinid'])
-
-                    # 2) Αν αλλάξει μόνο το koinid...
-                    if koinid_field != form.cleaned_data['koinid']:
-
-                        # α) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                        # 3) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
                         Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
 
-                        # β) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                        # 4) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο της τρέχουσας
+                        # εκλ. αναμέτρησης, αφού ο δημοτικός σύμβουλος ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+                        for kentro in Kentra.objects.filter(eklid=eklid):
+                            Psifoi.objects.create(
+                                simbid=simb_item,
+                                kenid=kentro,
+                                votes=0
+                            ).save()
+
+                #Αν είναι Τοπικός..
+                else:
+                    if eidos_field == 0:
+                        # αν είναι ήδη Τοπικός, ελέγχω/κάνω για 2 ενέργειες
+
+                        # 1) απλό update του koinid
+                        Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simbid).update(koinid=form.cleaned_data['koinid'])
+
+                        # 2) Αν αλλάξει μόνο το koinid...
+                        if koinid_field != form.cleaned_data['koinid']:
+
+                            # α) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                            Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                            # β) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                            # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+                            for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                                Psifoi.objects.create(
+                                    simbid=simb_item,
+                                    kenid=kentro,
+                                    votes=0
+                                ).save()
+
+                    # ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Δημοτικός έγινε Τοπικός τότε απαιτούνται 4 ενέργειες
+                    else:
+                        # 1) προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin
+                        Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                                   simbid=simb_item,
+                                                   koinid=form.cleaned_data['koinid']
+                                                   ).save()
+
+                        # 2) Διαγραφή Υποψηφίου και από τον Eklsimbper
+                        Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).delete()
+
+                        # 3) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                        Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                        # 4) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
                         # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
                         for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
                             Psifoi.objects.create(
@@ -1857,30 +1893,34 @@ def simbouloi_edit(request, eklid, simbid):
                                 votes=0
                             ).save()
 
-                # ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Δημοτικός έγινε Τοπικός τότε απαιτούνται 4 ενέργειες
+                return redirect('simbouloi_list', eklid)
+
+            #αλλιώς αν αντικατασταθεί από υποψήφιο παλιάς εκλ. αναμέτρησης
+            else:
+                eklid = Eklogestbl.objects.get(eklid=eklid).eklid
+
+                simb_item = Simbouloi.objects.get(simbid=simbid)
+
+                #παίρνω το νέο υποψήφιο...
+                new_simb_item=Simbouloi.objects.get(simbid=form.cleaned_data['hiddenid'])
+                # κλήση της παρακάτω συνάρτησης για την εισαγωγή στοιχείων και σε άλλους εξαρτώμενους πίνακες (Eklsindsimb, Eklsimbper, Eklsimbkoin, Psifoi)
+                simbouloi_insert_records(form, new_simb_item, eklid)
+
+                #ο προηγούμενος διαγράφεται ΜΟΝΟ από πίνακες Eklsindsimb, Eklsimbper, Eklsimbkoin, Psifoi της τρέχουσας εκλ. αναμέτρησης
+                #αν βρεθεί σε παλιές εκλ. αναμετρήσεις
+                if EklallsimbVw.objects.filter(simbid=simb_item.simbid).filter(eklid__lt=eklid).exists():
+                    #Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
+                    Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simb_item.simbid).delete()
+                    Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simb_item.simbid).delete()
+                    Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=simb_item.simbid).delete()
+                    Psifoi.objects.filter(simbid=simb_item.simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+                #αλλιώς διαγράφεται από παντού, αφού υπάρχει μόνο στην τρέχουσα εκλ. αναμέτρηση (μέσω του cascade option)
                 else:
-                    # 1) προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin
-                    Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
-                                               simbid=simb_item,
-                                               koinid=form.cleaned_data['koinid']
-                                               ).save()
+                    Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
 
-                    # 2) Διαγραφή Υποψηφίου και από τον Eklsimbper
-                    Eklsimbper.objects.filter(eklid=eklid).filter(simbid=simbid).delete()
+                messages.success(request, 'Ο υποψήφιος αντικαταστάθηκε από άλλον (προηγούμενης εκλ. αναμέτρησης) !')
+                return redirect('simbouloi_list', eklid)
 
-                    # 3) Διαγραφή ψήφων από πίνακα Psifoi και συγκεκριμένα όλες τις εγγραφές που έχουν τον υποψήφιο σε κέντρο της τρέχουσας εκλ. αναμέτρησης
-                    Psifoi.objects.filter(simbid=simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
-
-                    # 4) Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
-                    # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
-                    for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
-                        Psifoi.objects.create(
-                            simbid=simb_item,
-                            kenid=kentro,
-                            votes=0
-                        ).save()
-
-            return redirect('simbouloi_list', eklid)
     else:
         #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
         if Eklsimbper.objects.filter(simbid=simbid, eklid=eklid).exists():
@@ -1895,7 +1935,6 @@ def simbouloi_edit(request, eklid, simbid):
                                  initial={'aa': aa_field,
                                           'perid': perid_field.perid,
                                           'koinid': koinid_field.koinid,
-                                          'sindid': sindid_field.sindid,
                                           'eidos': eidos_field})
 
     context = {

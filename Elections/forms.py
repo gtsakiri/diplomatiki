@@ -380,6 +380,7 @@ class SimbouloiForm(ModelForm):
         (0, 'Κοινότητα'),
     )
 
+    hiddenid = IntegerField(label='ID Συμβούλου',required=False)
     aa = CharField(label='ΑΑ Συμβούλου', max_length=45)
     sindid= ModelChoiceField (queryset=Sindiasmoi.objects.none(), label='Συνδυασμός', required=False)
     perid = ModelChoiceField(queryset=Perifereies.objects.none(), label='Εκλ. Περιφέρεια')
@@ -388,9 +389,7 @@ class SimbouloiForm(ModelForm):
 
     class Meta:
         model=Simbouloi
-        fields = ['surname', 'firstname', 'fathername', 'eidos', 'comments', 'aa', 'sindid', 'perid', 'koinid']
-
-
+        fields = ['hiddenid', 'surname', 'firstname', 'fathername', 'eidos', 'comments',  'aa', 'sindid', 'perid', 'koinid']
 
         labels = {
             'surname': _('Επίθετο'),
@@ -417,6 +416,8 @@ class SimbouloiForm(ModelForm):
 
         self.fields['perid'].widget.attrs['id'] = 'perid_of_simbouloi'
 
+        self.fields['hiddenid'].widget = forms.HiddenInput()
+
     def clean(self):
         cleaned_data = super(SimbouloiForm, self).clean()
         surname = cleaned_data.get('surname')
@@ -428,8 +429,8 @@ class SimbouloiForm(ModelForm):
         sindid = cleaned_data.get('sindid')
         perid = cleaned_data.get('perid')
         koinid = cleaned_data.get('koinid')
-        print(self.cleaned_data['eidos'])
-        print(self.cleaned_data['koinid'])
+        hiddenid = cleaned_data.get('hiddenid')
+
 
         #Έλεγχος αν ξέχασε να βάλει ο χρήστης Κονότητα, αν πρόκειται για σύμβουλο Κοινότητας
         if eidos == '0' and koinid == None:
