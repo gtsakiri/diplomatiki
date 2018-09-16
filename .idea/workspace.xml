@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_15_9_2018">
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_16_9_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/static/css/elections.css" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/static/css/elections.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_found.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_found.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html" afterDir="false" />
     </list>
@@ -81,7 +82,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32674">
+            <state relative-caret-position="32912">
               <caret line="1936" column="72" selection-start-line="1936" selection-start-column="72" selection-end-line="1936" selection-end-column="72" />
             </state>
           </provider>
@@ -90,7 +91,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11084">
+            <state relative-caret-position="11101">
               <caret line="653" column="33" selection-start-line="653" selection-start-column="33" selection-end-line="653" selection-end-column="33" />
             </state>
           </provider>
@@ -99,8 +100,8 @@
       <file leaf-file-name="simbouloi_found.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_found.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+            <state relative-caret-position="273">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
         </entry>
@@ -108,8 +109,8 @@
       <file leaf-file-name="simbouloiform.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="230" column="46" selection-start-line="230" selection-end-line="231" />
+            <state relative-caret-position="357">
+              <caret line="240" column="23" lean-forward="true" selection-start-line="240" selection-start-column="23" selection-end-line="240" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -126,7 +127,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
+            <state relative-caret-position="7021">
               <caret line="418" selection-start-line="418" selection-end-line="418" />
             </state>
           </provider>
@@ -653,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537046855703</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="home_16_9_2018">
+      <created>1537081311230</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1537081311230</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView">
@@ -666,7 +674,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -697,25 +705,25 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21946308" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.3243626" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.32719547" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" weight="0.39943343" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25838926" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -784,7 +792,8 @@
     <MESSAGE value="work 11/09/2018" />
     <MESSAGE value="home_14_9_2018" />
     <MESSAGE value="home_15_9_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home_15_9_2018" />
+    <MESSAGE value="home_16_9_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="home_16_9_2018" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1070,7 +1079,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11084">
+        <state relative-caret-position="11101">
           <caret line="653" column="33" selection-start-line="653" selection-start-column="33" selection-end-line="653" selection-end-column="33" />
         </state>
       </provider>
@@ -1105,29 +1114,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32674">
+        <state relative-caret-position="32912">
           <caret line="1936" column="72" selection-start-line="1936" selection-start-column="72" selection-end-line="1936" selection-end-column="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
+        <state relative-caret-position="7021">
           <caret line="418" selection-start-line="418" selection-end-line="418" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_found.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+        <state relative-caret-position="273">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="230" column="46" selection-start-line="230" selection-end-line="231" />
+        <state relative-caret-position="357">
+          <caret line="240" column="23" lean-forward="true" selection-start-line="240" selection-start-column="23" selection-end-line="240" selection-end-column="23" />
         </state>
       </provider>
     </entry>

@@ -333,3 +333,9 @@ table.d {
     display: table;
     clear: both;
 }
+
+.modal-header{
+  background-color:#42bff4;
+  color:#ffffff;
+}
+
