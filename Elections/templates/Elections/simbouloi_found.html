@@ -11,7 +11,7 @@
 <body>
 
 
-    <table id="results" class="table table-condensed table-striped  table-hover">
+    <table id="results" class="table table-condensed table-hover">
 
         <tbody >
         <tr>
@@ -45,6 +45,12 @@
         $('#results').find('tr').click(function () {
                 //var row = $(this).find('td:first').text();
                 //alert('You clicked ' + row);
+                var selected = $(this).hasClass("active");
+                $("#results tr").removeClass("active");
+                if(!selected)
+                        $(this).addClass("active");
+
+
                 var simbid = $(this).find('td:eq(1)').text().trim();
                 var surname = $(this).find('td:eq(2)').text().trim();
                 var firstname = $(this).find('td:eq(3)').text().trim();
@@ -53,7 +59,7 @@
                 document.getElementById("id_firstname").value = firstname
                 document.getElementById("id_fathername").value = fathername
                 document.getElementById("id_hiddenid").value = simbid
-                $('#myModal').modal('hide');
+                //$('#myModal').modal('hide');
         });
 
     </script>
