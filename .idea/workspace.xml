@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_17_9_2018">
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/confirm_simbouloi_delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/elections_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/koinotita_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/perifereia_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/sistima_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_form.html" afterDir="false" />
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_17_9_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/kentraform.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/kentra_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/simbouloiform.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -811,7 +792,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537167942743</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="work_17_9_2018">
+      <created>1537177523029</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1537177523029</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TodoView">
@@ -933,7 +921,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="24_8_2018" />
     <MESSAGE value="24_8_2018b" />
     <MESSAGE value="24_8_2018c" />
     <MESSAGE value="24_8_2018e" />
@@ -958,7 +945,8 @@
     <MESSAGE value="home_15_9_2018" />
     <MESSAGE value="home_16_9_2018" />
     <MESSAGE value="home_17_9_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home_17_9_2018" />
+    <MESSAGE value="work_17_9_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="work_17_9_2018" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
