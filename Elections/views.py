@@ -1931,10 +1931,16 @@ def simbouloi_edit(request, eklid, simbid):
                                        'sindid':sindid_field.sindid,
                                        'eidos': eidos_field})
         else:
+            if sindid_field is None: #για την περίπτωση υποψηφίων που δεν έχουν συνδυασμό, όπως στις κοινότητες<300 κατ.
+                initialSindid=None
+            else:
+                initialSindid=sindid_field.sindid
+
             form = SimbouloiForm(eklid, request.POST or None, instance=simb_item,
                                  initial={'aa': aa_field,
                                           'perid': perid_field.perid,
                                           'koinid': koinid_field.koinid,
+                                          'sindid': initialSindid,
                                           'eidos': eidos_field})
 
     context = {
@@ -1985,10 +1991,12 @@ def load_simbouloi(request, eklid):
     firstname = request.GET.get('firstname')
     fathername = request.GET.get('fathername')
 
-    #Ψάχνω σε προηγούμενες εκλ. αναμετρήσεις υποψήφιο με ίδιο surname, firstname, fathername
+    #Ψάχνω σε προηγούμενες εκλ. αναμετρήσεις υποψήφιο με ίδιο surname, firstname, fathername και δεν έχουν εισαχθεί ακόμη στην τρέχουσα εκλ. αναμέτρηση
     simbouloi = EklallsimbVw.objects.filter(eklid__lt=eklid). \
         filter(surname__icontains=surname).filter(firstname__icontains=firstname). \
-        filter(fathername__icontains=fathername).order_by('surname', 'firstname', 'fathername')
+        filter(fathername__icontains=fathername). \
+        exclude(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).values_list('simbid',flat=True)). \
+        order_by('surname', 'firstname', 'fathername')
         #simbouloi = Simbouloi.objects.filter(surname__icontains=surname).filter(firstname__icontains=firstname)
 
     context = {

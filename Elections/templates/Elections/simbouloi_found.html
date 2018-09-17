@@ -22,6 +22,7 @@
                 <td class="thick">Όνομα Πατρός</td>
                 <td class="thick">Συνδυασμός</td>
                 <td class="thick">Τόπος εκλογής</td>
+                <td class="thick">Παρατηρήσεις</td>
         </tr>
         {% for p in simbouloi %}
         <tr>
@@ -32,6 +33,7 @@
             <td > {{ p.fathername }} </td>
             <td > {{ p.sindiasmos }} </td>
             <td > {{ p.toposeklogis }} </td>
+            <td > {{ p.comments }} </td>
 
         </tr>
         {% endfor %}
@@ -55,10 +57,12 @@
                 var surname = $(this).find('td:eq(2)').text().trim();
                 var firstname = $(this).find('td:eq(3)').text().trim();
                 var fathername = $(this).find('td:eq(4)').text().trim();
+                var comments = $(this).find('td:eq(7)').text().trim();
                 document.getElementById("id_surname").value = surname
                 document.getElementById("id_firstname").value = firstname
                 document.getElementById("id_fathername").value = fathername
                 document.getElementById("id_hiddenid").value = simbid
+                document.getElementById("id_comments").value = comments
                 //$('#myModal').modal('hide');
 
 
