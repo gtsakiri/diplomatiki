@@ -1,0 +1,36 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+ <div class="row">
+
+       <div class="col-md-8 col-md-offset-4">
+
+         <h3> Επιβεβαίωση διαγραφής</h3>
+              <form method="POST" action=".">
+                  {% csrf_token %}
+                  <div class="divmargin"></div>
+                  <p>ΠΡΟΣΟΧΗ: Όλα τα δεδομένα του Υποψηφίου (βασικά στοιχεία, ψήφοι κλπ) θα διαγραφούν!!! Είσαι σίγουρος/η για τη διαγραφή?</p>
+                  <div class="divmargin"></div>
+                  <input type="submit" value="Ναι, διέγραψέ το" class="btn btn-warning">
+                  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+
+             </form>
+
+
+     </div>
+
+</div>
+
+
+
+ {% endblock %}
+
+
+ </body>
+
+</html>

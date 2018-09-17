@@ -551,7 +551,7 @@ def edres_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/edres_form.html', context)
 
 def edres_edit(request, eklid, edrid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -575,7 +575,7 @@ def edres_edit(request, eklid, edrid):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/edres_form.html', context)
 
 def edres_delete(request, eklid, edrid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -632,7 +632,7 @@ def edreskoin_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/edreskoin_form.html', context)
 
 def edreskoin_edit(request, eklid, edrid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -656,7 +656,7 @@ def edreskoin_edit(request, eklid, edrid):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/edreskoin_form.html', context)
 
 def edreskoin_delete(request, eklid, edrid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -718,7 +718,7 @@ def sistima_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/sistima_form.html', context)
 
 def sistima_edit(request, eklid, sisid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -742,7 +742,7 @@ def sistima_edit(request, eklid, sisid):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/sistima_form.html', context)
 
 def sistima_delete(request, eklid, sisid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -800,7 +800,7 @@ def typeofkoinotita_add(request, eklid):
                 'form': form,
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/typeofkoinotita_form.html', context)
 
 def typeofkoinotita_edit(request, eklid, tpkid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -824,7 +824,7 @@ def typeofkoinotita_edit(request, eklid, tpkid):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/typeofkoinotita_form.html', context)
 
 def typeofkoinotita_delete(request, eklid, tpkid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -888,7 +888,7 @@ def ekloges_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/elections_form.html', context)
 
 def ekloges_edit(request, eklid, cureklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -915,7 +915,7 @@ def ekloges_edit(request, eklid, cureklid):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/elections_form.html', context)
 
 def ekloges_delete(request, eklid, cureklid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1002,7 +1002,7 @@ def sindiasmoi_add(request, eklid):
                 #'sub_form': sub_form,
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/sindiasmoi_form.html', context)
 
 def sindiasmoi_edit(request, eklid, sindid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1051,7 +1051,7 @@ def sindiasmoi_edit(request, eklid, sindid):
         'form': form,
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/sindiasmoi_form.html', context)
 
 
 def sindiasmoi_delete(request, eklid, sindid ):
@@ -1114,7 +1114,7 @@ def eklsind_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/eklsind_form.html', context)
 
 def eklsind_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1141,7 +1141,7 @@ def eklsind_edit(request, eklid, id):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/eklsind_form.html', context)
 
 
 def eklsind_delete(request, eklid, id ):
@@ -1205,7 +1205,7 @@ def perifereia_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/perifereia_form.html', context)
 
 def perifereia_edit(request, eklid, perid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1229,7 +1229,7 @@ def perifereia_edit(request, eklid, perid):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/perifereia_form.html', context)
 
 def perifereia_delete(request, eklid, perid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1291,7 +1291,7 @@ def eklsindkoin_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/eklsindkoin_form.html', context)
 
 def eklsindkoin_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1318,7 +1318,7 @@ def eklsindkoin_edit(request, eklid, id):
         'form': form
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/eklsindkoin_form.html', context)
 
 
 def eklsindkoin_delete(request, eklid, id ):
@@ -1389,7 +1389,7 @@ def koinotites_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/koinotita_form.html', context)
 
 def koinotites_edit(request, eklid, koinid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1428,7 +1428,7 @@ def koinotites_edit(request, eklid, koinid):
         'form': form,
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/koinotita_form.html', context)
 
 def koinotites_delete(request, eklid, koinid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1487,7 +1487,7 @@ def kentra_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/kentraform.html', context)
+    return render(request, 'Elections/kentra_form.html', context)
 
 def kentra_edit(request, eklid, kenid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1525,7 +1525,7 @@ def kentra_edit(request, eklid, kenid):
         'form': form,
     }
 
-    return render(request, 'Elections/kentraform.html', context)
+    return render(request, 'Elections/kentra_form.html', context)
 
 def kentra_delete(request, eklid, kenid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1599,7 +1599,7 @@ def psifodeltia_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/psifodeltia_form.html', context)
 
 def psifodeltia_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1636,7 +1636,7 @@ def psifodeltia_edit(request, eklid, id):
         'form': form,
     }
 
-    return render(request, 'Elections/basicform.html', context)
+    return render(request, 'Elections/psifodeltia_form.html', context)
 
 def psifodeltia_delete(request, eklid, id ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
@@ -1773,7 +1773,7 @@ def simbouloi_add(request, eklid):
                 #'sub_form': sub_form,
                }
 
-    return render(request, 'Elections/simbouloiform.html', context)
+    return render(request, 'Elections/simbouloi_form.html', context)
 
 
 def simbouloi_edit(request, eklid, simbid):
@@ -1950,28 +1950,28 @@ def simbouloi_edit(request, eklid, simbid):
         'form': form,
     }
 
-    return render(request, 'Elections/simbouloiform.html', context)
+    return render(request, 'Elections/simbouloi_form.html', context)
 
-'''
 
-def sindiasmoi_delete(request, eklid, sindid ):
+
+def simbouloi_delete(request, eklid, simbid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    obj = get_object_or_404(Sindiasmoi, sindid=sindid)
+    obj = get_object_or_404(Simbouloi, simbid=simbid)
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
-        return redirect('sindiasmoi_list', eklid)
+        return redirect('simbouloi_list', eklid)
     context = {'selected_ekloges': selected_ekloges,
                'all_ekloges': all_ekloges,
                'object': obj
                }
 
-    return render(request, 'Elections/confirm_delete.html', context)
-'''
+    return render(request, 'Elections/confirm_simbouloi_delete.html', context)
+
 
 
 ##Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα koinid που σχετίζονται με ένα perid

@@ -53,7 +53,7 @@ path('sindiasmoidelete/<int:eklid>/<int:sindid>/', views.sindiasmoi_delete, name
 path('simbouloi/<int:eklid>/', views.simbouloi_list, name='simbouloi_list'),
 path('simbouloiedit/<int:eklid>/<int:simbid>/', views.simbouloi_edit, name='simbouloi_edit'),
 path('simbouloiadd/<int:eklid>/', views.simbouloi_add, name='simbouloi_add'),
-#path('simbouloidelete/<int:eklid>/<int:simbid>/', views.simbouloi_delete, name='simbouloi_delete'),
+path('simbouloidelete/<int:eklid>/<int:simbid>/', views.simbouloi_delete, name='simbouloi_delete'),
 
 
 path('psifodeltia/<int:eklid>/', views.psifodeltia_list, name='psifodeltia_list'),

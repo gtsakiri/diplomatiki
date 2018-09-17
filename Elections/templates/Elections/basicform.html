@@ -100,7 +100,13 @@
                               {% endfor %}
 
 
-                                 <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary"> </td></tr>
+                                 <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
+
+                                     {% block buttonReturn %}
+
+                                     {% endblock %}
+
+                                 </td></tr>
 
                          </form>
 
@@ -108,42 +114,6 @@
 
        </div>
 
-    <script>
-    //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
-
-    //κατά το φόρτωμα της φόρμας...
-        $(document).ready(function () {
-            var optionSelected = $("#id_eidos", this);
-            var eidosSelected = $("#id_eidos").val();
-            if (eidosSelected == 1) {
-                $('#id_aa, label[for="#id_aa"]').show()
-                $('#id_aa, label[for="#id_aa"]').parent().show()
-            } else if (eidosSelected == 0) {
-                $('#id_aa, label[for="#id_aa"]').hide()
-                document.getElementById("id_aa").value = "0";
-                $('#id_aa, label[for="#id_aa"]').parent().hide()
-                }
-
-            return false;
-          });
-
-
-  //κατά την αλλαγή του dropdown eidos...
-          $('#id_eidos').on('change', function(){
-            var optionSelected = $("#id_eidos", this);
-            var eidosSelected = this.value;
-            if (eidosSelected == 1) {
-                $('#id_aa, label[for="#id_aa"]').show()
-                $('#id_aa, label[for="#id_aa"]').parent().show()
-            } else if (eidosSelected == 0) {
-                $('#id_aa, label[for="#id_aa"]').hide()
-                document.getElementById("id_aa").value = "0";
-                $('#id_aa, label[for="#id_aa"]').parent().hide()
-            }
-            return false;
-          });
-
-    </script>
 
  {% endblock %}
 

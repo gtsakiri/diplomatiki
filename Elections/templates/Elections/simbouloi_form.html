@@ -14,15 +14,17 @@
        {% include 'Elections/messages.html' %}
 
 
-                      <div class="text-center">
 
-                            <h3 align="center">{{  action_label }} </h3>
-                     </div>
+       <div class="text-center">
+                <h3 align="center">{{  action_label }} </h3>
+         </div>
 
+       <!-- <button class="btn btn-primary btn-sm pull-right" id="open-modal" data-target="#simbFound" data-toggle="modal">open modal</button> -->
 
-
-                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
+             <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" data-simbouloi-url="{% url 'ajax_load_simbouloi' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
+
+
                          <div class="form-group">
 
                              {% for hidden_field in form.hidden_fields %}
@@ -36,7 +38,7 @@
                                   {% endfor %}
                                 </div>
                               {% endif %}
-                        </div>
+                         </div>
 
                          {% if sub_form.non_field_errors %}
                                 <div class="alert alert-danger" role="alert">
@@ -100,21 +102,66 @@
                               {% endfor %}
 
 
-                                 <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary"> </td></tr>
+                                 <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
+
+                                 <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'simbouloi_list' selected_ekloges.0.eklid %}';">
+
+                                </td></tr>
+
+            </form>
+
+    </div>
+
+           <div class="modal" id="modalSimbFound"  role="dialog" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h5 class="modal-title text-center">Πιθανοί Υποψήφιοι με παρόμοια στοιχεία σε παλαιότερες εκλ. αναμετρήσεις</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter text:</p>
+                            <input type="text" id="txtInput">
 
 
+                       <!-- Στο body του modal θα έρθουν οι παρόμοιες εγγραφές συμβούλων -->
+
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <button class="btn btn-primary">Υποβολή</button> -->
+                            <button class="btn btn-primary" data-dismiss="modal">Κλείσιμο</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+   </div>
 
     <script>
     //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
 
     //κατά το φόρτωμα της φόρμας...
         $(document).ready(function () {
+               var optionSelected = $("#id_eidos", this);
+                var eidosSelected = $("#id_eidos").val();
+                if (eidosSelected == 0) {
+                    $('#id_koinid, label[for="#id_koinid"]').show()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                 }
+                else if (eidosSelected == 1) {
+                    $('#id_koinid, label[for="#id_koinid"]').hide()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                }
+
+
 
               //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
               var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
               var currentKoinid=$("#id_koinid").val();
               //alert(currentKoinid);
-              var perid = $("#perid_of_kentra").val();  // get the selected perid from the HTML input
+              var perid = $("#perid_of_simbouloi").val();  // get the selected perid from the HTML input
 
               $.ajax({                       // initialize an AJAX request
                 url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
@@ -133,8 +180,7 @@
             return false;
           });
 
-
-          $("#perid_of_kentra").change(function () {
+          $("#perid_of_simbouloi").change(function () {
               var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
               var perid = $(this).val();  // get the selected perid from the HTML input
 
@@ -149,6 +195,57 @@
               });
 
             });
+
+          //κατά την αλλαγή του dropdown eidos...
+          $('#id_eidos').on('change', function(){
+            var optionSelected = $("#id_eidos", this);
+            var eidosSelected = this.value;
+            if (eidosSelected == 0) {
+                    $('#id_koinid, label[for="#id_koinid"]').show()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                 }
+                else if (eidosSelected == 1) {
+                    $('#id_koinid, label[for="#id_koinid"]').hide()
+                    $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                }
+            return false;
+          });
+
+        //var modalDiv = $("#modal-div");
+
+        $("#id_surname, #id_firstname, #id_fathername").on('change', function(){
+
+              var url = $("#dataForm").attr("data-simbouloi-url");  // get the url of the `load_simbouloi` view
+              var surname = $("#id_surname").val();  // get the selected surname from the HTML input
+              var firstname = $("#id_firstname").val();  // get the selected firstname from the HTML input
+              var fathername = $("#id_fathername").val();  // get the selected fathername from the HTML input
+              //alert(surname);
+              $.ajax({                       // initialize an AJAX request
+                type: 'GET',
+                url: url,                    // set the url of the request (= localhost:8000/ajax/load_simbouloi/)
+                data: {
+                  'surname': surname,      // add the surname, firstname, fathername to the GET parameters
+                  'firstname': firstname,
+                  'fathername': fathername
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $('#modalSimbFound').find('.modal-body').html(data);
+                  //console.log(data)
+                  if ($.trim(data)) { //έλεγχος αν υπάρχουν data προς εμφάνιση
+                        var modalDiv = $('#modalSimbFound');
+                          modalDiv.modal({backdrop: false, show: true});
+
+                          $('.modal-dialog').draggable({
+                            handle: ".modal-header"
+                          });
+                  }
+                   // replace the contents of the koinid input with the data that came from the server
+                }
+              });
+
+            });
+
+
     </script>
 
 
