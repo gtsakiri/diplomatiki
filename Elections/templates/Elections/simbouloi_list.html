@@ -63,7 +63,7 @@
                                 <td > {{ p.firstname }}</td>
                                 <td > {{ p.fathername }} </td>
                                 <td > {{ p.toposeklogis }} </td>
-                                <td > {{ p.sindiasmos }}</td>
+                                <td > {% if  p.sindiasmos is None %} {% else %} {{ p.sindiasmos  }} {% endif %}</td>
                                 <td>
                                     <a class="btn btn-default" href="{% url 'simbouloi_edit' selected_ekloges.0.eklid p.simbid%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'simbouloi_delete' selected_ekloges.0.eklid p.simbid%}"><span class="glyphicon glyphicon-minus"></span></a>
@@ -95,8 +95,5 @@
 
 
 {% endblock %}
-
-  </body>
-</html>
 
 

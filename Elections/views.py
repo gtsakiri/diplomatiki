@@ -1984,6 +1984,21 @@ def load_koinotites(request, eklid):
 
     return render(request, 'Elections/koinotites_dropdown_list_options.html', {'koinotites': koinotites})
 
+#Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα είδη κοινοτήτων που σχετίζονται με το εκλ. σύστημα
+def load_koineidos(request):
+    eklid = request.GET.get('eklid')
+
+    #Αν είναι Καλλικρατικό σύστημα..
+    if Eklogestbl.objects.get(eklid=eklid).sisid.sisid == 1:
+        eidh = Typeofkoinotita.objects.filter(tpkid__lte=2)
+    else:
+        eidh = Typeofkoinotita.objects.filter(tpkid__gt=2)
+
+    context = {
+        'eidh': eidh
+    }
+
+    return render(request, 'Elections/koineidos_dropdown_list_options.html', context)
 
 def load_simbouloi(request, eklid):
 

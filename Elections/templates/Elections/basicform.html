@@ -21,7 +21,8 @@
 
 
 
-                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
+                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}"
+                               data-typeofkoinotites-url="{% url 'ajax_load_koineidos' %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
                          <div class="form-group">
 

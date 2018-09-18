@@ -50,7 +50,7 @@
                                 <td > {{ p.sindid }} </td>
                                 <td > {{ p.koinid }} </td>
                                 <td > {{ p.aa }} </td>
-                                <td > {{ p.proedros }} </td>
+                                <td > {% if  p.proedros is None %} {% else %} {{ p.proedros  }} {% endif %}</td>
                                 <td > {{ p.edresk }} </td>
                                 <td > {{ p.edresk_ypol }} </td>
                                 <td > {{ p.edresk_teliko }} </td>
@@ -82,8 +82,5 @@
 </div>
 
 {% endblock %}
-
-  </body>
-</html>
 
 

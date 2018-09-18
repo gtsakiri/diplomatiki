@@ -6,4 +6,33 @@
 
     <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'koinotites_list' selected_ekloges.0.eklid %}';">
 
+    <script>
+
+    $(document).ready(function () {
+
+              //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
+              var url = $("#dataForm").attr("data-typeofkoinotites-url");  // get the url of the `load_type` view
+              var currentEidos=$("#id_eidos").val();
+              //alert(currentKoinid);
+              var eklid = {{ selected_ekloges.0.eklid }};  // get the selected eklid from the HTML input
+
+              $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/ajax/load_koineidos/)
+                data: {
+                  'eklid': eklid       // add the eklid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_type` view function
+                  $("#id_eidos").html(data);  // replace the contents of the eidos input with the data that came from the server
+
+                  $("#id_eidos").val(currentEidos);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό eidos
+                                                     //με το οποίο άνοιξε η φόρμα
+                }
+
+              });
+
+            return false;
+          });
+
+    </script>
+
 {% endblock %}
