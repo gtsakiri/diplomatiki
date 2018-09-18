@@ -2,7 +2,7 @@ from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceFie
 from django import forms
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
-    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia, Simbouloi
+    Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia, Simbouloi, Psifoi, Eklsindsimb
 from django.utils.translation import gettext_lazy as _
 
 class EdresForm(ModelForm):
@@ -435,3 +435,28 @@ class SimbouloiForm(ModelForm):
         #Έλεγχος αν ξέχασε να βάλει ο χρήστης Κοινότητα, αν πρόκειται για σύμβουλο Κοινότητας
         if eidos == '0' and koinid == None:
             raise forms.ValidationError("Το πεδίο Κοινότητα πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Κοινότητας!")
+
+class PsifoiForm(ModelForm):
+
+    class Meta:
+        model=Psifoi
+        fields = ['simbid','kenid', 'votes']
+        labels = {
+            'simbid': _('Υποψήφιος'),
+            'kenid': _('Εκλ. Κέντρο'),
+            'votes': _('Ψηφοι'),
+
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(PsifoiForm, self).__init__(*args, **kwargs)
+
+        #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown simbid, kenid με τα στοιχεία της επιλεγμένης εκλ. αναμέτρησης
+        self.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).values_list('simbid')).order_by('surname', 'firstname', 'fathername')
+        self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
+
+    def clean(self):
+        cleaned_data = super(PsifoiForm, self).clean()
+        simbid = cleaned_data.get('simbid')
+        kenid = cleaned_data.get('kenid')
+        votes = cleaned_data.get('votes')

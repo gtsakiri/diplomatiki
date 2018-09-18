@@ -9,7 +9,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
     Psifoi
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
-    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm
+    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm
 from django.core.files.base import ContentFile
 
 from django.db import connection
@@ -2065,23 +2065,23 @@ def psifoi_list(request, eklid):
 
     return render(request, 'Elections/psifoi_list.html' , context)
 
-'''
-def psifodeltia_add(request, eklid):
+
+def psifoi_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Νέα εγγραφή'
+    action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = PsifodeltiaForm(eklid, request.POST)
+        form = PsifoiForm(eklid, request.POST)
         if form.is_valid():
             item = form.save(commit=False)
             item.save()
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
-            form = PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
+            form = PsifoiForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
     else:
-        form=PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        form=PsifoiForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
                 'selected_ekloges': selected_ekloges,
@@ -2090,17 +2090,17 @@ def psifodeltia_add(request, eklid):
                 'form': form
                }
 
-    return render(request, 'Elections/psifodeltia_form.html', context)
+    return render(request, 'Elections/psifoi_form.html', context)
 
-def psifodeltia_edit(request, eklid, id):
+def psifoi_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
-    action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Αλλαγή εγγραφής'
+    action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     #επιλογή της συγκεκριμένης κοινότητας
-    item=get_object_or_404(Psifodeltia, id=id)
+    item=get_object_or_404(Psifoi, id=id)
 
     #παίρνω sind_id, ken_id από τον Eklsind
     #eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
@@ -2110,15 +2110,15 @@ def psifodeltia_edit(request, eklid, id):
     #ken_id_item = kentra_item.kenid
 
     if request.method == 'POST':
-        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+        form = PsifoiForm(eklid, request.POST or None, instance=item)
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
-            return redirect('psifodeltia_list', eklid)
+            return redirect('psifoi_list', eklid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
-        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+        form = PsifoiForm(eklid, request.POST or None, instance=item)
 
     context = {
         'selected_ekloges': selected_ekloges,
@@ -2127,8 +2127,10 @@ def psifodeltia_edit(request, eklid, id):
         'form': form,
     }
 
-    return render(request, 'Elections/psifodeltia_form.html', context)
+    return render(request, 'Elections/psifoi_form.html', context)
 
+
+'''
 def psifodeltia_delete(request, eklid, id ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος

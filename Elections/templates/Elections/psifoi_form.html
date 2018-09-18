@@ -1,0 +1,9 @@
+{% extends 'Elections/basicform.html' %}
+
+{% load staticfiles %}
+
+{% block buttonReturn %}
+
+    <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'psifoi_list' selected_ekloges.0.eklid %}';">
+
+{% endblock %}
