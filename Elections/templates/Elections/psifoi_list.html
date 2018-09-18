@@ -1,0 +1,101 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+
+     {% include 'Elections/messages.html' %}
+
+
+     <div class="page-header">
+
+            <h3 align="center">Ψήφοι Υποψηφίων Συμβούλων ανά εκλ. κέντρο</h3>
+     </div>
+
+ <div class="row">
+
+       <div class="col-md-10 col-md-offset-1">
+
+
+
+               <div id="div2">
+                    <form method="get" name="kentra">
+                        <label class="label5">Εκλογικό κέντρο</label>
+                     <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
+                        {% for p in all_kentra %}
+                         <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
+                        {% endfor %}
+                     </select>
+
+                     <select   name="orderoption"  onchange="kentra.submit()">
+                     <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                         <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Επώνυμο</option>
+                         <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
+                         <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά αρ. ψήφων</option>
+                     </select>
+
+                    <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
+
+                    <div class="divmargin"> </div>
+
+                    </form>
+
+                </div>
+
+
+                   <table class="table styletd1 table-condensed table-striped  table-hover">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Επίθετο</td>
+                                <td class="thick">Όνομα</td>
+                                <td class="thick">Όν. Πατρός</td>
+                                <td class="thick">Συνδυασμός</td>
+                                <td class="thick">Κοινότητα</td>
+                                <td class="thick">Ψήφοι</td>
+                                <td class="thick">Ενέργειες</td>
+                        </tr>
+                        {% for p in all_psifoi %}
+                              <tr>
+                                <td > {{ p.surname}} </td>
+                                <td > {{ p.firstname }} </td>
+                                <td > {{ p.fathername }}</td>
+                                <td > {% if  p.sindiasmos is None %} {% else %} {{ p.sindiasmos  }} {% endif %}</td>
+                                <td > {{ p.koinotita }} </td>
+                                <td > {{ p.votes }}</td>
+                                <td>
+                                    <a class="btn btn-default" href="{% url 'psifodeltia_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                </td>
+
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+                    <table>
+
+                        <tbody >
+
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'psifodeltia_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+
+                        </tbody>
+                   </table>
+
+        <div class="divmargin"></div>
+
+
+
+        </div>
+</div>
+
+{% endblock %}
+
+
+

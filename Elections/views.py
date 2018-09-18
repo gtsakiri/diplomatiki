@@ -1553,7 +1553,7 @@ def psifodeltia_list(request, eklid):
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default perid  αν δεν δοθεί
+        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
 
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1656,7 +1656,7 @@ def psifodeltia_delete(request, eklid, id ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-##########
+
 
 def simbouloi_list(request, eklid):
     paramorder = request.GET.get('orderoption', '')
@@ -1670,7 +1670,7 @@ def simbouloi_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
+    #all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
 
     if paramorder==1 or paramorder==6:
         all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname','fathername')
@@ -2019,3 +2019,132 @@ def load_simbouloi(request, eklid):
     }
 
     return render(request, 'Elections/simbouloi_found.html', context)
+
+##########
+
+def psifoi_list(request, eklid):
+    paramorder = request.GET.get('orderoption', '')
+
+    try:
+        paramorder = int(paramorder)
+    except:
+        paramorder = 4  # default ταξινόμηση
+
+
+    paramstr = request.GET.get('kentraoption', '')
+
+    try:
+        paramstr = int(paramstr)
+    except:
+        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
+
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
+
+    if paramorder==1 or paramorder==4:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
+    elif paramorder == 2:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'surname', 'firstname','fathername')
+    else:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
+
+    selected_kentro = Kentra.objects.filter(kenid=paramstr)
+
+    #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
+    #all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr)
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges,
+               'all_psifoi':all_psifoi,
+               'all_kentra':all_kentra,
+               'selected_kentro':selected_kentro
+               }
+
+    return render(request, 'Elections/psifoi_list.html' , context)
+
+'''
+def psifodeltia_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = PsifodeltiaForm(eklid, request.POST)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
+            form = PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
+    else:
+        form=PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/psifodeltia_form.html', context)
+
+def psifodeltia_edit(request, eklid, id):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Αλλαγή εγγραφής'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    #επιλογή της συγκεκριμένης κοινότητας
+    item=get_object_or_404(Psifodeltia, id=id)
+
+    #παίρνω sind_id, ken_id από τον Eklsind
+    #eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
+    #sind_id_item = eklsind_item.sindid.sindid
+
+    #kentra_item = Kentra.objects.get(eklid=eklid, kenid=item.kenid.kenid)
+    #ken_id_item = kentra_item.kenid
+
+    if request.method == 'POST':
+        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+        if form.is_valid():
+            item=form.save(commit=False)
+            item.save()
+            return redirect('psifodeltia_list', eklid)
+    else:
+        # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
+        #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
+        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+
+    context = {
+        'selected_ekloges': selected_ekloges,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form,
+    }
+
+    return render(request, 'Elections/psifodeltia_form.html', context)
+
+def psifodeltia_delete(request, eklid, id ):
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj=get_object_or_404(Psifodeltia, id=id)
+
+    if request.method == 'POST':
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('psifodeltia_list', eklid)
+    context={'selected_ekloges': selected_ekloges,
+             'all_ekloges': all_ekloges,
+             'object':obj
+             }
+
+    return render(request, 'Elections/confirm_delete.html', context)
+
+'''

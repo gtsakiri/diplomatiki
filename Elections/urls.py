@@ -62,6 +62,8 @@ path('psifodeltiaedit/<int:eklid>/<int:id>/', views.psifodeltia_edit, name='psif
 path('psifodeltiaadd/<int:eklid>/', views.psifodeltia_add, name='psifodeltia_add'),
 path('psifodeltiadelete/<int:eklid>/<int:id>/', views.psifodeltia_delete, name='psifodeltia_delete'),
 
+path('psifoi/<int:eklid>/', views.psifoi_list, name='psifoi_list'),
+
 path('eklsind/<int:eklid>/', views.eklsind_list, name='eklsind_list'),
 path('eklsindedit/<int:eklid>/<int:id>/', views.eklsind_edit, name='eklsind_edit'),
 path('eklsindadd/<int:eklid>/', views.eklsind_add, name='eklsind_add'),
@@ -79,10 +81,12 @@ path('eklogesdelete/<int:eklid>/<int:cureklid>/', views.ekloges_delete, name='ek
 
 path('pososta/<int:eklid>/', views.pososta_telika, name='pososta_telika'),
 path('posostaper/<int:eklid>/', views.pososta_perifereies, name='pososta_perifereies'),
+
 path('psifoisimbperifereies/<int:eklid>/', views.psifoisimb_perifereies, name='psifoisimb_perifereies'),
 path('psifoisimbkoinotites/<int:eklid>/<int:eidoskoinotitas>', views.psifoisimb_koinotites, name='psifoisimb_koinotites'),
 path('psifodeltiasind_ken/<int:eklid>/', views.psifodeltiasind_ken, name='psifodeltiasind_ken'),
 path('psifoisimb_ken/<int:eklid>/', views.psifoisimb_ken, name='psifoisimb_ken'),
+
 path('export/per/<int:eklid>/<int:selected_order>/', views.export_psifoiper_xls, name='export_psifoiper_xls'),
 path('export/koin/<int:eklid>/<int:selected_order>/', views.export_psifoikoin_xls, name='export_psifoikoin_xls'),
 path('export/psifodeltiasindken/<int:eklid>/<int:selected_order>/', views.export_psifodeltiasind_ken, name='export_psifodeltiasind_ken'),

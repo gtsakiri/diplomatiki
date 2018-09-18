@@ -155,6 +155,7 @@
                             <li><a href="{% url 'kentra_list' selected_ekloges.0.eklid  %}">Εκλογικά Κέντρα</a></li>
                             <li><a href="{% url 'psifodeltia_list' selected_ekloges.0.eklid  %}">Ψηφοδέλτια Συνδυασμών ανά εκλ. κέντρο</a></li>
                             <li><a href="{% url 'simbouloi_list' selected_ekloges.0.eklid  %}">Υποψήφιοι Σύμβουλοι</a></li>
+                            <li><a href="{% url 'psifoi_list' selected_ekloges.0.eklid  %}">Ψήφοι Υποψηφίων ανά εκλ. κέντρο</a></li>
 
                         </ul>
 
@@ -224,12 +225,12 @@
 
   <script>
 
-      <!-- για το text-box Που κάνει Live αναζήτηση -->
+      // για το text-box Που κάνει Live αναζήτηση
 
     $("#livesearch").keyup(function () {
                     var value = this.value.toLowerCase().trim();
 
-                    $("table tr").each(function (index) {
+                    $("table tr:not(:first)").each(function (index) {
                         if (!index) return;
                         $(this).find("td").each(function () {
                             var id = $(this).text().toLowerCase().trim();
