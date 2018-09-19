@@ -2101,7 +2101,8 @@ def psifoi_edit(request, eklid, simbid, kenid):
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
-            return redirect('psifoi_list', eklid)
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
+            form = PsifoiForm(eklid, initial={'eklid': Eklogestbl.objects.get(eklid=eklid)})
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
