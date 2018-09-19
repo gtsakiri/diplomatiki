@@ -1616,6 +1616,7 @@ def psifodeltia_edit(request, eklid, id):
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
+            messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
             return redirect('psifodeltia_list', eklid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
@@ -2037,17 +2038,18 @@ def psifoi_list(request, eklid):
 
     all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
 
-    if paramorder==1 or paramorder==4:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
-    elif paramorder == 2:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'surname', 'firstname','fathername')
-    else:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
+
+   # if paramorder==1 or paramorder==4:
+   #     all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
+   # elif paramorder == 2:
+  #      all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'surname', 'firstname','fathername')
+   # else:
+   #     all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
 
     selected_kentro = Kentra.objects.filter(kenid=paramstr)
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
-    #all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr)
+    all_psifoi = Psifoi.objects.filter(kenid=paramstr)
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
@@ -2085,15 +2087,15 @@ def psifoi_add(request, eklid):
 
     return render(request, 'Elections/psifoi_form.html', context)
 
-def psifoi_edit(request, eklid, simbid, kenid):
+def psifoi_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    #επιλογή της συγκεκριμένης κοινότητας
-    simb_item=get_object_or_404(Psifoi, simbid=simbid, kenid=kenid)
+    #επιλογή της συγκεκριμένης εγγραφής
+    simb_item=get_object_or_404(Psifoi, id=id)
 
 
     if request.method == 'POST':
@@ -2101,8 +2103,8 @@ def psifoi_edit(request, eklid, simbid, kenid):
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
-            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
-            form = PsifoiForm(eklid, initial={'eklid': Eklogestbl.objects.get(eklid=eklid)})
+            messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
+            return redirect('psifoi_list', eklid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })

@@ -61,6 +61,7 @@
 
                         <tbody >
                         <tr>
+                             <td class="thick">id</td>
                                 <td class="thick">Επίθετο</td>
                                 <td class="thick">Όνομα</td>
                                 <td class="thick">Όν. Πατρός</td>
@@ -71,14 +72,15 @@
                         </tr>
                         {% for p in all_psifoi %}
                               <tr>
-                                <td > {{ p.surname}} </td>
+                               <td > {{ p.id}} </td>
+                                <td > {{ p.simbid.surname}} </td>
                                 <td > {{ p.firstname }} </td>
                                 <td > {{ p.fathername }}</td>
                                 <td > {% if  p.sindiasmos is None %} {% else %} {{ p.sindiasmos  }} {% endif %}</td>
                                 <td > {{ p.koinotita }} </td>
                                 <td > {{ p.votes }}</td>
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'psifoi_edit' selected_ekloges.0.eklid p.simbid p.kenid %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifoi_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 

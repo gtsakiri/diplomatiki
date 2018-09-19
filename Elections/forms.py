@@ -453,7 +453,7 @@ class PsifoiForm(ModelForm):
 
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown simbid, kenid με τα στοιχεία της επιλεγμένης εκλ. αναμέτρησης
         self.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).values_list('simbid')).order_by('surname', 'firstname', 'fathername')
-        self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
+        self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('descr')
 
     def clean(self):
         cleaned_data = super(PsifoiForm, self).clean()
