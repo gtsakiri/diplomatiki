@@ -1608,15 +1608,8 @@ def psifodeltia_edit(request, eklid, id):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    #επιλογή της συγκεκριμένης κοινότητας
+    #επιλογή της συγκεκριμένης εγγραφής
     item=get_object_or_404(Psifodeltia, id=id)
-
-    #παίρνω sind_id, ken_id από τον Eklsind
-    #eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
-    #sind_id_item = eklsind_item.sindid.sindid
-
-    #kentra_item = Kentra.objects.get(eklid=eklid, kenid=item.kenid.kenid)
-    #ken_id_item = kentra_item.kenid
 
     if request.method == 'POST':
         form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
@@ -2020,7 +2013,7 @@ def load_simbouloi(request, eklid):
 
     return render(request, 'Elections/simbouloi_found.html', context)
 
-##########
+
 
 def psifoi_list(request, eklid):
     paramorder = request.GET.get('orderoption', '')
@@ -2092,7 +2085,7 @@ def psifoi_add(request, eklid):
 
     return render(request, 'Elections/psifoi_form.html', context)
 
-def psifoi_edit(request, eklid, id):
+def psifoi_edit(request, eklid, simbid, kenid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
@@ -2100,17 +2093,11 @@ def psifoi_edit(request, eklid, id):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     #επιλογή της συγκεκριμένης κοινότητας
-    item=get_object_or_404(Psifoi, id=id)
+    simb_item=get_object_or_404(Psifoi, simbid=simbid, kenid=kenid)
 
-    #παίρνω sind_id, ken_id από τον Eklsind
-    #eklsind_item = Eklsind.objects.get(eklid=eklid, sindid=item.sindid)
-    #sind_id_item = eklsind_item.sindid.sindid
-
-    #kentra_item = Kentra.objects.get(eklid=eklid, kenid=item.kenid.kenid)
-    #ken_id_item = kentra_item.kenid
 
     if request.method == 'POST':
-        form = PsifoiForm(eklid, request.POST or None, instance=item)
+        form = PsifoiForm(eklid, request.POST or None, instance=simb_item)
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
@@ -2118,7 +2105,7 @@ def psifoi_edit(request, eklid, id):
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
-        form = PsifoiForm(eklid, request.POST or None, instance=item)
+        form = PsifoiForm(eklid, request.POST or None, instance=simb_item)
 
     context = {
         'selected_ekloges': selected_ekloges,
@@ -2128,6 +2115,8 @@ def psifoi_edit(request, eklid, id):
     }
 
     return render(request, 'Elections/psifoi_form.html', context)
+
+
 
 
 '''
