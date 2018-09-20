@@ -378,9 +378,12 @@ class EklPsifoisimbVw(models.Model):
     surname = models.CharField(max_length=100)
     firstname = models.CharField(max_length=100)
     fathername = models.CharField(max_length=100)
+    aa =  models.CharField(db_column='aa',max_length=45)
     kenid = models.IntegerField(db_column='kenID')  # Field name made lowercase.
     kentro = models.CharField(max_length=45)
+    eidos = models.CharField(db_column='eidos', max_length=100)
     koinotita= models.CharField(max_length=100)
+
     votes = models.IntegerField()
 
     def __str__(self):

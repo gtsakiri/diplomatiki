@@ -2039,17 +2039,17 @@ def psifoi_list(request, eklid):
     all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
 
 
-   # if paramorder==1 or paramorder==4:
-   #     all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
-   # elif paramorder == 2:
-  #      all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'surname', 'firstname','fathername')
-   # else:
-   #     all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
+    if paramorder==1 or paramorder==4:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
+    elif paramorder == 2:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'surname', 'firstname','fathername')
+    else:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
 
     selected_kentro = Kentra.objects.filter(kenid=paramstr)
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
-    all_psifoi = Psifoi.objects.filter(kenid=paramstr)
+    #all_psifoi = Psifoi.objects.filter(kenid=paramstr).order_by('simbid__surname')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
@@ -2087,7 +2087,7 @@ def psifoi_add(request, eklid):
 
     return render(request, 'Elections/psifoi_form.html', context)
 
-def psifoi_edit(request, eklid, id):
+def psifoi_edit(request, eklid, simbid, kenid):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
@@ -2095,7 +2095,7 @@ def psifoi_edit(request, eklid, id):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     #επιλογή της συγκεκριμένης εγγραφής
-    simb_item=get_object_or_404(Psifoi, id=id)
+    simb_item=get_object_or_404(Psifoi, simbid=simbid, kenid=kenid)
 
 
     if request.method == 'POST':
