@@ -17,7 +17,7 @@
 
  <div class="row">
 
-       <div class="col-md-10 col-md-offset-1">
+       <div class="col-md-12">
 
 
 
@@ -26,15 +26,16 @@
                         <label class="label5">Εκλογικό κέντρο</label>
                      <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
                         {% for p in all_kentra %}
-                         <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
+                         <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }} - {{ p.koinid }}</option>
                         {% endfor %}
                      </select>
 
                      <select   name="orderoption"  onchange="kentra.submit()">
-                     <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                     <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
                          <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Επώνυμο</option>
                          <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
-                         <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά αρ. ψήφων</option>
+                         <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Είδος/Επώνυμο</option>
+                         <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά αρ. ψήφων</option>
                      </select>
 
                     <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
@@ -66,8 +67,7 @@
                                 <td class="thick">Όν. Πατρός</td>
                                 <td class="thick">Συνδυασμός</td>
                                 <td class="thick">ΑΑ</td>
-                                <td class="thick">Κατηγορία</td>
-                                <td class="thick">Κοινότητα</td>
+                                <td class="thick">Κατηγορία Συμβούλου</td>
                                 <td class="thick">Ψήφοι</td>
                                 <td class="thick">Ενέργειες</td>
                         </tr>
@@ -76,15 +76,14 @@
                                 <td > {{ p.surname}} </td>
                                 <td > {{ p.firstname }} </td>
                                 <td > {{ p.fathername }}</td>
-                                <td > {{ p.sindiasmos }}</td>
+                                <td > {{ p.shortsind }}</td>
                                 <td > {{ p.aa }}</td>
                                 <td > {{ p.eidos }}</td>
-                                <td > {{ p.koinotita }}  </td>
                                 <td > {{ p.votes }}</td>
 
                                 <td>
                                     <a class="btn btn-default" href="{% url 'psifoi_edit' selected_ekloges.0.eklid p.simbid p.kenid%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifoi_delete' selected_ekloges.0.eklid p.simbid p.kenid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>

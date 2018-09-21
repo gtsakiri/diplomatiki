@@ -2022,7 +2022,7 @@ def psifoi_list(request, eklid):
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 4  # default ταξινόμηση
+        paramorder = 5  # default ταξινόμηση
 
 
     paramstr = request.GET.get('kentraoption', '')
@@ -2039,12 +2039,14 @@ def psifoi_list(request, eklid):
     all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
 
 
-    if paramorder==1 or paramorder==4:
+    if paramorder==1 or paramorder==5:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
     elif paramorder == 2:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'surname', 'firstname','fathername')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('shortsind', 'surname', 'firstname','fathername')
+    elif paramorder == 3:
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'eidos', 'surname', 'firstname','fathername')
     else:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('-votes')
 
     selected_kentro = Kentra.objects.filter(kenid=paramstr)
 
@@ -2121,19 +2123,17 @@ def psifoi_edit(request, eklid, simbid, kenid):
 
 
 
-
-'''
-def psifodeltia_delete(request, eklid, id ):
+def psifoi_delete(request, eklid, simbid, kenid ):
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    obj=get_object_or_404(Psifodeltia, id=id)
+    obj=get_object_or_404(Psifoi, simbid=simbid, kenid=kenid)
 
     if request.method == 'POST':
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
-        return redirect('psifodeltia_list', eklid)
+        return redirect('psifoi_list', eklid)
     context={'selected_ekloges': selected_ekloges,
              'all_ekloges': all_ekloges,
              'object':obj
@@ -2141,4 +2141,4 @@ def psifodeltia_delete(request, eklid, id ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-'''
+

@@ -373,7 +373,8 @@ class EklPsifoisimbVw(models.Model):
     id = models.IntegerField(primary_key=True)
     eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
     sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
-    sindiasmos = models.CharField(max_length=100, blank=True, null=True)
+    sindiasmos = models.CharField(db_column='sindiasmos',max_length=100, blank=True, null=True)
+    shortsind = models.CharField(db_column='shortsind',max_length=100, blank=True, null=True)
     simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
     surname = models.CharField(max_length=100)
     firstname = models.CharField(max_length=100)
