@@ -16,13 +16,14 @@
 
                       <div class="text-center">
 
-                            <h3 align="center">{{  action_label }} </h3>
+                        <h3 align="center">{{  action_label }} </h3>
                      </div>
 
 
 
                          <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
+
                          <div class="form-group">
 
                              {% for hidden_field in form.hidden_fields %}
@@ -38,79 +39,75 @@
                               {% endif %}
                         </div>
 
-                         {% if sub_form.non_field_errors %}
-                                <div class="alert alert-danger" role="alert">
-                                  {% for error in sub_form.non_field_errors %}
-                                    {{ error }}
+                      {% for field in form.visible_fields %}
+                        <div class="form-group">
+                          {{ field.label_tag }}
+                          {% if form.is_bound %}
+                            {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="bg2 invalid-feedback">
+                                      {{ error }}
+                                    </div>
                                   {% endfor %}
-                                </div>
-                              {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                          {% else %}
+                                {% render_field field class="form-control" %}
+                          {% endif %}
 
+                          {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
 
-                             <!--<table class="a table table-striped"> <!-- Για να φέρει τη φόρμα σε πραγματική μορφή πίνακα -->
+                      {% endfor %}
 
-                              {% for field in form.visible_fields %}
-                                <div class="form-group">
-                                  {{ field.label_tag }}
-                                  {% if form.is_bound %}
-                                    {% if field.errors %}
-                                            {% render_field field class="form-control is-invalid" %}
-                                            {% for error in field.errors %}
-                                            <div class="bg2 invalid-feedback">
-                                              {{ error }}
-                                            </div>
-                                          {% endfor %}
-                                        {% else %}
-                                            {% render_field field class="form-control is-valid" %}
-                                        {% endif %}
-                                  {% else %}
-                                        {% render_field field class="form-control" %}
-                                  {% endif %}
+                     <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
+                      <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'kentra_list' selected_ekloges.0.eklid %}';">
+                     </td></tr>
 
-                                  {% if field.help_text %}
-                                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                                  {% endif %}
-                                </div>
+                    </form>
 
-                              {% endfor %}
-
-                            {% for field in sub_form.visible_fields %}
-                                <div class="form-group">
-                                  {{ field.label_tag }}
-                                  {% if sub_form.is_bound %}
-                                    {% if field.errors %}
-                                            {% render_field field class="form-control is-invalid" %}
-                                            {% for error in field.errors %}
-                                            <div class="invalid-feedback">
-                                              {{ error }}
-                                            </div>
-                                          {% endfor %}
-                                        {% else %}
-                                            {% render_field field class="form-control is-valid" %}
-                                        {% endif %}
-                                  {% else %}
-                                        {% render_field field class="form-control" %}
-                                  {% endif %}
-
-                                  {% if field.help_text %}
-                                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                                  {% endif %}
-                                </div>
-
-                              {% endfor %}
-
-
-                                 <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
-                                  <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'kentra_list' selected_ekloges.0.eklid %}';">
-                                 </td></tr>
-
-
+        </div>
 
     <script>
     //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
 
     //κατά το φόρτωμα της φόρμας...
         $(document).ready(function () {
+
+            $("input[type='text']").focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $("input[type='text']").blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
+            $("input[type='number']").focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $("input[type='number']").blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
+             $('select').focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $('select').blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
 
               //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
               var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view

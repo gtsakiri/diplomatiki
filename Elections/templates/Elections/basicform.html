@@ -116,6 +116,28 @@
 
        </div>
 
+     <script>
+            $("input[type='text']").focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $("input[type='text']").blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
+             $('select').focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $('select').blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+     </script>
+
 
  {% endblock %}
 

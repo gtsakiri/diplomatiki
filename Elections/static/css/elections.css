@@ -142,6 +142,13 @@ label.menulabel {
     width: 100%;
 }
 
+#button-search {
+    height: 30px;
+	background-color:#b9d1f7;
+	color:#1c1a1a;
+
+}
+
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -220,7 +227,7 @@ font-size: 18px;
 font: bold;
 background-repeat:no-repeat;
 background-position:300px;
-width:250px;
+width:300px;
 padding:6px;
 margin-top:8px;
 font-family:Calibri;
