@@ -267,10 +267,12 @@ def Elections_list(request, eklid=0):
     try:
         selected_kentro = get_object_or_404(Kentra, eklid=paramekloges, descr=str(paramkentro))
         selected_koinotita = Koinotites.objects.get(kentra__kenid=selected_kentro.kenid)
+        selected_simbouloi = Simbouloi.objects.filter(simbid__in=Psifoi.objects.filter(kenid=selected_kentro.kenid).values_list('simbid'))
         action_label = 'Εκλ. Κέντρο ' + selected_kentro.descr + ' - ' + selected_koinotita.descr
     except:
         selected_kentro = None
         selected_koinotita = None
+        selected_simbouloi = None
         action_label = ''
 
 
@@ -313,6 +315,7 @@ def Elections_list(request, eklid=0):
                'selected_ekloges':selected_ekloges,
                'selected_kentro':selected_kentro,
                'selected_koinotita': selected_koinotita,
+               'selected_simbouloi':selected_simbouloi,
                'action_label' : action_label,
                'form':form}
 
@@ -2206,16 +2209,28 @@ def psifoi_delete(request, eklid, simbid, kenid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-def edit_psifoi_kentrou(request, kenid):
-    PsifoiFormSet = modelformset_factory(Psifoi, fields=('simbid', 'kenid', 'votes'), extra=0)
+def edit_psifoi_kentrou(request,eklid, kenid):
+    action_label='Edit Psifoi'
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+
+    PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',),extra=0)
+
     data = request.POST or None
-    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid))
+    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).order_by( 'simbid__surname' ))
     for form in formset:
         form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid)
+        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Psifoi.objects.filter(kenid=kenid).values_list('simbid'))
 
     if request.method == 'POST' and formset.is_valid():
         formset.save()
         messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
-        #return redirect('Elections_list')
+        return redirect('Elections_list')
 
-    return render(request, 'Elections/psifoi_formset.html', {'formset': formset})
+    context = {'selected_ekloges': selected_ekloges,
+               'all_ekloges': all_ekloges,
+               'action_label':action_label,
+               'formset': formset
+               }
+
+    return render(request, 'Elections/psifoi_formset.html', context)

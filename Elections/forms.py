@@ -1,8 +1,6 @@
 from django.forms import ModelForm, forms, DateInput, CharField, ModelChoiceField, IntegerField
 from django import forms
 
-
-
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
     Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia, Simbouloi, Psifoi, Eklsindsimb
 from django.utils.translation import gettext_lazy as _
@@ -442,11 +440,11 @@ class PsifoiForm(ModelForm):
 
     class Meta:
         model=Psifoi
-        fields = ['simbid','kenid', 'votes']
+        fields = ['simbid', 'votes', 'kenid']
         labels = {
             'simbid': _('Υποψήφιος'),
-            'kenid': _('Εκλ. Κέντρο'),
             'votes': _('Ψηφοι'),
+            'kenid': _('Εκλ. Κέντρο'),
 
         }
 
@@ -460,6 +458,6 @@ class PsifoiForm(ModelForm):
     def clean(self):
         cleaned_data = super(PsifoiForm, self).clean()
         simbid = cleaned_data.get('simbid')
-        kenid = cleaned_data.get('kenid')
         votes = cleaned_data.get('votes')
+        kenid = cleaned_data.get('kenid')
 

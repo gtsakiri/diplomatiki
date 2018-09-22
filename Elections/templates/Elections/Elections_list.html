@@ -68,9 +68,13 @@
 
                       {% endfor %}
 
-                     <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
+                     <tr class="noborder">
+                         <td colspan="4">
+                           <input type="submit" value="Save" class="btn btn-primary">
+                          <input type="button" value="Ψήφοι Υποψηφίων" class="btn btn-primary pull-right" onclick="window.location='{% url 'edit_psifoi_kentrou' selected_ekloges.0.eklid selected_kentro.kenid %}';">
 
-                     </td></tr>
+                        </td>
+                     </tr>
 
         </form>
 
