@@ -1,8 +1,12 @@
 import xlwt
 from django.contrib import  messages
-from django.forms import  DateInput
+from django.forms.formsets import formset_factory
+
+from django.forms import DateInput, modelformset_factory
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render,get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.template import RequestContext
+
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
@@ -2202,4 +2206,16 @@ def psifoi_delete(request, eklid, simbid, kenid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
+def edit_psifoi_kentrou(request, kenid):
+    PsifoiFormSet = modelformset_factory(Psifoi, fields=('simbid', 'kenid', 'votes'), extra=0)
+    data = request.POST or None
+    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid))
+    for form in formset:
+        form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid)
 
+    if request.method == 'POST' and formset.is_valid():
+        formset.save()
+        messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
+        #return redirect('Elections_list')
+
+    return render(request, 'Elections/psifoi_formset.html', {'formset': formset})

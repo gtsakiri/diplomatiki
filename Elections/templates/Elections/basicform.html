@@ -25,104 +25,108 @@
 
 
 
-                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}"
-                               data-typeofkoinotites-url="{% url 'ajax_load_koineidos' %}" class="post-form"  action="." enctype="multipart/form-data">
-                            {% csrf_token %}
-                         <div class="form-group">
+                 <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}"
+                       data-typeofkoinotites-url="{% url 'ajax_load_koineidos' %}" class="post-form"  action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                 <div class="form-group">
 
-                             {% for hidden_field in form.hidden_fields %}
-                                {{ hidden_field }}
-                              {% endfor %}
+                     {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                      {% endfor %}
 
-                              {% if form.non_field_errors %}
-                                <div class="alert alert-danger" role="alert">
-                                  {% for error in form.non_field_errors %}
-                                    {{ error }}
+                      {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                          {% for error in form.non_field_errors %}
+                            {{ error }}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                 </div>
+
+                 {% if sub_form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                          {% for error in sub_form.non_field_errors %}
+                            {{ error }}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+
+
+                     <!--<table class="a table table-striped"> <!-- Για να φέρει τη φόρμα σε πραγματική μορφή πίνακα -->
+
+                      {% for field in form.visible_fields %}
+                        <div class="form-group">
+                          {{ field.label_tag }}
+                          {% if form.is_bound %}
+                            {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="bg2 invalid-feedback">
+                                      {{ error }}
+                                    </div>
                                   {% endfor %}
-                                </div>
-                              {% endif %}
-                         </div>
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                          {% else %}
+                                {% render_field field class="form-control" %}
+                          {% endif %}
 
-                         {% if sub_form.non_field_errors %}
-                                <div class="alert alert-danger" role="alert">
-                                  {% for error in sub_form.non_field_errors %}
-                                    {{ error }}
+                          {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
+
+                      {% endfor %}
+
+                    {% for field in sub_form.visible_fields %}
+                        <div class="form-group">
+                          {{ field.label_tag }}
+                          {% if sub_form.is_bound %}
+                            {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="invalid-feedback">
+                                      {{ error }}
+                                    </div>
                                   {% endfor %}
-                                </div>
-                              {% endif %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                          {% else %}
+                                {% render_field field class="form-control" %}
+                          {% endif %}
+
+                          {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
+
+                      {% endfor %}
 
 
-                             <!--<table class="a table table-striped"> <!-- Για να φέρει τη φόρμα σε πραγματική μορφή πίνακα -->
+                         <tr class="noborder"> <td colspan="4">
+                             <input type="submit" value="Save" class="btn btn-primary">
 
-                              {% for field in form.visible_fields %}
-                                <div class="form-group">
-                                  {{ field.label_tag }}
-                                  {% if form.is_bound %}
-                                    {% if field.errors %}
-                                            {% render_field field class="form-control is-invalid" %}
-                                            {% for error in field.errors %}
-                                            <div class="bg2 invalid-feedback">
-                                              {{ error }}
-                                            </div>
-                                          {% endfor %}
-                                        {% else %}
-                                            {% render_field field class="form-control is-valid" %}
-                                        {% endif %}
-                                  {% else %}
-                                        {% render_field field class="form-control" %}
-                                  {% endif %}
+                             {% block buttonReturn %}
 
-                                  {% if field.help_text %}
-                                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                                  {% endif %}
-                                </div>
+                             {% endblock %}
 
-                              {% endfor %}
+                         </td></tr>
 
-                            {% for field in sub_form.visible_fields %}
-                                <div class="form-group">
-                                  {{ field.label_tag }}
-                                  {% if sub_form.is_bound %}
-                                    {% if field.errors %}
-                                            {% render_field field class="form-control is-invalid" %}
-                                            {% for error in field.errors %}
-                                            <div class="invalid-feedback">
-                                              {{ error }}
-                                            </div>
-                                          {% endfor %}
-                                        {% else %}
-                                            {% render_field field class="form-control is-valid" %}
-                                        {% endif %}
-                                  {% else %}
-                                        {% render_field field class="form-control" %}
-                                  {% endif %}
-
-                                  {% if field.help_text %}
-                                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                                  {% endif %}
-                                </div>
-
-                              {% endfor %}
-
-
-                                 <tr class="noborder"> <td colspan="4">
-                                     <input type="submit" value="Save" class="btn btn-primary">
-
-                                     {% block buttonReturn %}
-
-                                     {% endblock %}
-
-                                 </td></tr>
-
-                         </form>
+                 </form>
 
             </div>
 
        </div>
 
      <script>
-            $("input[type='text']").focus(
+     $(document).ready(function () {
+
+             $("input[type='text']").focus(
+
             function(){
+                alert('hi');
                 $(this).css({'background-color' : '#f9f398'});
             });
 
@@ -133,12 +137,23 @@
 
              $('select').focus(
             function(){
-                $(this).css({'background-color' : '#f9f398'});
+
+                alert($(this).attr('class'));
+                if ($(this).attr('class')!='sel1') {
+                     $(this).css({'background-color' : '#f9f398'});
+                }
+
             });
 
             $('select').blur(
             function(){
-                $(this).css({'background-color' : '#fcfcf9'});
+                 if ($(this).attr('class')!='sel1') {
+                    $(this).css({'background-color' : '#fcfcf9'});
+                  }
+            });
+
+            return false;
+
             });
      </script>
 

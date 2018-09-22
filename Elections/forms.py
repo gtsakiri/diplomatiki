@@ -1,5 +1,7 @@
-from django.forms import ModelForm, forms,  DateInput, CharField, ModelChoiceField, IntegerField
+from django.forms import ModelForm, forms, DateInput, CharField, ModelChoiceField, IntegerField
 from django import forms
+
+
 
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
     Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia, Simbouloi, Psifoi, Eklsindsimb
@@ -460,3 +462,4 @@ class PsifoiForm(ModelForm):
         simbid = cleaned_data.get('simbid')
         kenid = cleaned_data.get('kenid')
         votes = cleaned_data.get('votes')
+

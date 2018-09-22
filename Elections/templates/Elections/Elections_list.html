@@ -100,7 +100,9 @@
             $(document).ready(function () {
 
                 $("input[type='text']").focus(
+
             function(){
+                //alert('hi');
                 $(this).css({'background-color' : '#f9f398'});
             });
 
@@ -109,24 +111,21 @@
                 $(this).css({'background-color' : '#fcfcf9'});
             });
 
-            $("input[type='number']").focus(
-            function(){
-                $(this).css({'background-color' : '#f9f398'});
-            });
-
-            $("input[type='number']").blur(
-            function(){
-                $(this).css({'background-color' : '#fcfcf9'});
-            });
-
              $('select').focus(
             function(){
-                $(this).css({'background-color' : '#f9f398'});
+
+                //alert($(this).attr('class'));
+                if ($(this).attr('class')!='sel1') {
+                     $(this).css({'background-color' : '#f9f398'});
+                }
+
             });
 
             $('select').blur(
             function(){
-                $(this).css({'background-color' : '#fcfcf9'});
+                 if ($(this).attr('class')!='sel1') {
+                    $(this).css({'background-color' : '#fcfcf9'});
+                  }
             });
 
 
