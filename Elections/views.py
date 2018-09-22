@@ -2217,7 +2217,7 @@ def edit_psifoi_kentrou(request,eklid, kenid):
     PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',),extra=0)
 
     data = request.POST or None
-    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).order_by( 'simbid__surname' ))
+    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).order_by(  'simbid__surname' ))
     for form in formset:
         form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid)
         form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Psifoi.objects.filter(kenid=kenid).values_list('simbid'))
