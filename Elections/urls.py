@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
 path('', views.Elections_list, name='Elections_list'),
+path('<int:eklid>/', views.Elections_list, name='Elections_list'),
 #path('', views.simb_modal, name='simb_modal'),
 
 path('edres/<int:eklid>/', views.edres_list, name='edres_list'),

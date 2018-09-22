@@ -65,7 +65,7 @@
         <div class="collapse navbar-collapse" id="topNavBar">
 
 
-                <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Elections_list' %}">
+                <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Elections_list' selected_ekloges.0.eklid %}">
                     <div class="form-group" >
                         <input type="text" class="form-control" name="search" id="search" value="">
                     </div>
@@ -99,7 +99,7 @@
                 <!--<p id="demo1" type="hidden" ></p> -->
                 <div id="div1">
 
-                <form method="get" name="ekloges" action="{% url 'Elections_list' %}">
+                <form method="get" name="ekloges" action="{% url 'Elections_list' selected_ekloges.0.eklid %}">
                      <!--<input id="EklInput" name="eklogesinput" value="9"/><!--name="eklogesinput"  -->
                     <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                     <select  class="sel1" id="mydir" name="eklogesoption"  onchange="ekloges.submit()">
@@ -110,7 +110,7 @@
                 <hr>
 
                 Αναζήτηση εκλ. κέντρου
-                    <input type="text"  id="eklkentro"  name="eklkentro" placeholder="Π.χ. 275" />
+                    <input type="text"  id="eklkentro"  name="eklkentrooption" placeholder="Π.χ. 275" />
                     <div class="divmargin"></div>
                     <button type="submit" id="button-search" class="btn btn-primary ">Αναζήτηση</button>
 

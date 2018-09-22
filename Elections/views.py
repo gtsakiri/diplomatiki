@@ -232,21 +232,86 @@ def export_psifoisimb_ken(request,eklid, selected_order):
     return response
 
 
-def Elections_list(request):
+def Elections_list(request, eklid=0):
 
-    paramstr=request.GET.get('eklogesoption','')
+    if eklid == 0:
+        eklid=Eklogestbl.objects.filter(defaultelection=1).values_list('eklid',flat=True)[0]
+
+    paramekloges=request.GET.get('eklogesoption','')
+    if request.method == 'POST':
+        paramekloges=request.POST['eklid']
+
+    paramkentro = request.GET.get('eklkentrooption', '')
 
     try:
-        paramstr = int(paramstr)
+        paramekloges = int(paramekloges)
     except:
-        paramstr = Eklogestbl.objects.filter(defaultelection=1).values_list('eklid',flat=True)[0]
+        #paramekloges = Eklogestbl.objects.filter(defaultelection=1).values_list('eklid',flat=True)[0]
+        paramekloges = Eklogestbl.objects.filter(eklid=eklid).values_list('eklid',flat=True)[0]
+        if request.method=='POST':
+            paramekloges=request.POST['eklid']
         #παίρνω το eklid της default εκλ. αναμέτρησης..ΠΡΟΣΟΧΗ!!! ΜΟΝΟ ΜΙΑ ΠΡΕΠΕΙ ΝΑ ΕΙΝΑΙ DEFAULT
 
-    #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=paramstr)
-    #επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση για να επιλεγεί η τελευταία αν δεν δοθεί παράμετρος
+    try:
+        paramkentro = int(paramkentro)
+    except:
+        paramkentro = 0
+
+    #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης και προαιρετικά κέντρου
+    selected_ekloges = Eklogestbl.objects.filter(eklid=paramekloges)
+
+    try:
+        selected_kentro = get_object_or_404(Kentra, eklid=paramekloges, descr=str(paramkentro))
+        selected_koinotita = Koinotites.objects.get(kentra__kenid=selected_kentro.kenid)
+        action_label = 'Εκλ. Κέντρο ' + selected_kentro.descr + ' - ' + selected_koinotita.descr
+    except:
+        selected_kentro = None
+        selected_koinotita = None
+        action_label = ''
+
+
+        # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-    context = {'selected_ekloges':selected_ekloges, 'all_ekloges':all_ekloges}
+
+    #αν έχει δοθεί κέντρο προς αναζήτηση ή γίνεται αποθήκευση της φόρμας...
+    if paramkentro!=0 or request.method == 'POST':
+
+        #αν γίνεται αποθήκευση της φόρμας κάνω get το κέντρο..
+        if request.method == 'POST':
+            selected_kentro = get_object_or_404(Kentra, eklid=paramekloges, descr=request.POST['descr'])
+
+        if selected_kentro is not  None:
+
+            # παίρνω per_id, koin_id από τον Eklperkoin
+            eklperkoin_item = Eklperkoin.objects.get(eklid=paramekloges, koinid=selected_kentro.koinid)
+            per_id_item = eklperkoin_item.perid
+            koin_id_item = eklperkoin_item.koinid
+
+            if request.method == 'POST':
+
+                form = KentraForm(paramekloges, request.POST or None, instance=selected_kentro)
+                if form.is_valid():
+                    item = form.save(commit=False)
+                    item.save()
+                    messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
+                    #return redirect('Elections_list')
+            else:
+                # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
+                form = KentraForm(paramekloges, request.POST or None, instance=selected_kentro,
+                                  initial={'koinid': koin_id_item, 'perid': per_id_item})
+        else:
+            form = None
+            action_label='Δεν βρέθηκαν στοιχεία!'
+    else:
+        form=None
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges':selected_ekloges,
+               'selected_kentro':selected_kentro,
+               'selected_koinotita': selected_koinotita,
+               'action_label' : action_label,
+               'form':form}
+
     return render(request, 'Elections/Elections_list.html',context)
 
 
@@ -1496,7 +1561,7 @@ def kentra_edit(request, eklid, kenid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    #επιλογή της συγκεκριμένης κοινότητας
+    #επιλογή του συγκεκριμένου κέντρου
     item=get_object_or_404(Kentra, kenid=kenid)
 
     #παίρνω per_id, koin_id από τον Eklperkoin
@@ -1508,10 +1573,6 @@ def kentra_edit(request, eklid, kenid):
         form = KentraForm(eklid, request.POST or None, instance=item)
         if form.is_valid():
             item=form.save(commit=False)
-
-            #per_id_item=Perifereies.objects.filter(perid__in=Eklperkoin.objects.filter(eklid=eklid, koinid=koin_id_item).values_list('perid'))
-            #print(per_id_item)
-            #form.perid=per_id_item
             item.save()
             return redirect('kentra_list', eklid)
     else:

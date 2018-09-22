@@ -1,10 +1,179 @@
 {% extends 'Elections/base.html' %}
 
+{% load widget_tweaks %}
+
 {% load staticfiles %}
 
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
  {% block content %}
+
+     <div class="row">
+
+       <div class="col-md-8 col-md-offset-2">
+
+       {% if selected_kentro is not None %}
+
+           {% include 'Elections/messages.html' %}
+
+           <div class="alert alert-info" role="alert">
+
+              <div class="text-center">
+
+                <h4 align="center">{{  action_label }} </h4>
+
+             </div>
+           </div>
+
+        <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                         <div class="form-group">
+
+                             {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
+                              {% endfor %}
+
+                              {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                  {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                  {% endfor %}
+                                </div>
+                              {% endif %}
+                        </div>
+
+                      {% for field in form.visible_fields %}
+                        <div class="form-group">
+                          {{ field.label_tag }}
+                          {% if form.is_bound %}
+                            {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                    <div class="bg2 invalid-feedback">
+                                      {{ error }}
+                                    </div>
+                                  {% endfor %}
+                            {% else %}
+                                {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                          {% else %}
+                                {% render_field field class="form-control" %}
+                          {% endif %}
+
+                          {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
+
+                      {% endfor %}
+
+                     <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
+
+                     </td></tr>
+
+        </form>
+
+       {% else %}
+
+            <div class="text-center">
+
+            {% if action_label != '' %}
+
+                <div class="alert alert-danger" role="alert">
+
+                    <h4 align="center">{{  action_label }} </h4>
+
+                </div>
+
+            {% endif %}
+
+            </div>
+
+
+       {% endif %}
+
+      <script>
+        //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
+
+        //κατά το φόρτωμα της φόρμας...
+            $(document).ready(function () {
+
+                $("input[type='text']").focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $("input[type='text']").blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
+            $("input[type='number']").focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $("input[type='number']").blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
+             $('select').focus(
+            function(){
+                $(this).css({'background-color' : '#f9f398'});
+            });
+
+            $('select').blur(
+            function(){
+                $(this).css({'background-color' : '#fcfcf9'});
+            });
+
+
+                  //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
+                  var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
+                  var currentKoinid=$("#id_koinid").val();
+                  //alert(currentKoinid);
+                  var perid = $("#perid_of_kentra").val();  // get the selected perid from the HTML input
+
+                  $.ajax({                       // initialize an AJAX request
+                    url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
+                    data: {
+                      'perid': perid       // add the perid to the GET parameters
+                    },
+                    success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                      $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
+
+                      $("#id_koinid").val(currentKoinid);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό koinid
+                                                         //με το οποίο άνοιξε η φόρμα
+                    }
+
+                  });
+
+                return false;
+              });
+
+
+              $("#perid_of_kentra").change(function () {
+                  var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
+                  var perid = $(this).val();  // get the selected perid from the HTML input
+
+                  $.ajax({                       // initialize an AJAX request
+                    url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
+                    data: {
+                      'perid': perid       // add the perid to the GET parameters
+                    },
+                    success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                      $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
+                    }
+                  });
+
+                });
+        </script>
+
+       </div>
+
+     </div>
 
  {% endblock %}
 
