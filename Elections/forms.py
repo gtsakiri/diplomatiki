@@ -437,11 +437,10 @@ class SimbouloiForm(ModelForm):
             raise forms.ValidationError("Το πεδίο Κοινότητα πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Κοινότητας!")
 
 class PsifoiForm(ModelForm):
-    sindiasmos = CharField(label='sindiasmos', max_length=100)
 
     class Meta:
         model=Psifoi
-        fields = ['simbid', 'votes', 'kenid', 'sindiasmos']
+        fields = ['simbid', 'votes', 'kenid']
         labels = {
             'simbid': _('Υποψήφιος'),
             'votes': _('Ψηφοι'),
