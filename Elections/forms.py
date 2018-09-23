@@ -437,10 +437,11 @@ class SimbouloiForm(ModelForm):
             raise forms.ValidationError("Το πεδίο Κοινότητα πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Κοινότητας!")
 
 class PsifoiForm(ModelForm):
+    sindiasmos = CharField(label='sindiasmos', max_length=100)
 
     class Meta:
         model=Psifoi
-        fields = ['simbid', 'votes', 'kenid']
+        fields = ['simbid', 'votes', 'kenid', 'sindiasmos']
         labels = {
             'simbid': _('Υποψήφιος'),
             'votes': _('Ψηφοι'),
@@ -452,8 +453,9 @@ class PsifoiForm(ModelForm):
         super(PsifoiForm, self).__init__(*args, **kwargs)
 
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown simbid, kenid με τα στοιχεία της επιλεγμένης εκλ. αναμέτρησης
-        self.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).values_list('simbid')).order_by('surname', 'firstname', 'fathername')
-        self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('descr')
+        self.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).prefetch_related('sindid','simbid', 'eklid').values_list('simbid')).order_by('surname', 'firstname', 'fathername')
+        self.fields['kenid'].queryset = Kentra.objects.filter(eklid=eklid).prefetch_related('eklid','perid', 'koinid').order_by('descr')
+
 
     def clean(self):
         cleaned_data = super(PsifoiForm, self).clean()

@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Edres(models.Model):
-    edrid = models.AutoField(db_column='edrID', primary_key=True)  # Field name made lowercase.
+    edrid = models.AutoField(db_column='edrID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=45, verbose_name='Περιγραφή')
     sinoloedrwn = models.IntegerField(db_column='sinoloEdrwn', verbose_name='Σύνολο εδρών')  # Field name made lowercase.
     edresprwtou = models.IntegerField(db_column='edresPrwtou', verbose_name='Έδρες Πρώτου')  # Field name made lowercase.
@@ -18,7 +18,7 @@ class Edres(models.Model):
 
 
 class Edreskoin(models.Model):
-    edrid = models.AutoField(db_column='edrID', primary_key=True)  # Field name made lowercase.
+    edrid = models.AutoField(db_column='edrID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
     sinolo = models.IntegerField(default=0)
 
@@ -30,7 +30,7 @@ class Edreskoin(models.Model):
         db_table = 'EDRESKOIN'
 
 class Sistima(models.Model):
-    sisid = models.AutoField(db_column='sisID', primary_key=True)  # Field name made lowercase.
+    sisid = models.AutoField(db_column='sisID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Sistima(models.Model):
 
 
 class Typeofkoinotita(models.Model):
-    tpkid = models.IntegerField(db_column='tpkID', primary_key=True)  # Field name made lowercase.
+    tpkid = models.IntegerField(db_column='tpkID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
 
     def __str__(self):
@@ -53,12 +53,12 @@ class Typeofkoinotita(models.Model):
         db_table = 'TYPEOFKOINOTITA'
 
 class Eklogestbl(models.Model):
-    eklid = models.AutoField(db_column='eklID', primary_key=True)  # Field name made lowercase.
+    eklid = models.AutoField(db_column='eklID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(unique=True, max_length=100)
     dateofelection = models.DateField(db_column='dateOfElection', blank=True, null=True)  # Field name made lowercase.
     dimos = models.CharField(max_length=100, blank=True)
-    sisid = models.ForeignKey('Sistima', models.DO_NOTHING, db_column='sisID')  # Field name made lowercase.
-    edrid = models.ForeignKey(Edres, models.DO_NOTHING, db_column='edrID')  # Field name made lowercase.
+    sisid = models.ForeignKey('Sistima', models.DO_NOTHING, db_column='sisID', db_index=True)  # Field name made lowercase.
+    edrid = models.ForeignKey(Edres, models.DO_NOTHING, db_column='edrID', db_index=True)  # Field name made lowercase.
     visible=models.IntegerField(db_column='visible', default=1)
     defaultelection=models.IntegerField(db_column='defaultElection', default=1)
 
@@ -71,7 +71,7 @@ class Eklogestbl(models.Model):
         db_table = 'EKLOGESTBL'
 
 class Perifereies(models.Model):
-    perid = models.AutoField(db_column='perID', primary_key=True)  # Field name made lowercase.
+    perid = models.AutoField(db_column='perID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
 
     def __str__(self):
@@ -82,9 +82,9 @@ class Perifereies(models.Model):
         db_table = 'PERIFEREIES'
 
 class Koinotites(models.Model):
-    koinid = models.AutoField(db_column='koinID', primary_key=True)  # Field name made lowercase.
+    koinid = models.AutoField(db_column='koinID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
-    eidos = models.ForeignKey('Typeofkoinotita', models.DO_NOTHING, db_column='eidos')
+    eidos = models.ForeignKey('Typeofkoinotita', models.DO_NOTHING, db_column='eidos', db_index=True)
 
     def __str__(self):
         return self.descr
@@ -95,10 +95,10 @@ class Koinotites(models.Model):
 
 
 class Simbouloi(models.Model):
-    simbid = models.AutoField(db_column='simbID', primary_key=True)  # Field name made lowercase.
-    surname = models.CharField(max_length=100)
-    firstname = models.CharField(max_length=100)
-    fathername = models.CharField(max_length=100)
+    simbid = models.AutoField(db_column='simbID', primary_key=True, db_index=True)  # Field name made lowercase.
+    surname = models.CharField(max_length=100, db_index=True)
+    firstname = models.CharField(max_length=100, db_index=True)
+    fathername = models.CharField(max_length=100, db_index=True)
     comments = models.CharField(max_length=250, blank=True)
 
     def __str__(self):
@@ -110,7 +110,7 @@ class Simbouloi(models.Model):
 
 
 class Sindiasmoi(models.Model):
-    sindid = models.AutoField(db_column='sindID', primary_key=True)  # Field name made lowercase.
+    sindid = models.AutoField(db_column='sindID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
     photo = models.ImageField(db_column='photo',upload_to='sindiasmoi/',default='elections.jpg',null=True, blank=True)
@@ -125,8 +125,8 @@ class Sindiasmoi(models.Model):
 
 
 class Eklper(models.Model):
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID', db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - '  + str(self.perid)
@@ -138,10 +138,10 @@ class Eklper(models.Model):
 
 
 class Eklperkoin(models.Model):
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID')  # Field name made lowercase.
-    koinid = models.ForeignKey(Koinotites, models.CASCADE, db_column='koinID')  # Field name made lowercase.
-    edrid = models.ForeignKey(Edreskoin, models.CASCADE, db_column='edrID', blank=True, null=True)  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID', db_index=True)  # Field name made lowercase.
+    koinid = models.ForeignKey(Koinotites, models.CASCADE, db_column='koinID', db_index=True)  # Field name made lowercase.
+    edrid = models.ForeignKey(Edreskoin, models.CASCADE, db_column='edrID', blank=True, null=True, db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - '  + str(self.perid) + ' - '  + str(self.koinid)
@@ -153,9 +153,9 @@ class Eklperkoin(models.Model):
 
 
 class Eklsimbkoin(models.Model):
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID')  # Field name made lowercase.
-    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID', db_index=True)  # Field name made lowercase.
+    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID', db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.simbid) + ' - ' + str(self.koinid)
@@ -167,9 +167,9 @@ class Eklsimbkoin(models.Model):
 
 
 class Eklsimbper(models.Model):
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID')  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID', db_index=True)  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID', db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.simbid) + ' - ' + str(self.perid)
@@ -182,8 +182,8 @@ class Eklsimbper(models.Model):
 
 class Eklsind(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID', db_index=True)  # Field name made lowercase.
     aa = models.CharField(max_length=45)
     edresa = models.IntegerField(db_column='edresA', default=0)  # Field name made lowercase.
     edresa_ypol = models.IntegerField(db_column='edresA_Ypol',default=0)  # Field name made lowercase.
@@ -207,9 +207,9 @@ class Eklsind(models.Model):
 
 
 class Eklsindkoin(models.Model):
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID')  # Field name made lowercase.
-    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
+    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID', db_index=True)  # Field name made lowercase.
     aa = models.CharField(max_length=45)
     proedros = models.CharField(max_length=100, blank=True)
     edresk = models.IntegerField(db_column='edresK', default=0)  # Field name made lowercase.
@@ -228,9 +228,9 @@ class Eklsindkoin(models.Model):
 
 
 class Eklsindsimb(models.Model):
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID', blank=True, null=True)  # Field name made lowercase.
-    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID', db_index=True, blank=True, null=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID', db_index=True)  # Field name made lowercase.
     aa = models.CharField(max_length=45, blank=True)
 
     def __str__(self):
@@ -243,7 +243,7 @@ class Eklsindsimb(models.Model):
 
 
 class Kentra(models.Model):
-    kenid = models.AutoField(db_column='kenID', primary_key=True)  # Field name made lowercase.
+    kenid = models.AutoField(db_column='kenID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=45)
     eggegrammenoia = models.IntegerField(db_column='eggegrammenoiA', default=0)  # Field name made lowercase.
     psifisana = models.IntegerField(db_column='psifisanA', default=0)  # Field name made lowercase.
@@ -252,9 +252,9 @@ class Kentra(models.Model):
     lefkaa = models.IntegerField(db_column='lefkaA', default=0)  # Field name made lowercase.
     sinoloakiralefkaa = models.IntegerField(db_column='sinoloAkiraLefkaA', default=0)  # Field name made lowercase.
     comments = models.CharField(max_length=250, blank=True)
-    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID')  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID')  # Field name made lowercase.
-    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID', db_index=True)  # Field name made lowercase.
+    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID', db_index=True)  # Field name made lowercase.
     eggegrammenoib = models.IntegerField(db_column='eggegrammenoiB', default=0)  # Field name made lowercase.
     psifisanb = models.IntegerField(db_column='psifisanB', default=0)  # Field name made lowercase.
     egkirab = models.IntegerField(db_column='egkiraB', default=0)  # Field name made lowercase.
@@ -280,8 +280,8 @@ class Kentra(models.Model):
 
 class Psifodeltia(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
-    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID')  # Field name made lowercase.
-    kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.CASCADE, db_column='sindID', db_index=True)  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID', db_index=True)  # Field name made lowercase.
     votesa = models.IntegerField(db_column='votesA', default=0)  # Field name made lowercase.
     votesb = models.IntegerField(db_column='votesB', default=0)  # Field name made lowercase.
     votesk = models.IntegerField(db_column='votesK', default=0)  # Field name made lowercase.
@@ -297,9 +297,9 @@ class Psifodeltia(models.Model):
 
 class Psifoi(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
-    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID')  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID', db_index=True)  # Field name made lowercase.
     votes = models.IntegerField(default=0)
-    kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID')  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID', db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return  str(self.simbid) + ' - ' +  str(self.kenid) + ' - ' + str(self.votes)
@@ -371,16 +371,16 @@ class EklPosostasindPerVw(models.Model):
 
 class EklPsifoisimbVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    eklid = models.IntegerField(db_column='eklID', db_index=True)  # Field name made lowercase.
+    sindid = models.IntegerField(db_column='sindID', blank=True, null=True, db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(db_column='sindiasmos',max_length=100, blank=True, null=True)
     shortsind = models.CharField(db_column='shortsind',max_length=100, blank=True, null=True)
-    simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
-    surname = models.CharField(max_length=100)
-    firstname = models.CharField(max_length=100)
-    fathername = models.CharField(max_length=100)
+    simbid = models.IntegerField(db_column='simbID', db_index=True)  # Field name made lowercase.
+    surname = models.CharField(max_length=100, db_index=True)
+    firstname = models.CharField(max_length=100, db_index=True)
+    fathername = models.CharField(max_length=100, db_index=True)
     aa =  models.CharField(db_column='aa',max_length=45)
-    kenid = models.IntegerField(db_column='kenID')  # Field name made lowercase.
+    kenid = models.IntegerField(db_column='kenID', db_index=True)  # Field name made lowercase.
     kentro = models.CharField(max_length=45)
     eidos = models.CharField(db_column='eidos', max_length=100)
     koinotita= models.CharField(max_length=100)

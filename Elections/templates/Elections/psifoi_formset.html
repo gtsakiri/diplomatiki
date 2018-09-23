@@ -25,12 +25,14 @@
 
 
 
-                 <form method="POST" id="dataForm" class="post-form"  action=".">
+                 <form method="POST" id="dataForm" class="post-form"  action="">
                     {% csrf_token %}
 
                     <table class="table styletd1 table-condensed  table-hover ">
                         <thead>
                             {% for form in formset.forms %}
+                                {{ formset.management_form }}
+
                                 {% if forloop.first %}
                                     {% for field in form %}
 
@@ -39,7 +41,7 @@
                                             {% elif field.name == 'votes' %}
                                                 <th><label for="id_votes">Ψήφοι</label></th>
                                             {% elif field.name == 'kenid' %}
-
+                                                <th><label for="id_kenid">Κέντρο</label></th>
                                             {% endif %}
 
                                     {% endfor %}
@@ -50,9 +52,9 @@
                                     {% for field in form %}
 
 
-                                        {% if field.name == 'simbid' or field.name == 'votes' %}
+
                                                <td>{{ field }}</td>
-                                        {% endif %}
+
                                     {% endfor %}
                                 </tr>
                             {% endfor %}

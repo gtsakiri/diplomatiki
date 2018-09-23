@@ -2,7 +2,7 @@ import xlwt
 from django.contrib import  messages
 from django.forms.formsets import formset_factory
 
-from django.forms import DateInput, modelformset_factory
+from django.forms import DateInput, modelformset_factory, CharField
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
@@ -1526,7 +1526,7 @@ def kentra_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_kentra=Kentra.objects.filter(eklid=eklid)
+    all_kentra=Kentra.objects.filter(eklid=eklid).prefetch_related('eklid','perid','koinid')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
@@ -2211,23 +2211,25 @@ def psifoi_delete(request, eklid, simbid, kenid ):
 
 def edit_psifoi_kentrou(request,eklid, kenid):
     action_label='Edit Psifoi'
-    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    all_ekloges = Eklogestbl.objects.filter(visible=1).select_related('sisid','edrid').order_by('-eklid')
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_kentro = Kentra.objects.get(kenid=kenid)
 
-    PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',),extra=0)
+    PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',), extra=0)
 
     data = request.POST or None
-    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).order_by(  'simbid__surname' ))
+    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).prefetch_related('simbid','kenid').order_by('simbid__eklsindsimb__sindid_id','simbid__surname' ))
     for form in formset:
-        form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid)
-        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Psifoi.objects.filter(kenid=kenid).values_list('simbid'))
+        form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid).select_related('eklid', 'koinid', 'perid')
+        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Psifoi.objects.filter(kenid=kenid).select_related('kenid', 'simbid').values_list('simbid'))
 
     if request.method == 'POST' and formset.is_valid():
         formset.save()
         messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
-        return redirect('Elections_list')
+        return redirect('Elections_list', eklid)
 
     context = {'selected_ekloges': selected_ekloges,
+                'selected_kentro':selected_kentro,
                'all_ekloges': all_ekloges,
                'action_label':action_label,
                'formset': formset

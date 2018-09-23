@@ -44,16 +44,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Elections',
     'widget_tweaks',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'diplomatiki.urls'
@@ -124,6 +127,8 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
