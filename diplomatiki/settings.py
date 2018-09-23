@@ -130,6 +130,8 @@ MESSAGE_TAGS = {
 
 INTERNAL_IPS = ('127.0.0.1',)
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10000000000
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
