@@ -1721,6 +1721,7 @@ def psifodeltia_delete(request, eklid, id ):
 
 
 def simbouloi_list(request, eklid):
+
     paramorder = request.GET.get('orderoption', '')
 
     try:
@@ -1729,29 +1730,29 @@ def simbouloi_list(request, eklid):
         paramorder = 6  # default ταξινόμηση
 
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    #all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
+    all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
 
     if paramorder==1 or paramorder==6:
-        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.order_by('surname', 'firstname','fathername')
     elif paramorder == 2:
-        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.order_by('sindiasmos', 'surname', 'firstname','fathername')
     elif paramorder == 3:
-        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
     elif paramorder == 4:
-        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
+        all_simbouloi = EklallsimbVw.order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
     else:
-        all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('toposeklogis', 'surname','firstname', 'fathername')
-
+        all_simbouloi = EklallsimbVw.order_by('toposeklogis', 'surname','firstname', 'fathername')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges,
                'all_simbouloi': all_simbouloi,
                }
 
-    return render(request, 'Elections/simbouloi_list.html' , context)
+    return render(request, 'Elections/simbouloi_list.html', context)
 
 def simbouloi_insert_records(form, simb_item, eklid):
     # Προσθήκη εγγραφής και στον πίνακα Eklsindsimb για τη σύνδεση του Υποψηφίου με το Συνδυασμό του
@@ -2240,7 +2241,7 @@ def edit_psifoi_kentrou(request,eklid, kenid):
     if request.method == 'POST' and formset.is_valid():
         formset.save()
         messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
-        return redirect('psifoi_list', eklid, kenid)
+        return redirect('Elections_list')
 
     context = {'selected_ekloges': selected_ekloges,
                 'selected_kentro':selected_kentro,
