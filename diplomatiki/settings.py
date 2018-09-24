@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': 'ekloges',
         'USER': 'root',
         'PASSWORD': 'ds9000',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on 10.128.162.201  127.0.0.1
+        'HOST': '10.128.162.201',   # Or an IP Address that your DB is hosted on 10.128.162.201  127.0.0.1
         'PORT': '3306',
     }
 }
@@ -139,6 +139,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Athens'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10000000000
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000000
 
 USE_I18N = True
 

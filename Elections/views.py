@@ -2084,7 +2084,7 @@ def load_simbouloi(request, eklid):
 
 
 
-def psifoi_list(request, eklid):
+def psifoi_list(request, eklid, kenid=None):
     paramorder = request.GET.get('orderoption', '')
 
     try:
@@ -2098,7 +2098,12 @@ def psifoi_list(request, eklid):
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
+        if kenid is not None:
+            paramstr = kenid
+        else:
+            paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
+
+
 
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2117,6 +2122,8 @@ def psifoi_list(request, eklid):
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('-votes')
 
     selected_kentro = Kentra.objects.filter(kenid=paramstr)
+
+
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
     #all_psifoi = Psifoi.objects.filter(kenid=paramstr).order_by('simbid__surname')
@@ -2167,6 +2174,7 @@ def psifoi_edit(request, eklid, simbid, kenid):
     #επιλογή της συγκεκριμένης εγγραφής
     simb_item=get_object_or_404(Psifoi, simbid=simbid, kenid=kenid)
 
+    selected_kentro = kenid
 
     if request.method == 'POST':
         form = PsifoiForm(eklid, request.POST or None, instance=simb_item)
@@ -2174,14 +2182,18 @@ def psifoi_edit(request, eklid, simbid, kenid):
             item=form.save(commit=False)
             item.save()
             messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
-            return redirect('psifoi_list', eklid)
+            return redirect('psifoi_list', eklid, kenid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
         form = PsifoiForm(eklid, request.POST or None, instance=simb_item)
 
+
+
+
     context = {
         'selected_ekloges': selected_ekloges,
+        'selected_kentro' : selected_kentro,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form,
@@ -2210,7 +2222,7 @@ def psifoi_delete(request, eklid, simbid, kenid ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 def edit_psifoi_kentrou(request,eklid, kenid):
-    action_label='Edit Psifoi'
+    action_label='Καταχώρηση ψήφων Υποψηφίων Συμβούλων'
     all_ekloges = Eklogestbl.objects.filter(visible=1).select_related('sisid','edrid').order_by('-eklid')
     selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
     selected_kentro = Kentra.objects.get(kenid=kenid)
@@ -2221,13 +2233,14 @@ def edit_psifoi_kentrou(request,eklid, kenid):
     formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).order_by('simbid__surname' ))
     for form in formset:
         form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid).select_related('eklid', 'koinid', 'perid')
-        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid__in=Psifoi.objects.filter(kenid=kenid).values_list('simbid'))
+        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid=form['simbid'].value())  #Τα dropdown θα έχουν μόνο το σχετικό simbid
+        #form.fields['simbid'].queryset = Simbouloi.objects.all().first()
         #form.fields['simbid'].queryset = None
 
     if request.method == 'POST' and formset.is_valid():
         formset.save()
         messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
-        return redirect('Elections_list', eklid)
+        return redirect('psifoi_list', eklid, kenid)
 
     context = {'selected_ekloges': selected_ekloges,
                 'selected_kentro':selected_kentro,

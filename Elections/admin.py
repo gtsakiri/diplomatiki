@@ -61,7 +61,7 @@ class PsifodeltiaAdmin(admin.ModelAdmin):
 
 class PsifoiAdmin(admin.ModelAdmin):
     list_display = ('id', 'simbid', 'kenid', 'votes')
-    list_filter = ('simbid', )
+    list_filter = ('kenid', )
 
 
 class SimbouloiAdmin(admin.ModelAdmin):
