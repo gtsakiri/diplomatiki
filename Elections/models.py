@@ -653,6 +653,8 @@ class EklSumpsifoisimbWithIdVw(models.Model):
         db_table = 'EKL_SUMPSIFOISIMB_WITHID_VW'
 
 class EklallsimbVw(models.Model):
+
+    '''
     id = models.IntegerField(primary_key=True)
     eklid = models.IntegerField(db_column='eklID',db_index=True)  # Field name made lowercase.
     simbid = models.IntegerField(db_column='simbID',db_index=True)  # Field name made lowercase.
@@ -665,7 +667,20 @@ class EklallsimbVw(models.Model):
     eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas', blank=True, null=True)  # Field name made lowercase.
     sindid = models.IntegerField(db_column='sindID', blank=True, null=True,db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(db_column='sindiasmos', max_length=100, blank=True, null=True,db_index=True)
-
+    '''
+    id = models.IntegerField(primary_key=True)
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING,  db_column='eklID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID', db_index=True)  # Field name made lowercase.
+    surname = models.CharField(db_column='surname', max_length=100, db_index=True)
+    firstname = models.CharField(db_column='firstname', max_length=100, db_index=True)
+    fathername = models.CharField(db_column='fathername', max_length=100, db_index=True)
+    comments = models.CharField(db_column='comments', max_length=100)
+    toposeklogisid = models.IntegerField(db_column='toposEklogisID')  # Field name made lowercase.
+    toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
+    eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas', blank=True,
+                                          null=True)  # Field name made lowercase.
+    sindid = models.IntegerField(db_column='sindID', blank=True, null=True, db_index=True)  # Field name made lowercase.
+    sindiasmos = models.CharField(db_column='sindiasmos', max_length=100, blank=True, null=True, db_index=True)
     def __str__(self):
         return self.toposeklogis  + ' - ' +  self.surname
 

@@ -27,7 +27,7 @@
 
                         <tbody >
 
-                        <tr> <td colspan="11"><a href="{% url 'eklsindkoin_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr> <td colspan="11"><a href="{% url 'eklsindkoin_add' selected_ekloges%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>
@@ -64,8 +64,8 @@
                                 <td > {{ p.ypol }} </td>
                                 <td > {{ p.checkfordraw }} </td>
                                 <td >
-                                    <a class="btn btn-default" href="{% url 'eklsindkoin_edit' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'eklsindkoin_delete' selected_ekloges.0.eklid p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'eklsindkoin_edit' selected_ekloges p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'eklsindkoin_delete' selected_ekloges p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>
@@ -80,7 +80,7 @@
 
                         <tbody >
 
-                        <tr> <td colspan="11"><a href="{% url 'eklsindkoin_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr> <td colspan="11"><a href="{% url 'eklsindkoin_add' selected_ekloges%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>

@@ -39,7 +39,7 @@
 
                         <tbody >
 
-                        <tr class="noborder"> <td colspan="4"><a href="{% url 'simbouloi_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'simbouloi_add' selected_ekloges %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>
@@ -65,8 +65,8 @@
                                 <td > {{ p.toposeklogis }} </td>
                                 <td > {% if  p.sindiasmos is None %} {% else %} {{ p.sindiasmos  }} {% endif %}</td>
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'simbouloi_edit' selected_ekloges.0.eklid p.simbid%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'simbouloi_delete' selected_ekloges.0.eklid p.simbid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'simbouloi_edit' selected_ekloges p.simbid.simbid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'simbouloi_delete' selected_ekloges p.simbid.simbid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>
@@ -81,7 +81,7 @@
 
                         <tbody >
 
-                        <tr class="noborder"> <td colspan="4"><a href="{% url 'simbouloi_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'simbouloi_add' selected_ekloges%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>

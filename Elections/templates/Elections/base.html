@@ -65,7 +65,7 @@
         <div class="collapse navbar-collapse" id="topNavBar">
 
 
-                <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Elections_list' selected_ekloges.0.eklid %}">
+                <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Elections_list' selected_ekloges %}">
                     <div class="form-group" >
                         <input type="text" class="form-control" name="search" id="search" value="">
                     </div>
@@ -99,12 +99,12 @@
                 <!--<p id="demo1" type="hidden" ></p> -->
                 <div id="div1">
 
-                <form method="get" name="ekloges" action="{% url 'Elections_list' selected_ekloges.0.eklid %}">
+                <form method="get" name="ekloges" action="{% url 'Elections_list' selected_ekloges %}">
                      <!--<input id="EklInput" name="eklogesinput" value="9"/><!--name="eklogesinput"  -->
                     <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                     <select  class="sel1" id="mydir" name="eklogesoption"  onchange="ekloges.submit()">
                         {% for e in all_ekloges %}
-                         <option  value="{{  e.eklid }}" {% if selected_ekloges.0.eklid ==  e.eklid  %}selected{%endif%}>{{ e.descr }}</option>
+                         <option  value="{{  e.eklid }}" {% if selected_ekloges ==  e.eklid  %}selected{%endif%}>{{ e.descr }}</option>
                         {% endfor %}
                     </select>
                 <hr>
@@ -130,41 +130,41 @@
 
                     <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-stats"></span> ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
                         <ul class=" nav nav-list tree" style="font-size: 13px; ">
-                            <li><a href="{% url 'pososta_telika' selected_ekloges.0.eklid %} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
-                            <li><a href="{% url 'pososta_perifereies' selected_ekloges.0.eklid  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια</a></li>
-                            <li><a href="{% url 'psifoisimb_perifereies' selected_ekloges.0.eklid  %}" id="m3">Κατάταξη υποψ. δημοτικών συμβούλων</a></li>
+                            <li><a href="{% url 'pososta_telika' selected_ekloges %} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
+                            <li><a href="{% url 'pososta_perifereies' selected_ekloges  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια</a></li>
+                            <li><a href="{% url 'psifoisimb_perifereies' selected_ekloges  %}" id="m3">Κατάταξη υποψ. δημοτικών συμβούλων</a></li>
 
-                            {% if selected_ekloges.0.eklid == 1  %}
+                            {% if selected_ekloges == 1  %}
                             <li><a href="{% url 'psifoisimb_koinotites' 1 1 %}" id="m4">Κατάταξη υποψ. συμβούλων κοινοτήτων > 2000 κατοίκων</a></li>
                             <li><a href="{% url 'psifoisimb_koinotites' 1 2 %}" id="m5">Κατάταξη υποψ. συμβούλων κοινοτήτων έως 2000 κατοίκων</a></li>
                             {% else %}
-                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges.0.eklid 4 %}" id="m6">Κατάταξη υποψ. συμβούλων κοινοτήτων > 300 κατοίκων</a></li>
-                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges.0.eklid 3 %}" id="m7">Κατάταξη υποψ. συμβούλων κοινοτήτων έως 300 κατοίκων</a></li>
+                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges 4 %}" id="m6">Κατάταξη υποψ. συμβούλων κοινοτήτων > 300 κατοίκων</a></li>
+                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges 3 %}" id="m7">Κατάταξη υποψ. συμβούλων κοινοτήτων έως 300 κατοίκων</a></li>
 
                             {% endif %}
 
-                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges.0.eklid%}" id="m8">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο</a></li>
-                            <li><a href="{% url 'psifoisimb_ken' selected_ekloges.0.eklid%}" id="m9">Ψήφοι υποψηφίων συμβούλων ανά κέντρο</a></li>
+                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges%}" id="m8">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο</a></li>
+                            <li><a href="{% url 'psifoisimb_ken' selected_ekloges%}" id="m9">Ψήφοι υποψηφίων συμβούλων ανά κέντρο</a></li>
                         </ul>
                     </li>
 
                     <li class="divider"></li>
                     <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
                         <ul class="nav nav-list tree" style="font-size: 13px; " >
-                            <li><a href="{% url 'ekloges_list' selected_ekloges.0.eklid  %}">Εκλ. αναμετρήσεις</a></li>
-                            <li><a href="{% url 'sistima_list' selected_ekloges.0.eklid  %}">Εκλογικά Συστήματα</a></li>
-                            <li><a href="{% url 'edres_list' selected_ekloges.0.eklid  %}" >Περιπτώσεις κατανομής εδρών σε Δήμους</a></li>
-                            <li><a href="{% url 'edreskoin_list' selected_ekloges.0.eklid  %}">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
-                            <li><a href="{% url 'typeofkoinotita_list' selected_ekloges.0.eklid  %}">Τύποι Κοινοτήτων</a></li>
-                            <li><a href="{% url 'perifereia_list' selected_ekloges.0.eklid  %}">Εκλογικές Περιφέρειες</a></li>
-                            <li><a href="{% url 'koinotites_list' selected_ekloges.0.eklid  %}">Κοινότητες</a></li>
-                            <li><a href="{% url 'sindiasmoi_list' selected_ekloges.0.eklid  %}">Υποψήφιοι Συνδυασμοί - Βασικά στοιχεία</a></li>
-                            <li><a href="{% url 'eklsind_list' selected_ekloges.0.eklid  %}">Δημοτικοί Συνδυασμοί και Έδρες</a></li>
-                            <li><a href="{% url 'eklsindkoin_list' selected_ekloges.0.eklid  %}">Τοπικοί Συνδυασμοί και  Κοινότητες</a></li>
-                            <li><a href="{% url 'kentra_list' selected_ekloges.0.eklid  %}">Εκλογικά Κέντρα</a></li>
-                            <li><a href="{% url 'psifodeltia_list' selected_ekloges.0.eklid  %}">Ψηφοδέλτια Συνδυασμών ανά εκλ. κέντρο</a></li>
-                            <li><a href="{% url 'simbouloi_list' selected_ekloges.0.eklid  %}">Υποψήφιοι Σύμβουλοι</a></li>
-                            <li><a href="{% url 'psifoi_list' selected_ekloges.0.eklid  %}">Ψήφοι Υποψηφίων ανά εκλ. κέντρο</a></li>
+                            <li><a href="{% url 'ekloges_list' selected_ekloges  %}">Εκλ. αναμετρήσεις</a></li>
+                            <li><a href="{% url 'sistima_list' selected_ekloges  %}">Εκλογικά Συστήματα</a></li>
+                            <li><a href="{% url 'edres_list' selected_ekloges  %}" >Περιπτώσεις κατανομής εδρών σε Δήμους</a></li>
+                            <li><a href="{% url 'edreskoin_list' selected_ekloges  %}">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
+                            <li><a href="{% url 'typeofkoinotita_list' selected_ekloges  %}">Τύποι Κοινοτήτων</a></li>
+                            <li><a href="{% url 'perifereia_list' selected_ekloges  %}">Εκλογικές Περιφέρειες</a></li>
+                            <li><a href="{% url 'koinotites_list' selected_ekloges  %}">Κοινότητες</a></li>
+                            <li><a href="{% url 'sindiasmoi_list' selected_ekloges  %}">Υποψήφιοι Συνδυασμοί - Βασικά στοιχεία</a></li>
+                            <li><a href="{% url 'eklsind_list' selected_ekloges  %}">Δημοτικοί Συνδυασμοί και Έδρες</a></li>
+                            <li><a href="{% url 'eklsindkoin_list' selected_ekloges  %}">Τοπικοί Συνδυασμοί και  Κοινότητες</a></li>
+                            <li><a href="{% url 'kentra_list' selected_ekloges  %}">Εκλογικά Κέντρα</a></li>
+                            <li><a href="{% url 'psifodeltia_list' selected_ekloges  %}">Ψηφοδέλτια Συνδυασμών ανά εκλ. κέντρο</a></li>
+                            <li><a href="{% url 'simbouloi_list' selected_ekloges  %}">Υποψήφιοι Σύμβουλοι</a></li>
+                            <li><a href="{% url 'psifoi_list' selected_ekloges  %}">Ψήφοι Υποψηφίων ανά εκλ. κέντρο</a></li>
 
                         </ul>
 

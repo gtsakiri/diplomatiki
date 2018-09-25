@@ -25,7 +25,7 @@
 
 
 
-                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges.0.eklid %}" class="post-form"  action="." enctype="multipart/form-data">
+                         <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
 
                          <div class="form-group">
@@ -69,7 +69,7 @@
                       {% endfor %}
 
                      <tr class="noborder"> <td colspan="4"> <input type="submit" value="Save" class="btn btn-primary">
-                      <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'kentra_list' selected_ekloges.0.eklid %}';">
+                      <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'kentra_list' selected_ekloges %}';">
                      </td></tr>
 
                     </form>

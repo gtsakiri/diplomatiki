@@ -262,7 +262,7 @@ def Elections_list(request, eklid=0):
         paramkentro = 0
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης και προαιρετικά κέντρου
-    selected_ekloges = Eklogestbl.objects.filter(eklid=paramekloges)
+    selected_ekloges = Eklogestbl.objects.get(eklid=paramekloges)
 
     try:
         selected_kentro = get_object_or_404(Kentra, eklid=paramekloges, descr=str(paramkentro))
@@ -312,7 +312,7 @@ def Elections_list(request, eklid=0):
         form=None
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges':selected_ekloges,
+               'selected_ekloges':selected_ekloges.eklid,
                'selected_kentro':selected_kentro,
                'selected_koinotita': selected_koinotita,
                'selected_simbouloi':selected_simbouloi,
@@ -328,12 +328,12 @@ def pososta_telika(request, eklid):
 
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
-    context = {'all_pososta':all_pososta, 'all_ekloges':all_ekloges, 'selected_ekloges':selected_ekloges}
+    context = {'all_pososta':all_pososta, 'all_ekloges':all_ekloges, 'selected_ekloges':selected_ekloges.eklid}
     return render(request, 'Elections/pososta_telika.html',context)
 
 def pososta_perifereies(request, eklid):
@@ -347,7 +347,7 @@ def pososta_perifereies(request, eklid):
         paramstr = 1  # default perid  αν δεν δοθεί
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -361,7 +361,7 @@ def pososta_perifereies(request, eklid):
     context = {'all_posostaper':all_posostaper,
                 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges,
+               'selected_ekloges':selected_ekloges.eklid,
                'all_perifereies':all_perifereies,
                'selected_perifereia': selected_perifereia,}
     return render(request, 'Elections/pososta_perifereies.html',context)
@@ -385,7 +385,7 @@ def psifoisimb_perifereies(request, eklid):
         paramorder = 4  # default ταξινόμηση
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -409,7 +409,7 @@ def psifoisimb_perifereies(request, eklid):
     context = {'all_psifoi':all_psifoi,
                 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges,
+               'selected_ekloges':selected_ekloges.eklid,
                'all_perifereies':all_perifereies,
                'selected_perifereia': selected_perifereia,
                'selected_order':selected_order,}
@@ -435,7 +435,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
         paramorder = 5  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -472,7 +472,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
     context = {'all_psifoi':all_psifoi,
                 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges,
+               'selected_ekloges':selected_ekloges.eklid,
                'all_koinotites':all_koinotites,
                'selected_koinotita': selected_koinotita,
                'selected_order':selected_order,
@@ -498,7 +498,7 @@ def psifodeltiasind_ken(request, eklid):
         paramorder = 4  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -523,7 +523,7 @@ def psifodeltiasind_ken(request, eklid):
     context = {'all_psifodeltia':all_psifodeltia,
                 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges,
+               'selected_ekloges':selected_ekloges.eklid,
                'all_kentra':all_kentra,
                'selected_kentro': selected_kentro,
                'selected_order':selected_order,
@@ -549,7 +549,7 @@ def psifoisimb_ken(request, eklid):
         paramorder = 5  # default ταξινόμηση
 
     # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -576,7 +576,7 @@ def psifoisimb_ken(request, eklid):
     context = {'all_psifoi':all_psifoi,
                 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges,
+               'selected_ekloges':selected_ekloges.eklid,
                'all_kentra':all_kentra,
                'selected_kentro': selected_kentro,
                'selected_order':selected_order,
@@ -586,21 +586,21 @@ def psifoisimb_ken(request, eklid):
 #ΠΑΡΑΜΕΤΡΙΚΑ
 
 def edres_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_edres=Edres.objects.all()
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_edres':all_edres
                }
 
     return render(request, 'Elections/edres_list.html' , context)
 
 def edres_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κατανομή εδρών - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -617,7 +617,7 @@ def edres_add(request, eklid):
         form=EdresForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -626,7 +626,7 @@ def edres_add(request, eklid):
     return render(request, 'Elections/edres_form.html', context)
 
 def edres_edit(request, eklid, edrid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κατανομή εδρών - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -641,7 +641,7 @@ def edres_edit(request, eklid, edrid):
         return redirect('edres_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -650,7 +650,7 @@ def edres_edit(request, eklid, edrid):
     return render(request, 'Elections/edres_form.html', context)
 
 def edres_delete(request, eklid, edrid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -660,28 +660,28 @@ def edres_delete(request, eklid, edrid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('edres_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
     return render(request, 'Elections/confirm_delete.html', context)
 
 def edreskoin_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_edreskoin=Edreskoin.objects.all()
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_edreskoin':all_edreskoin
                }
 
     return render(request, 'Elections/edreskoin_list.html' , context)
 
 def edreskoin_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κατανομή εδρών σε Κοινότητες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -698,7 +698,7 @@ def edreskoin_add(request, eklid):
         form=EdresKoinForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -707,7 +707,7 @@ def edreskoin_add(request, eklid):
     return render(request, 'Elections/edreskoin_form.html', context)
 
 def edreskoin_edit(request, eklid, edrid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κατανομή εδρών σε Κοινότητες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -722,7 +722,7 @@ def edreskoin_edit(request, eklid, edrid):
         return redirect('edreskoin_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -731,7 +731,7 @@ def edreskoin_edit(request, eklid, edrid):
     return render(request, 'Elections/edreskoin_form.html', context)
 
 def edreskoin_delete(request, eklid, edrid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -741,28 +741,28 @@ def edreskoin_delete(request, eklid, edrid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('edreskoin_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
     return render(request, 'Elections/confirm_delete.html', context)
 
 def sistima_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_sistima=Sistima.objects.all()
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_sistima':all_sistima
                }
 
     return render(request, 'Elections/sistima_list.html' , context)
 
 def sistima_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -784,7 +784,7 @@ def sistima_add(request, eklid):
         form=SistimaForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -793,7 +793,7 @@ def sistima_add(request, eklid):
     return render(request, 'Elections/sistima_form.html', context)
 
 def sistima_edit(request, eklid, sisid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -808,7 +808,7 @@ def sistima_edit(request, eklid, sisid):
         return redirect('sistima_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -817,7 +817,7 @@ def sistima_edit(request, eklid, sisid):
     return render(request, 'Elections/sistima_form.html', context)
 
 def sistima_delete(request, eklid, sisid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -826,7 +826,7 @@ def sistima_delete(request, eklid, sisid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('sistima_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -835,21 +835,21 @@ def sistima_delete(request, eklid, sisid ):
 
 
 def typeofkoinotita_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_type=Typeofkoinotita.objects.all()
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_type':all_type
                }
 
     return render(request, 'Elections/typeofkoinotita_list.html' , context)
 
 def typeofkoinotita_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Τύποι κοινοτήτων - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -866,7 +866,7 @@ def typeofkoinotita_add(request, eklid):
         form=TypeofkoinotitaForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form,
@@ -875,7 +875,7 @@ def typeofkoinotita_add(request, eklid):
     return render(request, 'Elections/typeofkoinotita_form.html', context)
 
 def typeofkoinotita_edit(request, eklid, tpkid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Τύποι κοινοτήτων - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -890,7 +890,7 @@ def typeofkoinotita_edit(request, eklid, tpkid):
         return redirect('typeofkoinotita_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -899,7 +899,7 @@ def typeofkoinotita_edit(request, eklid, tpkid):
     return render(request, 'Elections/typeofkoinotita_form.html', context)
 
 def typeofkoinotita_delete(request, eklid, tpkid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -908,7 +908,7 @@ def typeofkoinotita_delete(request, eklid, tpkid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('typeofkoinotita_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -916,20 +916,20 @@ def typeofkoinotita_delete(request, eklid, tpkid ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 def ekloges_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     #all_sistima=Sistima.objects.all()
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                }
 
     return render(request, 'Elections/ekloges_list.html' , context)
 
 def ekloges_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -954,7 +954,7 @@ def ekloges_add(request, eklid):
         form=EklogestblForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -963,7 +963,7 @@ def ekloges_add(request, eklid):
     return render(request, 'Elections/elections_form.html', context)
 
 def ekloges_edit(request, eklid, cureklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -981,7 +981,7 @@ def ekloges_edit(request, eklid, cureklid):
         return redirect('ekloges_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -990,7 +990,7 @@ def ekloges_edit(request, eklid, cureklid):
     return render(request, 'Elections/elections_form.html', context)
 
 def ekloges_delete(request, eklid, cureklid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1004,7 +1004,7 @@ def ekloges_delete(request, eklid, cureklid ):
 
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('ekloges_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -1013,7 +1013,7 @@ def ekloges_delete(request, eklid, cureklid ):
 
 
 def sindiasmoi_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1023,14 +1023,14 @@ def sindiasmoi_list(request, eklid):
     all_sindiasmoi = Sindiasmoi.objects.all().order_by('-eidos','-sindid')
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_sindiasmoi': all_sindiasmoi,
                }
 
     return render(request, 'Elections/sindiasmoi_list.html' , context)
 
 def sindiasmoi_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Υποψήφιοι Συνδυασμοί - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1067,7 +1067,7 @@ def sindiasmoi_add(request, eklid):
        # sub_form = EklsindFormPartial()
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form,
@@ -1077,7 +1077,7 @@ def sindiasmoi_add(request, eklid):
     return render(request, 'Elections/sindiasmoi_form.html', context)
 
 def sindiasmoi_edit(request, eklid, sindid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1117,7 +1117,7 @@ def sindiasmoi_edit(request, eklid, sindid):
         #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form,
@@ -1127,7 +1127,7 @@ def sindiasmoi_edit(request, eklid, sindid):
 
 
 def sindiasmoi_delete(request, eklid, sindid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1137,7 +1137,7 @@ def sindiasmoi_delete(request, eklid, sindid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('sindiasmoi_list', eklid)
-    context = {'selected_ekloges': selected_ekloges,
+    context = {'selected_ekloges': selected_ekloges.eklid,
                'all_ekloges': all_ekloges,
                'object': obj
                }
@@ -1146,21 +1146,21 @@ def sindiasmoi_delete(request, eklid, sindid ):
 
 
 def eklsind_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_eklsind = Eklsind.objects.filter(eklid=eklid)
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_eklsind': all_eklsind,
                }
 
     return render(request, 'Elections/eklsind_list.html' , context)
 
 def eklsind_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1180,7 +1180,7 @@ def eklsind_add(request, eklid):
         form=EklsindForm(eklid,initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -1189,7 +1189,7 @@ def eklsind_add(request, eklid):
     return render(request, 'Elections/eklsind_form.html', context)
 
 def eklsind_edit(request, eklid, id):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1207,7 +1207,7 @@ def eklsind_edit(request, eklid, id):
         return redirect('eklsind_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -1217,7 +1217,7 @@ def eklsind_edit(request, eklid, id):
 
 
 def eklsind_delete(request, eklid, id ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1227,7 +1227,7 @@ def eklsind_delete(request, eklid, id ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsind_list', eklid)
-    context = {'selected_ekloges': selected_ekloges,
+    context = {'selected_ekloges': selected_ekloges.eklid,
                'all_ekloges': all_ekloges,
                'object': obj
                }
@@ -1236,21 +1236,21 @@ def eklsind_delete(request, eklid, id ):
 
 
 def perifereia_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_perifereies=Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_perifereies':all_perifereies
                }
 
     return render(request, 'Elections/perifereia_list.html' , context)
 
 def perifereia_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Περιφέρειες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1271,7 +1271,7 @@ def perifereia_add(request, eklid):
         form=PerifereiesForm()  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -1280,7 +1280,7 @@ def perifereia_add(request, eklid):
     return render(request, 'Elections/perifereia_form.html', context)
 
 def perifereia_edit(request, eklid, perid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Περιφέρειες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1295,7 +1295,7 @@ def perifereia_edit(request, eklid, perid):
         return redirect('perifereia_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -1304,7 +1304,7 @@ def perifereia_edit(request, eklid, perid):
     return render(request, 'Elections/perifereia_form.html', context)
 
 def perifereia_delete(request, eklid, perid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1314,7 +1314,7 @@ def perifereia_delete(request, eklid, perid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('perifereia_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -1323,21 +1323,21 @@ def perifereia_delete(request, eklid, perid ):
 
 
 def eklsindkoin_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_eklsindkoin = Eklsindkoin.objects.filter(eklid=eklid)
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_eklsindkoin': all_eklsindkoin,
                }
 
     return render(request, 'Elections/eklsindkoin_list.html' , context)
 
 def eklsindkoin_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1357,7 +1357,7 @@ def eklsindkoin_add(request, eklid):
         form=EklsindkoinForm(eklid,initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -1366,7 +1366,7 @@ def eklsindkoin_add(request, eklid):
     return render(request, 'Elections/eklsindkoin_form.html', context)
 
 def eklsindkoin_edit(request, eklid, id):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1384,7 +1384,7 @@ def eklsindkoin_edit(request, eklid, id):
         return redirect('eklsindkoin_list', eklid)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form
@@ -1394,7 +1394,7 @@ def eklsindkoin_edit(request, eklid, id):
 
 
 def eklsindkoin_delete(request, eklid, id ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1404,7 +1404,7 @@ def eklsindkoin_delete(request, eklid, id ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsindkoin_list', eklid)
-    context = {'selected_ekloges': selected_ekloges,
+    context = {'selected_ekloges': selected_ekloges.eklid,
                'all_ekloges': all_ekloges,
                'object': obj
                }
@@ -1412,21 +1412,21 @@ def eklsindkoin_delete(request, eklid, id ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 def koinotites_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_koinotites=Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_koinotites':all_koinotites
                }
 
     return render(request, 'Elections/koinotites_list.html' , context)
 
 def koinotites_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κοινότητες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1455,7 +1455,7 @@ def koinotites_add(request, eklid):
         form=KoinotitesForm(eklid)  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -1464,7 +1464,7 @@ def koinotites_add(request, eklid):
     return render(request, 'Elections/koinotita_form.html', context)
 
 def koinotites_edit(request, eklid, koinid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κοινότητες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1494,7 +1494,7 @@ def koinotites_edit(request, eklid, koinid):
         form = KoinotitesForm(eklid, request.POST or None, instance=item, initial={'edrid':edr_id_item, 'perid': per_id_item })
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form,
@@ -1503,7 +1503,7 @@ def koinotites_edit(request, eklid, koinid):
     return render(request, 'Elections/koinotita_form.html', context)
 
 def koinotites_delete(request, eklid, koinid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1513,7 +1513,7 @@ def koinotites_delete(request, eklid, koinid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('koinotites_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -1522,21 +1522,21 @@ def koinotites_delete(request, eklid, koinid ):
 
 
 def kentra_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_kentra=Kentra.objects.filter(eklid=eklid).prefetch_related('eklid','perid','koinid')
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_kentra':all_kentra
                }
 
     return render(request, 'Elections/kentra_list.html' , context)
 
 def kentra_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Εκλ. Κέντρα - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1553,7 +1553,7 @@ def kentra_add(request, eklid):
         form=KentraForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -1562,7 +1562,7 @@ def kentra_add(request, eklid):
     return render(request, 'Elections/kentra_form.html', context)
 
 def kentra_edit(request, eklid, kenid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Κέντρα - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1587,7 +1587,7 @@ def kentra_edit(request, eklid, kenid):
         form = KentraForm(eklid, request.POST or None, instance=item, initial={'koinid':koin_id_item, 'perid': per_id_item })
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form,
@@ -1596,7 +1596,7 @@ def kentra_edit(request, eklid, kenid):
     return render(request, 'Elections/kentra_form.html', context)
 
 def kentra_delete(request, eklid, kenid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1606,7 +1606,7 @@ def kentra_delete(request, eklid, kenid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('kentra_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -1623,7 +1623,7 @@ def psifodeltia_list(request, eklid):
     except:
         paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
 
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1635,7 +1635,7 @@ def psifodeltia_list(request, eklid):
     all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_psifodeltia':all_psifodeltia,
                'all_kentra':all_kentra,
                'selected_kentro':selected_kentro
@@ -1644,7 +1644,7 @@ def psifodeltia_list(request, eklid):
     return render(request, 'Elections/psifodeltia_list.html' , context)
 
 def psifodeltia_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1661,7 +1661,7 @@ def psifodeltia_add(request, eklid):
         form=PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -1670,7 +1670,7 @@ def psifodeltia_add(request, eklid):
     return render(request, 'Elections/psifodeltia_form.html', context)
 
 def psifodeltia_edit(request, eklid, id):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1692,7 +1692,7 @@ def psifodeltia_edit(request, eklid, id):
         form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form,
@@ -1701,7 +1701,7 @@ def psifodeltia_edit(request, eklid, id):
     return render(request, 'Elections/psifodeltia_form.html', context)
 
 def psifodeltia_delete(request, eklid, id ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1711,7 +1711,7 @@ def psifodeltia_delete(request, eklid, id ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('psifodeltia_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -1723,32 +1723,32 @@ def psifodeltia_delete(request, eklid, id ):
 def simbouloi_list(request, eklid):
 
     paramorder = request.GET.get('orderoption', '')
-
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     try:
         paramorder = int(paramorder)
     except:
         paramorder = 6  # default ταξινόμηση
 
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    #selected_ekloges = Eklogestbl.objects.get(eklid=eklid).prefetch_related('eklallsimbvw_set')
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
-    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklallsimbvw_set').get(eklid=eklid)
 
-    all_simbouloi = EklallsimbVw.objects.filter(eklid=eklid).order_by('surname', 'firstname', 'fathername')
+    all_simbouloi = selected_ekloges.eklallsimbvw_set.all()
 
     if paramorder==1 or paramorder==6:
-        all_simbouloi = EklallsimbVw.order_by('surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by('surname', 'firstname','fathername')
     elif paramorder == 2:
-        all_simbouloi = EklallsimbVw.order_by('sindiasmos', 'surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by('sindiasmos', 'surname', 'firstname','fathername')
     elif paramorder == 3:
-        all_simbouloi = EklallsimbVw.order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
     elif paramorder == 4:
-        all_simbouloi = EklallsimbVw.order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
     else:
-        all_simbouloi = EklallsimbVw.order_by('toposeklogis', 'surname','firstname', 'fathername')
+        all_simbouloi = all_simbouloi.order_by('toposeklogis', 'surname','firstname', 'fathername')
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_simbouloi': all_simbouloi,
                }
 
@@ -1797,7 +1797,7 @@ def simbouloi_insert_records(form, simb_item, eklid):
 
 
 def simbouloi_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Υποψήφιοι Σύμβουλοι - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1829,7 +1829,7 @@ def simbouloi_add(request, eklid):
        # sub_form = EklsindFormPartial()
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form,
@@ -1840,7 +1840,7 @@ def simbouloi_add(request, eklid):
 
 
 def simbouloi_edit(request, eklid, simbid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Υποψήφιοι Σύμβουλοι - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2007,7 +2007,7 @@ def simbouloi_edit(request, eklid, simbid):
                                           'eidos': eidos_field})
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
         'form': form,
@@ -2018,7 +2018,7 @@ def simbouloi_edit(request, eklid, simbid):
 
 
 def simbouloi_delete(request, eklid, simbid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2028,7 +2028,7 @@ def simbouloi_delete(request, eklid, simbid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('simbouloi_list', eklid)
-    context = {'selected_ekloges': selected_ekloges,
+    context = {'selected_ekloges': selected_ekloges.eklid,
                'all_ekloges': all_ekloges,
                'object': obj
                }
@@ -2039,7 +2039,7 @@ def simbouloi_delete(request, eklid, simbid ):
 
 ##Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα koinid που σχετίζονται με ένα perid
 def load_koinotites(request, eklid):
-    #selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    #selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     #all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     perid = request.GET.get('perid')
@@ -2106,7 +2106,7 @@ def psifoi_list(request, eklid, kenid=None):
 
 
 
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2130,7 +2130,7 @@ def psifoi_list(request, eklid, kenid=None):
     #all_psifoi = Psifoi.objects.filter(kenid=paramstr).order_by('simbid__surname')
 
     context = {'all_ekloges': all_ekloges,
-               'selected_ekloges': selected_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
                'all_psifoi':all_psifoi,
                'all_kentra':all_kentra,
                'selected_kentro':selected_kentro
@@ -2140,7 +2140,7 @@ def psifoi_list(request, eklid, kenid=None):
 
 
 def psifoi_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2157,7 +2157,7 @@ def psifoi_add(request, eklid):
         form=PsifoiForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
-                'selected_ekloges': selected_ekloges,
+                'selected_ekloges': selected_ekloges.eklid,
                 'action_label' : action_label,
                 'all_ekloges': all_ekloges,
                 'form': form
@@ -2166,7 +2166,7 @@ def psifoi_add(request, eklid):
     return render(request, 'Elections/psifoi_form.html', context)
 
 def psifoi_edit(request, eklid, simbid, kenid):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2193,7 +2193,7 @@ def psifoi_edit(request, eklid, simbid, kenid):
 
 
     context = {
-        'selected_ekloges': selected_ekloges,
+        'selected_ekloges': selected_ekloges.eklid,
         'selected_kentro' : selected_kentro,
         'action_label': action_label,
         'all_ekloges': all_ekloges,
@@ -2205,7 +2205,7 @@ def psifoi_edit(request, eklid, simbid, kenid):
 
 
 def psifoi_delete(request, eklid, simbid, kenid ):
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2215,7 +2215,7 @@ def psifoi_delete(request, eklid, simbid, kenid ):
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('psifoi_list', eklid)
-    context={'selected_ekloges': selected_ekloges,
+    context={'selected_ekloges': selected_ekloges.eklid,
              'all_ekloges': all_ekloges,
              'object':obj
              }
@@ -2225,7 +2225,7 @@ def psifoi_delete(request, eklid, simbid, kenid ):
 def edit_psifoi_kentrou(request,eklid, kenid):
     action_label='Καταχώρηση ψήφων Υποψηφίων Συμβούλων'
     all_ekloges = Eklogestbl.objects.filter(visible=1).select_related('sisid','edrid').order_by('-eklid')
-    selected_ekloges = Eklogestbl.objects.filter(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     selected_kentro = Kentra.objects.get(kenid=kenid)
 
     PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',), extra=0)
@@ -2243,7 +2243,7 @@ def edit_psifoi_kentrou(request,eklid, kenid):
         messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
         return redirect('Elections_list')
 
-    context = {'selected_ekloges': selected_ekloges,
+    context = {'selected_ekloges': selected_ekloges.eklid,
                 'selected_kentro':selected_kentro,
                'all_ekloges': all_ekloges,
                'action_label':action_label,

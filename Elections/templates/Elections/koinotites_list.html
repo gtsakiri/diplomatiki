@@ -23,7 +23,7 @@
 
                         <tbody >
 
-                        <tr class="noborder"> <td colspan="4"><a href="{% url 'koinotites_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'koinotites_add' selected_ekloges%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>
@@ -42,8 +42,8 @@
                                  <td > {{ p.descr}} </td>
                                  <td > {{ p.eidos}} </td>
                                 <td .noborder>
-                                    <a class="btn btn-default" href="{% url 'koinotites_edit' selected_ekloges.0.eklid p.koinid%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'koinotites_delete' selected_ekloges.0.eklid p.koinid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'koinotites_edit' selected_ekloges p.koinid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'koinotites_delete' selected_ekloges p.koinid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>
@@ -58,7 +58,7 @@
 
                         <tbody >
 
-                        <tr> <td colspan="4"><a href="{% url 'koinotites_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr> <td colspan="4"><a href="{% url 'koinotites_add' selected_ekloges%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>

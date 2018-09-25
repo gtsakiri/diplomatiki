@@ -4,7 +4,7 @@
 
 {% block buttonReturn %}
 
-    <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'koinotites_list' selected_ekloges.0.eklid %}';">
+    <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'koinotites_list' selected_ekloges %}';">
 
     <script>
 
@@ -14,7 +14,7 @@
               var url = $("#dataForm").attr("data-typeofkoinotites-url");  // get the url of the `load_type` view
               var currentEidos=$("#id_eidos").val();
               //alert(currentKoinid);
-              var eklid = {{ selected_ekloges.0.eklid }};  // get the selected eklid from the HTML input
+              var eklid = {{ selected_ekloges }};  // get the selected eklid from the HTML input
 
               $.ajax({                       // initialize an AJAX request
                 url: url,                    // set the url of the request (= localhost:8000/ajax/load_koineidos/)

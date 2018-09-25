@@ -33,8 +33,8 @@
                                 <td > {% if p.eidos == 1 %}Δήμο{% else %}Κοινότητα{% endif %}</td>
 
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges.0.eklid p.sindid%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'sindiasmoi_delete' selected_ekloges.0.eklid p.sindid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'sindiasmoi_edit' selected_ekloges p.sindid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'sindiasmoi_delete' selected_ekloges p.sindid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>
@@ -49,7 +49,7 @@
 
                         <tbody >
 
-                        <tr class="noborder"> <td colspan="4"><a href="{% url 'sindiasmoi_add' selected_ekloges.0.eklid%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
+                        <tr class="noborder"> <td colspan="4"><a href="{% url 'sindiasmoi_add' selected_ekloges%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Νέα καταχώριση</a></td></tr>
 
                         </tbody>
                    </table>
