@@ -59,14 +59,17 @@
                         </tr>
                         {% for p in all_simbouloi %}
                               <tr>
-                                <td > {{ p.surname }} </td>
-                                <td > {{ p.firstname }}</td>
-                                <td > {{ p.fathername }} </td>
-                                <td > {{ p.toposeklogis }} </td>
-                                <td > {% if  p.sindiasmos is None %} {% else %} {{ p.sindiasmos  }} {% endif %}</td>
+                                <td > {{ p.0 }} </td>
+                                <td > {{ p.1 }}</td>
+                                <td > {{ p.2 }} </td>
+                                <td > {{ p.3 }} </td>
+                                <td > {% if  p.4 is None %} {% else %} {{ p.4  }} {% endif %}</td>
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'simbouloi_edit' selected_ekloges p.simbid.simbid%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'simbouloi_delete' selected_ekloges p.simbid.simbid%}"><span class="glyphicon glyphicon-minus"></span></a>
+
+
+                                    <a class="btn btn-default" href="{% url 'simbouloi_edit' selected_ekloges p.0 %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'simbouloi_delete' selected_ekloges p.0 %}"><span class="glyphicon glyphicon-minus"></span></a>
+
                                 </td>
 
                               </tr>

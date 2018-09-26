@@ -1734,7 +1734,7 @@ def simbouloi_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklallsimbvw_set').get(eklid=eklid)
 
-    all_simbouloi = selected_ekloges.eklallsimbvw_set.all()
+    all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sindiasmos')
 
     if paramorder==1 or paramorder==6:
         all_simbouloi = all_simbouloi.order_by('surname', 'firstname','fathername')
