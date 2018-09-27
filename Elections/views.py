@@ -2238,17 +2238,15 @@ def edit_psifoi_kentrou(request,eklid, kenid):
     action_label='Καταχώρηση ψήφων Υποψηφίων Συμβούλων'
     all_ekloges = Eklogestbl.objects.filter(visible=1).select_related('sisid','edrid').order_by('-eklid')
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
-    selected_kentro = Kentra.objects.get(kenid=kenid)
+    selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
     PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',), extra=0)
 
     data = request.POST or None
-    formset = PsifoiFormSet(data=data, queryset=Psifoi.objects.filter(kenid=kenid).order_by('simbid__surname' ))
+    formset = PsifoiFormSet(data=data, queryset= selected_kentro.psifoi_set.all().order_by('simbid__surname' ))
     for form in formset:
-        form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid).select_related('eklid', 'koinid', 'perid')
+        form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid)
         form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid=form['simbid'].value())  #Τα dropdown θα έχουν μόνο το σχετικό simbid
-        #form.fields['simbid'].queryset = Simbouloi.objects.all().first()
-        #form.fields['simbid'].queryset = None
 
     if request.method == 'POST' and formset.is_valid():
         formset.save()
