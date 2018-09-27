@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_27_9_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,8 +90,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="374" column="62" selection-start-line="374" selection-start-column="62" selection-end-line="374" selection-end-column="62" />
+            <state relative-caret-position="305">
+              <caret line="439" column="75" selection-start-line="439" selection-start-column="75" selection-end-line="439" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -98,8 +99,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="560" lean-forward="true" selection-start-line="560" selection-end-line="560" />
+            <state relative-caret-position="408">
+              <caret line="518" column="56" selection-start-line="518" selection-start-column="56" selection-end-line="518" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -185,11 +186,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Simbouloi_lis</find>
-      <find>sindiasmos</find>
-      <find>initial</find>
-      <find>psifodeltia_lis</find>
-      <find>exists</find>
       <find>window</find>
       <find>clea</find>
       <find>Elections_list</find>
@@ -215,6 +211,11 @@
       <find>Eklpsi</find>
       <find>psifoisimb_per</find>
       <find>psifoisimb_ken</find>
+      <find>psifodeltiasind_</find>
+      <find>simbouloi_l</find>
+      <find>eklsumpsifodeltiasindvw</find>
+      <find>psifodeltiasind_ken</find>
+      <find>eklsumpsifodeltiasindkenvw</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -277,10 +278,10 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsind_list.html" />
         <option value="$PROJECT_DIR$/diplomatiki/settings.py" />
-        <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html" />
+        <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
       </list>
     </option>
@@ -426,13 +427,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00017" summary="home commit 21:45">
-      <created>1535144539221</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1535144539221</updated>
     </task>
     <task id="LOCAL-00018" summary="home commit 25_8_2018">
       <created>1535178467821</created>
@@ -770,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538038350976</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="work_27_9_2018">
+      <created>1538044833566</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1538044833566</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TodoView">
@@ -787,6 +788,7 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
+      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.3252376" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32831737" />
@@ -804,7 +806,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.3255814" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3284055" />
@@ -1237,13 +1238,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="374" column="62" selection-start-line="374" selection-start-column="62" selection-end-line="374" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1275,10 +1269,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="439" column="75" selection-start-line="439" selection-start-column="75" selection-end-line="439" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="560" lean-forward="true" selection-start-line="560" selection-end-line="560" />
+        <state relative-caret-position="408">
+          <caret line="518" column="56" selection-start-line="518" selection-start-column="56" selection-end-line="518" selection-end-column="56" />
         </state>
       </provider>
     </entry>

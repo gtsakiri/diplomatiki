@@ -432,12 +432,12 @@ class EklSinolokentrwnAnaAnametrhsh(models.Model):
 
 class EklSumpsifodeltiasindKenVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    kenid = models.IntegerField(db_column='kenID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.DO_NOTHING, db_column='kenID', db_index=True)  # Field name made lowercase.
     kentro = models.CharField(max_length=45)
     votes = models.IntegerField()
     votesb = models.IntegerField(db_column='votesB')  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
 
     def __str__(self):
@@ -485,8 +485,8 @@ class EklSumpsifodeltiasindPerVw(models.Model):
 
 class EklSumpsifodeltiasindVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
     photo=models.ImageField(db_column='photo',null=True)
