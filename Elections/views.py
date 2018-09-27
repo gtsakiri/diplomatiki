@@ -2086,6 +2086,9 @@ def load_simbouloi(request, eklid):
 
 
 def psifoi_list(request, eklid, kenid=None):
+
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklpsifoisimbvw_set').get(eklid=eklid)
+
     paramorder = request.GET.get('orderoption', '')
 
     try:
@@ -2102,30 +2105,30 @@ def psifoi_list(request, eklid, kenid=None):
         if kenid is not None:
             paramstr = kenid
         else:
-            paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
+            paramstr = selected_ekloges.kentra_set.all().first().kenid  #Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
 
 
 
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    all_psifoi = selected_ekloges.eklpsifoisimbvw_set.filter(kenid=paramstr).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmos', 'shortsind', 'aa', 'eidos', 'kenid', 'votes', 'koinotita')
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
-
+    #all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
+    all_kentra = selected_ekloges.kentra_set.all().values_list('kenid', 'descr', 'koinid').order_by('descr')
+    #all_kentra = Kentra.objects.filter(eklid=eklid)
 
     if paramorder==1 or paramorder==5:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname','fathername')
+        all_psifoi = all_psifoi.order_by('surname', 'firstname','fathername')
     elif paramorder == 2:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('shortsind', 'surname', 'firstname','fathername')
+        all_psifoi = all_psifoi.order_by('shortsind', 'surname', 'firstname','fathername')
     elif paramorder == 3:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos', 'eidos', 'surname', 'firstname','fathername')
+        all_psifoi = all_psifoi.order_by('shortsind', 'eidos', 'surname', 'firstname','fathername')
     else:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('-votes')
+        all_psifoi = all_psifoi.order_by('-votes')
 
-    selected_kentro = Kentra.objects.filter(kenid=paramstr)
-
-
-
+    selected_kentro = selected_ekloges.kentra_set.get(kenid=paramstr)
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
     #all_psifoi = Psifoi.objects.filter(kenid=paramstr).order_by('simbid__surname')
 
@@ -2133,7 +2136,7 @@ def psifoi_list(request, eklid, kenid=None):
                'selected_ekloges': selected_ekloges.eklid,
                'all_psifoi':all_psifoi,
                'all_kentra':all_kentra,
-               'selected_kentro':selected_kentro
+               'selected_kentro' : selected_kentro,
                }
 
     return render(request, 'Elections/psifoi_list.html' , context)

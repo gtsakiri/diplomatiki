@@ -26,7 +26,7 @@
                         <label class="label5">Εκλογικό κέντρο</label>
                      <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
                         {% for p in all_kentra %}
-                         <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }} - {{ p.koinid }}</option>
+                         <option  value="{{  p.0 }}" {% if selected_kentro.kenid ==  p.0  %}selected{%endif%}>{{ p.1 }}  </option>
                         {% endfor %}
                      </select>
 
@@ -68,22 +68,24 @@
                                 <td class="thick">Συνδυασμός</td>
                                 <td class="thick">ΑΑ</td>
                                 <td class="thick">Κατηγορία Συμβούλου</td>
+                                <td class="thick">Κοινότητα</td>
                                 <td class="thick">Ψήφοι</td>
                                 <td class="thick">Ενέργειες</td>
                         </tr>
                         {% for p in all_psifoi %}
                               <tr>
-                                <td > {{ p.surname}} </td>
-                                <td > {{ p.firstname }} </td>
-                                <td > {{ p.fathername }}</td>
-                                <td > {{ p.shortsind }}</td>
-                                <td > {{ p.aa }}</td>
-                                <td > {{ p.eidos }}</td>
-                                <td > {{ p.votes }}</td>
+                                <td > {{ p.1}} </td>
+                                <td > {{ p.2 }} </td>
+                                <td > {{ p.3 }}</td>
+                                <td > {{ p.5 }}</td>
+                                <td > {{ p.6 }}</td>
+                                <td > {{ p.7 }}</td>
+                                <td > {{ p.10 }}</td>
+                                <td > {{ p.9 }}</td>
 
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'psifoi_edit' selected_ekloges p.simbid p.kenid%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'psifoi_delete' selected_ekloges p.simbid p.kenid%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifoi_edit' selected_ekloges p.0 p.8%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifoi_delete' selected_ekloges p.0 p.8%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>

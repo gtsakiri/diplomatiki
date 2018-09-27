@@ -371,20 +371,19 @@ class EklPosostasindPerVw(models.Model):
 
 class EklPsifoisimbVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID', db_index=True)  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID', blank=True, null=True, db_index=True)  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID',db_index=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', blank=True, null=True, db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(db_column='sindiasmos',max_length=100, blank=True, null=True)
     shortsind = models.CharField(db_column='shortsind',max_length=100, blank=True, null=True)
-    simbid = models.IntegerField(db_column='simbID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID', db_index=True)
     surname = models.CharField(max_length=100, db_index=True)
     firstname = models.CharField(max_length=100, db_index=True)
     fathername = models.CharField(max_length=100, db_index=True)
     aa =  models.CharField(db_column='aa',max_length=45)
-    kenid = models.IntegerField(db_column='kenID', db_index=True)  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.DO_NOTHING, db_column='kenID', db_index=True)  # Field name made lowercase.
     kentro = models.CharField(max_length=45)
     eidos = models.CharField(db_column='eidos', max_length=100)
     koinotita= models.CharField(max_length=100)
-
     votes = models.IntegerField()
 
     def __str__(self):
