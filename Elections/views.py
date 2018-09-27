@@ -537,24 +537,27 @@ def psifoisimb_ken(request, eklid):
     paramstr = request.GET.get('kentrooption','')
     paramorder = request.GET.get('orderoption','')
 
+
+    # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklpsifoisimbvw_set').get(eklid=eklid)
     try:
         paramstr = int(paramstr)
     except:
-        p = EklPsifoisimbVw.objects.filter(eklid=eklid).order_by('kentro')
-        paramstr=p[0].kenid  # default kenid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
+        p = selected_ekloges.eklpsifoisimbvw_set.all().order_by('kentro')
+        #EklPsifoisimbVw.objects.filter(eklid=eklid).order_by('kentro')
+        paramstr=p[0].kenid.kenid  # default kenid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
 
     try:
         paramorder = int(paramorder)
     except:
         paramorder = 5  # default ταξινόμηση
 
-    # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     # φιλτράρισμα επιλεγμένου κέντρου
-    selected_kentro = Kentra.objects.filter(kenid=paramstr)
+    selected_kentro = selected_ekloges.kentra_set.get(kenid=paramstr)
 
     selected_order = paramorder
 
@@ -1147,10 +1150,15 @@ def sindiasmoi_delete(request, eklid, sindid ):
 
 def eklsind_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    #selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
+
+    #all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername','toposeklogis', 'sindiasmos')
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     all_eklsind = Eklsind.objects.filter(eklid=eklid)
+    #all_eklsind = selected_ekloges.eklsind_set().all()
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -1323,11 +1331,11 @@ def perifereia_delete(request, eklid, perid ):
 
 
 def eklsindkoin_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsindkoin_set').get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_eklsindkoin = Eklsindkoin.objects.filter(eklid=eklid)
+    all_eklsindkoin = selected_ekloges.eklsindkoin_set.all()
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
