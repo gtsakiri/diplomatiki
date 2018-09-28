@@ -270,7 +270,7 @@ class Kentra(models.Model):
 
 
     def __str__(self):
-        return self.descr + ' - ' + str(self.koinid)
+        return self.descr #+ ' - ' + str(self.koinid.descr)
 
     class Meta:
         managed = True

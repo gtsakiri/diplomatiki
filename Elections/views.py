@@ -2235,22 +2235,23 @@ def psifoi_delete(request, eklid, simbid, kenid ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 def edit_psifoi_kentrou(request,eklid, kenid):
+
     action_label='Καταχώρηση ψήφων Υποψηφίων Συμβούλων'
-    all_ekloges = Eklogestbl.objects.filter(visible=1).select_related('sisid','edrid').order_by('-eklid')
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set','eklsindsimb_set').get(eklid=eklid)
     selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
     PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',), extra=0)
 
     data = request.POST or None
-    formset = PsifoiFormSet(data=data, queryset= selected_kentro.psifoi_set.all().order_by('simbid__surname' ))
+    formset = PsifoiFormSet(data=data, queryset= selected_kentro.psifoi_set.filter(kenid=kenid).order_by('simbid__surname' ))
     for form in formset:
-        form.fields['kenid'].queryset = Kentra.objects.filter(kenid=kenid)
-        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid=form['simbid'].value())  #Τα dropdown θα έχουν μόνο το σχετικό simbid
+        form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
+        form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid=form['simbid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
 
     if request.method == 'POST' and formset.is_valid():
         formset.save()
-        messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
+        #messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
         return redirect('Elections_list')
 
     context = {'selected_ekloges': selected_ekloges.eklid,
