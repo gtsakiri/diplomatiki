@@ -461,4 +461,6 @@ class PsifoiForm(ModelForm):
         simbid = cleaned_data.get('simbid')
         votes = cleaned_data.get('votes')
         kenid = cleaned_data.get('kenid')
+        if votes<0:
+            raise forms.ValidationError('Δεν υπάρχει αρνητικό σύνολο ψήφων!')
 

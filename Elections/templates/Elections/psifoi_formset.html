@@ -36,13 +36,14 @@
                                 {% if forloop.first %}
                                     {% for field in form %}
 
-                                            {% if field.name == 'simbid' %}
-                                                <th><label for="id_simbid">Υποψήφιος</label></th>
-                                            {% elif field.name == 'votes' %}
-                                                <th><label for="id_votes">Ψήφοι</label></th>
-                                            {% elif field.name == 'kenid' %}
-                                                <th><label for="id_kenid">Κέντρο</label></th>
-                                            {% endif %}
+
+                                        {% if field.name == 'simbid' %}
+                                            <th><label for="id_simbid">Υποψήφιος</label> </th>
+                                        {% elif field.name == 'votes' %}
+                                            <th><label for="id_votes">Ψήφοι</label></th>
+                                        {% elif field.name == 'kenid' %}
+                                            <th><label for="id_kenid">Κέντρο</label></th>
+                                        {% endif %}
 
                                     {% endfor %}
                                 {% endif %}
@@ -50,10 +51,18 @@
                         <tbody>
                                 <tr>
                                     {% for field in form %}
+                                        {% if field.errors %}
+                                            {% render_field field class="form-control is-invalid" %}
+                                            {% for error in field.errors %}
+                                                <div class="bg2 invalid-feedback">
+                                                  {{ error }}
+                                                </div>
+                                          {% endfor %}
+                                        {% else %}
 
+                                                <td>{% render_field field class="form-control is-valid" %}</td>
+                                        {% endif %}
 
-
-                                               <td>{{ field }}</td>
 
                                     {% endfor %}
                                 </tr>
@@ -79,37 +88,23 @@
      <script>
      $(document).ready(function () {
 
-             $("input[type='text']").focus(
+         $("input[type='number']").on('change', function(e) {
 
-            function(){
-              $(this).css({'background-color' : '#f9f398'});
-            });
-
-            $("input[type='text']").blur(
-            function(){
+            if ((new Number( $(this).val()) < 0)) {
+                alert('Δεν επιτρέπονται αρνητικές τιμές!')
+                $(this).css({'background-color': '#f9f398'});
+                $(this).focus();
+            }
+            else {
                 $(this).css({'background-color' : '#fcfcf9'});
-            });
-
-             $('select').focus(
-            function(){
-
-                //alert($(this).attr('class'));
-                if ($(this).attr('class')!='sel1') {
-                     $(this).css({'background-color' : '#f9f398'});
                 }
 
-            });
 
-            $('select').blur(
-            function(){
-                 if ($(this).attr('class')!='sel1') {
-                    $(this).css({'background-color' : '#fcfcf9'});
-                  }
-            });
+        });
 
-            return false;
+        return false;
 
-            });
+        });
      </script>
 
 
