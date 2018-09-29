@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Elections',
     'widget_tweaks',
     'debug_toolbar',
+    'accounts',
 ]
 
 MIDDLEWARE = [
