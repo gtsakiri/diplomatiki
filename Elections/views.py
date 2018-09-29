@@ -2,7 +2,6 @@ import xlwt
 from django.contrib import  messages
 from django.contrib.auth import  authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 from django.forms import DateInput, modelformset_factory
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
@@ -1625,33 +1624,38 @@ def kentra_delete(request, eklid, kenid ):
 
 
 def psifodeltia_list(request, eklid):
-
     paramstr = request.GET.get('kentraoption', '')
+    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set', 'eklsumpsifodeltiasindkenvw_set').get(
+        eklid=eklid)
 
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
+        paramstr = selected_ekloges.kentra_set.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
 
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
+    all_kentra = selected_ekloges.kentra_set.all().order_by('descr').values_list('kenid', 'descr', 'eklid')
 
-    selected_kentro = Kentra.objects.filter(kenid=paramstr)
+    selected_kentro = Kentra.objects.get(kenid=paramstr).kenid
 
-    #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
-    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
+    # all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
+    # all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
+    all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).values_list('eklid',
+                                                                                                         'kentro',
+                                                                                                         'votes',
+                                                                                                         'sindiasmos',
+                                                                                                         'id')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
-               'all_psifodeltia':all_psifodeltia,
-               'all_kentra':all_kentra,
-               'selected_kentro':selected_kentro
+               'all_psifodeltia': all_psifodeltia,
+               'all_kentra': all_kentra,
+               'selected_kentro': selected_kentro
                }
 
-    return render(request, 'Elections/psifodeltia_list.html' , context)
+    return render(request, 'Elections/psifodeltia_list.html', context)
 
 def psifodeltia_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
@@ -2261,40 +2265,4 @@ def edit_psifoi_kentrou(request,eklid, kenid):
 
     return render(request, 'Elections/psifoi_formset.html', context)
 
-def login_user(request, eklid):
 
-    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set').get(eklid=eklid)
-
-    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
-    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('Elections_list')
-        else:
-            messages.error(request, 'Ανύπαρκτος χρήστης!')
-
-    context = {'selected_ekloges': selected_ekloges.eklid,
-               'all_ekloges': all_ekloges,
-               }
-
-    return render(request, 'Elections/login.html',context)
-
-def logout_user(request, eklid):
-
-    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set').get(eklid=eklid)
-
-    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
-    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-
-    logout(request)
-
-    context = {'selected_ekloges': selected_ekloges.eklid,
-               'all_ekloges': all_ekloges,
-               }
-
-    return render(request, 'Elections/login.html',context)

@@ -26,7 +26,7 @@
                         <label class="label5">Εκλογικό κέντρο</label>
                      <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
                         {% for p in all_kentra %}
-                         <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
+                         <option  value="{{  p.0 }}" {% if selected_kentro ==  p.0  %}selected{%endif%}>{{ p.1 }}</option>
                         {% endfor %}
                      </select>
 
@@ -49,13 +49,13 @@
                         </tr>
                         {% for p in all_psifodeltia %}
                               <tr>
-                                <td > {{ p.sindid}} </td>
-                                <td > {{ p.kenid }} </td>
-                                <td > {{ p.votesa }}</td>
+                                <td > {{ p.3}} </td>
+                                <td > {{ p.1 }} </td>
+                                <td > {{ p.2 }}</td>
 
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'psifodeltia_edit' selected_ekloges p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifodeltia_edit' selected_ekloges p.4%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges p.4%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>

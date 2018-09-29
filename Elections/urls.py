@@ -1,13 +1,15 @@
 from django.conf.urls import url
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from . import views
 
 
 urlpatterns = [
 path('', views.Elections_list, name='Elections_list'),
 path('<int:eklid>/', views.Elections_list, name='Elections_list'),
-path('login/<int:eklid>/', views.login_user, name='login'),
-path('logout/<int:eklid>/', views.logout_user, name='logout'),
+path('accounts/', include('accounts.urls', namespace="accounts")),
+
+#path('login/<int:eklid>/', views.login_user, name='login'),
+#path('logout/<int:eklid>/', views.logout_user, name='logout'),
 #path('', views.simb_modal, name='simb_modal'),
 
 path('edres/<int:eklid>/', views.edres_list, name='edres_list'),
