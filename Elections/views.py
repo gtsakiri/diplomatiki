@@ -1,6 +1,7 @@
 import xlwt
 from django.contrib import  messages
 from django.contrib.auth import  authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from django.forms import DateInput, modelformset_factory
 from django.http import HttpResponse
@@ -588,6 +589,7 @@ def psifoisimb_ken(request, eklid):
 
 #ΠΑΡΑΜΕΤΡΙΚΑ
 
+#@login_required
 def edres_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2200,9 +2202,6 @@ def psifoi_edit(request, eklid, simbid, kenid):
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
         form = PsifoiForm(eklid, request.POST or None, instance=simb_item)
 
-
-
-
     context = {
         'selected_ekloges': selected_ekloges.eklid,
         'selected_kentro' : selected_kentro,
@@ -2278,6 +2277,7 @@ def login_user(request, eklid):
             return redirect('Elections_list')
         else:
             messages.error(request, 'Ανύπαρκτος χρήστης!')
+
     context = {'selected_ekloges': selected_ekloges.eklid,
                'all_ekloges': all_ekloges,
                }
