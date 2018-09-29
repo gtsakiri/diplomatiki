@@ -75,7 +75,12 @@
                 <ul class="nav navbar-nav navbar-right">
 
                      <li class="nav-item">
-                        <a href="/admin/"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Login</a>
+                        <!-- <a href="/admin/"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Login</a>  -->
+                         {% if request.user.is_authenticated %}
+                             <a href="{% url 'logout' selected_ekloges %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Logout</a>
+                         {% else %}
+                            <a href="{% url 'login' selected_ekloges %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Login</a>
+                         {% endif %}
                     </li>
                 </ul>
 

@@ -1,11 +1,10 @@
 import xlwt
 from django.contrib import  messages
-from django.forms.formsets import formset_factory
+from django.contrib.auth import  authenticate, login, logout
 
-from django.forms import DateInput, modelformset_factory, CharField
-from django.http import HttpResponse, HttpResponseRedirect
+from django.forms import DateInput, modelformset_factory
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
-from django.template import RequestContext
 
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
@@ -2262,3 +2261,40 @@ def edit_psifoi_kentrou(request,eklid, kenid):
                }
 
     return render(request, 'Elections/psifoi_formset.html', context)
+
+def login_user(request, eklid):
+
+    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set').get(eklid=eklid)
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('Elections_list')
+        else:
+            messages.error(request, 'Ανύπαρκτος χρήστης!')
+    context = {'selected_ekloges': selected_ekloges.eklid,
+               'all_ekloges': all_ekloges,
+               }
+
+    return render(request, 'Elections/login.html',context)
+
+def logout_user(request, eklid):
+
+    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set').get(eklid=eklid)
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    logout(request)
+
+    context = {'selected_ekloges': selected_ekloges.eklid,
+               'all_ekloges': all_ekloges,
+               }
+
+    return render(request, 'Elections/login.html',context)

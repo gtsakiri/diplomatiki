@@ -28,7 +28,7 @@
                  <form method="POST" id="dataForm" class="post-form"  action="">
                     {% csrf_token %}
 
-                    <table class="table styletd1 table-condensed  table-hover ">
+                    <table class="table styletd1 table-hover ">
                         <thead>
                             {% for form in formset.forms %}
                                 {{ formset.management_form }}
