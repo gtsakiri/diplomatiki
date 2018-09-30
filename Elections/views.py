@@ -375,7 +375,7 @@ def psifoisimb_perifereies(request, eklid):
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = Eklper.objects.filter(eklid=eklid).first().perid.perid # default perid  αν δεν δοθεί
+        paramstr = Eklper.objects.filter(eklid=eklid).first().perid.perid # default perid  το πρώτο αν δεν δοθεί
 
 
     try:
