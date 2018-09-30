@@ -588,9 +588,11 @@ def psifoisimb_ken(request, eklid):
 
 #ΠΑΡΑΜΕΤΡΙΚΑ
 
-#@login_required
 def edres_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -605,6 +607,10 @@ def edres_list(request, eklid):
 
 def edres_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
     action_label = 'Κατανομή εδρών - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -631,6 +637,9 @@ def edres_add(request, eklid):
 
 def edres_edit(request, eklid, edrid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
     action_label = 'Κατανομή εδρών - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -654,7 +663,12 @@ def edres_edit(request, eklid, edrid):
     return render(request, 'Elections/edres_form.html', context)
 
 def edres_delete(request, eklid, edrid ):
+
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -672,6 +686,9 @@ def edres_delete(request, eklid, edrid ):
 
 def edreskoin_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -686,6 +703,11 @@ def edreskoin_list(request, eklid):
 
 def edreskoin_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Κατανομή εδρών σε Κοινότητες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -712,6 +734,11 @@ def edreskoin_add(request, eklid):
 
 def edreskoin_edit(request, eklid, edrid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Κατανομή εδρών σε Κοινότητες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -736,6 +763,11 @@ def edreskoin_edit(request, eklid, edrid):
 
 def edreskoin_delete(request, eklid, edrid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -752,7 +784,13 @@ def edreskoin_delete(request, eklid, edrid ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 def sistima_list(request, eklid):
+
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -767,6 +805,11 @@ def sistima_list(request, eklid):
 
 def sistima_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -798,6 +841,11 @@ def sistima_add(request, eklid):
 
 def sistima_edit(request, eklid, sisid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -822,6 +870,11 @@ def sistima_edit(request, eklid, sisid):
 
 def sistima_delete(request, eklid, sisid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -840,6 +893,11 @@ def sistima_delete(request, eklid, sisid ):
 
 def typeofkoinotita_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -854,6 +912,11 @@ def typeofkoinotita_list(request, eklid):
 
 def typeofkoinotita_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Τύποι κοινοτήτων - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -880,6 +943,11 @@ def typeofkoinotita_add(request, eklid):
 
 def typeofkoinotita_edit(request, eklid, tpkid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Τύποι κοινοτήτων - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -904,6 +972,11 @@ def typeofkoinotita_edit(request, eklid, tpkid):
 
 def typeofkoinotita_delete(request, eklid, tpkid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -921,6 +994,11 @@ def typeofkoinotita_delete(request, eklid, tpkid ):
 
 def ekloges_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -934,6 +1012,11 @@ def ekloges_list(request, eklid):
 
 def ekloges_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -968,6 +1051,11 @@ def ekloges_add(request, eklid):
 
 def ekloges_edit(request, eklid, cureklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -995,6 +1083,11 @@ def ekloges_edit(request, eklid, cureklid):
 
 def ekloges_delete(request, eklid, cureklid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1018,6 +1111,11 @@ def ekloges_delete(request, eklid, cureklid ):
 
 def sindiasmoi_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1035,6 +1133,11 @@ def sindiasmoi_list(request, eklid):
 
 def sindiasmoi_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Υποψήφιοι Συνδυασμοί - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1082,6 +1185,11 @@ def sindiasmoi_add(request, eklid):
 
 def sindiasmoi_edit(request, eklid, sindid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1132,6 +1240,11 @@ def sindiasmoi_edit(request, eklid, sindid):
 
 def sindiasmoi_delete(request, eklid, sindid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1151,6 +1264,11 @@ def sindiasmoi_delete(request, eklid, sindid ):
 
 def eklsind_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     #selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
 
     #all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername','toposeklogis', 'sindiasmos')
@@ -1170,6 +1288,11 @@ def eklsind_list(request, eklid):
 
 def eklsind_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1199,6 +1322,11 @@ def eklsind_add(request, eklid):
 
 def eklsind_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1227,6 +1355,11 @@ def eklsind_edit(request, eklid, id):
 
 def eklsind_delete(request, eklid, id ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1246,6 +1379,11 @@ def eklsind_delete(request, eklid, id ):
 
 def perifereia_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1260,6 +1398,11 @@ def perifereia_list(request, eklid):
 
 def perifereia_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Περιφέρειες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1290,6 +1433,11 @@ def perifereia_add(request, eklid):
 
 def perifereia_edit(request, eklid, perid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Περιφέρειες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1314,6 +1462,11 @@ def perifereia_edit(request, eklid, perid):
 
 def perifereia_delete(request, eklid, perid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1333,6 +1486,11 @@ def perifereia_delete(request, eklid, perid ):
 
 def eklsindkoin_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklsindkoin_set').get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1347,6 +1505,11 @@ def eklsindkoin_list(request, eklid):
 
 def eklsindkoin_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1376,6 +1539,11 @@ def eklsindkoin_add(request, eklid):
 
 def eklsindkoin_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1404,6 +1572,11 @@ def eklsindkoin_edit(request, eklid, id):
 
 def eklsindkoin_delete(request, eklid, id ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1422,6 +1595,11 @@ def eklsindkoin_delete(request, eklid, id ):
 
 def koinotites_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1436,6 +1614,11 @@ def koinotites_list(request, eklid):
 
 def koinotites_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Κοινότητες - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1474,6 +1657,11 @@ def koinotites_add(request, eklid):
 
 def koinotites_edit(request, eklid, koinid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Κοινότητες - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1513,6 +1701,11 @@ def koinotites_edit(request, eklid, koinid):
 
 def koinotites_delete(request, eklid, koinid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1532,6 +1725,11 @@ def koinotites_delete(request, eklid, koinid ):
 
 def kentra_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1546,6 +1744,11 @@ def kentra_list(request, eklid):
 
 def kentra_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Εκλ. Κέντρα - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1572,6 +1775,11 @@ def kentra_add(request, eklid):
 
 def kentra_edit(request, eklid, kenid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Κέντρα - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1606,6 +1814,11 @@ def kentra_edit(request, eklid, kenid):
 
 def kentra_delete(request, eklid, kenid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1622,11 +1835,15 @@ def kentra_delete(request, eklid, kenid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-
+#@login_required
 def psifodeltia_list(request, eklid):
+
     paramstr = request.GET.get('kentraoption', '')
     selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set', 'eklsumpsifodeltiasindkenvw_set').get(
         eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
     try:
         paramstr = int(paramstr)
@@ -1659,6 +1876,11 @@ def psifodeltia_list(request, eklid):
 
 def psifodeltia_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1685,6 +1907,11 @@ def psifodeltia_add(request, eklid):
 
 def psifodeltia_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1716,6 +1943,11 @@ def psifodeltia_edit(request, eklid, id):
 
 def psifodeltia_delete(request, eklid, id ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1735,6 +1967,11 @@ def psifodeltia_delete(request, eklid, id ):
 
 
 def simbouloi_list(request, eklid):
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklallsimbvw_set').get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
 
     paramorder = request.GET.get('orderoption', '')
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1745,8 +1982,7 @@ def simbouloi_list(request, eklid):
 
     #selected_ekloges = Eklogestbl.objects.get(eklid=eklid).prefetch_related('eklallsimbvw_set')
 
-    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
-    selected_ekloges = Eklogestbl.objects.prefetch_related('eklallsimbvw_set').get(eklid=eklid)
+
 
     all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sindiasmos')
 
@@ -1812,6 +2048,11 @@ def simbouloi_insert_records(form, simb_item, eklid):
 
 def simbouloi_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
     action_label = 'Υποψήφιοι Σύμβουλοι - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -1855,6 +2096,11 @@ def simbouloi_add(request, eklid):
 
 def simbouloi_edit(request, eklid, simbid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
     action_label = 'Υποψήφιοι Σύμβουλοι - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2033,6 +2279,11 @@ def simbouloi_edit(request, eklid, simbid):
 
 def simbouloi_delete(request, eklid, simbid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2103,6 +2354,11 @@ def psifoi_list(request, eklid, kenid=None):
 
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklpsifoisimbvw_set').get(eklid=eklid)
 
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
+
     paramorder = request.GET.get('orderoption', '')
 
     try:
@@ -2158,6 +2414,11 @@ def psifoi_list(request, eklid, kenid=None):
 
 def psifoi_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2184,6 +2445,11 @@ def psifoi_add(request, eklid):
 
 def psifoi_edit(request, eklid, simbid, kenid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2220,6 +2486,11 @@ def psifoi_edit(request, eklid, simbid, kenid):
 
 def psifoi_delete(request, eklid, simbid, kenid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2237,10 +2508,16 @@ def psifoi_delete(request, eklid, simbid, kenid ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 def edit_psifoi_kentrou(request,eklid, kenid):
+    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set', 'eklsindsimb_set').get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/' + str(selected_ekloges.eklid), request.path))
 
     action_label='Καταχώρηση ψήφων Υποψηφίων Συμβούλων'
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set','eklsindsimb_set').get(eklid=eklid)
+
+
+
     selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
     PsifoiFormSet = modelformset_factory(Psifoi, fields =('simbid', 'votes', 'kenid',), extra=0)
