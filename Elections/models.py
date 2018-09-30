@@ -588,8 +588,8 @@ class EklSumpsifoisimbKoinVw(models.Model):
 
 class EklSumpsifoisimbPerVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.CASCADE, db_column='eklID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbid', db_index=True) # Field name made lowercase.
     surname = models.CharField(max_length=100)
     firstname = models.CharField(max_length=100)
     fathername = models.CharField(max_length=100)

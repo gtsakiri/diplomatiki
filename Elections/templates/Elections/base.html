@@ -103,30 +103,34 @@
                 <!--<p id="demo1" type="hidden" ></p> -->
                 <div id="div1">
 
-                <form method="get" name="ekloges" action="{% url 'Elections_list' selected_ekloges %}">
-                     <!--<input id="EklInput" name="eklogesinput" value="9"/><!--name="eklogesinput"  -->
-                    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                    <select  class="sel1" id="mydir" name="eklogesoption"  onchange="ekloges.submit()">
-                        {% for e in all_ekloges %}
-                         <option  value="{{  e.eklid }}" {% if selected_ekloges ==  e.eklid  %}selected{%endif%}>{{ e.descr }}</option>
-                        {% endfor %}
-                    </select>
-                <hr>
-
-                Αναζήτηση εκλ. κέντρου
-                    <input type="text"  id="eklkentro"  name="eklkentrooption" placeholder="Π.χ. 275" />
-                    <div class="divmargin"></div>
-                    <button type="submit" id="button-search" class="btn btn-primary ">Αναζήτηση</button>
 
 
-                <hr>
+                    <form method="get" name="ekloges" action="{% url 'Elections_list' selected_ekloges %}">
+                         <!--<input id="EklInput" name="eklogesinput" value="9"/><!--name="eklogesinput"  -->
+                        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                        <select  class="sel1" id="mydir" name="eklogesoption"  onchange="ekloges.submit()">
+                            {% for e in all_ekloges %}
+                             <option  value="{{  e.eklid }}" {% if selected_ekloges ==  e.eklid  %}selected{%endif%}>{{ e.descr }}</option>
+                            {% endfor %}
+                        </select>
+                    <hr>
+
+                    {% if request.user.is_authenticated %}
+
+                        Αναζήτηση εκλ. κέντρου
+                            <input type="text"  id="eklkentro"  name="eklkentrooption" placeholder="Π.χ. 275" />
+                            <div class="divmargin"></div>
+                            <button type="submit" id="button-search" class="btn btn-primary ">Αναζήτηση</button>
 
 
-                </form>
+                        <hr>
+                    {% endif %}
 
-                <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
 
-                </div>
+                    <noscript><input type="submit" value="Submit"></noscript>
+
+                    </div>
 
                     <!-- overflow-y: scroll; -->
                 <ul class="nav nav-list">
@@ -153,6 +157,7 @@
                     </li>
 
                     <li class="divider"></li>
+                {% if request.user.is_authenticated %}
                     <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
                         <ul class="nav nav-list tree" style="font-size: 13px; " >
                             <li><a href="{% url 'ekloges_list' selected_ekloges  %}">Εκλ. αναμετρήσεις</a></li>
@@ -173,6 +178,7 @@
                         </ul>
 
                     </li>
+                {% endif %}
                 </ul>
             </div>
 
@@ -242,7 +248,7 @@
     $("#livesearch").keyup(function () {
                     var value = this.value.toLowerCase().trim();
 
-                    $("table tr:not(:first)").each(function (index) {
+                    $("table tr").each(function (index) {
                         if (!index) return;
                         $(this).find("td").each(function () {
                             var id = $(this).text().toLowerCase().trim();
