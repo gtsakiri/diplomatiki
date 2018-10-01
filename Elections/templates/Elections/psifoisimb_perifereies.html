@@ -25,6 +25,7 @@
             {% for p in all_perifereies %}
              <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
             {% endfor %}
+             <option  value="0">ΑΝΕΞΑΡΤΗΤΟΥ ΠΕΡΙΦΕΡΕΙΑΣ</option>
          </select>
          <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
 
@@ -36,6 +37,7 @@
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμα</option>
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
+
          </select>
          </div>
         </form>
