@@ -18,7 +18,7 @@
 
        <div class="col-md-9 col-md-offset-1">
 
-        <div class="text-center">
+        <div class="container">
         <form method="get" name="perifereies">
 
          <select  class="sel2" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
@@ -26,22 +26,28 @@
              <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
             {% endfor %}
          </select>
+         <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
 
-         <select   name="orderoption"  onchange="perifereies.submit()">
+        <div class="divmargin"> </div>
+
+        <div>
+        <select   name="orderoption"  onchange="perifereies.submit()">
          <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμα</option>
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
-         <input type="text" class="heighttext" id="livesearch" placeholder="live search"></input>
+         </div>
         </form>
+
+       </div>
 
         <div class="divmargin"> </div>
 
         <a href="{% url 'export_psifoiper_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i>  Εξαγωγή όλων σε excel</a>
 
 
-       </div>
+
         <br>
 
         <table class="table styletd1 table-bordered table-striped  table-hover">

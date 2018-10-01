@@ -18,13 +18,13 @@
 
        <div class="col-md-6 col-md-offset-3">
 
-            <div class="text-center">
+            <div class="container">
 
                         <form method="get" name="kentra">
 
                          <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
                             {% for p in all_kentra %}
-                             <option  value="{{  p.kenid }}" {% if selected_kentro.0.kenid ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
+                             <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
                             {% endfor %}
                          </select>
 

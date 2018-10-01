@@ -18,7 +18,7 @@
 
        <div class="col-md-8 col-md-offset-2">
 
-       <div class="text-center">
+        <div class="container">
 
         <form method="get" name="koinotites">
 
@@ -27,6 +27,11 @@
              <option  value="{{  p.koinid }}" {% if selected_koinotita.0.koinid ==  p.koinid  %}selected{%endif%}>{{ p.descr }}</option>
             {% endfor %}
          </select>
+
+        <input type="text" class="heighttext  pull-right" id="livesearch" width="200px" placeholder="live search"></input>
+         <div class="divmargin"> </div>
+
+        <div>
 
          <select   name="orderoption"  onchange="koinotites.submit()">
             <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
@@ -39,17 +44,18 @@
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
 
-        <input type="text" class="heighttext" id="livesearch" width="200px" placeholder="live search"></input>
+        </div>
 
-        <br>
+
 
         </form>
+
+        </div>
 
        <div class="divmargin"> </div>
 
        <a href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
 
-       </div>
 
     <div class="divmargin">
 
