@@ -11,7 +11,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
-    Psifoi
+    Psifoi, EklSumpsifoisimbVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm
 from django.core.files.base import ContentFile
@@ -376,7 +376,7 @@ def psifoisimb_perifereies(request, eklid):
     try:
         paramstr = int(paramstr)
     except:
-        paramstr = 1 # default perid  αν δεν δοθεί
+        paramstr = 0 # default perid  αν δεν δοθεί
 
 
     try:
@@ -390,24 +390,29 @@ def psifoisimb_perifereies(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     # φιλτράρισμα επιλεγμένης περιφέρειας
-    selected_perifereia = Perifereies.objects.filter(perid=paramstr)
+    if paramstr == 0: #επιλογή: "ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ"
+        selected_perifereia = 0
+        all_psifoi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('-sumvotes')  #retrieve Από το EklSumpsifoisimbWithIdVw
+    else:
+        selected_perifereia = Perifereies.objects.get(perid=paramstr).perid                      #retrieve Από το EklSumpsifoisimbPerVw
+        all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr)
 
     selected_order = paramorder
 
     #ανάκτηση όλων των περιφερειών
     all_perifereies=Perifereies.objects.all()
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
-    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
+    #all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
     if paramorder==1:
-        all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr).order_by('sindiasmos','-sumvotes')
+        all_psifoi = all_psifoi.order_by('sindiasmos','-sumvotes')
     elif paramorder==2 :
-        all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr).order_by('sindiasmos','surname')
+        all_psifoi = all_psifoi.order_by('sindiasmos','surname')
     else:
-        all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr).order_by('-sumvotes')
+        all_psifoi = all_psifoi.order_by('-sumvotes')
 
     context = {'all_psifoi':all_psifoi,
-                'all_pososta':all_pososta,
+               # 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
                'selected_ekloges':selected_ekloges.eklid,
                'all_perifereies':all_perifereies,

@@ -1,4 +1,4 @@
-h3 a {
+﻿h3 a {
     color: red;
 }
 
@@ -298,7 +298,8 @@ table.d {
 .heighttext{
  
  height:20px;
- width:200px;
+ width:162px;
+ color:blue;
  }
  
  #wrapper {

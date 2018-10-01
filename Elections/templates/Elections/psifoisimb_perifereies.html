@@ -19,36 +19,37 @@
        <div class="col-md-9 col-md-offset-1">
 
         <div class="container">
+
         <form method="get" name="perifereies">
 
          <select  class="sel2" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
+         <option  value="0" {% if selected_perifereia ==  0  %} selected {%endif%}>ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ</option>
             {% for p in all_perifereies %}
-             <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
+             <option  value="{{  p.perid }}" {% if selected_perifereia ==  p.perid  %} selected {%endif%}>{{ p.descr }}</option>
             {% endfor %}
-             <option  value="0">ΑΝΕΞΑΡΤΗΤΟΥ ΠΕΡΙΦΕΡΕΙΑΣ</option>
+
          </select>
          <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
 
         <div class="divmargin"> </div>
 
         <div>
-        <select   name="orderoption"  onchange="perifereies.submit()">
+        <select  class="sel2"  name="orderoption"  onchange="perifereies.submit()">
          <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμα</option>
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
 
          </select>
+        <a style="color: blue;" class="pull-right" href="{% url 'export_psifoiper_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i>  Εξαγωγή όλων σε excel</a>
+
          </div>
         </form>
+
 
        </div>
 
         <div class="divmargin"> </div>
-
-        <a href="{% url 'export_psifoiper_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i>  Εξαγωγή όλων σε excel</a>
-
-
 
         <br>
 

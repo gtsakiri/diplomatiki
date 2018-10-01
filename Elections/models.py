@@ -609,6 +609,7 @@ class EklSumpsifoisimbPerVw(models.Model):
 
 
 class EklSumpsifoisimbVw(models.Model):
+    id = models.IntegerField(primary_key=True)
     eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
     simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
     surname = models.CharField(max_length=100)

@@ -18,33 +18,37 @@
 
        <div class="col-md-9 col-md-offset-2">
 
-        <div class="container">
+            <div class="container">
 
-        <form method="get" name="kentra">
+            <form method="get" name="kentra">
 
-             <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
-                {% for p in all_kentra %}
-                 <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %} selected {%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
-                {% endfor %}
-             </select>
+                 <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+                    {% for p in all_kentra %}
+                     <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %} selected {%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
+                    {% endfor %}
+                 </select>
 
-             <select   name="orderoption"  onchange="kentra.submit()">
-                 <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
-                 <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
-                 <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
-                 <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
-                 <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
-             </select>
+             <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
 
-            <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
+            <div class="divmargin"> </div>
 
-            <br>
 
-         </form>
+            <div>
 
-        <div class="divmargin"> </div>
+                 <select   class="sel2" name="orderoption"  onchange="kentra.submit()">
+                     <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                     <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
+                     <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
+                     <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
+                     <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
+                 </select>
 
-        <a href={% url 'export_psifoisimbken' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                <a style="color: blue;" class="pull-right" href={% url 'export_psifoisimbken' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+            </div>
+
+        </form>
+
+
 
         </div>
 
