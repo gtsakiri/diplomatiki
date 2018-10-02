@@ -326,15 +326,16 @@ def pososta_telika(request, eklid):
 
 #ΠΟΣΟΣΤΑ ΣΥΝΔΥΑΣΜΩΝ ΣΕ ΟΛΟ ΤΟ ΔΗΜΟ
 
+    if request.user.is_authenticated:
+        # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
+        selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+        # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+        all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+        #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
+        all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
+        context = {'all_pososta':all_pososta, 'all_ekloges':all_ekloges, 'selected_ekloges':selected_ekloges.eklid}
+        return render(request, 'Elections/pososta_telika.html',context)
 
-    # φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
-    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
-    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-    #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
-    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
-    context = {'all_pososta':all_pososta, 'all_ekloges':all_ekloges, 'selected_ekloges':selected_ekloges.eklid}
-    return render(request, 'Elections/pososta_telika.html',context)
 
 def pososta_perifereies(request, eklid):
 
@@ -1644,7 +1645,7 @@ def psifodeltia_list(request, eklid):
 
     all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
 
-    selected_kentro = Kentra.objects.filter(kenid=paramstr)
+    selected_kentro = Kentra.objects.get(kenid=paramstr).kenid
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
     all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
