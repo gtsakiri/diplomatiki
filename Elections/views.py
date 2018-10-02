@@ -4,7 +4,7 @@ from django.contrib.auth import  authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.forms import DateInput, modelformset_factory
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
@@ -14,7 +14,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Psifoi, EklSumpsifoisimbVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm
-from django.core.files.base import ContentFile
+from django.core.exceptions import PermissionDenied
 
 from django.db import connection
 
@@ -302,6 +302,10 @@ def Elections_list(request, eklid=0):
                     messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
                     #return redirect('Elections_list')
             else:
+
+                if not request.user.has_perm('Elections.change_kentra'):
+                    raise PermissionDenied
+
                 # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
                 form = KentraForm(paramekloges, request.POST or None, instance=selected_kentro,
                                   initial={'koinid': koin_id_item, 'perid': per_id_item})
@@ -1027,6 +1031,8 @@ def ekloges_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_electionstbl'):
+        raise PermissionDenied
 
     action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
 
@@ -1066,6 +1072,8 @@ def ekloges_edit(request, eklid, cureklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_electionstbl'):
+        raise PermissionDenied
 
     action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
 
