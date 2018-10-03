@@ -73,12 +73,23 @@
                      <tr class="noborder">
                          <td colspan="4">
                            <input type="submit" value="Save" class="btn btn-primary">
-                          <input type="button" value="Ψήφοι Υποψηφίων" class="btn btn-primary pull-right" onclick="window.location='{% url 'edit_psifoi_kentrou' selected_ekloges selected_kentro.kenid %}';">
+                          <input type="button" id="progress-bar-trigger" value="Ψήφοι Υποψηφίων" class="btn btn-primary pull-right" onclick="window.location='{% url 'edit_psifoi_kentrou' selected_ekloges selected_kentro.kenid %}';">
 
                         </td>
                      </tr>
 
         </form>
+
+         <div class="divmargin"> </div>
+
+        <div id="progress-wrapper">
+          <div id="progress-bar" style="background-color: blue; width: 0%;">&nbsp;</div>
+          <div id="progress-bar-message"> </div>
+        </div>
+
+        <div class="divmargin"> </div>
+
+
 
        {% else %}
 
@@ -98,6 +109,9 @@
 
 
        {% endif %}
+
+
+
 
       <script>
         //script για την φόρμα καταχώρισης των συνδυασμών. Αν δεν ειναι καθολικός ο συνδυασμός, κρύβω το πεδίο ΑΑ
@@ -174,6 +188,25 @@
                   });
 
                 });
+
+              function updateProgress(progressBarElement, progressBarMessageElement, progress) {
+                      progressBarElement.style.width = progress.percent + "%";
+                      progressBarMessageElement.innerHTML = progress.current + ' of ' + progress.total + ' processed.';
+                    }
+
+                var trigger = document.getElementById('progress-bar-trigger');
+                trigger.addEventListener('click', function(e) {
+                      var bar = document.getElementById("progress-bar");
+                      var barMessage = document.getElementById("progress-bar-message");
+                      for (var i = 0; i < {{ psifoi_kentrou.count }}; i++) {
+                        setTimeout(updateProgress, 100*i, bar, barMessage, {
+                          percent:  i,
+                          current: i,
+                          total: 100
+                        })
+                      }
+                })
+
         </script>
 
        </div>

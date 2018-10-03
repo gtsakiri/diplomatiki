@@ -263,6 +263,7 @@ def Elections_list(request, eklid=0):
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης και προαιρετικά κέντρου
     selected_ekloges = Eklogestbl.objects.get(eklid=paramekloges)
+    psifoi_kentrou = None
 
     try:
         selected_kentro = get_object_or_404(Kentra, eklid=paramekloges, descr=str(paramkentro))
@@ -306,6 +307,8 @@ def Elections_list(request, eklid=0):
                 if not request.user.has_perm('Elections.change_kentra'):
                     raise PermissionDenied
 
+                psifoi_kentrou = selected_kentro.psifoi_set.filter(kenid=selected_kentro.kenid)
+
                 # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
                 form = KentraForm(paramekloges, request.POST or None, instance=selected_kentro,
                                   initial={'koinid': koin_id_item, 'perid': per_id_item})
@@ -320,6 +323,7 @@ def Elections_list(request, eklid=0):
                'selected_kentro':selected_kentro,
                'selected_koinotita': selected_koinotita,
                'selected_simbouloi':selected_simbouloi,
+               'psifoi_kentrou': psifoi_kentrou,
                'action_label' : action_label,
                'form':form}
 
@@ -1838,6 +1842,8 @@ def kentra_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_kentra'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1857,6 +1863,8 @@ def kentra_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_kentra'):
+        raise PermissionDenied
 
     action_label = 'Εκλ. Κέντρα - Νέα εγγραφή'
 
@@ -1887,6 +1895,9 @@ def kentra_edit(request, eklid, kenid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.change_kentra'):
+        raise PermissionDenied
 
 
     action_label = 'Κέντρα - Αλλαγή εγγραφής'
@@ -1927,6 +1938,8 @@ def kentra_delete(request, eklid, kenid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_kentra'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1950,6 +1963,9 @@ def psifodeltia_list(request, eklid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.view_psifodeltia'):
+        raise PermissionDenied
 
     paramstr = request.GET.get('kentraoption', '')
 
@@ -1984,6 +2000,8 @@ def psifodeltia_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_psifodeltia'):
+        raise PermissionDenied
 
     action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Νέα εγγραφή'
 
@@ -2014,6 +2032,9 @@ def psifodeltia_edit(request, eklid, id):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.change_psifodeltia'):
+        raise PermissionDenied
 
 
     action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Αλλαγή εγγραφής'
@@ -2051,6 +2072,8 @@ def psifodeltia_delete(request, eklid, id ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_psifodeltia'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -2069,7 +2092,6 @@ def psifodeltia_delete(request, eklid, id ):
     return render(request, 'Elections/confirm_delete.html', context)
 
 
-
 def simbouloi_list(request, eklid):
 
     paramorder = request.GET.get('orderoption', '')
@@ -2086,6 +2108,9 @@ def simbouloi_list(request, eklid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.view_simbouloi'):
+        raise PermissionDenied
 
     all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sindiasmos')
 
@@ -2155,6 +2180,9 @@ def simbouloi_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_simbouloia'):
+        raise PermissionDenied
+
 
     action_label = 'Υποψήφιοι Σύμβουλοι - Νέα εγγραφή'
 
@@ -2202,6 +2230,10 @@ def simbouloi_edit(request, eklid, simbid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
+    if not request.user.has_perm('Elections.change_simbouloi'):
+        raise PermissionDenied
 
 
     action_label = 'Υποψήφιοι Σύμβουλοι - Αλλαγή εγγραφής'
@@ -2387,6 +2419,9 @@ def simbouloi_delete(request, eklid, simbid ):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.delete_simbouloi'):
+        raise PermissionDenied
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2461,6 +2496,9 @@ def psifoi_list(request, eklid, kenid=None):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.view_psifoi'):
+        raise PermissionDenied
+
     paramorder = request.GET.get('orderoption', '')
 
     try:
@@ -2521,6 +2559,9 @@ def psifoi_add(request, eklid):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.add_psifoi'):
+        raise PermissionDenied
+
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Νέα εγγραφή'
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -2551,6 +2592,9 @@ def psifoi_edit(request, eklid, simbid, kenid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+
+    if not request.user.has_perm('Elections.change_psifoi'):
+        raise PermissionDenied
 
     action_label = 'Ψήφοι υποψηφίου σε εκλ. κέντρο - Αλλαγή εγγραφής'
 
@@ -2593,6 +2637,9 @@ def psifoi_delete(request, eklid, simbid, kenid ):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.delete_psifoi'):
+        raise PermissionDenied
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -2618,6 +2665,9 @@ def edit_psifoi_kentrou(request,eklid, kenid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+
+    if not request.user.has_perm('Elections.change_psifoi'):
+        raise PermissionDenied
 
     selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
