@@ -605,6 +605,9 @@ def edres_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_edres'):
+        raise PermissionDenied
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -622,6 +625,9 @@ def edres_add(request, eklid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.add_edres'):
+        raise PermissionDenied
 
     action_label = 'Κατανομή εδρών - Νέα εγγραφή'
 
@@ -653,6 +659,9 @@ def edres_edit(request, eklid, edrid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_edres'):
+        raise PermissionDenied
+
 
     action_label = 'Κατανομή εδρών - Αλλαγή εγγραφής'
 
@@ -682,6 +691,8 @@ def edres_delete(request, eklid, edrid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_edres'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -704,6 +715,9 @@ def edreskoin_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_edreskoin'):
+        raise PermissionDenied
+
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -723,6 +737,8 @@ def edreskoin_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_edreskoin'):
+        raise PermissionDenied
 
     action_label = 'Κατανομή εδρών σε Κοινότητες - Νέα εγγραφή'
 
@@ -754,6 +770,9 @@ def edreskoin_edit(request, eklid, edrid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_edreskoin'):
+        raise PermissionDenied
+
 
     action_label = 'Κατανομή εδρών σε Κοινότητες - Αλλαγή εγγραφής'
 
@@ -783,6 +802,8 @@ def edreskoin_delete(request, eklid, edrid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_edreskoin'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -805,6 +826,8 @@ def sistima_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_sistima'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -824,6 +847,8 @@ def sistima_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_sistima'):
+        raise PermissionDenied
 
     action_label = 'Εκλ. Συστήματα - Νέα εγγραφή'
 
@@ -860,6 +885,8 @@ def sistima_edit(request, eklid, sisid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_sistima'):
+        raise PermissionDenied
 
     action_label = 'Εκλ. Συστήματα - Αλλαγή εγγραφής'
 
@@ -889,6 +916,8 @@ def sistima_delete(request, eklid, sisid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_sistima'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -912,6 +941,8 @@ def typeofkoinotita_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_typeofkoinotita'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -931,6 +962,8 @@ def typeofkoinotita_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_typeofkoinotita'):
+        raise PermissionDenied
 
     action_label = 'Τύποι κοινοτήτων - Νέα εγγραφή'
 
@@ -962,6 +995,8 @@ def typeofkoinotita_edit(request, eklid, tpkid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_typeofkoinotita'):
+        raise PermissionDenied
 
     action_label = 'Τύποι κοινοτήτων - Αλλαγή εγγραφής'
 
@@ -991,6 +1026,9 @@ def typeofkoinotita_delete(request, eklid, tpkid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_typeofkoinotita'):
+        raise PermissionDenied
+
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1013,6 +1051,8 @@ def ekloges_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_eklogestbl'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1106,6 +1146,8 @@ def ekloges_delete(request, eklid, cureklid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_eklogestbl'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1134,6 +1176,8 @@ def sindiasmoi_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_sindiasmoi'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1156,6 +1200,8 @@ def sindiasmoi_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_sindiasmoi'):
+        raise PermissionDenied
 
     action_label = 'Υποψήφιοι Συνδυασμοί - Νέα εγγραφή'
 
@@ -1208,6 +1254,8 @@ def sindiasmoi_edit(request, eklid, sindid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_sindiasmoi'):
+        raise PermissionDenied
 
     action_label = 'Υποψήφιοι Συνδυασμοί - Αλλαγή εγγραφής'
 
@@ -1263,6 +1311,8 @@ def sindiasmoi_delete(request, eklid, sindid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_sindiasmoi'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1288,6 +1338,9 @@ def eklsind_list(request, eklid):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.view_eklsind'):
+        raise PermissionDenied
+
     #selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
 
     #all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername','toposeklogis', 'sindiasmos')
@@ -1310,6 +1363,10 @@ def eklsind_add(request, eklid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+
+    if not request.user.has_perm('Elections.add_eklsind'):
+        raise PermissionDenied
 
 
     action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
@@ -1345,6 +1402,8 @@ def eklsind_edit(request, eklid, id):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_eklsind'):
+        raise PermissionDenied
 
     action_label = 'Δημοτικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
@@ -1379,6 +1438,9 @@ def eklsind_delete(request, eklid, id ):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.delete_eklsind'):
+        raise PermissionDenied
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1403,6 +1465,10 @@ def perifereia_list(request, eklid):
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
 
+    if not request.user.has_perm('Elections.view_perifereies'):
+        raise PermissionDenied
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
@@ -1420,6 +1486,9 @@ def perifereia_add(request, eklid):
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.add_perifereies'):
+        raise PermissionDenied
 
 
     action_label = 'Εκλ. Περιφέρειες - Νέα εγγραφή'
@@ -1456,7 +1525,8 @@ def perifereia_edit(request, eklid, perid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
-
+    if not request.user.has_perm('Elections.change_perifereies'):
+        raise PermissionDenied
 
     action_label = 'Εκλ. Περιφέρειες - Αλλαγή εγγραφής'
 
@@ -1486,6 +1556,8 @@ def perifereia_delete(request, eklid, perid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_perifereies'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1510,6 +1582,9 @@ def eklsindkoin_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_eklsindkoin'):
+        raise PermissionDenied
+
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1529,6 +1604,8 @@ def eklsindkoin_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_eklsindkoin'):
+        raise PermissionDenied
 
     action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Νέα εγγραφή'
 
@@ -1563,6 +1640,8 @@ def eklsindkoin_edit(request, eklid, id):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.edit_eklsindkoin'):
+        raise PermissionDenied
 
     action_label = 'Τοπικοί Συνδυασμοί και Έδρες - Αλλαγή εγγραφής'
 
@@ -1596,6 +1675,8 @@ def eklsindkoin_delete(request, eklid, id ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_eklsindkoin'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1619,6 +1700,8 @@ def koinotites_list(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.view_koinotites'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -1638,6 +1721,8 @@ def koinotites_add(request, eklid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.add_koinotites'):
+        raise PermissionDenied
 
     action_label = 'Κοινότητες - Νέα εγγραφή'
 
@@ -1681,6 +1766,8 @@ def koinotites_edit(request, eklid, koinid):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.change_koinotites'):
+        raise PermissionDenied
 
     action_label = 'Κοινότητες - Αλλαγή εγγραφής'
 
@@ -1725,6 +1812,8 @@ def koinotites_delete(request, eklid, koinid ):
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
 
+    if not request.user.has_perm('Elections.delete_koinotites'):
+        raise PermissionDenied
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
