@@ -97,6 +97,7 @@ path('psifodeltiasind_ken/<int:eklid>/', views.psifodeltiasind_ken, name='psifod
 path('psifoisimb_ken/<int:eklid>/', views.psifoisimb_ken, name='psifoisimb_ken'),
 
 path('editpsifoikentrou/<int:eklid>/<int:kenid>', views.edit_psifoi_kentrou, name='edit_psifoi_kentrou'),
+path('editpsifodeltiakentrou/<int:eklid>/<int:kenid>', views.edit_psifodeltia_kentrou, name='edit_psifodeltia_kentrou'),
 
 
 path('export/per/<int:eklid>/<int:selected_order>/', views.export_psifoiper_xls, name='export_psifoiper_xls'),

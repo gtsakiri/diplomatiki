@@ -1,0 +1,119 @@
+{% extends 'Elections/Elections_list.html' %}
+
+{% load widget_tweaks %}
+
+{% load staticfiles %}
+
+
+ {% block content %}
+
+       <div class="row">
+
+       <div class="col-md-8 col-md-offset-2">
+
+       {% include 'Elections/messages.html' %}
+
+
+         <div class="alert alert-info" role="alert">
+
+              <div class="text-center">
+
+                <h4 align="center">{{  action_label }} </h4>
+
+             </div>
+          </div>
+
+
+
+                 <form method="POST" id="dataForm" class="post-form"  action="">
+                    {% csrf_token %}
+
+                    <table class="table styletd1 table-hover ">
+                        <thead>
+                            {% for form in formset.forms %}
+                                {{ formset.management_form }}
+
+                                {% if forloop.first %}
+                                    {% for field in form %}
+
+
+                                        {% if field.name == 'sindid' %}
+                                            <th><label for="id_sindid">Συνδυασμός</label> </th>
+                                        {% elif field.name == 'votesa' %}
+                                            <th><label for="id_votesa">Ψήφοι</label></th>
+                                        {% elif field.name == 'kenid' %}
+                                            <th><label for="id_kenid">Κέντρο</label></th>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                {% endif %}
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    {% for field in form %}
+                                        {% if field.errors %}
+                                            {% render_field field class="form-control is-invalid" %}
+                                            {% for error in field.errors %}
+                                                <div class="bg2 invalid-feedback">
+                                                  {{ error }}
+                                                </div>
+                                          {% endfor %}
+                                        {% else %}
+
+                                                <td>{% render_field field class="form-control is-valid" %}</td>
+                                        {% endif %}
+
+
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                 <tr class="noborder">
+                 <td colspan="4">
+                 <input type="submit" value="Save" class="btn btn-primary">
+
+
+                     <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.history.back();">
+                 </td></tr>
+
+                 </form>
+
+            </div>
+
+       </div>
+
+     <script>
+     $(document).ready(function () {
+
+         $("input[type='number']").on('change', function(e) {
+
+            if ((new Number( $(this).val()) < 0)) {
+                alert('Δεν επιτρέπονται αρνητικές τιμές!')
+                $(this).css({'background-color': '#f9f398'});
+                $(this).focus();
+            }
+            else {
+                $(this).css({'background-color' : '#fcfcf9'});
+                }
+
+
+        });
+
+        return false;
+
+        });
+     </script>
+
+
+ {% endblock %}
+
+
+
+ </body>
+
+</html>
+
+
