@@ -2074,13 +2074,13 @@ def psifodeltia_edit(request, eklid, id):
         raise PermissionDenied
 
 
-    action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Αλλαγή εγγραφής'
-
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     #επιλογή της συγκεκριμένης εγγραφής
     item=get_object_or_404(Psifodeltia, id=id)
+
+    action_label = 'Ψηφοδέλτια Συνδυασμού στο εκλ. κέντρο ' + item.kenid.descr + ' - Αλλαγή εγγραφής'
 
     if request.method == 'POST':
         form = PsifodeltiaForm(eklid, request.POST or None, instance=item)

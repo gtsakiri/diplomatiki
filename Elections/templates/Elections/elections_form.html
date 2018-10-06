@@ -4,6 +4,6 @@
 
 {% block buttonReturn %}
 
-    <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.location='{% url 'ekloges_list' selected_ekloges %}';">
+    <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.history.back();">
 
 {% endblock %}

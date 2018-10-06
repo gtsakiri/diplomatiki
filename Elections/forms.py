@@ -4,6 +4,7 @@ from django import forms
 from .models import Edres, Sistima, Eklogestbl, Sindiasmoi, Eklsind, Perifereies, Edreskoin, Typeofkoinotita, \
     Koinotites, Eklper, Eklsindkoin, Eklperkoin, Kentra, Psifodeltia, Simbouloi, Psifoi, Eklsindsimb
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
 
 class EdresForm(ModelForm):
     class Meta:
@@ -187,7 +188,8 @@ class EklsindForm(ModelForm):
 
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς που δεν έχουν εισαχθεί ακόμα στην τρέχουσα
         #εκλ. αναμέτρηση, ώστε να μην επαναεισάγει κατά λάθος ο χρήστης τον ίδιο συνδυασμό.
-        self.fields['sindid'].queryset = Sindiasmoi.objects.exclude(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(eidos=1).exclude(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
 
 class EklsindkoinForm(ModelForm):
 
@@ -213,8 +215,11 @@ class EklsindkoinForm(ModelForm):
 
     def __init__(self, eklid, *args, **kwargs):
         super(EklsindkoinForm, self).__init__(*args, **kwargs)
+        # δημιουργία φίλτρου με τη βοήθεια του Q object
+        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid)) | \
+            Q(sindid__in=Eklsind.objects.filter(eklid=eklid))
 
-        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
         self.fields['koinid'].queryset = Koinotites.objects.filter(eidos=4).filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
 
     def clean(self):
