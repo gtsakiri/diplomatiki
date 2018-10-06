@@ -116,6 +116,11 @@ label.label5 {
 	color: blue;
 }
 
+label.label6 {        
+    font-size: 14px;
+	color: red;
+}
+
 label.menulabel {
     float:bottom;
     width:150px;

@@ -29,26 +29,37 @@
                          </select>
 
 
-                         <select   class="sel2 pull-right name="orderoption"  onchange="kentra.submit()">
+                         <select   class="sel2 pull-right" name="orderoption"  onchange="kentra.submit()">
                              <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
                              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Ψηφοδέλτια </option>
                              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Συνδυασμό</option>
                              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Εκλ. Κέντρο</option>
                          </select>
+
                         <div class="divmargin"></div>
 
+                        {% if sunday == 1 %}
+                          <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 1 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                        {% else %}
+                          <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 2 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                        {% endif %}
 
-                         <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+
 
                         </form>
+            <br>
+            <hr>
 
 
+             <div class="text-center">
+                 {% if sunday == 1 %}
+                    <label class="label6 pull-center">Α' Κυριακή</label>
+                 {% else %}
+                    <label class="label6 pull-center">Β' Κυριακή</label>
+                 {% endif %}
+             </div>
 
-
-
-        </div>
-
-                   <div class="divmargin"></div>
+            <div class="divmargin"></div>
 
 
                  <table class="table table-bordered table-striped  table-hover">
@@ -61,11 +72,22 @@
                    {% for p in all_psifodeltia %}
                          <tr>
                             <td >{{ p.sindiasmos }}</td>
-                            <td class="myfontsize">{{ p.votes }}</td>
+                             {% if sunday == 1 %}
+                                <td class="myfontsize">{{ p.votes }}</td>
+                         {% else %}
+                                <td class="myfontsize">{{ p.votesb }}</td>
+                         {% endif %}
                          </tr>
                      {% endfor %}
                    </tbody>
                 </table>
+
+
+
+
+            <div class="divmargin"></div>
+
+            </div>
 
 
      </div>

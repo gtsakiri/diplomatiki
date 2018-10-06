@@ -129,7 +129,7 @@ def export_psifoikoin_xls(request,eklid, selected_order):
     return response
 
 
-def export_psifodeltiasind_ken(request,eklid, selected_order):
+def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="psifodeltiasind_ken.xls"'
 
@@ -143,13 +143,36 @@ def export_psifodeltiasind_ken(request,eklid, selected_order):
     font_style.font.height = 280
     font_style.font.bold = True
 
-    ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο', font_style)
+    if sunday == 1:
+        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Α Κυριακή', font_style)
+    else:
+        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Β Κυριακή', font_style)
 
     row_num += 2
 
-    firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
+    if sunday == 1:
+        firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
+    else:
+        firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenab', 'plithoskentrwn','posostokatametrimenwnkentrwnb').distinct()
     # for col_num in range(len(firstrow[0])):
-    ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
+
+    if firstrow[0][0] is not None:
+        katametrimena = firstrow[0][0]
+    else:
+        katametrimena = 0
+
+    if firstrow[0][1] is not None:
+        sinoloKentrwn = firstrow[0][1]
+    else:
+        sinoloKentrwn = 0
+
+    if firstrow[0][2] is not None:
+        pososto_katametrimenwn = firstrow[0][2]
+    else:
+        pososto_katametrimenwn = 0
+
+
+    ws.write(row_num, 0,'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -165,13 +188,23 @@ def export_psifodeltiasind_ken(request,eklid, selected_order):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
+    if sunday == 1:
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes')
+    else:
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesb')
+
+
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1 or selected_order == 4:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('kentro','-votes')
+        if sunday == 1:
+            rows = rows.order_by('kentro','-votes')
+        else:
+            rows = rows.order_by('kentro','-votesb')
+
     elif selected_order == 1 or selected_order == 4:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos','votes').order_by('kentro', 'sindiasmos')
+        rows = rows.order_by('kentro', 'sindiasmos')
     else:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes').order_by('sindiasmos','kentro',)
+        rows = rows.order_by('sindiasmos','kentro',)
 
     for row in rows:
         row_num += 1
@@ -492,7 +525,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
                'selected_menu':selected_menu,}
     return render(request, 'Elections/psifoisimb_koinotites.html',context)
 
-def psifodeltiasind_ken(request, eklid):
+def psifodeltiasindken(request, eklid, sunday):
 
 # ΨΗΦΟΙ ΣΥΝΔΥΑΣΜΩΝ ΑΝΑ ΕΚΛ. ΚΕΝΤΡΟ
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklsumpsifodeltiasindkenvw_set').get(eklid=eklid)
@@ -524,10 +557,13 @@ def psifodeltiasind_ken(request, eklid):
     #ανάκτηση όλων των κέντρων της εκλ. αναμέτρησης
     all_kentra= selected_ekloges.kentra_set.all()
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
-    all_pososta = selected_ekloges.eklsumpsifodeltiasindkenvw_set.all().order_by('-posostosindiasmou')
+    all_pososta = selected_ekloges.eklsumpsifodeltiasindvw_set.all().order_by('-posostosindiasmou')
 
     if paramorder == 1 or paramorder == 4:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votes')
+        if sunday == 1:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votes')
+        else:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votesb')
     elif paramorder == 2:
         all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('sindiasmos')
     else:
@@ -536,6 +572,7 @@ def psifodeltiasind_ken(request, eklid):
 
     context = {'all_psifodeltia':all_psifodeltia,
                 'all_pososta':all_pososta,
+               'sunday': sunday,
                'all_ekloges':all_ekloges,
                'selected_ekloges':selected_ekloges.eklid,
                'all_kentra':all_kentra,
