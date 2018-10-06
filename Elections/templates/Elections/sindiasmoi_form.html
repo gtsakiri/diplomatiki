@@ -15,12 +15,25 @@
             var optionSelected = $("#id_eidos", this);
             var eidosSelected = $("#id_eidos").val();
             if (eidosSelected == 1) {
-                $('#id_aa, label[for="#id_aa"]').show()
-                $('#id_aa, label[for="#id_aa"]').parent().show()
+                //$('#id_aa, label[for="#id_aa"]').show()
+               // $('#id_aa, label[for="#id_aa"]').parent().show()
+
+                $('#id_koinid, label[for="#id_koinid"]').hide()
+                $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                $('#id_proedros, label[for="#id_proedros"]').hide()
+                $('#id_proedros, label[for="#id_proedros"]').parent().hide()
+
+
             } else if (eidosSelected == 0) {
-                $('#id_aa, label[for="#id_aa"]').hide()
+               // $('#id_aa, label[for="#id_aa"]').hide()
+
+                $('#id_koinid, label[for="#id_koinid"]').show()
+                $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                $('#id_proedros, label[for="#id_proedros"]').show()
+                $('#id_proedros, label[for="#id_proedros"]').parent().show()
+
                 document.getElementById("id_aa").value = "0";
-                $('#id_aa, label[for="#id_aa"]').parent().hide()
+               // $('#id_aa, label[for="#id_aa"]').parent().hide()
                 }
 
             return false;
@@ -32,12 +45,23 @@
             var optionSelected = $("#id_eidos", this);
             var eidosSelected = this.value;
             if (eidosSelected == 1) {
-                $('#id_aa, label[for="#id_aa"]').show()
-                $('#id_aa, label[for="#id_aa"]').parent().show()
+               // $('#id_aa, label[for="#id_aa"]').show()
+               // $('#id_aa, label[for="#id_aa"]').parent().show()
+
+                $('#id_koinid, label[for="#id_koinid"]').hide()
+                $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                $('#id_proedros, label[for="#id_proedros"]').hide()
+                $('#id_proedros, label[for="#id_proedros"]').parent().hide()
+
             } else if (eidosSelected == 0) {
-                $('#id_aa, label[for="#id_aa"]').hide()
+               // $('#id_aa, label[for="#id_aa"]').hide()
                 document.getElementById("id_aa").value = "0";
-                $('#id_aa, label[for="#id_aa"]').parent().hide()
+              //  $('#id_aa, label[for="#id_aa"]').parent().hide()
+
+                $('#id_koinid, label[for="#id_koinid"]').show()
+                $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                $('#id_proedros, label[for="#id_proedros"]').show()
+                $('#id_proedros, label[for="#id_proedros"]').parent().show()
             }
             return false;
           });

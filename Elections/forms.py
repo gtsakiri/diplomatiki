@@ -131,11 +131,12 @@ class SindiasmoiForm(ModelForm):
 
     aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
     #proedros=CharField(label='Πρόεδρος (σε περίπτωση Κοινότητας>300 κατ.',max_length=100)
-    #koin=ModelChoiceField(queryset=Koinotites.objects.filter(eidos=4), label='Κοινότητα')
+    koinid=ModelChoiceField(queryset=Koinotites.objects.filter(eidos=4), label='Κοινότητα', required=False)
+    proedros=CharField(label='Πρόεδρος',max_length=100)
 
     class Meta:
         model=Sindiasmoi
-        fields = ['descr', 'shortdescr', 'eidos', 'photo', 'aa']
+        fields = ['descr', 'shortdescr', 'eidos', 'koinid', 'proedros', 'photo', 'aa']
 
         EIDOS_CHOICES = (
             ('1', 'Δήμο'),
@@ -145,10 +146,13 @@ class SindiasmoiForm(ModelForm):
             'descr': _('Περιγραφή'),
             'shortdescr': _('Σύντομος τίτλος'),
             'eidos': _('Υποψήφιος συνδυασμός για όλο το Δήμο ή σε Τοπική Κοινότητα μόνο?'),
+            'koinid': _('Κοινότητα'),
+            'proedros': _('Πρόεδρος'),
             'photo': _('Φωτογραφία'),
         }
         help_texts = {
             'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
+            'koin': _('Κοινότητα στην οποία συμμέτεχει'),
             'aa': _('Με ποιο ΑΑ συμμετέχει o συνδυασμός στις εκλογές'),
         }
         widgets = {
@@ -159,9 +163,19 @@ class SindiasmoiForm(ModelForm):
         cleaned_data = super(SindiasmoiForm, self).clean()
         descr = cleaned_data.get('descr')
         shortdescr = cleaned_data.get('shortdescr')
-        eidos = cleaned_data.get('eidos')
+        koin = cleaned_data.get('koin')
+        proedros=cleaned_data.get('proedros')
+        eidos = cleaned_data.get('proedros')
         photo = cleaned_data.get('photo')
         aa = cleaned_data.get('aa')
+
+    def __init__(self, *args, **kwargs):
+        super(SindiasmoiForm, self).__init__(*args, **kwargs)
+
+        # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, edrid
+        # Για το perid παίρνω μόνο τις περιφέρειες που έχουν καταχωρηθεί στην τρέχουσα εκλ. αναμέτρηση μόνο
+        self.fields['koinid'].queryset = Koinotites.objects.filter(eidos=4)
+
 
 
 class EklsindForm(ModelForm):

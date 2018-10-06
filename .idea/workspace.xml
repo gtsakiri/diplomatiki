@@ -4,21 +4,7 @@
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_06_10_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/elections_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/elections_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/kentra_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/kentra_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/koinotita_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/koinotita_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/perifereia_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/perifereia_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifoi_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifoi_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/sistima_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/sistima_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,11 +79,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-65">
-              <caret line="1641" column="19" selection-start-line="1641" selection-start-column="4" selection-end-line="1641" selection-end-column="19" />
+            <state relative-caret-position="-269">
+              <caret line="2290" column="18" selection-start-line="2290" selection-start-column="4" selection-end-line="2290" selection-end-column="18" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -105,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="222" column="34" lean-forward="true" selection-start-line="222" selection-start-column="34" selection-end-line="222" selection-end-column="34" />
+            <state relative-caret-position="221">
+              <caret line="205" column="25" lean-forward="true" selection-start-line="205" selection-end-line="206" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
               </folding>
@@ -117,11 +103,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="sindiasmoi_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-510" />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="simbouloi_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="106" column="139" selection-start-line="106" selection-start-column="139" selection-end-line="106" selection-end-column="139" />
+            <state relative-caret-position="340">
+              <caret line="152" column="34" lean-forward="true" selection-start-line="152" selection-start-column="34" selection-end-line="152" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -129,8 +122,17 @@
       <file leaf-file-name="sindiasmoi_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="109" selection-start-line="6" selection-start-column="109" selection-end-line="6" selection-end-column="109" />
+            <state relative-caret-position="170">
+              <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="218" column="16" selection-start-line="218" selection-start-column="4" selection-end-line="218" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -148,9 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>eklsindkoin</find>
-      <find>redirect</find>
-      <find>simbouloi_list</find>
       <find>EklSump</find>
       <find>eklsindkoin_list</find>
       <find>psifodeltia_list</find>
@@ -175,9 +174,12 @@
       <find>psifodeltiasind_</find>
       <find>EklSumpsifodeltiasindVw</find>
       <find>psifodeltiasind</find>
-      <find>sindiasmoi_add</find>
       <find>psifodeltia_add</find>
       <find>eklsindkoin_add</find>
+      <find>Eklsindkoin</find>
+      <find>sindiasmoi_add</find>
+      <find>SindiasmoiForm</find>
+      <find>simbouloi_edit</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -228,12 +230,10 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
         <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" />
-        <option value="$PROJECT_DIR$/Elections/views.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/perifereia_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sistima_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" />
@@ -243,7 +243,9 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/elections_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/kentra_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotita_form.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html" />
         <option value="$PROJECT_DIR$/Elections/forms.py" />
+        <option value="$PROJECT_DIR$/Elections/views.py" />
       </list>
     </option>
   </component>
@@ -1187,13 +1189,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
     </task>
-    <task id="LOCAL-00033" summary="work 04/09/2018">
-      <created>1536054168905</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1536054168906</updated>
-    </task>
     <task id="LOCAL-00034" summary="work 04/09/2018">
       <created>1536061890024</created>
       <option name="number" value="00034" />
@@ -1530,7 +1525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538815807086</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="home_06_10_2018">
+      <created>1538827835914</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1538827835914</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1704,7 +1706,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Python36/Lib/wsgiref/handlers.py" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/servers/basehttp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -1852,13 +1853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="485" column="29" selection-start-line="485" selection-start-column="6" selection-end-line="485" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-576767271/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -2001,36 +1995,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="218" column="16" selection-start-line="218" selection-start-column="4" selection-end-line="218" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="109" selection-start-line="6" selection-start-column="109" selection-end-line="6" selection-end-column="109" />
+        <state relative-caret-position="170">
+          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="106" column="139" selection-start-line="106" selection-start-column="139" selection-end-line="106" selection-end-column="139" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65">
-          <caret line="1641" column="19" selection-start-line="1641" selection-start-column="4" selection-end-line="1641" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="340">
+          <caret line="152" column="34" lean-forward="true" selection-start-line="152" selection-start-column="34" selection-end-line="152" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="222" column="34" lean-forward="true" selection-start-line="222" selection-start-column="34" selection-end-line="222" selection-end-column="34" />
+        <state relative-caret-position="221">
+          <caret line="205" column="25" lean-forward="true" selection-start-line="205" selection-end-line="206" />
           <folding>
             <element signature="e#0#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="2290" column="18" selection-start-line="2290" selection-start-column="4" selection-end-line="2290" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

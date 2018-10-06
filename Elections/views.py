@@ -1270,7 +1270,17 @@ def sindiasmoi_add(request, eklid):
                                        edresa_teliko=0,
                                        edresb=0,
                                        ypol=0).save()
-
+            else:
+                Eklsindkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                       sindid=sind_item,
+                                       koinid=form.cleaned_data['koinid'],
+                                       proedros=form.cleaned_data['proedros'],
+                                       aa=form.cleaned_data['aa'],
+                                       edresk=0,
+                                       edresk_ypol=0,
+                                       edresk_teliko=0,
+                                       ypol=0,
+                                       checkfordraw=0).save()
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('sindiasmoi_add', eklid)
 
@@ -1305,11 +1315,21 @@ def sindiasmoi_edit(request, eklid, sindid):
 
     sind_item = get_object_or_404(Sindiasmoi, sindid=sindid)
 
-    #ΠΡΟΣΟΧΗ!!! Το extra πεδία aa το φορτώνω manually
+    #ΠΡΟΣΟΧΗ!!! Τα extra πεδία aa, koinid, proedros τα φορτώνω manually
     try:
         aa_field = Eklsind.objects.get(sindid=sindid, eklid=eklid).aa
     except:
         aa_field=0
+
+    try:
+        koinid_field = Eklsindkoin.objects.get(sindid=sindid, eklid=eklid).koinid
+    except:
+        koinid_field= None
+
+    try:
+        proedros_field = Eklsindkoin.objects.get(sindid=sindid, eklid=eklid).proedros
+    except:
+        proedros_field= ''
 
     if request.method == 'POST':
         form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
@@ -1327,13 +1347,19 @@ def sindiasmoi_edit(request, eklid, sindid):
 
             if sind_item.eidos == 1:
                 Eklsind.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'])
+                Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).delete()
             #sub_form.save()
             else:
+                Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'],
+                                                                          koinid=form.cleaned_data['koinid'],
+                                                                          proedros=form.cleaned_data['proedros'])
                 Eklsind.objects.filter(eklid=eklid, sindid=sindid).delete()
+
+            messages.success(request, 'Η αλλαγή αποθηκεύτηκε!')
             return redirect('sindiasmoi_list', eklid)
     else:
         #αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και το extra πεδίο aa manually
-        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item, initial={'aa': aa_field})
+        form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item, initial={'aa': aa_field, 'koinid': koinid_field, 'proedros':proedros_field})
         #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
 
     context = {
