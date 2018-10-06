@@ -132,15 +132,15 @@ class SindiasmoiForm(ModelForm):
     aa= CharField(label='ΑΑ συνδυασμού',max_length=45)
     #proedros=CharField(label='Πρόεδρος (σε περίπτωση Κοινότητας>300 κατ.',max_length=100)
     koinid=ModelChoiceField(queryset=Koinotites.objects.filter(eidos=4), label='Κοινότητα', required=False)
-    proedros=CharField(label='Πρόεδρος',max_length=100)
+    proedros=CharField(label='Πρόεδρος',max_length=100, required=False)
 
     class Meta:
         model=Sindiasmoi
         fields = ['descr', 'shortdescr', 'eidos', 'koinid', 'proedros', 'photo', 'aa']
 
         EIDOS_CHOICES = (
-            ('1', 'Δήμο'),
-            ('0', 'Κοινότητα'),
+            (1, 'Δήμο'),
+            (0, 'Κοινότητα'),
         )
         labels = {
             'descr': _('Περιγραφή'),
@@ -165,7 +165,7 @@ class SindiasmoiForm(ModelForm):
         shortdescr = cleaned_data.get('shortdescr')
         koin = cleaned_data.get('koin')
         proedros=cleaned_data.get('proedros')
-        eidos = cleaned_data.get('proedros')
+        eidos = cleaned_data.get('eidos')
         photo = cleaned_data.get('photo')
         aa = cleaned_data.get('aa')
 
@@ -230,8 +230,8 @@ class EklsindkoinForm(ModelForm):
     def __init__(self, eklid, *args, **kwargs):
         super(EklsindkoinForm, self).__init__(*args, **kwargs)
         # δημιουργία φίλτρου με τη βοήθεια του Q object
-        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid)) | \
-            Q(sindid__in=Eklsind.objects.filter(eklid=eklid))
+        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
+            Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
 
         self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
         self.fields['koinid'].queryset = Koinotites.objects.filter(eidos=4).filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
@@ -381,7 +381,12 @@ class PsifodeltiaForm(ModelForm):
         super(PsifodeltiaForm, self).__init__(*args, **kwargs)
 
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
-        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        #self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        # δημιουργία φίλτρου με τη βοήθεια του Q object
+        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
+            Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
         self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
 
     def clean(self):

@@ -1270,6 +1270,18 @@ def sindiasmoi_add(request, eklid):
                                        edresa_teliko=0,
                                        edresb=0,
                                        ypol=0).save()
+
+                # Εισαγωγή εγγραφής συνδυασμού στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο της
+                # εκλ. αναμέτρησης, αφού ο καθολικός συνδυασμός ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+                for kentro in Kentra.objects.filter(eklid=Eklogestbl.objects.get(eklid=eklid)):
+                    Psifodeltia.objects.create(
+                        sindid=sind_item,
+                        kenid=kentro,
+                        votesa=0,
+                        votesb=0,
+                        votesk=0,
+                    ).save()
+
             else:
                 Eklsindkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
@@ -1281,6 +1293,19 @@ def sindiasmoi_add(request, eklid):
                                        edresk_teliko=0,
                                        ypol=0,
                                        checkfordraw=0).save()
+
+                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+                for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                    Psifodeltia.objects.create(
+                        sindid=sind_item,
+                        kenid=kentro,
+                        votesa=0,
+                        votesb=0,
+                        votesk=0,
+                    ).save()
+
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('sindiasmoi_add', eklid)
 
@@ -1331,6 +1356,11 @@ def sindiasmoi_edit(request, eklid, sindid):
     except:
         proedros_field= ''
 
+    if Eklsind.objects.filter(sindid=sindid, eklid=eklid).exists():
+        eidos_field = 1
+    else:
+        eidos_field = 0
+
     if request.method == 'POST':
         form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
         #sub_form = EklsindFormPartial(request.POST or None, instance=eklsind_item)
@@ -1345,16 +1375,98 @@ def sindiasmoi_edit(request, eklid, sindid):
 
             sind_item.save()
 
-            if sind_item.eidos == 1:
-                Eklsind.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'])
-                Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).delete()
-            #sub_form.save()
-            else:
-                Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'],
-                                                                          koinid=form.cleaned_data['koinid'],
-                                                                          proedros=form.cleaned_data['proedros'])
-                Eklsind.objects.filter(eklid=eklid, sindid=sindid).delete()
+            test=form.cleaned_data['eidos']
 
+            # Αν είναι  Καθολικός Συνδυασμός..
+            if form.cleaned_data['eidos'] == 1:
+
+                #Αν είναι ήδη Καθολικός Συνδυασμός, κάνω απλά Update το πεδίο aa
+                if eidos_field == 1:
+                    Eklsind.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'])
+                    #Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).delete()
+
+                #αλλιώς αν έγινε από Τοπικός --> Καθολικός ..
+                else:
+                    #1) εισαγωγή εγγραφής στον Eklsind
+                    Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                           sindid=sind_item,
+                                           aa=form.cleaned_data['aa'],
+                                           edresa=0,
+                                           edresa_ypol=0,
+                                           edresa_teliko=0,
+                                           edresb=0,
+                                           ypol=0).save()
+
+                    # 2) Διαγραφή εγγραφής από τον  Eklsindkoin
+                    Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).delete()
+
+                    # 3) Διαγραφή ψήφων από πίνακα Psifodeltia και συγκεκριμένα όλες τις εγγραφές που έχουν τον συνδυασμό σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                    Psifodeltia.objects.filter(sindid=sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                    # 4) Εισαγωγή εγγραφής συνδυασμού στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο της τρέχουσας
+                    # εκλ. αναμέτρησης, αφού ο καθολικός συνδυασμός ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+                    for kentro in Kentra.objects.filter(eklid=eklid):
+                        Psifodeltia.objects.create(
+                            sindid=sind_item,
+                            kenid=kentro,
+                            votesa=0,
+                            votesb=0,
+                            votesk=0,
+                        ).save()
+
+            #αλλιώς αν είναι Τοπικός
+            else:
+                #1) Αν είναι ήδη Τοπικός Συνδυασμός, κάνω απλά Update τα πεδία aa, koinid, proedros στον Eklsind
+                if eidos_field == 0:
+                    Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'],
+                                                                              koinid=form.cleaned_data['koinid'],
+                                                                              proedros=form.cleaned_data['proedros'])
+                    #2) Αν αλλάξει μόνο το koinid...
+                    if koinid_field != form.cleaned_data['koinid']:
+                        # α) Διαγραφή ψήφων από πίνακα Psifodeltia και συγκεκριμένα όλες τις εγγραφές που έχουν τον συνδυασμό σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                        Psifodeltia.objects.filter(sindid=sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                        # β) Εισαγωγή εγγραφής συνδυασμού στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                        # αφού ο ΤΟΠΙΚΟΣ συνδυασμός ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+                        for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                            Psifodeltia.objects.create(
+                                sindid=sind_item,
+                                kenid=kentro,
+                                votesa=0,
+                                votesb=0,
+                                votesk=0,
+                            ).save()
+
+                #αν από Καθολικός --> Τοπικός..
+                else:
+                    #1) εισαγωγή εγγραφής στον Eklsindkoin
+                    Eklsindkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
+                                               sindid=sind_item,
+                                               koinid=form.cleaned_data['koinid'],
+                                               proedros=form.cleaned_data['proedros'],
+                                               aa=form.cleaned_data['aa'],
+                                               edresk=0,
+                                               edresk_ypol=0,
+                                               edresk_teliko=0,
+                                               ypol=0,
+                                               checkfordraw=0).save()
+
+                    # 2) Διαγραφή εγγραφής από τον  Eklsind
+                    Eklsind.objects.filter(eklid=eklid, sindid=sindid).delete()
+
+                    # 3) Διαγραφή ψήφων από πίνακα Psifodeltia και συγκεκριμένα όλες τις εγγραφές που έχουν τον συνδυασμό σε κέντρο της τρέχουσας εκλ. αναμέτρησης
+                    Psifodeltia.objects.filter(sindid=sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+                    # 4) Εισαγωγή εγγραφής συνδυασμού στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                    # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+                    for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                        Psifodeltia.objects.create(
+                            sindid=sind_item,
+                            kenid=kentro,
+                            votesa=0,
+                            votesb=0,
+                            votesk=0,
+                        ).save()
             messages.success(request, 'Η αλλαγή αποθηκεύτηκε!')
             return redirect('sindiasmoi_list', eklid)
     else:
@@ -2335,9 +2447,7 @@ def simbouloi_edit(request, eklid, simbid):
                 simb_item = form.save(commit=False)
                 simb_item.save()
 
-                Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(aa=form.cleaned_data['aa'])
-
-                Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(sindid=form.cleaned_data['sindid'])
+                Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=simbid).update(aa=form.cleaned_data['aa'], sindid=form.cleaned_data['sindid'])
 
                 #Αν είναι Δημοτικός...
                 if form.cleaned_data['eidos'] == '1':
