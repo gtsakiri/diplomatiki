@@ -614,7 +614,7 @@ def psifoisimb_ken(request, eklid):
     try:
         paramorder = int(paramorder)
     except:
-        paramorder = 5  # default ταξινόμηση
+        paramorder = 4  # default ταξινόμηση
 
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -637,7 +637,7 @@ def psifoisimb_ken(request, eklid):
     elif paramorder == 3:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname')
     else:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('votes')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('-votes')
 
 
     context = {'all_psifoi':all_psifoi,
@@ -2064,6 +2064,8 @@ def kentra_add(request, eklid):
         if form.is_valid():
             item = form.save(commit=False)
             item.save()
+
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = KentraForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
     else:
@@ -2396,6 +2398,8 @@ def simbouloi_add(request, eklid):
 
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!' )
             return redirect('simbouloi_add', eklid)
+        else:
+            return HttpResponse('Σφάλμα καταχώρησης στο πεδίο: ' + form.errors)
 
     else:
         # όταν ανοίγει η φόρμα για καταχώριση δεδομένων
