@@ -145,15 +145,20 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
 
     if sunday == 1:
         ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Α Κυριακή', font_style)
-    else:
+    elif sunday == 1:
         ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Β Κυριακή', font_style)
+    else:
+        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Τοπικά Συμβούλια', font_style)
 
     row_num += 2
 
     if sunday == 1:
         firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
-    else:
+    elif sunday == 2:
         firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenab', 'plithoskentrwn','posostokatametrimenwnkentrwnb').distinct()
+    else:
+        firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak', 'plithoskentrwn','posostokatametrimenwnkentrwnk').distinct()
+
     # for col_num in range(len(firstrow[0])):
 
     if firstrow[0][0] is not None:
@@ -190,18 +195,23 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
 
     if sunday == 1:
         rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes')
-    else:
+    elif sunday == 2:
         rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesb')
+    else:
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesk')
 
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1 or selected_order == 4:
         if sunday == 1:
             rows = rows.order_by('kentro','-votes')
-        else:
+        elif sunday == 2:
             rows = rows.order_by('kentro','-votesb')
+        else:
+            rows = rows.order_by('kentro','-votesk')
 
-    elif selected_order == 1 or selected_order == 4:
+
+    elif selected_order == 2:
         rows = rows.order_by('kentro', 'sindiasmos')
     else:
         rows = rows.order_by('sindiasmos','kentro',)
@@ -560,10 +570,13 @@ def psifodeltiasindken(request, eklid, sunday):
     all_pososta = selected_ekloges.eklsumpsifodeltiasindvw_set.all().order_by('-posostosindiasmou')
 
     if paramorder == 1 or paramorder == 4:
+        #Α Κυριακή sunday=1, Β Κυριακή sunday=2, Εκλογές Κοινότητας sunday=3,
         if sunday == 1:
             all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votes')
-        else:
+        elif sunday == 2:
             all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votesb')
+        else:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votesk')
     elif paramorder == 2:
         all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('sindiasmos')
     else:
@@ -2881,10 +2894,10 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
 
     selected_kentro = Kentra.objects.prefetch_related('psifodeltia_set').get(kenid=kenid)
 
-    PsifodeltiaFormSet = modelformset_factory(Psifodeltia, fields =('sindid', 'votesa', 'kenid',), extra=0)
+    PsifodeltiaFormSet = modelformset_factory(Psifodeltia, fields =('sindid', 'votesa', 'votesb', 'votesk','kenid',), extra=0)
 
     data = request.POST or None
-    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).order_by('sindid__descr' ))
+    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).order_by('-sindid__eidos', 'sindid__descr'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid

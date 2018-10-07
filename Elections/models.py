@@ -437,6 +437,7 @@ class EklSumpsifodeltiasindKenVw(models.Model):
     kentro = models.CharField(max_length=45)
     votes = models.IntegerField()
     votesb = models.IntegerField(db_column='votesB')  # Field name made lowercase.
+    votesk = models.IntegerField(db_column='votesK')  # Field name made lowercase.
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
 
@@ -501,6 +502,17 @@ class EklSumpsifodeltiasindVw(models.Model):
     posostosindiasmoub = models.DecimalField(db_column='posostoSindiasmouB', max_digits=38, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     katametrimenab = models.BigIntegerField(db_column='katametrimenaB', blank=True, null=True)  # Field name made lowercase.
     posostokatametrimenwnkentrwnb = models.DecimalField(db_column='posostoKatametrimenwnKentrwnB', max_digits=26, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sumvotesk = models.DecimalField(db_column='sumVotesK', max_digits=32, decimal_places=0, blank=True,
+                                    null=True)  # Field name made lowercase.
+    sinolak = models.DecimalField(db_column='sinolaK', max_digits=32, decimal_places=0, blank=True,
+                                  null=True)  # Field name made lowercase.
+    posostosindiasmouk = models.DecimalField(db_column='posostoSindiasmouK', max_digits=38, decimal_places=2,
+                                             blank=True, null=True)  # Field name made lowercase.
+    katametrimenak = models.BigIntegerField(db_column='katametrimenaK', blank=True,
+                                            null=True)  # Field name made lowercase.
+    posostokatametrimenwnkentrwnk = models.DecimalField(db_column='posostoKatametrimenwnKentrwnK', max_digits=26,
+                                                        decimal_places=2, blank=True,
+                                                        null=True)  # Field name made lowercase.
 
     def __str__(self):
         return self.sindiasmos + ' - ' + str(self.posostosindiasmou)

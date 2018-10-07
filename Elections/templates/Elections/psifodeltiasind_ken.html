@@ -7,7 +7,11 @@
  {% block content %}
 
 <div class="divmargin">
-<label class="label4">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο για την εκλογή Δημοτικής Αρχής</label>
+    {% if sunday == 1 or sunday == 2%}
+        <label class="label4">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο για την εκλογή Δημοτικής Αρχής</label>
+    {%  else  %}
+        <label class="label4">Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο για την ανάδειξη Τοπικού Συμβουλίου</label>
+    {%  endif  %}
 </div>
 
 <div class="divmargin"> </div>
@@ -21,10 +25,10 @@
             <div class="container">
 
                         <form method="get" name="kentra">
-
+                        <label class="label5">Εκλογικό κέντρο</label>
                          <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
                             {% for p in all_kentra %}
-                             <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %}selected{%endif%}>Εκλ. Κέντρο {{ p.descr }}</option>
+                             <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
                             {% endfor %}
                          </select>
 
@@ -40,8 +44,10 @@
 
                         {% if sunday == 1 %}
                           <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 1 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
-                        {% else %}
+                        {% elif sunday == 2 %}
                           <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 2 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                        {% else %}
+                          <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 3 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
                         {% endif %}
 
 
@@ -54,8 +60,10 @@
              <div class="text-center">
                  {% if sunday == 1 %}
                     <label class="label6 pull-center">Α' Κυριακή</label>
-                 {% else %}
+                 {% elif sunday == 2 %}
                     <label class="label6 pull-center">Β' Κυριακή</label>
+                 {% else %}
+                    <label class="label6 pull-center">Για το τοπικό Συμβούλιο </label>
                  {% endif %}
              </div>
 
@@ -74,9 +82,11 @@
                             <td >{{ p.sindiasmos }}</td>
                              {% if sunday == 1 %}
                                 <td class="myfontsize">{{ p.votes }}</td>
-                         {% else %}
+                             {% elif sunday == 2 %}
                                 <td class="myfontsize">{{ p.votesb }}</td>
-                         {% endif %}
+                             {% else %}
+                                <td class="myfontsize">{{ p.votesk }}</td>
+                             {% endif %}
                          </tr>
                      {% endfor %}
                    </tbody>

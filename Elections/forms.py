@@ -377,6 +377,7 @@ class PsifodeltiaForm(ModelForm):
             'votesk': _('Ψηφοδέλτια (Εκλ. Κοινότητας)'),
         }
 
+
     def __init__(self, eklid, *args, **kwargs):
         super(PsifodeltiaForm, self).__init__(*args, **kwargs)
 

@@ -45,6 +45,8 @@
                                 <td class="thick">Συνδυασμός</td>
                                 <td class="thick">Κέντρο</td>
                                 <td class="thick">Ψηφοδέλτια Α Κυριακής</td>
+                                <td class="thick">Ψηφοδέλτια Β Κυριακής</td>
+                                <td class="thick">Ψηφοδέλτια Κοινότητας</td>
                                 <td class="thick">Ενέργειες</td>
                         </tr>
                         {% for p in all_psifodeltia %}
@@ -52,6 +54,8 @@
                                 <td > {{ p.sindid}} </td>
                                 <td > {{ p.kenid }} </td>
                                 <td > {{ p.votesa }}</td>
+                                <td > {{ p.votesb }}</td>
+                                <td > {{ p.votesk }}</td>
 
                                 <td>
                                     <a class="btn btn-default" href="{% url 'psifodeltia_edit' selected_ekloges p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>

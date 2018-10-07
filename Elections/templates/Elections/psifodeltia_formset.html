@@ -36,11 +36,14 @@
                                 {% if forloop.first %}
                                     {% for field in form %}
 
-
                                         {% if field.name == 'sindid' %}
                                             <th><label for="id_sindid">Συνδυασμός</label> </th>
                                         {% elif field.name == 'votesa' %}
-                                            <th><label for="id_votesa">Ψήφοι</label></th>
+                                            <th><label for="id_votesa">Ψηφοδέλτια Α Κυριακής</label></th>
+                                        {% elif field.name == 'votesb' %}
+                                            <th><label for="id_votesb">Ψηφοδέλτια Β Κυριακής</label></th>
+                                        {% elif field.name == 'votesk' %}
+                                            <th><label for="id_votesk">Ψηφοδέλτια Κοινότητας</label></th>
                                         {% elif field.name == 'kenid' %}
                                             <th><label for="id_kenid">Κέντρο</label></th>
                                         {% endif %}
