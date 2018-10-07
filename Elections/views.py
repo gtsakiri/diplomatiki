@@ -2046,7 +2046,7 @@ def kentra_list(request, eklid):
     return render(request, 'Elections/kentra_list.html' , context)
 
 def kentra_add(request, eklid):
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set','eklsimbper_set', 'eklsimbkoin_set').get(eklid=eklid)
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
@@ -2065,6 +2065,27 @@ def kentra_add(request, eklid):
             item = form.save(commit=False)
             item.save()
 
+            # Δημιουργία εγγραφών στον πίνακα Psifodeltia για κάθε Καθολικό συνδυασμό
+            for rec in selected_ekloges.eklsind_set.all():
+                Psifodeltia.objects.create(kenid=item,
+                                           sindid=rec.sindid,
+                                           votesa=0,
+                                           votesb=0,
+                                           votesk=0
+                                           ).save()
+
+            # Δημιουργία εγγραφών στον πίνακα Psifoi για κάθε δημοτικό σύμβουλο
+            for rec in selected_ekloges.eklsimbper_set.all():
+                Psifoi.objects.create(kenid=item,
+                                      simbid=rec.simbid,
+                                      votes=0
+                                      ).save()
+            # Δημιουργία εγγραφών στον πίνακα Psifoi για κάθε τοπικό σύμβουλο της Κοινότητας στην οποία ανήκει το εκλ. κέντρο
+            for rec in selected_ekloges.eklsimbkoin_set.filter(koinid=item.koinid):
+                Psifoi.objects.create(kenid=item,
+                                      simbid=rec.simbid,
+                                      votes=0
+                                      ).save()
 
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             form = KentraForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
