@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_04_10_2018">
-      <change afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" afterDir="false" />
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_08_10_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplomatiki/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplomatiki/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -596,13 +590,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
     </task>
-    <task id="LOCAL-00040" summary="home_14_9_2018">
-      <created>1537001699292</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1537001699292</updated>
-    </task>
     <task id="LOCAL-00041" summary="home_15_9_2018">
       <created>1537046855703</created>
       <option name="number" value="00041" />
@@ -939,7 +926,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538934487711</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="work_08_10_2018">
+      <created>1538997758854</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1538997758855</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TodoView">
@@ -952,7 +946,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -1061,7 +1055,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="work 10/09/2018" />
     <MESSAGE value="work 11/09/2018" />
     <MESSAGE value="home_14_9_2018" />
     <MESSAGE value="home_15_9_2018" />
@@ -1086,7 +1079,8 @@
     <MESSAGE value="work_02_10_2018" />
     <MESSAGE value="work_03_10_2018" />
     <MESSAGE value="home_06_10_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home_06_10_2018" />
+    <MESSAGE value="work_08_10_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="work_08_10_2018" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
