@@ -451,10 +451,12 @@ class EklSumpsifodeltiasindKenVw(models.Model):
 
 class EklSumpsifodeltiasindKoinVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)   # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
     koinid = models.IntegerField(db_column='koinID')  # Field name made lowercase.
+    descr= models.CharField(max_length=100, db_column='descr')
+    eidos=models.IntegerField(db_column='eidos')  # Field name made lowercase.
     sumsindiasmou = models.DecimalField(db_column='sumSindiasmou', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
     sumkoinotitas = models.DecimalField(db_column='sumKoinotitas', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 

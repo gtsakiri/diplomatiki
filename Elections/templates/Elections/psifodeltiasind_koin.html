@@ -1,0 +1,93 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+<div class="divmargin">
+
+    <label class="label4">Ψηφοδέλτια συνδυασμών για την ανάδειξη Τοπικού Συμβουλίου ανά Κοινότητα </label>
+
+</div>
+
+<div class="divmargin"> </div>
+
+
+
+ <div class="row">
+
+       <div class="col-md-6 col-md-offset-3">
+
+            <div class="container">
+
+                <form method="get" name="koinotites">
+                <label class="label5">Κοινότητα</label>
+                 <select  class="sel2" id="mydir" name="koinotitaoption"  onchange="koinotites.submit()">
+                    {% for p in all_koinotites %}
+                     <option  value="{{  p.koinid }}" {% if selected_koinotita ==  p.koinid  %}selected{%endif%}>{{ p.descr }}</option>
+                    {% endfor %}
+                 </select>
+
+
+                 <select   class="sel2 pull-right" name="orderoption"  onchange="koinotites.submit()">
+                     <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                     <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Κοινότητα/Ψηφοδέλτια </option>
+                     <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Κοινότητα/Συνδυασμό</option>
+                     <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Συνδυασμό/Κοινότητα</option>
+                 </select>
+
+                <div class="divmargin"></div>
+
+
+                <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_koin' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+
+                </form>
+            <br>
+            <hr>
+
+
+             <div class="text-center">
+
+                <label class="label6 pull-center">Για το τοπικό Συμβούλιο </label>
+
+             </div>
+
+            <div class="divmargin"></div>
+
+
+                 <table class="table table-bordered table-striped  table-hover">
+
+                   <tbody >
+                   <tr>
+                           <td class="thick">Συνδυασμός </td>
+                           <td class="thick">Ψηφοδέλτια </td>
+                   </tr>
+                   {% for p in all_psifodeltia %}
+                         <tr>
+                            <td >{{ p.sindiasmos }}</td>
+                            <td class="myfontsize">{{ p.sumsindiasmou }}</td>
+                         </tr>
+                     {% endfor %}
+                   </tbody>
+                </table>
+
+            <div class="divmargin"></div>
+
+            </div>
+
+
+     </div>
+
+
+
+ </div>
+
+{% endblock %}
+
+  </body>
+
+</html>
+
+

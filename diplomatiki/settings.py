@@ -97,7 +97,7 @@ DATABASES = {
         'NAME': 'ekloges',
         'USER': 'root',
         'PASSWORD': 'ds9000',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on 10.128.162.201  127.0.0.1
+        'HOST': '10.128.162.201',   # Or an IP Address that your DB is hosted on 10.128.162.201  127.0.0.1
         'PORT': '3306',
     }
 }
@@ -130,6 +130,8 @@ MESSAGE_TAGS = {
 }
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10000000000
 

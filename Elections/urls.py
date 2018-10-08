@@ -96,6 +96,7 @@ path('psifoisimbkoinotites/<int:eklid>/<int:eidoskoinotitas>', views.psifoisimb_
 
 path('psifodeltiasindken/<int:eklid>/<int:sunday>', views.psifodeltiasindken, name='psifodeltiasind_ken'),
 
+path('psifodeltiasindkoin/<int:eklid>/', views.psifodeltiasindkoin, name='psifodeltiasind_koin'),
 
 path('psifoisimb_ken/<int:eklid>/', views.psifoisimb_ken, name='psifoisimb_ken'),
 
@@ -106,6 +107,7 @@ path('editpsifodeltiakentrou/<int:eklid>/<int:kenid>', views.edit_psifodeltia_ke
 path('export/per/<int:eklid>/<int:selected_order>/', views.export_psifoiper_xls, name='export_psifoiper_xls'),
 path('export/koin/<int:eklid>/<int:selected_order>/', views.export_psifoikoin_xls, name='export_psifoikoin_xls'),
 path('export/psifodeltiasindken/<int:eklid>/<int:sunday>/<int:selected_order>/', views.export_psifodeltiasind_ken, name='export_psifodeltiasind_ken'),
+path('export/psifodeltiasindkoin/<int:eklid>/<int:selected_order>/', views.export_psifodeltiasind_koin, name='export_psifodeltiasind_koin'),
 path('export/psifoisimbken/<int:eklid>/<int:selected_order>/', views.export_psifoisimb_ken, name='export_psifoisimbken'),
 
 ]
