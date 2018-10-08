@@ -378,7 +378,7 @@ def Elections_list(request, eklid=0):
         paramkentro = 0
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης και προαιρετικά κέντρου
-    selected_ekloges = Eklogestbl.objects.get(eklid=paramekloges)
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsimbkoin_set', 'eklperkoin_set').get(eklid=paramekloges)
     psifoi_kentrou = None
 
     try:
@@ -406,7 +406,7 @@ def Elections_list(request, eklid=0):
         if selected_kentro is not  None:
 
             # παίρνω per_id, koin_id από τον Eklperkoin
-            eklperkoin_item = Eklperkoin.objects.get(eklid=paramekloges, koinid=selected_kentro.koinid)
+            eklperkoin_item = selected_ekloges.eklperkoin_set.get(koinid=selected_kentro.koinid)
             per_id_item = eklperkoin_item.perid
             koin_id_item = eklperkoin_item.koinid
 
@@ -416,6 +416,23 @@ def Elections_list(request, eklid=0):
                 if form.is_valid():
                     item = form.save(commit=False)
                     item.save()
+
+                    print(koin_id_item)
+                    print(form.cleaned_data['koinid'])
+
+                    # Αν αλλάξει η κοινότητα του κέντρου...
+                    if koin_id_item != form.cleaned_data['koinid']:
+                        # Διαγραφή ψήφων για τοπικούς συμβούλους της πρώην Κοινότητας
+                        Psifoi.objects.filter(kenid=selected_kentro.kenid).filter(
+                            simbid__in=selected_ekloges.eklsimbkoin_set.filter(koinid=koin_id_item).values_list('simbid')).delete()
+
+                        # Δημιουργία εγγραφών στον πίνακα Psifoi για κάθε τοπικό σύμβουλο της Κοινότητας στην οποία ανήκει πλέον το εκλ. κέντρο
+                        for rec in selected_ekloges.eklsimbkoin_set.filter(koinid=item.koinid):
+                            Psifoi.objects.create(kenid=item,
+                                                  simbid=rec.simbid,
+                                                  votes=0
+                                                  ).save()
+
                     messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
                     #return redirect('Elections_list')
             else:
@@ -2191,7 +2208,7 @@ def kentra_add(request, eklid):
             item = form.save(commit=False)
             item.save()
 
-            # Δημιουργία εγγραφών στον πίνακα Psifodeltia για κάθε Καθολικό συνδυασμό
+            # Δημιουργία εγγραφών στον πίνακα Psifodeltia για κάθε Καθολικό συνδυασμό της τρέχουσας εκλ. αναμέτρησης
             for rec in selected_ekloges.eklsind_set.all():
                 Psifodeltia.objects.create(kenid=item,
                                            sindid=rec.sindid,
@@ -2200,7 +2217,7 @@ def kentra_add(request, eklid):
                                            votesk=0
                                            ).save()
 
-            # Δημιουργία εγγραφών στον πίνακα Psifoi για κάθε δημοτικό σύμβουλο
+            # Δημιουργία εγγραφών στον πίνακα Psifoi για κάθε δημοτικό σύμβουλο της τρέχουσας εκλ. αναμέτρησης
             for rec in selected_ekloges.eklsimbper_set.all():
                 Psifoi.objects.create(kenid=item,
                                       simbid=rec.simbid,
@@ -2228,7 +2245,7 @@ def kentra_add(request, eklid):
     return render(request, 'Elections/kentra_form.html', context)
 
 def kentra_edit(request, eklid, kenid):
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsimbkoin_set').get(eklid=eklid)
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
@@ -2255,6 +2272,21 @@ def kentra_edit(request, eklid, kenid):
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
+
+            print(koin_id_item)
+            print(form.cleaned_data['koinid'])
+
+            #Αν αλλάξει η κοινότητα του κέντρου...
+            if koin_id_item != form.cleaned_data['koinid']:
+                #Διαγραφή ψήφων για τοπικούς συμβούλους της πρώην Κοινότητας
+                Psifoi.objects.filter(kenid=kenid).filter(simbid__in=selected_ekloges.eklsimbkoin_set.filter(koinid=koin_id_item).values_list('simbid')).delete()
+
+                # Δημιουργία εγγραφών στον πίνακα Psifoi για κάθε τοπικό σύμβουλο της Κοινότητας στην οποία ανήκει πλέον το εκλ. κέντρο
+                for rec in selected_ekloges.eklsimbkoin_set.filter(koinid=item.koinid):
+                    Psifoi.objects.create(kenid=item,
+                                          simbid=rec.simbid,
+                                          votes=0
+                                          ).save()
             return redirect('kentra_list', eklid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου καθως και τα extra πεδία  manually
