@@ -22,7 +22,7 @@
 
             <form method="get" name="kentra">
                 <label class="label5">Εκλογικό κέντρο</label>
-                 <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+                 <select  class="sel3" id="mydir" name="kentrooption"  onchange="kentra.submit()">
                     {% for p in all_kentra %}
                      <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %} selected {%endif%}>{{ p.descr }}</option>
                     {% endfor %}
@@ -35,7 +35,7 @@
 
             <div>
 
-                 <select   class="sel2" name="orderoption"  onchange="kentra.submit()">
+                 <select   class="sel3" name="orderoption"  onchange="kentra.submit()">
                      <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
                      <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
                      <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
@@ -43,7 +43,7 @@
                      <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
                  </select>
 
-                <a style="color: blue;" class="pull-right" href={% url 'export_psifoisimbken' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                <a style="color: blue;  font-family:Calibri;" class="pull-right" href={% url 'export_psifoisimbken' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
             </div>
 
         </form>

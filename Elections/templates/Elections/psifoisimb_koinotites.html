@@ -22,7 +22,7 @@
 
         <form method="get" name="koinotites">
 
-         <select  class="sel2" id="mydir" name="koinotitaoption"  onchange="koinotites.submit()">
+         <select  class="sel3" id="mydir" name="koinotitaoption"  onchange="koinotites.submit()">
             {% for p in all_koinotites %}
              <option  value="{{  p.koinid }}" {% if selected_koinotita.0.koinid ==  p.koinid  %}selected{%endif%}>{{ p.descr }}</option>
             {% endfor %}
@@ -34,7 +34,7 @@
 
         <div>
 
-         <select   class="sel2" name="orderoption"  onchange="koinotites.submit()">
+         <select   class="sel3" name="orderoption"  onchange="koinotites.submit()">
             <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
             {% if all_psifoi.0.eidoskoinotitas != 3 %}
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
@@ -45,7 +45,7 @@
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
 
-        <a style="color: blue;" class="pull-right" href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
 
         </div>
 
@@ -58,7 +58,7 @@
     <div class="divmargin"> </div>
     <!-- <div class="container-fluid" overflow:auto> -->
 
-      <table class="table styletd1 table-bordered table-striped  table-hover">
+      <table class="table styletd1 table-bordered table-striped  table-condensed table-hover">
 
            <tbody >
            <tr>

@@ -26,14 +26,14 @@
 
                         <form method="get" name="kentra">
                         <label class="label5">Εκλογικό κέντρο</label>
-                         <select  class="sel2" id="mydir" name="kentrooption"  onchange="kentra.submit()">
+                         <select  class="sel3" id="mydir" name="kentrooption"  onchange="kentra.submit()">
                             {% for p in all_kentra %}
                              <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %}selected{%endif%}>{{ p.descr }}</option>
                             {% endfor %}
                          </select>
 
 
-                         <select   class="sel2 pull-right" name="orderoption"  onchange="kentra.submit()">
+                         <select   class="sel3 pull-right" name="orderoption"  onchange="kentra.submit()">
                              <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
                              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Ψηφοδέλτια </option>
                              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Εκλ. Κέντρο/Συνδυασμό</option>
@@ -43,11 +43,11 @@
                         <div class="divmargin"></div>
 
                         {% if sunday == 1 %}
-                          <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 1 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                          <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 1 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
                         {% elif sunday == 2 %}
-                          <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 2 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                          <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 2 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
                         {% else %}
-                          <a style="color: blue;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 3 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                          <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 3 selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
                         {% endif %}
 
 
@@ -70,7 +70,7 @@
             <div class="divmargin"></div>
 
 
-                 <table class="table table-bordered table-striped  table-hover">
+                 <table class="table table-bordered table-striped table-condensed table-hover">
 
                    <tbody >
                    <tr>

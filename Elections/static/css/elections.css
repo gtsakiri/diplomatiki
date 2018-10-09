@@ -249,12 +249,22 @@ font: bold;
 color:blue;
 }
 
-table.a {
+select.sel3 {
+font-size: 14px;
+font: bold;
+background-repeat:no-repeat;
+background-position:300px;
 
- width: 60%;
- margin: 0 auto;  
- 
+padding:6px;
+margin-top:8px;
+font-family:Calibri;
+line-height:2;
+border-radius:5px;
+background-color:#d9edf7;
+color:#1c1a1a;
 }
+
+
 
 tr.hide_all > td, td.hide_all{
         border-style:hidden;
@@ -272,6 +282,12 @@ table.styletd2 td
     white-space: nowrap; /* οχι αναδίπλωση του κειμένου μέσα στο κελί */
 }
 
+table.a {
+
+ width: 60%;
+ margin: 0 auto;  
+ 
+}
 
 table.b {
  margin: 0 auto;  
@@ -293,18 +309,25 @@ table.d {
 .noborder
       {
         border:0;
-      }
+  }
 
 .table-condensed{
   font-size: 11px;
 }
 
 
-.heighttext{
- 
- height:20px;
- width:162px;
- color:blue;
+.heighttext {
+font-size: 14px;
+font: bold;
+background-repeat:no-repeat;
+background-position:300px;
+padding:2px;
+margin-top:8px;
+font-family:Calibri;
+line-height:2;
+border-radius:5px;
+background-color:#d9edf7;
+color:#1c1a1a;
  }
  
  #wrapper {
