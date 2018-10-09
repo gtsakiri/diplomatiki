@@ -18,18 +18,26 @@
 
               <div class="text-center">
 
-                <h4 align="center">{{  action_label }} </h4>
+                <h4 align="center">{{  action_label }} - Εκλ. κέντρο {{ selected_kentro }} </h4>
+
 
              </div>
           </div>
+
+       <div><input type="text" class="heighttext pull-left" id="livesearch" placeholder="live search"></input><p></p></div>
+
+
 
 
 
                  <form method="POST" id="dataForm" class="post-form"  action="">
                     {% csrf_token %}
 
+
                     <table class="table styletd1 table-hover ">
                         <thead>
+
+
                             {% for form in formset.forms %}
                                 {{ formset.management_form }}
 
