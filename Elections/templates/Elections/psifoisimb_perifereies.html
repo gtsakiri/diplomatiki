@@ -41,7 +41,7 @@
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
 
          </select>
-        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoiper_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i>  Εξαγωγή όλων σε excel</a>
+        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoiper_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i> <label class="label5">Εξαγωγή όλων σε excel</label></a>
 
          </div>
         </form>

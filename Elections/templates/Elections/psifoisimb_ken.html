@@ -36,14 +36,15 @@
             <div>
 
                  <select   class="sel3" name="orderoption"  onchange="kentra.submit()">
-                     <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                     <option  value="6" {% if selected_order ==  6  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
                      <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
                      <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
                      <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Επώνυμο</option>
                      <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
+                     <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>Κατά Είδος Υποψηφίου/Σύνολο Ψήφων</option>
                  </select>
 
-                <a style="color: blue;  font-family:Calibri;" class="pull-right" href={% url 'export_psifoisimbken' selected_ekloges selected_order %}><i class="far fa-file-excel"></i> Εξαγωγή όλων σε excel</a>
+                <a class="pull-right" href={% url 'export_psifoisimbken' selected_ekloges selected_order %}><i class="far fa-file-excel label5"></i>Εξαγωγή όλων σε excel</a>
             </div>
 
         </form>
@@ -59,6 +60,7 @@
                    <td class="thick">Επώνυμο</td>
                    <td class="thick">Όνομα </td>
                    <td class="thick">Όν. Πατρός</td>
+                   <td class="thick">Είδος</td>
                    <td class="thick">Συνδυασμός</td>
                    <td class="thick">Ψήφοι</td>
            </tr>
@@ -67,7 +69,8 @@
                     <td >{{ p.surname }}</td>
                     <td >{{ p.firstname }}</td>
                     <td >{{ p.fathername }}</td>
-                    <td >{% if p.sindiasmos == None %} {% else %}{{ p.sindiasmos }} {% endif %}</td>
+                    <td >{{ p.eidos }}</td>
+                     <td >{% if p.sindiasmos == None %} {% else %}{{ p.sindiasmos }} {% endif %}</td>
                     <td class="myfontsize">{{ p.votes }}</td>
                  </tr>
              {% endfor %}
