@@ -3066,6 +3066,42 @@ def edit_psifoi_kentrou(request,eklid, kenid):
 
     return render(request, 'Elections/psifoi_formset.html', context)
 
+def edit_psifoi_kentrou2(request,eklid, kenid):
+
+    action_label='Καταχώρηση ψήφων Υποψηφίων Συμβούλων'
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set','eklsindsimb_set', 'eklpsifoisimbvw_set').get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.change_psifoi'):
+        raise PermissionDenied
+
+    selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
+
+    all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid)
+
+
+
+    #form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
+    #form.fields['simbid'].queryset = Simbouloi.objects.filter(simbid=form['simbid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
+
+    #if request.method == 'POST' and formset.is_valid():
+     #   formset.save()
+    #    messages.success(request, 'Οι αλλαγές αποθηκεύτηκαν!')
+    #    return HttpResponseRedirect('/' + str(eklid) + '?eklogesoption=' + str(eklid) + '&eklkentrooption=' + str(selected_kentro.descr))
+
+    context = {'selected_ekloges': selected_ekloges.eklid,
+                'selected_kentro':selected_kentro,
+               'all_ekloges': all_ekloges,
+               'action_label':action_label,
+               'all_psifoi': all_psifoi
+               }
+
+    return render(request, 'Elections/psifoi_formset2.html', context)
+
+
 def edit_psifodeltia_kentrou(request,eklid, kenid):
 
     action_label='Καταχώρηση ψηφοδελτίων Υποψηφίων Συνδυασμών'
@@ -3102,6 +3138,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
                }
 
     return render(request, 'Elections/psifodeltia_formset.html', context)
+
 def login_user(request, eklid):
 
     selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set').get(eklid=eklid)

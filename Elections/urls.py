@@ -101,6 +101,8 @@ path('psifodeltiasindkoin/<int:eklid>/', views.psifodeltiasindkoin, name='psifod
 path('psifoisimb_ken/<int:eklid>/', views.psifoisimb_ken, name='psifoisimb_ken'),
 
 path('editpsifoikentrou/<int:eklid>/<int:kenid>', views.edit_psifoi_kentrou, name='edit_psifoi_kentrou'),
+path('editpsifoikentrou2/<int:eklid>/<int:kenid>', views.edit_psifoi_kentrou2, name='edit_psifoi_kentrou2'),
+
 path('editpsifodeltiakentrou/<int:eklid>/<int:kenid>', views.edit_psifodeltia_kentrou, name='edit_psifodeltia_kentrou'),
 
 

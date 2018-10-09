@@ -11,7 +11,6 @@
 
 
      <div class="page-header">
-
             <h3 align="center">Ψήφοι Υποψηφίων Συμβούλων ανά εκλ. κέντρο</h3>
      </div>
 
@@ -22,15 +21,16 @@
 
 
                <div id="div2">
+
                     <form method="get" name="kentra">
                         <label class="label5">Εκλογικό κέντρο</label>
-                     <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
+                     <select  class="sel3" id="mydir" name="kentraoption"  onchange="kentra.submit()">
                         {% for p in all_kentra %}
                          <option  value="{{  p.0 }}" {% if selected_kentro.kenid ==  p.0  %}selected{%endif%}>{{ p.1 }}  </option>
                         {% endfor %}
                      </select>
 
-                     <select   name="orderoption"  onchange="kentra.submit()">
+                     <select class="sel3"  name="orderoption"  onchange="kentra.submit()">
                      <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
                          <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Επώνυμο</option>
                          <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>

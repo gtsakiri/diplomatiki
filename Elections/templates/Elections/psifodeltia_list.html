@@ -24,7 +24,7 @@
                <div id="div2">
                     <form method="get" name="kentra">
                         <label class="label5">Εκλογικό κέντρο</label>
-                     <select  class="sel2" id="mydir" name="kentraoption"  onchange="kentra.submit()">
+                     <select  class="sel3" id="mydir" name="kentraoption"  onchange="kentra.submit()">
                         {% for p in all_kentra %}
                          <option  value="{{  p.kenid }}" {% if selected_kentro ==  p.kenid  %} selected {%endif%}>{{ p.descr }}</option>
                         {% endfor %}

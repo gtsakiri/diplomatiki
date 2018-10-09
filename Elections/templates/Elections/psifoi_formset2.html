@@ -1,0 +1,101 @@
+{% extends 'Elections/Elections_list.html' %}
+
+{% load widget_tweaks %}
+
+{% load staticfiles %}
+
+
+ {% block content %}
+
+    {% include 'Elections/messages.html' %}
+
+
+       <div class="row">
+
+           <div class="col-md-9 col-md-offset-1">
+
+               <div class="alert alert-info" role="alert">
+
+                  <div class="text-center">
+
+                    <h4 align="center">{{  action_label }} - Εκλ. κέντρο {{ selected_kentro }} </h4>
+
+
+                 </div>
+
+                </div>
+
+
+
+            <table class="table styletd1 table-condensed table-striped  table-hover">
+
+                <tbody >
+                <tr>
+                        <td class="thick">Επίθετο</td>
+                        <td class="thick">Όνομα</td>
+                        <td class="thick">Όν. Πατρός</td>
+                        <td class="thick">Συνδυασμός</td>
+                        <td class="thick">ΑΑ</td>
+                        <td class="thick">Κατηγορία Υποψηφίου</td>
+                        <td class="thick">Κοινότητα</td>
+                        <td class="thick">Ψήφοι</td>
+
+                </tr>
+                {% for p in all_psifoi %}
+                      <tr>
+                        <td > {{ p.surname}} </td>
+                        <td > {{ p.firstname }} </td>
+                        <td > {{ p.fathername }}</td>
+                        <td > {{ p.sindiasmos }}</td>
+                        <td > {{ p.aa }}</td>
+                        <td > {{ p.eidos }}</td>
+                        <td > {{ p.koinotita }}</td>
+                        <td > <input type="text" class="form-control input-sm" name="votes" value="{{ p.votes }}"></td>
+
+                      </tr>
+                  {% endfor %}
+
+                <tr class="noborder">
+                 <td colspan="8">
+                 <input type="submit" value="Save" class="btn btn-primary">
+
+
+                 <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.history.back();">
+                 </td></tr>
+
+            </tbody>
+
+           </table>
+
+          </div>
+
+
+       </div>
+
+     <script>
+     $(document).ready(function () {
+
+         $("input[type='number']").on('change', function(e) {
+
+            if ((new Number( $(this).val()) < 0)) {
+                alert('Δεν επιτρέπονται αρνητικές τιμές!')
+                $(this).css({'background-color': '#f9f398'});
+                $(this).focus();
+            }
+            else {
+                $(this).css({'background-color' : '#fcfcf9'});
+                }
+
+
+        });
+
+        return false;
+
+        });
+     </script>
+
+
+ {% endblock %}
+
+
+
