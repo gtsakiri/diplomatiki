@@ -2277,9 +2277,6 @@ def kentra_edit(request, eklid, kenid):
             item=form.save(commit=False)
             item.save()
 
-            print(koin_id_item)
-            print(form.cleaned_data['koinid'])
-
             #Αν αλλάξει η κοινότητα του κέντρου...
             if koin_id_item != form.cleaned_data['koinid']:
                 #Διαγραφή ψήφων για τοπικούς συμβούλους της πρώην Κοινότητας
