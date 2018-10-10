@@ -14,6 +14,8 @@
 
            <div class="col-md-9 col-md-offset-1">
 
+            <div class="container">
+
                <div class="alert alert-info" role="alert">
 
                   <div class="text-center">
@@ -25,7 +27,24 @@
 
                 </div>
 
+           <div>
+           <form method="get" name="psifoi">
 
+                 <select   class="sel3" name="orderoption"  onchange="psifoi.submit()">
+                     <option  value="6" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+                     <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>ΑΑ Συνδυασμού/Κατηγορία/Περιοχή εκλογής/Επώνυμο</option>
+                     <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>ΑΑ Συνδυασμού/Κατηγορία/Επώνυμο</option>
+                     <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατηγορία/Επώνυμο</option>
+                     <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Επώνυμο</option>
+                 </select>
+
+           <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search"></input>
+
+            </form>
+
+            </div>
+
+            </div>
 
             <table class="table styletd1 table-condensed table-striped  table-hover">
 
@@ -35,9 +54,9 @@
                         <td class="thick">Όνομα</td>
                         <td class="thick">Όν. Πατρός</td>
                         <td class="thick">Συνδυασμός</td>
-                        <td class="thick">ΑΑ</td>
+                        <td class="thick">ΑΑ Συνδυασμού</td>
                         <td class="thick">Κατηγορία Υποψηφίου</td>
-                        <td class="thick">Κοινότητα</td>
+                        <td class="thick">Περιοχή εκλογής</td>
                         <td class="thick">Ψήφοι</td>
 
                 </tr>
@@ -46,10 +65,10 @@
                         <td > {{ p.surname}} </td>
                         <td > {{ p.firstname }} </td>
                         <td > {{ p.fathername }}</td>
-                        <td > {{ p.sindiasmos }}</td>
-                        <td > {{ p.aa }}</td>
+                        <td > {{ p.shortsind }}</td>
+                        <td > {{ p.sindaa }}</td>
                         <td > {{ p.eidos }}</td>
-                        <td > {{ p.koinotita }}</td>
+                        <td > {{ p.toposeklogis }}</td>
                         <td > <input type="text" class="form-control input-sm" name="votes" value="{{ p.votes }}"></td>
 
                       </tr>

@@ -140,23 +140,23 @@
                         <ul class=" nav nav-list tree" style="font-size: 13px; ">
                             <li><a href="{% url 'pososta_telika' selected_ekloges %} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
                             <li><a href="{% url 'pososta_perifereies' selected_ekloges  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια</a></li>
-                            <li><a href="{% url 'psifoisimb_perifereies' selected_ekloges  %}" id="m3">Κατάταξη υποψ. δημοτικών συμβούλων</a></li>
+                            <li><a href="{% url 'psifoisimb_perifereies' selected_ekloges  %}" id="m3">Ψήφοι υποψ. δημοτικών συμβούλων</a></li>
 
                             {% if selected_ekloges == 1  %}
-                            <li><a href="{% url 'psifoisimb_koinotites' 1 1 %}" id="m4">Κατάταξη υποψ. συμβούλων κοινοτήτων > 2000 κατοίκων</a></li>
-                            <li><a href="{% url 'psifoisimb_koinotites' 1 2 %}" id="m5">Κατάταξη υποψ. συμβούλων κοινοτήτων έως 2000 κατοίκων</a></li>
+                            <li><a href="{% url 'psifoisimb_koinotites' 1 1 %}" id="m4">Ψήφοι υποψ. συμβούλων κοινοτήτων > 2000 κατοίκων</a></li>
+                            <li><a href="{% url 'psifoisimb_koinotites' 1 2 %}" id="m5">Ψήφοι υποψ. συμβούλων κοινοτήτων έως 2000 κατοίκων</a></li>
                             {% else %}
-                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges 4 %}" id="m6">Κατάταξη υποψ. συμβούλων κοινοτήτων > 300 κατοίκων</a></li>
-                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges 3 %}" id="m7">Κατάταξη υποψ. συμβούλων κοινοτήτων έως 300 κατοίκων</a></li>
-
+                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges 4 %}" id="m6">Ψήφοι υποψ. συμβούλων κοινοτήτων > 300 κατοίκων</a></li>
+                            <li><a href="{% url 'psifoisimb_koinotites' selected_ekloges 3 %}" id="m7">Ψήφοι υποψ. συμβούλων κοινοτήτων έως 300 κατοίκων</a></li>
                             {% endif %}
+                            <li><a href="{% url 'psifoisimb_ken' selected_ekloges%}" id="m9">Ψήφοι υποψηφίων συμβούλων ανά εκλ. κέντρο</a></li>
 
                             <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 1%}" id="m8">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά εκλ. κέντρο (Α' Κυριακή)</a></li>
                             <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 2%}" id="m9">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά εκλ. κέντρο (Β' Κυριακή)</a></li>
                             <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 3%}" id="m10">Ψηφοδέλτια συνδυασμών για την εκλογή Τοπικού Συμβουλίου ανά εκλ. κέντρο</a></li>
                             <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges %}" id="m11">Ψηφοδέλτια συνδυασμών για την εκλογή Τοπικού Συμβουλίου ανά Κοινότητα</a></li>
 
-                            <li><a href="{% url 'psifoisimb_ken' selected_ekloges%}" id="m9">Ψήφοι υποψηφίων συμβούλων ανά εκλ. κέντρο</a></li>
+
                         </ul>
                     </li>
 

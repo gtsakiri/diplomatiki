@@ -2889,7 +2889,7 @@ def psifoi_list(request, eklid, kenid=None):
 
 
 
-    all_psifoi = selected_ekloges.eklpsifoisimbvw_set.filter(kenid=paramstr).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmos', 'shortsind', 'aa', 'eidos', 'kenid', 'votes', 'koinotita')
+    all_psifoi = selected_ekloges.eklpsifoisimbvw_set.filter(kenid=paramstr).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmos', 'shortsind', 'simbaa', 'eidos', 'kenid', 'votes', 'koinotita')
 
 
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
@@ -3075,9 +3075,25 @@ def edit_psifoi_kentrou2(request,eklid, kenid):
     if not request.user.has_perm('Elections.change_psifoi'):
         raise PermissionDenied
 
+    paramorder = request.GET.get('orderoption', '')
+
+    try:
+        paramorder = int(paramorder)
+    except:
+        paramorder = 1  # default ταξινόμηση
+
     selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
     all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid)
+
+    if paramorder==1 or paramorder==5:
+        all_psifoi = all_psifoi.order_by('sindaa', 'eidos', 'toposeklogis', 'surname')
+    elif paramorder == 2:
+        all_psifoi = all_psifoi.order_by('sindaa', 'eidos', 'surname')
+    elif paramorder == 3:
+        all_psifoi = all_psifoi.order_by('eidos', 'surname')
+    else:
+        all_psifoi = all_psifoi.order_by('surname')
 
 
 
