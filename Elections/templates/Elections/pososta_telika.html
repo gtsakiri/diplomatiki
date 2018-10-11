@@ -6,83 +6,87 @@
 
  {% block content %}
 
- <div class="container-fluid">
+ <div class="row">
 
- <div id="container"></div>
-  <script src="https://code.highcharts.com/highcharts.src.js"></script>
-  <script>
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων',
-            style: {
-                color: 'red',
-                fontSize:'20px'
-             },
-        },
-        xAxis: {
-            categories: [
-            {% for entry in all_pososta %}'{{ entry.shortdescr }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
-          ],
-            labels: {
-            style: {
-                color: 'red',
-                fontSize:'16px'
-             }
-            }
+       <div class="col-md-10 col-md-offset-1">
 
-        },
-        series: [{
-            name: 'Ποσοστά υποψηφίων',
-          data: [
-            {% for entry in all_pososta %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
-          ],
-          color: 'blue',
-        }],
-        plotOptions: {
-            series: {
-            dataLabels: {
-                enabled: true,
-                fontSize:'34px',
-                format:"{y} %"
-            }
-         }
+             <div id="container"></div>
 
-        }
-    });
-  </script>
+              <script src="https://code.highcharts.com/highcharts.src.js"></script>
+              <script>
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Ποσοστά συνδυασμών στο  {{ all_pososta.0.2 }} % των εκλ. κέντρων',
+                        style: {
+                            color: 'red',
+                            fontSize:'20px'
+                         },
+                    },
+                    xAxis: {
+                        categories: [
+                        {% for entry in all_pososta %}'{{ entry.0 }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                      ],
+                        labels: {
+                        style: {
+                            color: 'red',
+                            fontSize:'16px'
+                         }
+                        }
 
-    <div class="container-fluid" overflow:auto align="center">
+                    },
+                    series: [{
+                        name: 'Ποσοστά υποψηφίων',
+                      data: [
+                        {% for entry in all_pososta %}{{ entry.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                      ],
+                      color: 'blue',
+                    }],
+                    plotOptions: {
+                        series: {
+                        dataLabels: {
+                            enabled: true,
+                            fontSize:'34px',
+                            format:"{y} %"
+                        }
+                     }
 
+                    }
+                });
+              </script>
 
-               <table class="a table table-bordered table-striped">
-
-                    <tbody >
-                    <tr>
-                            <td class="thick">Συνδυασμός</td>
-                            <td class="thick">Ποσοστό </td>
-                    </tr>
-                    {% for p in all_pososta %}
-                          <tr>
-                            <td > {{ p.sindiasmos }} {% if p.image %} <img src="{{ p.image.url}}"/>{% endif %}</td>
-                            <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
-                          </tr>
-                      {% endfor %}
-                    </tbody>
-               </table>
-    {% for p in all_pososta %}
-
-        <img src="{{ p.image.url}}" alt="image"/>
-      {% endfor %}
-
-    <div class="divmargin"> </div>
+                <div class="container-fluid" overflow:auto align="center">
 
 
-    </div>
+                           <table class="a table table-bordered table-striped">
+
+                                <tbody >
+                                <tr>
+                                        <td class="thick">Συνδυασμός</td>
+                                        <td class="thick">Ποσοστό </td>
+                                </tr>
+                                {% for p in all_pososta %}
+                                      <tr>
+                                        <td > {{ p.0 }} {% if p.3 %} <img src="{{ p.3}}"/>{% endif %}</td>
+                                        <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
+                                      </tr>
+                                  {% endfor %}
+                                </tbody>
+                           </table>
+                {% for p in all_pososta %}
+
+                    <img src="{{ p.3}}" alt="image"/>
+                  {% endfor %}
+
+                <div class="divmargin"> </div>
 
 
+                </div>
+
+             </div>
+ </div>
 
 {% endblock %}
 

@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_09_10_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset2.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,47 +81,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="2891" column="169" selection-start-line="2891" selection-start-column="169" selection-end-line="2891" selection-end-column="169" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simbouloi_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="65" column="77" selection-start-line="65" selection-start-column="77" selection-end-line="65" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="psifoi_list.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-748">
-              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="383" column="74" lean-forward="true" selection-start-line="383" selection-start-column="74" selection-end-line="383" selection-end-column="74" />
+            <state relative-caret-position="290">
+              <caret line="496" column="18" selection-start-line="496" selection-start-column="18" selection-end-line="496" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="psifoi_formset2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset2.html">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="71" column="104" lean-forward="true" selection-start-line="71" selection-start-column="104" selection-end-line="71" selection-end-column="104" />
+            <state relative-caret-position="137">
+              <caret line="476" column="93" selection-start-line="476" selection-start-column="93" selection-end-line="476" selection-end-column="93" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pososta_perifereies.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="10" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psifoi_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-459">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pososta_telika.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psifodeltia_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -131,8 +141,8 @@
       <file leaf-file-name="psifoisimb_ken.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+            <state relative-caret-position="-237">
+              <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -140,38 +150,26 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
+            <state relative-caret-position="1683">
               <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="101" selection-start-line="101" selection-end-line="101" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-3757">
+              <caret line="40" column="4" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="psifoisimb_koinotites.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html">
+      <file leaf-file-name="Elections_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/Elections_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-158">
-              <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/diplomatiki/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-62">
-              <caret line="24" selection-start-line="22" selection-end-line="24" />
+            <state relative-caret-position="629">
+              <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -189,13 +187,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hidden</find>
-      <find>psifodeltiasind_ken</find>
-      <find>export_psifodeltiasind</find>
       <find>psifodeltiasind</find>
       <find>sumpsifodeltiasind</find>
       <find>SUMPSIFODELTIASIND</find>
-      <find>pososta</find>
       <find>simbouloi_inse</find>
       <find>HttpResponse</find>
       <find>simbouloi_add</find>
@@ -208,7 +202,6 @@
       <find>psifodeltiasindkoin</find>
       <find>psifodeltiasindken</find>
       <find>eklsumpsifodeltiasindkoinvw</find>
-      <find>EklSumpsifodeltiasindVw</find>
       <find>EklSumpsifodeltiasindkoinVw</find>
       <find>export</find>
       <find>Eklpsifoisimb</find>
@@ -219,6 +212,11 @@
       <find>Elections_list</find>
       <find>psifoisimb</find>
       <find>simbouloi_list</find>
+      <find>posostaper</find>
+      <find>pososta</find>
+      <find>div2</find>
+      <find>EklSumpsifodeltiasindVw</find>
+      <find>pososta_</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -250,8 +248,6 @@
         <option value="$PROJECT_DIR$/diplomatiki/urls.py" />
         <option value="$PROJECT_DIR$/accounts/urls.py" />
         <option value="$PROJECT_DIR$/accounts/views.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/perifereia_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_form.html" />
@@ -275,8 +271,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/Elections_list.html" />
         <option value="$PROJECT_DIR$/Elections/urls.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html" />
@@ -284,7 +278,11 @@
         <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset2.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
       </list>
     </option>
   </component>
@@ -303,9 +301,7 @@
     <option name="width" value="1935" />
     <option name="height" value="1060" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -327,19 +323,6 @@
             <path>
               <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
-              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
-              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -352,13 +335,6 @@
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
               <item name="Elections" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
-              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
-              <item name="Elections" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
@@ -377,11 +353,6 @@
               <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
-              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -423,9 +394,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Elections/views.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/diplomatiki/settings.py</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -518,6 +486,660 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Elections/views.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/diplomatiki/settings.py</PATH>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" />
+            <option name="myStatusName" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" />
+          <option name="myStatusName" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" />
+        </FILE-GROUP>
       </FILE-GROUP>
     </UpdatedFiles>
   </component>
@@ -925,20 +1547,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" visible="true" weight="0.32284543" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32831737" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32147744" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31737345" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" visible="true" weight="0.32101372" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31678987" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20833333" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20833333" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3284055" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -954,6 +1576,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32831737" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" visible="true" weight="0.31737345" />
+      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" visible="true" weight="0.32284543" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Database" order="4" />
@@ -961,7 +1584,6 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3284055" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32946146" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32147744" />
@@ -970,25 +1592,25 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21946308" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.3243626" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.32719547" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" weight="0.39943343" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25838926" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1066,12 +1688,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Elections/views.py</url>
-          <line>1417</line>
+          <line>1419</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Elections/views.py</url>
-          <line>1523</line>
+          <line>1525</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
@@ -1114,20 +1736,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="94" column="12" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/query.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1328,13 +1936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1513">
@@ -1342,31 +1943,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/Elections_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="186" selection-start-line="77" selection-start-column="186" selection-end-line="77" selection-end-column="186" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="43" column="198" selection-start-line="43" selection-start-column="198" selection-end-line="43" selection-end-column="198" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="151" column="28" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
+        <state relative-caret-position="731">
+          <caret line="43" column="227" selection-start-line="43" selection-start-column="227" selection-end-line="43" selection-end-column="227" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_koinotites.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158">
-          <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
+        <state relative-caret-position="799">
+          <caret line="47" column="231" selection-start-line="47" selection-start-column="231" selection-end-line="47" selection-end-column="231" />
         </state>
       </provider>
     </entry>
@@ -1387,16 +1974,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="1683">
           <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
         </state>
       </provider>
@@ -1408,13 +1988,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="383" column="74" lean-forward="true" selection-start-line="383" selection-start-column="74" selection-end-line="383" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
@@ -1422,17 +1995,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/Elections_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="2891" column="169" selection-start-line="2891" selection-start-column="169" selection-end-line="2891" selection-end-column="169" />
+        <state relative-caret-position="629">
+          <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoisimb_ken.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-237">
+          <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3757">
+          <caret line="40" column="4" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="10" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="496" column="18" selection-start-line="496" selection-start-column="18" selection-end-line="496" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        <state relative-caret-position="-459">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="476" column="93" selection-start-line="476" selection-start-column="93" selection-end-line="476" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
         </state>
       </provider>
     </entry>

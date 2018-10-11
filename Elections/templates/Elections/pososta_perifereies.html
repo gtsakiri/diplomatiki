@@ -6,105 +6,105 @@
 
  {% block content %}
 
-<div class="divmargin"> </div>
+ <div class="row">
 
-<div id="div2">
-<form method="get" name="perifereies">
+       <div class="col-md-10 col-md-offset-1">
 
- <select  class="sel2" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
-    {% for p in all_perifereies %}
-     <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
-    {% endfor %}
- </select>
+        <!--<div id="div2"> -->
+        <form method="get" name="perifereies">
 
-
-<div class="divmargin"> </div>
-
-</form>
-
-</div>
+         <select  class="sel3" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
+            {% for p in all_perifereies %}
+             <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
+            {% endfor %}
+         </select>
 
 
-<div id="container"></div>
+        <div class="divmargin"> </div>
 
- <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        </form>
 
- <script>
-
-   Highcharts.chart('container', {
-       chart: {
-           type: 'column'
-       },
-       title: {
-           text: 'Ποσοστά συνδυασμών ΑΝΑ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑ στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων',
-           style: {
-               color: 'red',
-               fontSize: '20px'
-           },
-       },
-       xAxis: {
-           categories: [
-           {% for entry in all_posostaper %}'{{ entry.shortdescr }} '{% if not forloop.last %}, {% endif %}{% endfor %}
-         ],
-           labels: {
-           style: {
-               color: 'red',
-               fontSize:'16px'
-            }
-           }
-
-       },
-       series: [{
-           name: 'Ποσοστά υποψηφίων',
-         data: [
-           {% for entry in all_posostaper %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
-         ],
-         color: 'blue',
-       }],
-       plotOptions: {
-           series: {
-           dataLabels: {
-               enabled: true,
-               fontSize:'34px',
-               format:"{y} %"
-           }
-        }
-
-       }
-   });
- </script>
-
-   <div class="a container-fluid" overflow:auto align="center">
+        <!--</div> -->
 
 
-              <table class="a table table-bordered table-striped table-condensed">
+        <div id="container"></div>
 
-                   <tbody >
-                   <tr>
-                           <td class="thick">Συνδυασμός</td>
-                           <td class="thick">Ποσοστό </td>
-                   </tr>
-                   {% for p in all_posostaper %}
-                         <tr>
-                           <td >{{ p.sindiasmos }}</td>
-                           <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
-                         </tr>
-                     {% endfor %}
-                   </tbody>
-              </table>
-            <div class="divmargin"> </div>
+         <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+         <script>
+
+           Highcharts.chart('container', {
+               chart: {
+                   type: 'column'
+               },
+               title: {
+                   text: 'Ποσοστά συνδυασμών ΑΝΑ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑ στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων',
+                   style: {
+                       color: 'red',
+                       fontSize: '20px'
+                   },
+               },
+               xAxis: {
+                   categories: [
+                   {% for entry in all_posostaper %}'{{ entry.shortdescr }} '{% if not forloop.last %}, {% endif %}{% endfor %}
+                 ],
+                   labels: {
+                   style: {
+                       color: 'red',
+                       fontSize:'16px'
+                    }
+                   }
+
+               },
+               series: [{
+                   name: 'Ποσοστά υποψηφίων',
+                 data: [
+                   {% for entry in all_posostaper %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                 ],
+                 color: 'blue',
+               }],
+               plotOptions: {
+                   series: {
+                   dataLabels: {
+                       enabled: true,
+                       fontSize:'34px',
+                       format:"{y} %"
+                   }
+                }
+
+               }
+           });
+         </script>
+
+           <div class="a container-fluid" overflow:auto align="center">
 
 
-   </div>
+                      <table class="a table table-bordered table-striped table-condensed">
 
-  </div>
+                           <tbody >
+                           <tr>
+                                   <td class="thick">Συνδυασμός</td>
+                                   <td class="thick">Ποσοστό </td>
+                           </tr>
+                           {% for p in all_posostaper %}
+                                 <tr>
+                                   <td >{{ p.sindiasmos }}</td>
+                                   <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
+                                 </tr>
+                             {% endfor %}
+                           </tbody>
+                      </table>
+                    <div class="divmargin"> </div>
 
 
+           </div>
+
+
+        </div>
+ </div>
 
 
 {% endblock %}
 
-  </body>
-</html>
 
 
