@@ -2858,6 +2858,15 @@ def load_simbouloi(request, eklid):
 
     return render(request, 'Elections/simbouloi_found.html', context)
 
+def update_psifoi(request):
+
+    votes= int(request.GET.get('votes',''))
+    simbid= int(request.GET.get('simbid',''))
+    kenid= int(request.GET.get('kenid',''))
+
+    Psifoi.objects.filter(kenid=kenid, simbid=simbid).update(votes=votes)
+    return HttpResponse('');
+
 
 
 def psifoi_list(request, eklid, kenid=None):

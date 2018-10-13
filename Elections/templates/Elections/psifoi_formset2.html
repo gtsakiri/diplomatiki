@@ -46,7 +46,8 @@
 
             </div>
 
-            <table class="table styletd1 table-condensed table-striped  table-hover">
+
+            <table id="tblPsifoi" data-psifoi-url="{% url 'ajax_update_psifoi' %}" class="table styletd1 table-condensed table-striped  table-hover">
 
                 <tbody >
                 <tr>
@@ -62,16 +63,16 @@
                 </tr>
                 {% for p in all_psifoi %}
                       <tr>
-                        <td > {{ p.surname}} </td>
-                        <td > {{ p.firstname }} </td>
-                        <td > {{ p.fathername }}</td>
-                        <td > {{ p.shortsind }}</td>
-                        <td > {{ p.sindaa }}</td>
-                        <td > {{ p.eidos }}</td>
-                        <td > {{ p.toposeklogis }}</td>
-                        <td > <input type="number" onkeypress="return event.charCode >= 48" min=0 class="form-control input-sm" name="votes" value="{{ p.votes }}">
-                                <input type="number" class="hidden form-control input-sm" name="simbid" value="{{ p.simbid }}">
-                                <input type="number" class="hidden form-control input-sm" name="kenid" value="{{ p.kenid }}">
+                        <td class="surname"> {{ p.surname}} </td>
+                        <td class="firstname"> {{ p.firstname }} </td>
+                        <td class="fathername"> {{ p.fathername }}</td>
+                        <td class="shortsind"> {{ p.shortsind }}</td>
+                        <td class="sindaa"> {{ p.sindaa }}</td>
+                        <td class="eidos"> {{ p.eidos }}</td>
+                        <td class="toposeklogis"> {{ p.toposeklogis }}</td>
+                        <td class="votes"> <input type="number" id="votes{{ p.id }}" onkeypress="return event.charCode >= 48" min=0 class="form-control input-sm" name="votes" value="{{ p.votes }}">
+                                <input type="text" id="simbid{{ p.id }}" class="simbid hidden form-control input-sm" name="simbid" value="{{ p.simbid.simbid }}">
+                                <input type="text" id="kenid{{ p.id }}" class="kenid hidden form-control input-sm" name="kenid" value="{{ p.kenid.kenid }}">
                         </td>
 
                       </tr>
@@ -79,15 +80,14 @@
 
                 <tr class="noborder">
                  <td colspan="8">
-                 <input type="submit" value="Save" class="btn btn-primary">
 
 
-                 <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.history.back();">
                  </td></tr>
 
             </tbody>
 
            </table>
+           <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.history.back();">
 
           </div>
 
@@ -97,21 +97,32 @@
      <script>
      $(document).ready(function () {
 
-         <!--
-
          $("input[type='number']").on('change', function(e) {
 
-            if ((new Number( $(this).val()) < 0)) {
-                alert('Δεν επιτρέπονται αρνητικές τιμές!')
-                $(this).css({'background-color': '#f9f398'});
-                $(this).focus();
+            var url = $("#tblPsifoi").attr("data-psifoi-url");  // get the url of the `update_psifoi` view
+
+            var votes = $(this).closest('tr').find('input[name="votes"]').val();
+            var simbid = $(this).closest('tr').find('input[name="simbid"]').val();
+            var kenid = $(this).closest('tr').find('input[name="kenid"]').val();
+
+            //δημιουργία παραμετρικού string για κλήση GET
+            var itemstring = "votes=" + votes + "&simbid=" + simbid + "&kenid=" + kenid;
+
+
+            $.ajax({
+            type: "GET",
+            url: url,
+            data: itemstring            ,
+            success: function() {
+
             }
-            else {
-                $(this).css({'background-color' : '#fcfcf9'});
-                }
-     -->
+        });
+
+        $(this).css({'background-color': '#c5e8fa'});
+
 
         });
+
 
         return false;
 
