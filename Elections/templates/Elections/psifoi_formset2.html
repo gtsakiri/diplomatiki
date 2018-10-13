@@ -63,16 +63,16 @@
                 </tr>
                 {% for p in all_psifoi %}
                       <tr>
-                        <td class="surname"> {{ p.surname}} </td>
-                        <td class="firstname"> {{ p.firstname }} </td>
-                        <td class="fathername"> {{ p.fathername }}</td>
-                        <td class="shortsind"> {{ p.shortsind }}</td>
-                        <td class="sindaa"> {{ p.sindaa }}</td>
-                        <td class="eidos"> {{ p.eidos }}</td>
-                        <td class="toposeklogis"> {{ p.toposeklogis }}</td>
-                        <td class="votes"> <input type="number" id="votes{{ p.id }}" onkeypress="return event.charCode >= 48" min=0 class="form-control input-sm" name="votes" value="{{ p.votes }}">
-                                <input type="text" id="simbid{{ p.id }}" class="simbid hidden form-control input-sm" name="simbid" value="{{ p.simbid.simbid }}">
-                                <input type="text" id="kenid{{ p.id }}" class="kenid hidden form-control input-sm" name="kenid" value="{{ p.kenid.kenid }}">
+                        <td class="surname"> {{ p.1}} </td>
+                        <td class="firstname"> {{ p.2 }} </td>
+                        <td class="fathername"> {{ p.3 }}</td>
+                        <td class="shortsind"> {{ p.5 }}</td>
+                        <td class="sindaa"> {{ p.6 }}</td>
+                        <td class="eidos"> {{ p.7 }}</td>
+                        <td class="toposeklogis"> {{ p.9 }}</td>
+                        <td class="votes"> <input type="number" id="votes{{ p.13 }}" onkeypress="return event.charCode >= 48" min=0 class="form-control input-sm" name="votes" value="{{ p.10 }}">
+                                <input type="text" id="simbid{{ p.13 }}" class="simbid hidden form-control input-sm" name="simbid" value="{{ p.0 }}">
+                                <input type="text" id="kenid{{ p.13 }}" class="kenid hidden form-control input-sm" name="kenid" value="{{ p.11 }}">
                         </td>
 
                       </tr>

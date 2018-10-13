@@ -3095,8 +3095,7 @@ def edit_psifoi_kentrou2(request,eklid, kenid):
 
     selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
-    all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid)
-
+    all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmos', 'shortsind', 'sindaa','eidos', 'simbaa', 'toposeklogis', 'votes', 'kenid', 'koinotita', 'id', 'kenid__perid__descr')
     if paramorder==1 or paramorder==5:
         all_psifoi = all_psifoi.order_by('sindaa', 'eidos', 'toposeklogis', 'surname')
     elif paramorder == 2:
