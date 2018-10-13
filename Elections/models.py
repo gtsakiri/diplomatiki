@@ -442,6 +442,7 @@ class EklSumpsifodeltiasindKenVw(models.Model):
     votesk = models.IntegerField(db_column='votesK')  # Field name made lowercase.
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
+    eidos = models.IntegerField(db_column='eidos')
 
     def __str__(self):
         return str(self.kenid) + ' - ' + self.sindiasmos
@@ -517,6 +518,7 @@ class EklSumpsifodeltiasindVw(models.Model):
     posostokatametrimenwnkentrwnk = models.DecimalField(db_column='posostoKatametrimenwnKentrwnK', max_digits=26,
                                                         decimal_places=2, blank=True,
                                                         null=True)  # Field name made lowercase.
+    eidos=models.IntegerField(db_column='eidos')
 
     def __str__(self):
         return self.sindiasmos + ' - ' + str(self.posostosindiasmou)
