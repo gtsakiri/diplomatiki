@@ -388,3 +388,9 @@ color:#1c1a1a;
   color:#ffffff;
 }
 
+/*no arrows to input type=number */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
