@@ -368,13 +368,13 @@ class PsifodeltiaForm(ModelForm):
 
     class Meta:
         model=Psifodeltia
-        fields = ['sindid','kenid', 'votesa', 'votesb', 'votesk']
+        fields = ['sindid','kenid', 'votesa', 'votesb']
         labels = {
             'sindid': _('Συνδυασμός'),
             'kenid': _('Εκλ. Κέντρο'),
             'votesa': _('Ψηφοδέλτια (Α Κυριακής)'),
             'votesb': _('Ψηφοδέλτια (Β Κυριακής)'),
-            'votesk': _('Ψηφοδέλτια (Εκλ. Κοινότητας)'),
+
         }
 
 
@@ -396,7 +396,38 @@ class PsifodeltiaForm(ModelForm):
         kenid = cleaned_data.get('kenid')
         votesa = cleaned_data.get('votesa')
         votesb = cleaned_data.get('votesb')
+
+
+class PsifodeltiaKoinForm(ModelForm):
+    class Meta:
+        model = Psifodeltia
+        fields = ['sindid', 'kenid', 'votesk']
+        labels = {
+            'sindid': _('Συνδυασμός'),
+            'kenid': _('Εκλ. Κέντρο'),
+            'votesk': _('Ψηφοδέλτια Για Τοπικό Συμβούλιο'),
+
+        }
+
+    def __init__(self, eklid, *args, **kwargs):
+        super(PsifodeltiaKoinForm, self).__init__(*args, **kwargs)
+
+        # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
+        # self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        # δημιουργία φίλτρου με τη βοήθεια του Q object
+        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
+            Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
+        self.fields['kenid'].queryset = Kentra.objects.filter(
+            kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
+
+    def clean(self):
+        cleaned_data = super(PsifodeltiaKoinForm, self).clean()
+        sindid = cleaned_data.get('sindid')
+        kenid = cleaned_data.get('kenid')
         votesk = cleaned_data.get('votesk')
+
 
 class SimbouloiForm(ModelForm):
 

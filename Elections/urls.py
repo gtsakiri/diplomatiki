@@ -106,6 +106,7 @@ path('editpsifoikentrou/<int:eklid>/<int:kenid>', views.edit_psifoi_kentrou, nam
 path('editpsifoikentrou2/<int:eklid>/<int:kenid>', views.edit_psifoi_kentrou2, name='edit_psifoi_kentrou2'),
 
 path('editpsifodeltiakentrou/<int:eklid>/<int:kenid>', views.edit_psifodeltia_kentrou, name='edit_psifodeltia_kentrou'),
+path('editpsifodeltiakoinkentrou/<int:eklid>/<int:kenid>', views.edit_psifodeltiakoin_kentrou, name='edit_psifodeltiakoin_kentrou'),
 
 
 path('export/per/<int:eklid>/<int:selected_order>/', views.export_psifoiper_xls, name='export_psifoiper_xls'),
