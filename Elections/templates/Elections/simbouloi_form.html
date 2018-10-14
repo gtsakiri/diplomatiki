@@ -21,7 +21,7 @@
 
        <!-- <button class="btn btn-primary btn-sm pull-right" id="open-modal" data-target="#simbFound" data-toggle="modal">open modal</button> -->
 
-             <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges %}" data-simbouloi-url="{% url 'ajax_load_simbouloi' selected_ekloges %}" class="post-form"  action="." enctype="multipart/form-data">
+             <form method="POST" id="dataForm" data-sindiasmoi-url="{% url 'ajax_load_sindiasmoi' selected_ekloges %}" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges %}" data-simbouloi-url="{% url 'ajax_load_simbouloi' selected_ekloges %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
 
 
@@ -153,15 +153,21 @@
                 else if (eidosSelected == 1) {
                     $('#id_koinid, label[for="#id_koinid"]').hide()
                     $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+
                 }
 
 
 
               //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
               var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
+              var url2 = $("#dataForm").attr("data-sindiasmoi-url");  // get the url of the `load_sindiasmoi` view
+
               var currentKoinid=$("#id_koinid").val();
+              var currentSindid=$("#id_sindid").val();
               //alert(currentKoinid);
+
               var perid = $("#perid_of_simbouloi").val();  // get the selected perid from the HTML input
+              var sindid = $("#id_sindid").val();  // get the selected sindid from the HTML input
 
               $.ajax({                       // initialize an AJAX request
                 url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
@@ -172,6 +178,21 @@
                   $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
 
                   $("#id_koinid").val(currentKoinid);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό koinid
+                                                     //με το οποίο άνοιξε η φόρμα
+
+                }
+
+              });
+
+              $.ajax({                       // initialize an AJAX request
+                url: url2,                    // set the url of the request (= localhost:8000/ajax/load_sindiasmoi/)
+                data: {
+                  'koinid': koinid       // add the koinid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $("#id_sindid").html(data);  // replace the contents of the sindid input with the data that came from the server
+
+                  $("#id_sindid").val(currentSindid);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό sindid
                                                      //με το οποίο άνοιξε η φόρμα
                 }
 
@@ -201,15 +222,34 @@
             var optionSelected = $("#id_eidos", this);
             var eidosSelected = this.value;
             if (eidosSelected == 0) {
-                    $('#id_koinid, label[for="#id_koinid"]').show()
-                    $('#id_koinid, label[for="#id_koinid"]').parent().show()
+                    $('#id_koinid, label[for="#id_koinid"]').show();
+                    $('#id_koinid, label[for="#id_koinid"]').parent().show();
+
                  }
                 else if (eidosSelected == 1) {
-                    $('#id_koinid, label[for="#id_koinid"]').hide()
-                    $('#id_koinid, label[for="#id_koinid"]').parent().hide()
+                    $('#id_koinid, label[for="#id_koinid"]').hide();
+                    $('#id_koinid, label[for="#id_koinid"]').parent().hide();
+                    $("#id_sindid").empty();
+                    $("#perid_of_simbouloi").change();
                 }
             return false;
           });
+
+          $("#id_koinid, #perid_of_simbouloi").change(function () {
+              var url2 = $("#dataForm").attr("data-sindiasmoi-url");  // get the url of the `load_koinotites` view
+              var koinid = $(this).val();  // get the selected koinid from the HTML input
+
+              $.ajax({                       // initialize an AJAX request
+                url: url2,                    // set the url of the request (= localhost:8000/ajax/load_sindiasmoi/)
+                data: {
+                  'koinid': koinid       // add the koinid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $("#id_sindid").html(data);  // replace the contents of the koinid input with the data that came from the server
+                }
+              });
+
+            });
 
         //var modalDiv = $("#modal-div");
 

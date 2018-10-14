@@ -406,40 +406,47 @@ class SimbouloiForm(ModelForm):
     )
 
     hiddenid = IntegerField(label='ID Συμβούλου',required=False)
-    aa = CharField(label='ΑΑ Συμβούλου', max_length=45)
-    sindid= ModelChoiceField (queryset=Sindiasmoi.objects.none(), label='Συνδυασμός', required=False)
+
+    eidos = forms.ChoiceField(choices = EIDOS_CHOICES, label="Σε Δήμο ή Κοινότητα ?", widget=forms.Select(), required=True)
     perid = ModelChoiceField(queryset=Perifereies.objects.none(), label='Εκλ. Περιφέρεια')
     koinid = ModelChoiceField(queryset=Koinotites.objects.none(), label='Κοινότητα', required=False)
-    eidos = forms.ChoiceField(choices = EIDOS_CHOICES, label="Σε Δήμο ή Κοινότητα ?", widget=forms.Select(), required=True)
+
+    sindid = ModelChoiceField(queryset=Sindiasmoi.objects.none(), label='Συνδυασμός', required=False)
+    aa = CharField(label='ΑΑ Συμβούλου', max_length=45)
 
     class Meta:
         model=Simbouloi
-        fields = ['hiddenid', 'surname', 'firstname', 'fathername', 'eidos', 'comments',  'aa', 'sindid', 'perid', 'koinid']
+        fields = ['hiddenid', 'surname', 'firstname', 'fathername', 'eidos',  'perid',  'koinid',  'sindid', 'aa', 'comments']
 
         labels = {
             'surname': _('Επίθετο'),
             'firstname': _('Όνομα'),
             'fathername': _('Όν. Πατρός'),
             'comments': _('Παρατηρήσεις'),
-            'aa': _('ΑΑ'),
-            'sindid': _('Συνδυασμός'),
             'perid': _('Εκλ. Περιφέρεια'),
             'koinid': _('Κοινότητα'),
+            'sindid': _('Συνδυασμός'),
+            'aa': _('ΑΑ'),
         }
         help_texts = {
             'aa': _('Με ποιο ΑΑ συμμετέχει o υποψήφιος στις εκλογές'),
         }
 
-    def __init__(self, eklid, *args, **kwargs):
+    def __init__(self, eklid,  *args, **kwargs):
         super(SimbouloiForm, self).__init__(*args, **kwargs)
 
         # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση των dropdown perid, sindid, koinid
         # Παίρνω μόνο perid, sindid, koinid που έχουν καταχωρηθεί στην τρέχουσα εκλ. αναμέτρηση μόνο
         self.fields['perid'].queryset = Perifereies.objects.filter(perid__in=Eklper.objects.filter(eklid=eklid).values_list('perid'))
-        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+
         self.fields['koinid'].queryset = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).values_list('koinid'))
 
         self.fields['perid'].widget.attrs['id'] = 'perid_of_simbouloi'
+
+        q = Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid')) | Q(
+           sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid'))
+
+        self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
 
         self.fields['hiddenid'].widget = forms.HiddenInput()
 

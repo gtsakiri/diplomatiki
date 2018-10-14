@@ -27,7 +27,7 @@
              </div>
            </div>
 
-        <form method="POST" id="dataForm" data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges %}" class="post-form"  action="." enctype="multipart/form-data">
+        <form method="POST" id="dataForm"  data-koinotites-url="{% url 'ajax_load_koinotites' selected_ekloges %}" class="post-form"  action="." enctype="multipart/form-data">
                             {% csrf_token %}
 
                          <div class="form-group">
@@ -146,45 +146,52 @@
             });
 
 
-                  //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
-                  var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
-                  var currentKoinid=$("#id_koinid").val();
-                  //alert(currentKoinid);
-                  var perid = $("#perid_of_kentra").val();  // get the selected perid from the HTML input
+              //κρατώ το koinid και επίσης ανάλογα με το perid φορτώνω στο dropdown koinid τα σχετικά μόνο koinid
+              var url1 = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
+              var currentKoinid=$("#id_koinid").val();
 
-                  $.ajax({                       // initialize an AJAX request
-                    url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
-                    data: {
-                      'perid': perid       // add the perid to the GET parameters
-                    },
-                    success: function (data) {   // `data` is the return of the `load_koinotites` view function
-                      $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
 
-                      $("#id_koinid").val(currentKoinid);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό koinid
-                                                         //με το οποίο άνοιξε η φόρμα
-                    }
+              //alert(currentKoinid);
+              var perid = $("#perid_of_kentra").val();  // get the selected perid from the HTML input
+              var koinid = $("#id_koinid").val();  // get the selected perid from the HTML input
 
-                  });
 
-                return false;
+              $.ajax({                       // initialize an AJAX request
+                url: url1,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
+                data: {
+                  'perid': perid       // add the perid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
+
+                  $("#id_koinid").val(currentKoinid);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό koinid
+                                                     //με το οποίο άνοιξε η φόρμα
+                }
+
               });
 
 
-              $("#perid_of_kentra").change(function () {
-                  var url = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
-                  var perid = $(this).val();  // get the selected perid from the HTML input
 
-                  $.ajax({                       // initialize an AJAX request
-                    url: url,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
-                    data: {
-                      'perid': perid       // add the perid to the GET parameters
-                    },
-                    success: function (data) {   // `data` is the return of the `load_koinotites` view function
-                      $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
-                    }
-                  });
+            return false;
+          });
 
-                });
+
+          $("#perid_of_kentra").change(function () {
+              var url1 = $("#dataForm").attr("data-koinotites-url");  // get the url of the `load_koinotites` view
+              var perid = $(this).val();  // get the selected perid from the HTML input
+
+              $.ajax({                       // initialize an AJAX request
+                url: url1,                    // set the url of the request (= localhost:8000/ajax/load_koinotites/)
+                data: {
+                  'perid': perid       // add the perid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $("#id_koinid").html(data);  // replace the contents of the koinid input with the data that came from the server
+                }
+              });
+
+            });
+
 
 
 

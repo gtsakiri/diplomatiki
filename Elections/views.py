@@ -2,6 +2,7 @@ import xlwt
 from django.contrib import  messages
 from django.contrib.auth import  authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from django.forms import DateInput, modelformset_factory
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -2819,8 +2820,21 @@ def load_koinotites(request, eklid):
 
     perid = request.GET.get('perid')
     koinotites = Koinotites.objects.filter(koinid__in=Eklperkoin.objects.filter(eklid=eklid).filter(perid=perid).values_list('koinid')).order_by('descr')
-
+    #sindiasmoi = Sindiasmoi.objects.filter(sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid')))
     return render(request, 'Elections/koinotites_dropdown_list_options.html', {'koinotites': koinotites})
+
+##Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα sindid που σχετίζονται με ένα koinid
+def load_sindiasmoi(request, eklid):
+    #selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    #all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    koinid = request.GET.get('koinid')
+
+    q = Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid')) | Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).filter(koinid=koinid).values_list('sindid'))
+
+    sindiasmoi = Sindiasmoi.objects.filter(q).order_by('descr')
+
+    return render(request, 'Elections/sindiasmoi_dropdown_list_options.html', {'sindiasmoi': sindiasmoi})
 
 #Αυτό το view φορτώνει με τη βοήθεια Ajax σε dropdown μόνο τα είδη κοινοτήτων που σχετίζονται με το εκλ. σύστημα
 def load_koineidos(request):
