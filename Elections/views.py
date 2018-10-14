@@ -12,7 +12,8 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
-    Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw
+    Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
+    EklSumpsifodeltiasindKenTopikoiOnlyVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm
 from django.core.exceptions import PermissionDenied
@@ -195,11 +196,12 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
     font_style = xlwt.XFStyle()
 
     if sunday == 1:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votes')
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).values_list('kentro', 'sindiasmos', 'votes')
     elif sunday == 2:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesb')
-    else:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesk')
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).values_list('kentro', 'sindiasmos', 'votesb')
+    else: #sunday=3
+        #ΠΡΟΣΟΧΗ!!!: Για Κοινότητες μόνο
+        rows = EklSumpsifodeltiasindKenTopikoiOnlyVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesk')
 
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
@@ -667,15 +669,16 @@ def psifodeltiasindken(request, eklid, sunday):
     if paramorder == 1 or paramorder == 4:
         #Α Κυριακή sunday=1, Β Κυριακή sunday=2, Εκλογές Κοινότητας sunday=3,
         if sunday == 1:
-            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votes')
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-votes')
         elif sunday == 2:
-            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votesb')
-        else:
-            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('-votesk')
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-votesb')
+        else: #sunday=3 άρα εκλογές κοινότητας
+            #ΠΡΟΣΟΧΗ!!!: για τις εκλογές Κοινότητας φιλτράρω μόνο τους συμμετέχοντες συνδυασμούς στην Κοινότητα
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(kenid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('-votesk')
     elif paramorder == 2:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('sindiasmos')
+        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos')
     else:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).order_by('sindiasmos','kentro')
+        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos','kentro')
 
 
     context = {'all_psifodeltia':all_psifodeltia,
@@ -724,12 +727,14 @@ def psifodeltiasindkoin(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     #all_pososta = selected_ekloges.eklsumpsifodeltiasindvw_set.all().order_by('-posostosindiasmou')
 
+
+    #ΠΡΟΣΟΧΗ!!! : ΦΙΛΤΡΑΡΩ ΜΟΝΟ ΣΥΝΔΥΑΣΜΟΥΣ ΠΟΥ ΣΥΜΜΕΤΕΧΟΥΝ ΣΕ ΚΟΙΝΟΤΗΤΕΣ
     if paramorder == 1 or paramorder == 4:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.filter(koinid=paramstr).order_by('-sumsindiasmou')
+        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.filter(koinid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(koinid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('-sumsindiasmou')
     elif paramorder == 2:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.filter(koinid=paramstr).order_by('sindiasmos')
+        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.filter(koinid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(koinid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('sindiasmos')
     else:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.filter(koinid=paramstr).order_by('sindiasmos','descr')
+        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.filter(koinid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(koinid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('sindiasmos','descr')
 
 
     context = {'all_psifodeltia': all_psifodeltia,

@@ -451,6 +451,26 @@ class EklSumpsifodeltiasindKenVw(models.Model):
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_SUMPSIFODELTIASIND_KEN_VW'
 
+#ΠΡΟΣΟΧΗ!!! : Model μόνο για ομαδοποίηση ψήφων Τοπικών συνδυασμών ανά εκλ. κέντρο
+class EklSumpsifodeltiasindKenTopikoiOnlyVw(models.Model):
+    id = models.IntegerField(primary_key=True)
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
+    kenid = models.ForeignKey(Kentra, models.DO_NOTHING, db_column='kenID', db_index=True)  # Field name made lowercase.
+    kentro = models.CharField(max_length=45)
+    votes = models.IntegerField()
+    votesb = models.IntegerField(db_column='votesB')  # Field name made lowercase.
+    votesk = models.IntegerField(db_column='votesK')  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
+    sindiasmos = models.CharField(max_length=100)
+    eidos = models.IntegerField(db_column='eidos')
+
+    def __str__(self):
+        return str(self.kenid) + ' - ' + self.sindiasmos
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'EKL_SUMPSIFODELTIASINDTOPIKOIONLY_KEN_VW'
+
 
 class EklSumpsifodeltiasindKoinVw(models.Model):
     id = models.IntegerField(primary_key=True)
