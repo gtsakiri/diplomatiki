@@ -1446,6 +1446,7 @@ def sindiasmoi_add(request, eklid):
                     ).save()
 
             else:
+                # αν όμως τοπικός συνδυασμός, Εισάγω και μια νέα εγγραφή στον πίνακα EKLSINDKOIN
                 Eklsindkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
                                        koinid=form.cleaned_data['koinid'],
@@ -1457,8 +1458,8 @@ def sindiasmoi_add(request, eklid):
                                        ypol=0,
                                        checkfordraw=0).save()
 
-                # Εισαγωγή εγγραφής υποψηφίου στον πίνακα Psifoi με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
-                # αφού ο ΤΟΠΙΚΟΣ σύμβουλος ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+                # Εισαγωγή εγγραφής  στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+                # αφού ο ΤΟΠΙΚΟΣ συνδυασμός ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
                 for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
                     Psifodeltia.objects.create(
                         sindid=sind_item,
@@ -2330,7 +2331,6 @@ def kentra_delete(request, eklid, kenid ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
-
 def psifodeltia_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
 
@@ -2464,6 +2464,140 @@ def psifodeltia_delete(request, eklid, id ):
 
     return render(request, 'Elections/confirm_delete.html', context)
 
+##############Ψηφοδέλτια Κοινοτήτων#######################
+
+def psifodeltiakoin_list(request, eklid):
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.view_psifodeltia'):
+        raise PermissionDenied
+
+    paramstr = request.GET.get('kentraoption', '')
+
+    try:
+        paramstr = int(paramstr)
+    except:
+        paramstr = Kentra.objects.filter(eklid=eklid).first().kenid  # default kenid  αν δεν δοθεί
+
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_kentra=Kentra.objects.filter(eklid=eklid).order_by('descr')
+
+    selected_kentro = Kentra.objects.get(kenid=paramstr).kenid
+
+    #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
+    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
+               'all_psifodeltia':all_psifodeltia,
+               'all_kentra':all_kentra,
+               'selected_kentro':selected_kentro
+               }
+
+    return render(request, 'Elections/psifodeltiakoin_list.html' , context)
+
+def psifodeltiakoin_add(request, eklid):
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.add_psifodeltia'):
+        raise PermissionDenied
+
+    action_label = 'Ψηφοδέλτια Συνδυασμού σε εκλ. κέντρο - Νέα εγγραφή'
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
+        form = PsifodeltiaForm(eklid, request.POST)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.save()
+            messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
+            form = PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
+    else:
+        form=PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+
+    context = {
+                'selected_ekloges': selected_ekloges.eklid,
+                'action_label' : action_label,
+                'all_ekloges': all_ekloges,
+                'form': form
+               }
+
+    return render(request, 'Elections/psifodeltia_form.html', context)
+
+def psifodeltiakoin_edit(request, eklid, id):
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.change_psifodeltia'):
+        raise PermissionDenied
+
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    #επιλογή της συγκεκριμένης εγγραφής
+    item=get_object_or_404(Psifodeltia, id=id)
+
+    action_label = 'Ψηφοδέλτια Συνδυασμού στο εκλ. κέντρο ' + item.kenid.descr + ' - Αλλαγή εγγραφής'
+
+    if request.method == 'POST':
+        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+        if form.is_valid():
+            item=form.save(commit=False)
+            item.save()
+            messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
+            return redirect('psifodeltia_list', eklid)
+    else:
+        # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
+        #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
+        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+
+    context = {
+        'selected_ekloges': selected_ekloges.eklid,
+        'action_label': action_label,
+        'all_ekloges': all_ekloges,
+        'form': form,
+    }
+
+    return render(request, 'Elections/psifodeltia_form.html', context)
+
+def psifodeltiakoin_delete(request, eklid, id ):
+    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+
+    if not request.user.is_authenticated:
+        return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
+
+    if not request.user.has_perm('Elections.delete_psifodeltia'):
+        raise PermissionDenied
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    obj=get_object_or_404(Psifodeltia, id=id)
+
+    if request.method == 'POST':
+        obj.delete()
+        messages.success(request, "Η διαγραφή ολοκληρώθηκε")
+        return redirect('psifodeltia_list', eklid)
+    context={'selected_ekloges': selected_ekloges.eklid,
+             'all_ekloges': all_ekloges,
+             'object':obj
+             }
+
+    return render(request, 'Elections/confirm_delete.html', context)
 
 def simbouloi_list(request, eklid):
 
@@ -3159,7 +3293,8 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
                                               extra=0)
 
     data = request.POST or None
-    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).order_by('-sindid__eidos', 'sindid__descr'  ))
+    #προσοχή: φιλτράρω μόνο τους Καθολικούς συνδυασμούς!
+    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=2).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
@@ -3194,11 +3329,14 @@ def edit_psifodeltiakoin_kentrou(request,eklid, kenid):
     selected_kentro = Kentra.objects.prefetch_related('psifodeltia_set').get(kenid=kenid)
 
     #PsifodeltiaFormSet = modelformset_factory(Psifodeltia, fields =('sindid', 'votesa', 'votesb', 'votesk','kenid',), extra=0)
-    PsifodeltiaKoinFormSet = modelformset_factory(Psifodeltia, fields=('sindid',  'votesk', 'kenid',),
-                                              extra=0)
+
+    PsifodeltiaKoinFormSet = modelformset_factory(Psifodeltia, fields=('sindid',  'votesk', 'kenid',), extra=0)
 
     data = request.POST or None
-    formset = PsifodeltiaKoinFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).order_by('-sindid__eidos', 'sindid__descr'  ))
+
+    # προσοχή: φιλτράρω  τους συνδυασμούς που έχουν εγγραφή στον πίνακα Eklsindkoin!
+    koinid=selected_kentro.koinid
+    formset = PsifodeltiaKoinFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=2).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid

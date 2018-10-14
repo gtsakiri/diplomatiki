@@ -182,7 +182,8 @@
                             {% endif %}
 
                             {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'psifodeltia_list' selected_ekloges  %}">Ψηφοδέλτια Συνδυασμών ανά εκλ. κέντρο</a></li>
+                                <li><a href="{% url 'psifodeltia_list' selected_ekloges  %}">Ψηφοδέλτια ανά εκλ. κέντρο για Δημοτικό Συμβούλιο</a></li>
+                                <li><a href="{% url 'psifodeltiakoin_list' selected_ekloges  %}">Ψηφοδέλτια ανά εκλ. κέντρο για Τοπικά Συμβούλια</a></li>
                             {% endif %}
                             {% if request.user.is_superuser %}
                                 <li><a href="{% url 'simbouloi_list' selected_ekloges  %}">Υποψήφιοι Σύμβουλοι</a></li>
