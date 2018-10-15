@@ -15,7 +15,8 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
     EklSumpsifodeltiasindKenTopikoiOnlyVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
-    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm
+    TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm, \
+    PsifodeltiaKoinForm
 from django.core.exceptions import PermissionDenied
 
 from django.db import connection
@@ -2361,7 +2362,7 @@ def psifodeltia_list(request, eklid):
     selected_kentro = Kentra.objects.get(kenid=paramstr).kenid
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
-    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
+    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-votesa')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -2496,7 +2497,7 @@ def psifodeltiakoin_list(request, eklid):
     selected_kentro = Kentra.objects.get(kenid=paramstr).kenid
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
-    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr)
+    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(kenid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('-votesk')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -2522,14 +2523,14 @@ def psifodeltiakoin_add(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = PsifodeltiaForm(eklid, request.POST)
+        form = PsifodeltiaKoinForm(eklid, request.POST)
         if form.is_valid():
             item = form.save(commit=False)
             item.save()
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
-            form = PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
+            form = PsifodeltiaKoinForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
     else:
-        form=PsifodeltiaForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
+        form=PsifodeltiaKoinForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})  #όταν ανοίγει η φόρμα για καταχώριση δεδομένων
 
     context = {
                 'selected_ekloges': selected_ekloges.eklid,

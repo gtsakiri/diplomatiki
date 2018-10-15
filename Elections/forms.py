@@ -384,8 +384,10 @@ class PsifodeltiaForm(ModelForm):
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
         #self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
         # δημιουργία φίλτρου με τη βοήθεια του Q object
-        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
-            Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        #q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
+        #    Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+
+        q = Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
 
         self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
         self.fields['kenid'].queryset = Kentra.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid'))
@@ -415,8 +417,10 @@ class PsifodeltiaKoinForm(ModelForm):
         # SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
         # self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
         # δημιουργία φίλτρου με τη βοήθεια του Q object
-        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
-            Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+        #q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid')) | \
+        #    Q(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
+
+        q = Q(sindid__in=Eklsindkoin.objects.filter(eklid=eklid).values_list('sindid'))
 
         self.fields['sindid'].queryset = Sindiasmoi.objects.filter(q)
         self.fields['kenid'].queryset = Kentra.objects.filter(
