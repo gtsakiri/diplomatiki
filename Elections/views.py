@@ -1429,7 +1429,6 @@ def sindiasmoi_add(request, eklid):
             sind_item.save()
 
             # Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND αν είναι καθολικός συνδυασμός
-            #Αν δεν είναι καθολικός, κρύβω στο template και το ΑΑ
             if sind_item.eidos == 1:
                 Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
@@ -1453,6 +1452,7 @@ def sindiasmoi_add(request, eklid):
 
             else:
                 # αν όμως τοπικός συνδυασμός, Εισάγω και μια νέα εγγραφή στον πίνακα EKLSINDKOIN
+                # Αν  είναι τοπικός, κρύβω στο template και το ΑΑ
                 Eklsindkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                        sindid=sind_item,
                                        koinid=form.cleaned_data['koinid'],
@@ -2034,6 +2034,12 @@ def eklsindkoin_delete(request, eklid, id ):
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()
+        #αν είναι καθολικόε συνδυασμός, ενημέρωση του votesk=0 στα Psifodeltia
+        if obj.sindid.eidos == 1:
+            Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).update(votesk=0)
+        else: #Αλλιώς αν είναι Τοπικός, διαγραφή των εγγραφών από τον πίνακα Psifodeltia
+            Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).delete()
+
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsindkoin_list', eklid)
     context = {'selected_ekloges': selected_ekloges.eklid,
@@ -2508,6 +2514,7 @@ def psifodeltiakoin_list(request, eklid):
 
     return render(request, 'Elections/psifodeltiakoin_list.html' , context)
 
+''' Δεν δίνω δυνατότητα add γιατί δημιουργείται εγγραφή στα Psifodeltia κατά την δημιουργία του συνδυασμού.
 def psifodeltiakoin_add(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
 
@@ -2540,6 +2547,7 @@ def psifodeltiakoin_add(request, eklid):
                }
 
     return render(request, 'Elections/psifodeltia_form.html', context)
+'''
 
 def psifodeltiakoin_edit(request, eklid, id):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
@@ -2560,16 +2568,16 @@ def psifodeltiakoin_edit(request, eklid, id):
     action_label = 'Ψηφοδέλτια Συνδυασμού στο εκλ. κέντρο ' + item.kenid.descr + ' - Αλλαγή εγγραφής'
 
     if request.method == 'POST':
-        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+        form = PsifodeltiaKoinForm(eklid, request.POST or None, instance=item)
         if form.is_valid():
             item=form.save(commit=False)
             item.save()
             messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
-            return redirect('psifodeltia_list', eklid)
+            return redirect('psifodeltiakoin_list', eklid)
     else:
         # αν δεν γίνει POST φέρνω τα πεδία του μοντέλου
         #form = PsifodeltiaForm(eklid, request.POST or None, instance=item, initial={'sindid':sind_id_item, 'kenid': ken_id_item })
-        form = PsifodeltiaForm(eklid, request.POST or None, instance=item)
+        form = PsifodeltiaKoinForm(eklid, request.POST or None, instance=item)
 
     context = {
         'selected_ekloges': selected_ekloges.eklid,
