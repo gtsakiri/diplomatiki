@@ -1586,7 +1586,7 @@ def sindiasmoi_edit(request, eklid, sindid):
 
             #αλλιώς αν είναι Τοπικός
             else:
-                #1) Αν είναι ήδη Τοπικός Συνδυασμός, κάνω απλά Update τα πεδία aa, koinid, proedros στον Eklsind
+                #1) Αν είναι ήδη Τοπικός Συνδυασμός, κάνω απλά Update τα πεδία aa, koinid, proedros στον Eklsindkoin
                 if eidos_field == 0:
                     Eklsindkoin.objects.filter(eklid=eklid, sindid=sindid).update(aa=form.cleaned_data['aa'],
                                                                               koinid=form.cleaned_data['koinid'],
@@ -1697,7 +1697,7 @@ def eklsind_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_eklsind = Eklsind.objects.filter(eklid=eklid)
+    all_eklsind = Eklsind.objects.filter(eklid=eklid).order_by('koinid__descr', 'sindid__descr')
     #all_eklsind = selected_ekloges.eklsind_set().all()
 
     context = {'all_ekloges': all_ekloges,
@@ -1767,6 +1767,7 @@ def eklsind_edit(request, eklid, id):
 
     if form.is_valid():
         form.save()
+
 
         return redirect('eklsind_list', eklid)
 
@@ -1938,7 +1939,7 @@ def eklsindkoin_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_eklsindkoin = selected_ekloges.eklsindkoin_set.all()
+    all_eklsindkoin = selected_ekloges.eklsindkoin_set.all().order_by('koinid__descr')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -1998,6 +1999,9 @@ def eklsindkoin_edit(request, eklid, id):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     item = get_object_or_404(Eklsindkoin, id=id)
+    oldeidosSind = item.sindid.eidos
+    oldsindid = item.sindid
+    oldkoinid = item.koinid
 
     #περνάω παράμετρο eklid=0, για να μπορεί να εμφανίσει στο dropdown sindid το συνδυασμό
     #γιατί διαφορετικά το αποκλείει σύμφωνα με την αρχικοποίηση που κάνω στη φόρμα EklsindForm
@@ -2005,6 +2009,62 @@ def eklsindkoin_edit(request, eklid, id):
 
     if form.is_valid():
         form.save()
+
+        #1) αν αλλάξει συνδυασμός
+        if form.cleaned_data['sindid'] != oldsindid: #and form.cleaned_data['koinid'] != oldkoinid:
+            #α) Από Τοπικό συνδυασμό --> σε Καθολικό
+            if form.cleaned_data['sindid'].eidos ==1 and oldeidosSind == 0:
+                # i) Διαγραφή στον πίνακα Psifodeltia των εγγραφών των σχετικών με την πρώην Κοινότητα και τον πρώην Συνδυασμό
+                #Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(sindid=oldsindid).delete()
+                # ii) Διαγραφή ψήφων συμβούλων του πρώην Συνδυασμού για τα κέντρα της πρώην Κοινότητας
+                #Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(simbid__in=(Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid))).delete()
+                # iii) Διαγραφή συμβούλων του πρώην Συνδυασμού από τον Eklsimbkoin
+                #Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=(Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid))).delete()
+
+
+                # Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε προηγούμενες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
+                # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
+                for simbitem in Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid):
+                    if Eklsindsimb.objects.filter(simbid=simbitem.simbid).filter(eklid__lt=eklid).exists():
+                        Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
+                            simbid__in=(Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid))).delete()
+                        Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
+                        Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).delete()
+                    else:
+                        Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
+
+
+                #Αν ο συνδυασμός υπάρχει σε προηγούμενες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συνδυασμού, αλλιώς
+                #σβήσε και το συνδυασμό (μέσω του cascade Θα σβήσουν και όλα τα σχετικά)
+                if Eklsindkoin.objects.filter(sindid=oldsindid).filter(eklid__lt=eklid).exists():
+                    Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
+                        sindid=oldsindid).delete()
+                    Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
+                else:
+                    Sindiasmoi.objects.filter(sindid=oldsindid.sindid).delete()
+
+
+
+
+
+
+            #β) Από Καθολικό συνδυασμό --> σε Τοπικό
+            elif form.cleaned_data['sindid'].eidos ==0 and oldeidosSind == 1:
+                # ι) Μηδενισμός votesk στα Psifodeltia για τον πρώην συνδυασμό
+                Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(sindid=oldsindid).update(votesk=0)
+                # ιι) Δημιουργία εγγραφής στα Psifodeltia για κάθε κέντρο της νέας Κοινότητας για το νέο συνδυασμό
+
+                for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                    Psifodeltia.objects.create(
+                        sindid=form.cleaned_data['sindid'],
+                        kenid=kentro,
+                        votesa=0,
+                        votesb=0,
+                        votesk=0
+                    )
+
+
+
 
         return redirect('eklsindkoin_list', eklid)
 
@@ -2034,10 +2094,10 @@ def eklsindkoin_delete(request, eklid, id ):
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()
-        #αν είναι καθολικόε συνδυασμός, ενημέρωση του votesk=0 στα Psifodeltia
+        #αν είναι καθολικός συνδυασμός, ενημέρωση του votesk=0 στα Psifodeltia
         if obj.sindid.eidos == 1:
             Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).update(votesk=0)
-        else: #Αλλιώς αν είναι Τοπικός, διαγραφή των εγγραφών από τον πίνακα Psifodeltia
+        else: #Αλλιώς αν είναι Τοπικός, διαγραφή των σχετικών εγγραφών από τον πίνακα Psifodeltia
             Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).delete()
 
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
@@ -2679,7 +2739,7 @@ def simbouloi_insert_records(form, simb_item, eklid):
                 votes=0
             ).save()
     else:
-        # Διαφορετικά προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin, αν είναι Τοπικός
+        # Διαφορετικά προσθήκη εγγραφής και στον πίνακα Eklsimbkoin, αν είναι Τοπικός
         Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                    simbid=simb_item,
                                    koinid=form.cleaned_data['koinid']
@@ -3308,7 +3368,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
 
     data = request.POST or None
     #προσοχή: φιλτράρω μόνο τους Καθολικούς συνδυασμούς!
-    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=2).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
+    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
@@ -3350,7 +3410,7 @@ def edit_psifodeltiakoin_kentrou(request,eklid, kenid):
 
     # προσοχή: φιλτράρω  τους συνδυασμούς που έχουν εγγραφή στον πίνακα Eklsindkoin!
     koinid=selected_kentro.koinid
-    formset = PsifodeltiaKoinFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=2).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
+    formset = PsifodeltiaKoinFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid).filter(koinid=koinid).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
