@@ -6,4 +6,51 @@
 
     <input type="button" value="Επιστροφή" class="btn btn-primary pull-right" onclick="window.history.back();">
 
+    <script>
+
+    $(document).ready(function () {
+
+              var url = $("#dataForm").attr("data-sindiasmoi-url");  // get the url of the `load_sindiasmoi` view
+              var currentKoinid=$("#id_koinid").val();
+              var currentSindid=$("#id_sindid").val();
+
+
+               var koinid = $("#id_koinid").val();  // get the selected koinid from the HTML input
+              //alert(currentKoinid);
+
+              $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/ajax/load_sindiasmoi/)
+                data: {
+                  'koinid': koinid       // add the koinid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $("#id_sindid").html(data);  // replace the contents of the sindid input with the data that came from the server
+
+                  $("#id_sindid").val(currentSindid);//μόλις γεμίσει το dropdown κάνω επιλεγμένο το αρχικό sindid
+                                                     //με το οποίο άνοιξε η φόρμα
+                }
+
+              });
+
+            return false;
+          });
+
+        $("#id_koinid").change(function () {
+              var url = $("#dataForm").attr("data-sindiasmoi-url");  // get the url of the `load_koinotites` view
+              var koinid = $(this).val();  // get the selected koinid from the HTML input
+
+              $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/ajax/load_sindiasmoi/)
+                data: {
+                  'koinid': koinid       // add the koinid to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_koinotites` view function
+                  $("#id_sindid").html(data);  // replace the contents of the koinid input with the data that came from the server
+                }
+              });
+
+            });
+
+    </script>
+
 {% endblock %}

@@ -209,7 +209,7 @@ class EklsindkoinForm(ModelForm):
 
     class Meta:
         model = Eklsindkoin
-        fields = ['eklid', 'sindid', 'koinid', 'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw']
+        fields = ['eklid', 'koinid', 'sindid',  'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw']
         labels = {
             'sindid': _('Συνδυασμός'),
             'koinid': _('Κοινότητα'),
