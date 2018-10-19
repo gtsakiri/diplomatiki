@@ -24,7 +24,7 @@ body {
 }
 
 .navbar-default {
-    background-color: #5f6bef;
+    background-color: #337ab7;
     border-color: #E7E7E7;
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 #footer-content {
-  background: #5f6bef;
+  background: #337ab7;
   color: #f7f7f9;
   text-align: center;
 }
@@ -393,4 +393,8 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+.bg-green{
+    background-color:green;
 }

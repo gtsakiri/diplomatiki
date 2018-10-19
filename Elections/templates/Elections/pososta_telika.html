@@ -19,7 +19,7 @@
                         type: 'column'
                     },
                     title: {
-                        text: 'Ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων',
+                        text: '<span class="label label-primary">Ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων</span>',
                         style: {
                             color: 'red',
                             fontSize:'20px'
@@ -27,7 +27,7 @@
                     },
                     xAxis: {
                         categories: [
-                        {% for entry in all_pososta %}'{{ entry.shortdescr }} ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                        {% for entry in all_pososta %}'<span class="label label-primary">{{ entry.shortdescr }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
                       ],
                         labels: {
                         style: {

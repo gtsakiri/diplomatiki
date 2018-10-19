@@ -1681,11 +1681,10 @@ def sindiasmoi_delete(request, eklid, sindid ):
 
 
 def eklsind_list(request, eklid):
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
-
 
     if not request.user.has_perm('Elections.view_eklsind'):
         raise PermissionDenied
@@ -1697,12 +1696,15 @@ def eklsind_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_eklsind = Eklsind.objects.filter(eklid=eklid).order_by('koinid__descr', 'sindid__descr')
-    #all_eklsind = selected_ekloges.eklsind_set().all()
+    #all_eklsind = Eklsind.objects.filter(eklid=eklid).order_by( 'sindid__descr')
+    all_eklsind = selected_ekloges.eklsind_set.all().order_by('-edresa_teliko')
+    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
+
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
                'all_eklsind': all_eklsind,
+               'all_pososta': all_pososta ,
                }
 
     return render(request, 'Elections/eklsind_list.html' , context)
