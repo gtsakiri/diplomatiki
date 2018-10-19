@@ -2136,14 +2136,54 @@ def eklsindkoin_delete(request, eklid, id ):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     obj = get_object_or_404(Eklsindkoin, id=id)
+    oldeidosSind = obj.sindid.eidos
+    oldsindid = obj.sindid
+    oldkoinid = obj.koinid
+
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
         obj.delete()
         #αν είναι καθολικός συνδυασμός, ενημέρωση του votesk=0 στα Psifodeltia
-        if obj.sindid.eidos == 1:
-            Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).update(votesk=0)
-        else: #Αλλιώς αν είναι Τοπικός, διαγραφή των σχετικών εγγραφών από τον πίνακα Psifodeltia
-            Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).delete()
+        if oldeidosSind == 1:
+            #Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).update(votesk=0)
+
+            # ι) Μηδενισμός votesk στα Psifodeltia για τον πρώην συνδυασμό
+            Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
+                sindid=oldsindid).update(votesk=0)
+
+            # ιι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε προηγούμενες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
+            # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
+            for simbitem in Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid):
+                if Eklsindsimb.objects.filter(simbid=simbitem.simbid).filter(eklid__lt=eklid).exists():
+                    Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
+                        simbid__in=(Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid))).delete()
+                    Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
+                    Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).delete()
+                else:
+                    Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
+        else:
+            #Αλλιώς αν είναι Τοπικός, διαγραφή των σχετικών εγγραφών από τον πίνακα Psifodeltia
+            #Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).delete()
+
+            # ι) Αν ο συνδυασμός υπάρχει σε προηγούμενες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συνδυασμού, αλλιώς
+            # σβήσε και το συνδυασμό (μέσω του cascade Θα σβήσουν και όλα τα σχετικά)
+            if Eklsindkoin.objects.filter(sindid=oldsindid).filter(eklid__lt=eklid).exists():
+                Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
+                    sindid=oldsindid).delete()
+                Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
+            else:
+                Sindiasmoi.objects.filter(sindid=oldsindid.sindid).delete()
+
+            # ι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε προηγούμενες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
+            # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
+            for simbitem in Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid):
+                if Eklsindsimb.objects.filter(simbid=simbitem.simbid).filter(eklid__lt=eklid).exists():
+                    Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
+                        simbid__in=(Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid))).delete()
+                    Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
+                    Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).delete()
+                else:
+                    Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
 
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsindkoin_list', eklid)
