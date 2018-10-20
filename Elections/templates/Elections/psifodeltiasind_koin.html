@@ -8,7 +8,12 @@
 
 <div class="divmargin">
 
-    <label class="label4">Ψηφοδέλτια συνδυασμών για την ανάδειξη Τοπικού Συμβουλίου ανά Κοινότητα </label>
+    {% if eidos == 0 %}
+        <label class="label4">Ψηφοδέλτια συνδυασμών για την ανάδειξη Τοπικού Συμβουλίου ανά Κοινότητα </label>
+    {% else %}
+        <label class="label4">Ψηφοδέλτια συνδυασμών για την ανάδειξη Δημοτικής Αρχής ανά Κοινότητα </label>
+    {% endif %}
+
 
 </div>
 
@@ -41,7 +46,7 @@
                 <div class="divmargin"></div>
 
 
-                <a style="color: blue;  font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_koin' selected_ekloges selected_order %}><i class="far fa-file-excel label5"></i> Εξαγωγή όλων σε excel</label></a>
+                <a style="color: blue;  font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_koin' selected_ekloges selected_order eidos sunday%}><i class="far fa-file-excel label5"></i> Εξαγωγή όλων σε excel</label></a>
 
                 </form>
             <br>
@@ -49,8 +54,15 @@
 
 
              <div class="text-center">
-
-                <label class="label6 pull-center">Για το Τοπικό Συμβούλιο </label>
+                 {% if eidos == 0 %}
+                     <label class="label6 pull-center">Για το Τοπικό Συμβούλιο </label>
+                 {% else %}
+                     {% if sunday == 1 %}
+                        <label class="label6 pull-center"> Α' Κυριακή </label>
+                     {% else %}
+                         <label class="label6 pull-center"> Β' Κυριακή </label>
+                     {% endif %}
+                 {% endif %}
 
              </div>
 
@@ -67,7 +79,16 @@
                    {% for p in all_psifodeltia %}
                          <tr>
                             <td >{{ p.sindiasmos }}</td>
-                            <td class="myfontsize">{{ p.sumsindiasmou }}</td>
+                             {% if eidos == 0 %}
+                                <td class="myfontsize">{{ p.sumksindiasmou }}</td>
+                             {% else %}
+                                 {% if sunday == 1 %}
+                                    <td class="myfontsize">{{ p.sumasindiasmou }}</td>
+                                 {% else %}
+                                    <td class="myfontsize">{{ p.sumbsindiasmou }}</td>
+                                 {% endif %}
+
+                            {% endif %}
                          </tr>
                      {% endfor %}
                    </tbody>

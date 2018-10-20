@@ -165,22 +165,7 @@ class Migration(migrations.Migration):
                 'managed': False,
             },
         ),
-        migrations.CreateModel(
-            name='EklSumpsifodeltiasindKoinVw',
-            fields=[
-                ('id', models.IntegerField(primary_key=True, serialize=False)),
-                ('eklid', models.IntegerField(db_column='eklID')),
-                ('sindid', models.IntegerField(db_column='sindID')),
-                ('sindiasmos', models.CharField(max_length=100)),
-                ('koinid', models.IntegerField(db_column='koinID')),
-                ('sumsindiasmou', models.DecimalField(blank=True, db_column='sumSindiasmou', decimal_places=0, max_digits=32, null=True)),
-                ('sumkoinotitas', models.DecimalField(blank=True, db_column='sumKoinotitas', decimal_places=0, max_digits=32, null=True)),
-            ],
-            options={
-                'db_table': 'EKL_SUMPSIFODELTIASIND_KOIN_VW',
-                'managed': False,
-            },
-        ),
+
         migrations.CreateModel(
             name='EklSumpsifodeltiasindPerVw',
             fields=[

@@ -480,11 +480,16 @@ class EklSumpsifodeltiasindKoinVw(models.Model):
     koinid = models.IntegerField(db_column='koinID')  # Field name made lowercase.
     descr= models.CharField(max_length=100, db_column='descr')
     eidos=models.IntegerField(db_column='eidos')  # Field name made lowercase.
-    sumsindiasmou = models.DecimalField(db_column='sumSindiasmou', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
-    sumkoinotitas = models.DecimalField(db_column='sumKoinotitas', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    sumasindiasmou = models.DecimalField(db_column='sumASindiasmou', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    sumbsindiasmou = models.DecimalField(db_column='sumBSindiasmou', max_digits=32, decimal_places=0, blank=True,
+                                         null=True)  # Field name made lowercase.
+    sumksindiasmou = models.DecimalField(db_column='sumKSindiasmou', max_digits=32, decimal_places=0, blank=True,
+                                         null=True)  # Field name made lowercase.
+    sumkkoinotitas = models.DecimalField(db_column='sumkKoinotitas', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return self.sindiasmos + ' - ' + str(self.sumsindiasmou)
+        return self.sindiasmos + ' - ' + self.descr
+
 
     class Meta:
         managed = False  # Created from a view. Don't remove.
