@@ -45,7 +45,7 @@
                         {% if sunday == 1 %}
                           <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 1 selected_order %}><i class="far fa-file-excel"></i> <label class="label5"> Εξαγωγή όλων σε excel</label></a>
                         {% elif sunday == 2 %}
-                          <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 2 selected_order %}><i class="far fa-file-excel"></i><label class="label5"> Εξαγωγή όλων σε excel</label></a>
+                          <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 2 selected_order %}><i class="far fa-file-excel"></i> <label class="label5"> Εξαγωγή όλων σε excel</label></a>
                         {% else %}
                           <a style="color: blue; font-family:Calibri;" class="pull-left" href={% url 'export_psifodeltiasind_ken' selected_ekloges 3 selected_order %}><i class="far fa-file-excel"></i> <label class="label5"> Εξαγωγή όλων σε excel</label></a>
                         {% endif %}

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_19_10_2018">
-      <change afterPath="$PROJECT_DIR$/Elections/migrations/0021_eklsumpsifodeltiasindkoinvw.py" afterDir="false" />
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_20_10_2018">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,11 +80,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="742" column="23" selection-start-line="742" selection-start-column="23" selection-end-line="742" selection-end-column="23" />
+            <state relative-caret-position="188">
+              <caret line="1982" column="89" selection-start-line="1982" selection-start-column="89" selection-end-line="1982" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eklsindkoin_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1003">
+              <caret line="62" column="78" selection-start-line="62" selection-start-column="78" selection-end-line="62" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -105,8 +110,11 @@
       <file leaf-file-name="psifodeltiasind_koin.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+            <state relative-caret-position="306">
+              <caret line="48" column="207" selection-start-line="48" selection-start-column="207" selection-end-line="48" selection-end-column="207" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#form#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="psifodeltiasind_ken.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="psifodeltiasind_ken.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="791">
-              <caret line="49" column="224" selection-start-line="49" selection-start-column="224" selection-end-line="49" selection-end-column="224" />
+            <state relative-caret-position="451">
+              <caret line="47" column="201" selection-start-line="47" selection-start-column="201" selection-end-line="47" selection-end-column="201" />
             </state>
           </provider>
         </entry>
@@ -142,7 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PsifodeltiaF</find>
       <find>psifodeltiakoin</find>
       <find>update</find>
       <find>eklsindkoin_list</find>
@@ -172,6 +179,7 @@
       <find>eklsumpsifodeltiasindkoinvw</find>
       <find>EklSumpsifodeltiasindKoinVw</find>
       <find>psifodeltiasind_koi</find>
+      <find>Eklsindkoin_lis</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -220,7 +228,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/ekloges_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/kentra_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html" />
@@ -231,13 +238,14 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sistima_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
         <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
         <option value="$PROJECT_DIR$/Elections/urls.py" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
       </list>
     </option>
   </component>
@@ -415,13 +423,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00064" summary="work_26_9_2018">
-      <created>1537959227696</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1537959227697</updated>
     </task>
     <task id="LOCAL-00065" summary="work_27_9_2018">
       <created>1538038350975</created>
@@ -759,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539987933920</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="home_20_10_2018">
+      <created>1540036374437</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1540036374441</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TodoView">
@@ -867,7 +875,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="work_21_9_2018" />
     <MESSAGE value="home_21_9_2018" />
     <MESSAGE value="home_22_9_2018" />
     <MESSAGE value="home_23_9_2018" />
@@ -892,17 +899,11 @@
     <MESSAGE value="home_16_10_2018" />
     <MESSAGE value="home_17_10_2018" />
     <MESSAGE value="home_19_10_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home_19_10_2018" />
+    <MESSAGE value="home_20_10_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="home_20_10_2018" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Elections/views.py</url>
-          <line>715</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -989,13 +990,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1178,24 +1172,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="791">
-          <caret line="49" column="224" selection-start-line="49" selection-start-column="224" selection-end-line="49" selection-end-column="224" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="125" column="60" lean-forward="true" selection-start-line="125" selection-start-column="60" selection-end-line="125" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1208,8 +1188,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="742" column="23" selection-start-line="742" selection-start-column="23" selection-end-line="742" selection-end-column="23" />
+        <state relative-caret-position="188">
+          <caret line="1982" column="89" selection-start-line="1982" selection-start-column="89" selection-end-line="1982" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="62" column="78" selection-start-line="62" selection-start-column="78" selection-end-line="62" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="48" column="207" selection-start-line="48" selection-start-column="207" selection-end-line="48" selection-end-column="207" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#form#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="47" column="201" selection-start-line="47" selection-start-column="201" selection-end-line="47" selection-end-column="201" />
         </state>
       </provider>
     </entry>

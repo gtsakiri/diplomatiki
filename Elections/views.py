@@ -1980,7 +1980,7 @@ def eklsindkoin_list(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    all_eklsindkoin = selected_ekloges.eklsindkoin_set.all().order_by('koinid__descr')
+    all_eklsindkoin = selected_ekloges.eklsindkoin_set.all().order_by('koinid__descr', '-edresk_teliko')
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
