@@ -60,17 +60,26 @@
                 <div class="container-fluid" overflow:auto align="center">
 
 
-                           <table class="a table table-bordered table-striped">
+                           <table class="a table table-bordered table-condensed table-striped">
 
                                 <tbody >
                                 <tr>
                                         <td class="thick">Συνδυασμός</td>
                                         <td class="thick">Ποσοστό </td>
+                                        <td class="thick">{{ all_pososta_prin.0.eklid.descr }}</td>
                                 </tr>
                                 {% for p in all_pososta %}
                                       <tr>
                                         <td > {{ p.sindiasmos }} {% if p.sindid.photo.url %} <img src="{{ p.sindid.photo.url}}"/>{% endif %}</td>
                                         <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
+                                        <td class="myfontsize">
+                                            {% for item in all_pososta_prin %}
+                                                {% if item.sindid == p.sindid %}
+                                                    {{ item.posostosindiasmou }} %
+                                                {% endif %}
+                                            {%  endfor %}
+
+                                        </td>
                                       </tr>
                                   {% endfor %}
                                 </tbody>

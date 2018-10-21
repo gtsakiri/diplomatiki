@@ -497,7 +497,22 @@ def pososta_telika(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view (μόνο καθολικοί συνδυασμοί επιλέγονται)
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
 
-    context = {'all_pososta':all_pososta, 'all_ekloges':all_ekloges, 'selected_ekloges':selected_ekloges.eklid}
+    oldeklid=-1
+    #Βρίσκω το id Της ακριβώς προηγούμενης αναμέτρησης
+    for item in Eklogestbl.objects.filter(eklid__lt=eklid).order_by('-eklid'):
+        if item.eklid > 0:
+            oldeklid = item.eklid
+            break
+
+    if oldeklid>-1: # αν υπάρχει εκλ. αναμέτρηση, φορτώνω τα αποτελέσματα
+        all_pososta_prin = EklSumpsifodeltiasindVw.objects.filter(eklid=oldeklid, eidos=1)
+    else:#αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
+        all_pososta_prin = []
+
+    context = {'all_pososta':all_pososta,
+               'all_pososta_prin': all_pososta_prin,
+               'all_ekloges':all_ekloges,
+               'selected_ekloges':selected_ekloges.eklid}
 
     return render(request, 'Elections/pososta_telika.html',context)
 
@@ -524,11 +539,12 @@ def pososta_perifereies(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
     all_posostaper = EklPosostasindPerVw.objects.filter(eklid=eklid).filter(perid=paramstr)
-    context = {'all_posostaper':all_posostaper,
-                'all_pososta':all_pososta,
-               'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges.eklid,
-               'all_perifereies':all_perifereies,
+    context = {'all_posostaper': all_posostaper,
+                'all_pososta': all_pososta,
+               'all_ekloges': all_ekloges,
+
+               'selected_ekloges': selected_ekloges.eklid,
+               'all_perifereies': all_perifereies,
                'selected_perifereia': selected_perifereia,}
     return render(request, 'Elections/pososta_perifereies.html',context)
 
