@@ -638,7 +638,7 @@ class EklSumpsifoisimbPerVw(models.Model):
     fathername = models.CharField(max_length=100)
     toposeklogisid = models.IntegerField(db_column='toposEklogisID')  # Field name made lowercase.
     toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True, blank=True, null=True)
     sindiasmos = models.CharField(max_length=100, blank=True, null=True)
     sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 
@@ -649,6 +649,19 @@ class EklSumpsifoisimbPerVw(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_SUMPSIFOISIMB_PER_VW'
+
+class EklSumpsifoisimbPerLightVw(models.Model):
+    id = models.IntegerField(primary_key=True)
+    eklid = models.IntegerField(db_column='eklID', db_index=True)  # Field name made lowercase.
+    simbid = models.IntegerField(db_column='simbID', db_index=True)  # Field name made lowercase.
+    sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+
+    def __str__(self):
+        return str(self.eklid)  + ' - ' +  str(self.simbid)  + ' - ' +  str(self.sumvotes)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'EKL_SUMPSIFOISIMBPER_LIGHT_VW'
 
 
 class EklSumpsifoisimbVw(models.Model):
@@ -661,7 +674,7 @@ class EklSumpsifoisimbVw(models.Model):
     toposeklogisid = models.IntegerField(db_column='toposEklogisID')  # Field name made lowercase.
     toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
     eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas', blank=True, null=True)  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True, blank=True, null=True)
     sindiasmos = models.CharField(max_length=100, blank=True, null=True)
     sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 
@@ -675,15 +688,15 @@ class EklSumpsifoisimbVw(models.Model):
 
 class EklSumpsifoisimbWithIdVw(models.Model):
     id = models.IntegerField(primary_key=True)
-    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    simbid = models.IntegerField(db_column='simbID')  # Field name made lowercase.
+    eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID',db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbid', db_index=True)
     surname = models.CharField(max_length=100)
     firstname = models.CharField(max_length=100)
     fathername = models.CharField(max_length=100)
     toposeklogisid = models.IntegerField(db_column='toposEklogisID')  # Field name made lowercase.
     toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
     eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas', blank=True, null=True)  # Field name made lowercase.
-    sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
+    sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True, blank=True, null=True) #models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100, blank=True, null=True)
     sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 

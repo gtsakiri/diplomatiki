@@ -13,7 +13,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
     Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
-    EklSumpsifodeltiasindKenTopikoiOnlyVw
+    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm, \
     PsifodeltiaKoinForm
@@ -575,17 +575,20 @@ def psifoisimb_perifereies(request, eklid):
         paramorder = 4  # default ταξινόμηση
 
     #φιλτράρισμα επιλεγμένης εκλ. αναμέτρησης
-    selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    #selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsumpsifoisimbwithidvw_set', 'eklsumpsifoisimbpervw_set').get(eklid=eklid)
+
+
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     # φιλτράρισμα επιλεγμένης περιφέρειας
     if paramstr == 0: #επιλογή: "ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ"
         selected_perifereia = 0
-        all_psifoi = EklSumpsifoisimbWithIdVw.objects.filter(eklid=eklid).order_by('-sumvotes')  #retrieve Από το EklSumpsifoisimbWithIdVw
+        all_psifoi = selected_ekloges.eklsumpsifoisimbwithidvw_set.order_by('-sumvotes')  #retrieve Από το EklSumpsifoisimbWithIdVw
     else:
         selected_perifereia = Perifereies.objects.get(perid=paramstr).perid                      #retrieve Από το EklSumpsifoisimbPerVw
-        all_psifoi = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).filter(toposeklogisid=paramstr)
+        all_psifoi = selected_ekloges.eklsumpsifoipervw_set.filter(toposeklogisid=paramstr)
 
     selected_order = paramorder
 
@@ -601,9 +604,33 @@ def psifoisimb_perifereies(request, eklid):
     else:
         all_psifoi = all_psifoi.order_by('-sumvotes')
 
+    # Για να βγάλω πιθανά συγκριτικά ψήφων...
+    oldeklid = -1
+    # Βρίσκω το id Της ακριβώς προηγούμενης αναμέτρησης
+    for item in Eklogestbl.objects.filter(eklid__lt=eklid).order_by('-eklid'):
+        if item.eklid > 0:
+            oldeklid = item.eklid
+            break
+
+    oldsimb_psifoi_list = []
+    if oldeklid > -1:  # αν υπάρχει προηγούμενη εκλ. αναμέτρηση, φορτώνω τα αποτελέσματα
+        #ekloges_prin = Eklogestbl.objects.prefetch_related('eklsumpsifoisimbwithidvw_set','eklsumpsifoisimbpervw_set', 'eklsumpsifoisimbperlightvw_set').get(eklid=oldeklid)
+        all_psifoi_prin = EklSumpsifoisimbPerLightVw.objects.filter(eklid=oldeklid)
+
+        all_psifoi_now=EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid)
+
+        for itemNow in all_psifoi_now:  # selected_ekloges.eklsumpsifoisimbpervw_set.all():
+            for itemPrin in all_psifoi_prin:
+                if itemNow.simbid == itemPrin.simbid:
+                    oldsimb_psifoi_list.append([itemNow.simbid, itemNow.sumvotes - itemPrin.sumvotes])
+    else:  # αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
+        all_psifoi_prin = []
+
     context = {'all_psifoi':all_psifoi,
                # 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
+               'oldsimb_psifoi_list' : oldsimb_psifoi_list,
+               'all_psifoi_prin' : all_psifoi_prin,
                'selected_ekloges':selected_ekloges.eklid,
                'all_perifereies':all_perifereies,
                'selected_perifereia': selected_perifereia,
