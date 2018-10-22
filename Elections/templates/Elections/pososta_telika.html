@@ -66,20 +66,43 @@
                                 <tr>
                                         <td class="thick">Συνδυασμός</td>
                                         <td class="thick">Ποσοστό </td>
-                                        <td class="thick">{{ all_pososta_prin.0.eklid.descr }}</td>
+                                    {% if all_pososta_prin.count %}
+                                    <td class="thick"><center>{{ all_pososta_prin.0.eklid.descr }}</center></td>
+                                    <td class="thick"><center>Διαφορά</center></td>
+                                    {% endif %}
                                 </tr>
                                 {% for p in all_pososta %}
                                       <tr>
                                         <td > {{ p.sindiasmos }} {% if p.sindid.photo.url %} <img src="{{ p.sindid.photo.url}}"/>{% endif %}</td>
                                         <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
-                                        <td class="myfontsize">
+                                       {% if all_pososta_prin.count %}
+                                        <td class="thick "><center>
                                             {% for item in all_pososta_prin %}
                                                 {% if item.sindid == p.sindid %}
-                                                    {{ item.posostosindiasmou }} %
+                                                  {{ item.posostosindiasmou }} %
                                                 {% endif %}
                                             {%  endfor %}
-
+                                        <center>
                                         </td>
+                                      <td class="thick"><center>
+                                          {% for item in all_pososta_prin %}
+                                              {% for old in oldsind_pososta_list %}
+                                                {% if p.sindid == old.0 and p.sindid == item.sindid%}
+                                                     {% if old.1 < 0 %}
+                                                        <div class="TransactionAmount NegativeTransaction">
+                                                        {% else %}
+                                                        <div class="TransactionAmount PositiveTransaction">
+                                                        {% endif %}
+                                                              {{ old.1 }} %
+                                                        </div>
+                                                {% endif %}
+                                            {%  endfor %}
+                                           {%  endfor %}
+
+                                          </center>
+
+                                      </td>
+                                      {% endif %}
                                       </tr>
                                   {% endfor %}
                                 </tbody>

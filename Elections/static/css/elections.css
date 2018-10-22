@@ -215,9 +215,11 @@ td.thick {
 }
 
 td.myfontsize { 
-font-size: 13px ; 
+font-size: 14px ; 
+text-align: center;
 font-weight: bold;
 white-space: nowrap;
+color: blue;
 }
 
 .element {
@@ -397,4 +399,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .bg-green{
     background-color:green;
+}
+
+.NegativeTransaction {
+  color: #FF0000;
+}
+
+.PositiveTransaction {
+  color: #3beb89;
 }

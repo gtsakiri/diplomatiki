@@ -504,15 +504,23 @@ def pososta_telika(request, eklid):
             oldeklid = item.eklid
             break
 
-    if oldeklid>-1: # αν υπάρχει εκλ. αναμέτρηση, φορτώνω τα αποτελέσματα
+
+    oldsind_pososta_list = []
+    if oldeklid>-1: # αν υπάρχει προηγούμενη εκλ. αναμέτρηση, φορτώνω τα αποτελέσματα
         all_pososta_prin = EklSumpsifodeltiasindVw.objects.filter(eklid=oldeklid, eidos=1)
+
+        for itemNow in EklSumpsifodeltiasindVw.objects.filter(eklid=eklid):
+            for itemPrin in all_pososta_prin:
+                if itemNow.sindid == itemPrin.sindid:
+                    oldsind_pososta_list.append([itemNow.sindid, itemNow.posostosindiasmou- itemPrin.posostosindiasmou])
     else:#αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
         all_pososta_prin = []
 
     context = {'all_pososta':all_pososta,
                'all_pososta_prin': all_pososta_prin,
                'all_ekloges':all_ekloges,
-               'selected_ekloges':selected_ekloges.eklid}
+               'selected_ekloges':selected_ekloges.eklid,
+               'oldsind_pososta_list':oldsind_pososta_list}
 
     return render(request, 'Elections/pososta_telika.html',context)
 
