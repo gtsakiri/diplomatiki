@@ -650,6 +650,7 @@ class EklSumpsifoisimbPerVw(models.Model):
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_SUMPSIFOISIMB_PER_VW'
 
+#sum ψήφων δημ. συμβούλων με βασικά πεδία μόνο
 class EklSumpsifoisimbPerLightVw(models.Model):
     id = models.IntegerField(primary_key=True)
     eklid = models.IntegerField(db_column='eklID', db_index=True)  # Field name made lowercase.
