@@ -68,20 +68,30 @@
            </tr>
            {% for p in all_psifoi %}
                  <tr>
-                    <td>{{ p.surname }} </td>
-                    <td >{{ p.firstname }}</td>
-                    <td>{{ p.fathername }} </td>
-                     <td >{{ p.sindiasmos }}</td>
-                    <td class="myfontsize">{{ p.sumvotes }}</td>
+                    <td>{{ p.2 }} </td>
+                    <td >{{ p.3 }}</td>
+                    <td>{{ p.4 }} </td>
+                     <td >{{ p.5 }}</td>
+                    <td class="myfontsize">{{ p.7 }}</td>
                      {% if all_psifoi_prin.count %}
                         <td class="thick "><center>
                             {% for item in all_psifoi_prin %}
-                                {% if item.simbid.simbid == p.simbid.simbid %}
-                                  {{ item.sumvotes }} %
+                                {% if item.1 == p.1 %}
+                                  {{ item.2 }}
                                 {% endif %}
                             {%  endfor %}
                         </center>
                         </td>
+                         <td class="thick"><center>
+                             {% for item in all_psifoi_prin %}
+                                {% if item.1 == p.1 %}
+                                  {{ {{item.2}}|add: {{p.5 }} }}
+                                {% endif %}
+                            {%  endfor %}
+
+                                          </center>
+
+                                      </td>
                     {% endif %}
                  </tr>
              {% endfor %}

@@ -585,10 +585,12 @@ def psifoisimb_perifereies(request, eklid):
     # φιλτράρισμα επιλεγμένης περιφέρειας
     if paramstr == 0: #επιλογή: "ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ"
         selected_perifereia = 0
-        all_psifoi = selected_ekloges.eklsumpsifoisimbwithidvw_set.order_by('-sumvotes')  #retrieve Από το EklSumpsifoisimbWithIdVw
+        all_psifoi = selected_ekloges.eklsumpsifoisimbwithidvw_set.values_list('eklid', 'simbid',
+            'surname', 'firstname', 'fathername', 'sindiasmos','toposeklogisid', 'sumvotes' ).order_by('-sumvotes')  #retrieve Από το EklSumpsifoisimbWithIdVw
     else:
         selected_perifereia = Perifereies.objects.get(perid=paramstr).perid                      #retrieve Από το EklSumpsifoisimbPerVw
-        all_psifoi = selected_ekloges.eklsumpsifoipervw_set.filter(toposeklogisid=paramstr)
+        all_psifoi = selected_ekloges.eklsumpsifoipervw_set.filter(toposeklogisid=paramstr).values_list('eklid', 'simbid',
+            'surname', 'firstname', 'fathername', 'sindiasmos','toposeklogisid', 'sumvotes' )
 
     selected_order = paramorder
 
@@ -615,15 +617,15 @@ def psifoisimb_perifereies(request, eklid):
     oldsimb_psifoi_list = []
     if oldeklid > -1:  # αν υπάρχει προηγούμενη εκλ. αναμέτρηση, φορτώνω τα αποτελέσματα
         #ekloges_prin = Eklogestbl.objects.prefetch_related('eklsumpsifoisimbwithidvw_set','eklsumpsifoisimbpervw_set', 'eklsumpsifoisimbperlightvw_set').get(eklid=oldeklid)
-        all_psifoi_prin = EklSumpsifoisimbPerLightVw.objects.filter(eklid=oldeklid)
+        all_psifoi_prin = EklSumpsifoisimbPerLightVw.objects.filter(eklid=oldeklid).values_list('eklid', 'simbid',  'sumvotes' )
         ekloges_prin=Eklogestbl.objects.get(eklid=oldeklid)
 
-        all_psifoi_now=EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid)
+        all_psifoi_now=EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid).values_list('eklid', 'simbid',  'sumvotes' )
 
-        for itemNow in all_psifoi_now:  # selected_ekloges.eklsumpsifoisimbpervw_set.all():
+        for itemNow in EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid):
             for itemPrin in all_psifoi_prin:
-                if itemNow.simbid == itemPrin.simbid:
-                    oldsimb_psifoi_list.append([itemNow.simbid, itemNow.sumvotes - itemPrin.sumvotes])
+                if itemNow.simbid == itemPrin[1]:
+                    oldsimb_psifoi_list.append([itemNow.simbid, itemNow.sumvotes - itemPrin[2]])
     else:  # αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
         all_psifoi_prin = []
 
