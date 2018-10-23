@@ -76,7 +76,7 @@
                      {% if all_psifoi_prin.count %}
                         <td class="thick "><center>
                             {% for item in all_psifoi_prin %}
-                                {% if item.simbid == p.simbid %}
+                                {% if item.simbid.simbid == p.simbid.simbid %}
                                   {{ item.sumvotes }} %
                                 {% endif %}
                             {%  endfor %}
