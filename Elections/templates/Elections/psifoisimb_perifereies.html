@@ -61,6 +61,10 @@
                     <td class="thick">Ον. πατρός  </td>
                     <td class="thick"> Συνδυασμός  </td>
                     <td class="thick">Ψήφοι </td>
+                    {% if all_psifoi_prin.count %}
+                        <td class="thick"><center>{{ ekloges_prin.descr }}</center></td>
+                        <td class="thick"><center>Διαφορά</center></td>
+                    {% endif %}
            </tr>
            {% for p in all_psifoi %}
                  <tr>
@@ -69,6 +73,16 @@
                     <td>{{ p.fathername }} </td>
                      <td >{{ p.sindiasmos }}</td>
                     <td class="myfontsize">{{ p.sumvotes }}</td>
+                     {% if all_psifoi_prin.count %}
+                        <td class="thick "><center>
+                            {% for item in all_psifoi_prin %}
+                                {% if item.simbid == p.simbid %}
+                                  {{ item.sumvotes }} %
+                                {% endif %}
+                            {%  endfor %}
+                        </center>
+                        </td>
+                    {% endif %}
                  </tr>
              {% endfor %}
            </tbody>

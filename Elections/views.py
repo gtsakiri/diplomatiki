@@ -616,6 +616,7 @@ def psifoisimb_perifereies(request, eklid):
     if oldeklid > -1:  # αν υπάρχει προηγούμενη εκλ. αναμέτρηση, φορτώνω τα αποτελέσματα
         #ekloges_prin = Eklogestbl.objects.prefetch_related('eklsumpsifoisimbwithidvw_set','eklsumpsifoisimbpervw_set', 'eklsumpsifoisimbperlightvw_set').get(eklid=oldeklid)
         all_psifoi_prin = EklSumpsifoisimbPerLightVw.objects.filter(eklid=oldeklid)
+        ekloges_prin=Eklogestbl.objects.get(eklid=oldeklid)
 
         all_psifoi_now=EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid)
 
@@ -629,6 +630,7 @@ def psifoisimb_perifereies(request, eklid):
     context = {'all_psifoi':all_psifoi,
                # 'all_pososta':all_pososta,
                'all_ekloges':all_ekloges,
+               'ekloges_prin':ekloges_prin,
                'oldsimb_psifoi_list' : oldsimb_psifoi_list,
                'all_psifoi_prin' : all_psifoi_prin,
                'selected_ekloges':selected_ekloges.eklid,
