@@ -90,9 +90,9 @@
                                                 {% if p.sindid == old.0 and p.sindid == item.sindid%}
                                                      {% if old.1 < 0 %}
                                                         <div class="TransactionAmount NegativeTransaction">
-                                                        {% else %}
+                                                     {% else %}
                                                         <div class="TransactionAmount PositiveTransaction">
-                                                        {% endif %}
+                                                     {% endif %}
                                                               {{ old.1 }} %
                                                         </div>
                                                 {% endif %}

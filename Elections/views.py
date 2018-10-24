@@ -3651,3 +3651,4 @@ def logout_user(request, eklid):
                }
 
     return render(request, 'Elections/login.html',context)
+

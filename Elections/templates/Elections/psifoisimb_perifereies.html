@@ -1,6 +1,7 @@
 {% extends 'Elections/base.html' %}
 
 {% load staticfiles %}
+{% load elections_extras %}
 
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
@@ -35,7 +36,7 @@
 
         <div>
         <select  class="sel3"  name="orderoption"  onchange="perifereies.submit()">
-         <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+         <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>----------------Επιλογή ταξινόμησης----------------</option>
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμα</option>
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
@@ -44,6 +45,10 @@
         <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoiper_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i> <label class="label5">Εξαγωγή όλων σε excel</label></a>
 
          </div>
+
+        <div class="checkbox">
+          <label><input type="checkbox" name="vehicle1" value="">Προβολή συγκριτικών</label>
+        </div>
         </form>
 
 
@@ -62,8 +67,8 @@
                     <td class="thick"> Συνδυασμός  </td>
                     <td class="thick">Ψήφοι </td>
                     {% if all_psifoi_prin.count %}
-                        <td class="thick"><center>{{ ekloges_prin.descr }}</center></td>
-                        <td class="thick"><center>Διαφορά</center></td>
+                        <td class="thick"><center>{{ ekloges_prin.descr }} (διαφορά ψήφων)</center></td>
+
                     {% endif %}
            </tr>
            {% for p in all_psifoi %}
@@ -77,21 +82,22 @@
                         <td class="thick "><center>
                             {% for item in all_psifoi_prin %}
                                 {% if item.1 == p.1 %}
-                                  {{ item.2 }}
+                                    {{ item.2 }}
+                                    {% if p.7|subtract:item.2 < 0 %}
+                                            <div class="TransactionAmount NegativeTransaction">
+                                                ({{ p.7|subtract:item.2  }})
+                                    {% else %}
+                                            <div class="TransactionAmount PositiveTransaction">
+                                                (+{{ p.7|subtract:item.2  }})
+                                    {% endif %}
+
+                                            </div>
+
                                 {% endif %}
                             {%  endfor %}
                         </center>
                         </td>
-                         <td class="thick"><center>
-                             {% for item in all_psifoi_prin %}
-                                {% if item.1 == p.1 %}
-                                  {{ {{item.2}}|add: {{p.5 }} }}
-                                {% endif %}
-                            {%  endfor %}
 
-                                          </center>
-
-                                      </td>
                     {% endif %}
                  </tr>
              {% endfor %}
