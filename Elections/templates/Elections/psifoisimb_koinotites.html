@@ -35,7 +35,7 @@
         <div>
 
          <select   class="sel3" name="orderoption"  onchange="koinotites.submit()">
-            <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>--------Επιλογή ταξινόμησης--------</option>
+            <option  value="5" {% if selected_order ==  5  %}selected{%endif%}>-----Επιλογή ταξινόμησης-----</option>
             {% if all_psifoi.0.eidoskoinotitas != 3 %}
              <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Κατά Συνδυασμό/Σύνολο Ψήφων</option>
              <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Κατά Συνδυασμό/Επώνυμο</option>
@@ -45,7 +45,7 @@
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
 
-        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order %}"><i class="far fa-file-excel"></i><label class="label5"> Εξαγωγή όλων σε excel</label></a>
+        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order %}"> <i class="far fa-file-excel"></i> <label class="label5"> Εξαγωγή όλων σε excel</label></a>
 
         </div>
 

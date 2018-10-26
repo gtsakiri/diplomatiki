@@ -11,9 +11,11 @@
 <label class="label4">Κατάταξη υποψηφίων δημοτικών συμβούλων </label>
 </div>
 
-<div class="divmargin"> </div>
+<div class="divmargin">
 
+ <label class="label7">(Στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων) </label>
 
+</div>
 
 <div class="row">
 
@@ -46,13 +48,16 @@
 
          </div>
 
-        <div class="checkbox">
-          <label><input type="checkbox" name="vehicle1" value="">Προβολή συγκριτικών</label>
-        </div>
+
+         <div class="divmargin"> </div>
+
+
+        <p>
+            <input type="checkbox" {% if sigritika ==  1  %}checked{%endif%} name="sigritika" id="sigritika" onclick="perifereies.submit()"/>
+            <label for="sigritika">Προβολή συγκριτικών</label>
+        </p>
+
         </form>
-
-
-       </div>
 
         <div class="divmargin"> </div>
 
@@ -104,8 +109,9 @@
            </tbody>
       </table>
 
-   </div>
+    </div>
 
+   </div>
 
 
  </div>
