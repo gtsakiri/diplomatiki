@@ -121,22 +121,17 @@
                             fontSize:'20px'
                          },
                     },
-                    xAxis: {
-                        categories: [
-                        {% for entry in all_psifodeltia %}'<span class="label label-primary">{{ entry.sindiasmos }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
-                      ],
-                        labels: {
-                        style: {
-                            color: 'red',
-                            fontSize:'16px'
-                         }
-                        }
-
-                    },
                     series: [{
                         name: 'Ψηφοδέλτια υποψηφίων',
                       data: [
-                        {% for entry in all_psifodeltia %} {name:"{{ entry.sindiasmos }}", y:{{ entry.votesk }}, sliced: true} {% if not forloop.last %}, {% endif %}{% endfor %}
+                        {% for entry in all_psifodeltia %}
+                          {name:"{{ entry.sindiasmos }}",
+                              {% if sunday == 1 %} y:{{ entry.votes }}
+                              {% elif sunday == 2 %} y:{{ entry.votesb }}
+                              {% else %} y:{{ entry.votesk }}
+                              {% endif %},
+                            sliced: true} {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
                       ]
                     }],
                     plotOptions: {
