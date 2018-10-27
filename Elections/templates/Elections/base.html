@@ -26,12 +26,12 @@
      <script>
 
 
-      $(document).ready(function () {
+      /*$(document).ready(function () {
        $('label.tree-toggler').click(function () {
         $(this).parent().children('ul.tree').toggle(300);
         });
 
-      });
+      }); */
     </script>
 
 
@@ -65,18 +65,19 @@
         <div class="collapse navbar-collapse" id="topNavBar">
 
 
-                <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Elections_list' selected_ekloges %}">
+              <!--  <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Elections_list' selected_ekloges %}">
                     <div class="form-group" >
                         <input type="text" class="form-control" name="search" id="search" value="">
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
-
+-->
                 <ul class="nav navbar-nav navbar-right">
 
                      <li class="nav-item">
                      {% if request.user.is_authenticated %}
-                        <a href="{% url 'accounts:logout' selected_ekloges %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Logout</a>
+                        <a href="{% url 'accounts:logout' selected_ekloges %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Logout {{ request.user }}</a>
+
                      {% else %}
                         <a href="{% url 'accounts:login' selected_ekloges %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;Login</a>
                      {% endif %}
@@ -96,14 +97,12 @@
       <div class="row">
 
               <!-- start of side bar -->
-            <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-light sidebar">
-
-            <div  style="overflow-x: hidden; width: 300px; height : 100%;">
+         <!--   <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-light sidebar"> -->
+        <div class="sidenav col-sm-4 col-md-3 d-none d-sm-block">
+            <div  style="overflow-x: hidden; overflow-y: hidden; width: 300px; height : 100%;">
 
                 <!--<p id="demo1" type="hidden" ></p> -->
-                <div id="div1">
-
-
+                <div class="sidebar-header">
 
                     <form method="get" name="ekloges" action="{% url 'Elections_list' selected_ekloges %}">
                          <!--<input id="EklInput" name="eklogesinput" value="9"/><!--name="eklogesinput"  -->
@@ -113,7 +112,7 @@
                              <option  value="{{  e.eklid }}" {% if selected_ekloges ==  e.eklid  %}selected{%endif%}>{{ e.descr }}</option>
                             {% endfor %}
                         </select>
-                    <hr>
+                    <div class="divmargin"></div>
 
                     {% if request.user.is_authenticated %}
 
@@ -136,23 +135,23 @@
                 <ul class="nav nav-list">
 
 
-                    <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-stats"></span> ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
+                    <li><label class="tree-toggler nav-header label8"><span class="glyphicon glyphicon-stats"></span> ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
                         <ul class=" nav nav-list tree" style="font-size: 13px; ">
-                            <li><a href="{% url 'pososta_telika' selected_ekloges %} "  id="m1">Ποσοστά συνδυασμών <mark>(συγκεντρωτικά)</mark></a></li>
-                            <li><a href="{% url 'pososta_perifereies' selected_ekloges  %}" id="m2">Ποσοστά συνδυασμών ανά <mark>εκλ. περιφέρεια</mark></a></li>
+                            <li><a href="{% url 'pososta_telika' selected_ekloges %} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά)</a></li>
+                            <li><a href="{% url 'pososta_perifereies' selected_ekloges  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια</a></li>
 
                         <hr>
 
-                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 1%}" id="m9">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά <mark>εκλ. κέντρο (Α' Κυριακή)</mark></a></li>
-                            <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 1 1%}" id="m10">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά <mark>Κοινότητα (Α' Κυριακή)</mark></a></li>
+                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 1%}" id="m9">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά εκλ. κέντρο (Α' Κυριακή)</a></li>
+                            <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 1 1%}" id="m10">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά Κοινότητα (Α' Κυριακή)</a></li>
                         <hr>
 
-                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 2%}" id="m11">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά <mark>εκλ. κέντρο (Β' Κυριακή)</mark></a></li>
-                            <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 1 2%}" id="m12">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά <mark>Κοινότητα (Β' Κυριακή)</mark></a></li>
+                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 2%}" id="m11">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά εκλ. κέντρο (Β' Κυριακή)</a></li>
+                            <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 1 2%}" id="m12">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά Κοινότητα (Β' Κυριακή)</a></li>
                         <hr>
 
-                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 3%}" id="m13">Ψηφοδέλτια συνδυασμών για την εκλογή Τοπικού Συμβουλίου ανά <mark>εκλ. κέντρο</mark></a></li>
-                            <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 0 1%}" id="m14">Ψηφοδέλτια συνδυασμών για την εκλογή Τοπικού Συμβουλίου ανά <mark>Κοινότητα</mark></a></li>
+                            <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 3%}" id="m13">Ψηφοδέλτια συνδυασμών για την εκλογή Τοπικού Συμβουλίου ανά εκλ. κέντρο</a></li>
+                            <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 0 1%}" id="m14">Ψηφοδέλτια συνδυασμών για την εκλογή Τοπικού Συμβουλίου ανά Κοινότητα</a></li>
                          <hr>
                             <li><a href="{% url 'psifoisimb_perifereies' selected_ekloges  %}" id="m3">Ψήφοι υποψ. δημοτικών συμβούλων</a></li>
 
@@ -171,7 +170,7 @@
                     <li class="divider"></li>
                
                     {% if request.user.is_authenticated %}
-                    <li><label class="tree-toggler nav-header"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
+                    <li><label class="tree-toggler nav-header label8"><span class="glyphicon glyphicon-wrench"></span> ΠΑΡΑΜΕΤΡΙΚΑ</label>
                         <ul class="nav nav-list tree" style="font-size: 13px; " >
                     {% endif %}
                             {% if request.user.is_superuser %}
@@ -236,8 +235,8 @@
             </script>
 
 
-        </nav>
-
+        <!-- </nav> -->
+        </div>
          <!-- end of side bar -->
 
 

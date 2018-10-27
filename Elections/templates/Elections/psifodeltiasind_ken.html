@@ -100,11 +100,61 @@
             </div>
 
 
+
      </div>
 
 
 
  </div>
+     <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+     <script src="https://code.highcharts.com/highcharts.src.js"></script>
+              <script>
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'pie'
+                    },
+                    title: {
+                        text: '',
+                        style: {
+                            color: 'red',
+                            fontSize:'20px'
+                         },
+                    },
+                    xAxis: {
+                        categories: [
+                        {% for entry in all_psifodeltia %}'<span class="label label-primary">{{ entry.sindiasmos }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                      ],
+                        labels: {
+                        style: {
+                            color: 'red',
+                            fontSize:'16px'
+                         }
+                        }
+
+                    },
+                    series: [{
+                        name: 'Ψηφοδέλτια υποψηφίων',
+                      data: [
+                        {% for entry in all_psifodeltia %} {name:"{{ entry.sindiasmos }}", y:{{ entry.votesk }}, sliced: true} {% if not forloop.last %}, {% endif %}{% endfor %}
+                      ]
+                    }],
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} % ',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                });
+              </script>
+
 
 {% endblock %}
 
