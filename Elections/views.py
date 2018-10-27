@@ -591,8 +591,8 @@ def psifoisimb_perifereies(request, eklid):
     # φιλτράρισμα επιλεγμένης περιφέρειας
     if paramstr == 0: #επιλογή: "ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ"
         selected_perifereia = 0
-        all_psifoi = selected_ekloges.eklsumpsifoisimbwithidvw_set.values_list('eklid', 'simbid',
-            'surname', 'firstname', 'fathername', 'sindiasmos','toposeklogisid', 'sumvotes' ).order_by('-sumvotes')  #retrieve Από το EklSumpsifoisimbWithIdVw
+        all_psifoi = selected_ekloges.eklsumpsifoisimbpervw_set.values_list('eklid', 'simbid',
+            'surname', 'firstname', 'fathername', 'sindiasmos','toposeklogisid', 'sumvotes' ).order_by('-sumvotes')
     else:
         selected_perifereia = Perifereies.objects.get(perid=paramstr).perid                      #retrieve Από το EklSumpsifoisimbPerVw
         all_psifoi = selected_ekloges.eklsumpsifoisimbpervw_set.filter(toposeklogisid=paramstr).values_list('eklid', 'simbid',
@@ -616,9 +616,8 @@ def psifoisimb_perifereies(request, eklid):
     oldsimb_psifoi_list = []
     all_psifoi_prin = []
     ekloges_prin = []
+
     if sigritika == 1:
-
-
         # Για να βγάλω πιθανά συγκριτικά ψήφων...
         oldeklid = -1
         # Βρίσκω το id Της ακριβώς προηγούμενης αναμέτρησης
@@ -635,10 +634,10 @@ def psifoisimb_perifereies(request, eklid):
 
             all_psifoi_now=EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid).values_list('eklid', 'simbid',  'sumvotes' )
 
-            for itemNow in EklSumpsifoisimbPerLightVw.objects.filter(eklid=eklid):
+            for itemNow in all_psifoi:
                 for itemPrin in all_psifoi_prin:
-                    if itemNow.simbid == itemPrin[1]:
-                        oldsimb_psifoi_list.append([itemNow.simbid, itemNow.sumvotes - itemPrin[2]])
+                    if itemNow[1] == itemPrin[1]:
+                        oldsimb_psifoi_list.append([itemNow[1], itemNow[7]- itemPrin[2]])
         else:  # αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
             all_psifoi_prin = []
 

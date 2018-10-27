@@ -502,6 +502,8 @@ class SimbouloiForm(ModelForm):
         #Έλεγχος αν ξέχασε να βάλει ο χρήστης Κοινότητα, αν πρόκειται για σύμβουλο Κοινότητας
         if eidos == '0' and koinid == None:
             raise forms.ValidationError("Το πεδίο Κοινότητα πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Κοινότητας!")
+        if eidos == '1' and sindid == None:
+            raise forms.ValidationError("Το πεδίο Συνδυασμός πρέπει να συμπληρωθεί αφού πρόκειται για υποψήφιο Δημοτικό Σύμβουλο!")
 
 class PsifoiForm(ModelForm):
 
