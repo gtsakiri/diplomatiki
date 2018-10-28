@@ -6,7 +6,6 @@
 
  {% block content %}
 
-<div class="divmargin">
 
     {% if eidos == 0 %}
         <label class="label4">Ψηφοδέλτια συνδυασμών για την ανάδειξη Τοπικού Συμβουλίου ανά Κοινότητα </label>
@@ -15,7 +14,6 @@
     {% endif %}
 
 
-</div>
 
 <div class="divmargin"> </div>
 
@@ -96,20 +94,24 @@
 
                    <br>
 
+     <div id="container" >
 
-     <div id="container" style="min-width: 410px; height: 600px; max-width: 1000px; margin: 0 auto">
+     <!-- style="min-width: 410px; height: 400px; max-width: 800px; margin: 0 auto"  -->
 
      <script src="https://code.highcharts.com/highcharts.src.js"></script>
      <script src="https://code.highcharts.com/modules/exporting.js"></script>
      <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
               <script>
-              var e = document.getElementById("mykoinotita");
-              var koinotita = e.options[e.selectedIndex].text;
+              if ({{ sumpsifodeltia }}>0) {  /* Μόνο αν υπάρχουν ψηφοδέλτια καταχωρημένα δείχνω και την πίτα */
 
-                Highcharts.getOptions().plotOptions.pie.colors=['#f3f36b',  '#f1d09e', '#a24508', '#375772', '#f1deef', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
 
-                Highcharts.chart('container', {
+                  var e = document.getElementById("mykoinotita");
+                  var koinotita = e.options[e.selectedIndex].text;
+
+                  Highcharts.getOptions().plotOptions.pie.colors=['#f3f36b',  '#f1d09e', '#a24508', '#375772', '#f1deef', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
+
+                  Highcharts.chart('container', {
                     chart: {
                         type: 'pie'
                     },
@@ -149,6 +151,8 @@
                         }
                     },
                 });
+
+                }  /* end if sumpsifodeltia>0*/
               </script>
 
             </div>

@@ -147,11 +147,11 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
     font_style.font.bold = True
 
     if sunday == 1:
-        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Α Κυριακή', font_style)
-    elif sunday == 1:
-        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Β Κυριακή', font_style)
+        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών για Δημ. Συμβούλιο ανά εκλ. κέντρο - Α Κυριακή', font_style)
+    elif sunday == 2:
+        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών για Δημ. Συμβούλιο ανά εκλ. κέντρο - Β Κυριακή', font_style)
     else:
-        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών ανά εκλ. κέντρο - Τοπικά Συμβούλια', font_style)
+        ws.write(row_num, 0, 'Ψηφοδέλτια συνδυασμών για Τοπικά Συμβούλια ανά εκλ. κέντρο ', font_style)
 
     row_num += 2
 
@@ -753,6 +753,8 @@ def psifodeltiasindken(request, eklid, sunday):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = selected_ekloges.eklsumpsifodeltiasindvw_set.all().order_by('-posostosindiasmou')
 
+
+
     if paramorder == 1 or paramorder == 4:
         #Α Κυριακή sunday=1, Β Κυριακή sunday=2, Εκλογές Κοινότητας sunday=3,
         if sunday == 1:
@@ -763,10 +765,29 @@ def psifodeltiasindken(request, eklid, sunday):
             #ΠΡΟΣΟΧΗ!!!: για τις εκλογές Κοινότητας φιλτράρω μόνο τους συμμετέχοντες συνδυασμούς στην Κοινότητα
             all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(kenid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('-votesk')
     elif paramorder == 2:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos')
+        if sunday == 1:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos')
+        elif sunday == 2:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos')
+        else: #sunday=3 άρα εκλογές κοινότητας
+            #ΠΡΟΣΟΧΗ!!!: για τις εκλογές Κοινότητας φιλτράρω μόνο τους συμμετέχοντες συνδυασμούς στην Κοινότητα
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(kenid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('sindiasmos')
     else:
-        all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos','kentro')
+        if sunday == 1:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos','kentro')
+        elif sunday == 2:
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('sindiasmos','kentro')
+        else: #sunday=3 άρα εκλογές κοινότητας
+            #ΠΡΟΣΟΧΗ!!!: για τις εκλογές Κοινότητας φιλτράρω μόνο τους συμμετέχοντες συνδυασμούς στην Κοινότητα
+            all_psifodeltia = selected_ekloges.eklsumpsifodeltiasindkenvw_set.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsindkoin.objects.filter(eklid=eklid, koinid__koinid__in=(Kentra.objects.filter(kenid=paramstr).values_list('koinid'))).values_list('sindid'))).order_by('sindiasmos','kentro')
 
+    sumpsifodeltia = -1
+    if sunday == 1:
+        sumpsifodeltia = sum([i[0] for i in all_psifodeltia.values_list('votes')])
+    elif sunday == 2:
+        sumpsifodeltia = sum([i[0] for i in all_psifodeltia.values_list('votesb')])
+    else:
+        sumpsifodeltia = sum([i[0] for i in all_psifodeltia.values_list('votesk')])
 
     context = {'all_psifodeltia':all_psifodeltia,
                 'all_pososta':all_pososta,
@@ -776,6 +797,7 @@ def psifodeltiasindken(request, eklid, sunday):
                'all_kentra':all_kentra,
                'selected_kentro': selected_kentro,
                'selected_order':selected_order,
+               'sumpsifodeltia':sumpsifodeltia,
                }
     return render(request, 'Elections/psifodeltiasind_ken.html',context)
 
@@ -830,6 +852,14 @@ def psifodeltiasindkoin(request, eklid, eidos, sunday ):
         sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid')))
 
 
+    sumpsifodeltia = -1
+    if sunday == 1:
+        sumpsifodeltia = sum([i[0] for i in all_psifodeltia.values_list('sumasindiasmou')])
+    elif sunday == 2:
+        sumpsifodeltia = sum([i[0] for i in all_psifodeltia.values_list('sumbsindiasmou')])
+    else:
+        sumpsifodeltia = sum([i[0] for i in all_psifodeltia.values_list('sumksindiasmou')])
+
     if paramorder == 1 or paramorder == 4:
         if eidos == 0:
             all_psifodeltia = all_psifodeltia.order_by('-sumksindiasmou')
@@ -843,7 +873,6 @@ def psifodeltiasindkoin(request, eklid, eidos, sunday ):
     else:
         all_psifodeltia = all_psifodeltia.order_by('sindiasmos','descr')
 
-
     context = {'all_psifodeltia': all_psifodeltia,
                'all_ekloges': all_ekloges,
                'eidos' : eidos,
@@ -852,6 +881,7 @@ def psifodeltiasindkoin(request, eklid, eidos, sunday ):
                'all_koinotites': all_koinotites,
                'selected_koinotita': selected_koinotita,
                'selected_order':selected_order,
+               'sumpsifodeltia' : sumpsifodeltia,
                }
     return render(request, 'Elections/psifodeltiasind_koin.html',context)
 
