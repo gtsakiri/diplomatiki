@@ -541,7 +541,7 @@ def pososta_perifereies(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     # φιλτράρισμα επιλεγμένης περιφέρειας
-    selected_perifereia = Perifereies.objects.filter(perid=paramstr)
+    selected_perifereia = Perifereies.objects.get(perid=paramstr)
     #ανάκτηση όλων των περιφερειών
     all_perifereies=Perifereies.objects.all()
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view

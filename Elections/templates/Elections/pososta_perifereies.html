@@ -13,9 +13,9 @@
         <!--<div id="div2"> -->
         <form method="get" name="perifereies">
 
-         <select  class="sel3" id="mydir" name="perifereiaoption"  onchange="perifereies.submit()">
+         <select  class="sel3" id="myperifereies" name="perifereiaoption"  onchange="perifereies.submit()">
             {% for p in all_perifereies %}
-             <option  value="{{  p.perid }}" {% if selected_perifereia.0.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
+             <option  value="{{  p.perid }}" {% if selected_perifereia.perid ==  p.perid  %}selected{%endif%}>{{ p.descr }}</option>
             {% endfor %}
          </select>
 
@@ -30,18 +30,24 @@
         <div id="container"></div>
 
          <script src="https://code.highcharts.com/highcharts.src.js"></script>
+         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+         <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
          <script>
+            var e = document.getElementById("myperifereies");
+            var perifereia = e.options[e.selectedIndex].text;
 
            Highcharts.chart('container', {
                chart: {
                    type: 'column'
                },
                title: {
-                   text: '<span class="label label-primary">Ποσοστά συνδυασμών ΑΝΑ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑ στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων</span>',
+                   text: '<span class="label label-primary">' + 'Ποσοστά συνδυασμών ' +   ' στο ' + {{ all_pososta.0.posostokatametrimenwnkentrwn }} + ' % των εκλ. κέντρων' +
+                        '<br>'  + '(' + perifereia + ')' + '</span>',
                    style: {
                        color: 'red',
                        fontSize: '20px'
+
                    },
                },
                xAxis: {
