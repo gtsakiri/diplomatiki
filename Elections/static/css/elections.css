@@ -525,4 +525,11 @@ label:hover:before {
     /*width: 100%;*/
     background-repeat:no-repeat;
     /*background-size:100% 60%; */
+	 /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
