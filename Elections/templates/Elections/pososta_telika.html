@@ -22,7 +22,7 @@
                         type: 'column'
                     },
                     title: {
-                        text: '<span class="label label-primary">Ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων</span>',
+                        text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων (για Δημ. Συμβούλιο)</span>',
                         style: {
                             color: 'red',
                             fontSize:'20px'
@@ -42,10 +42,11 @@
                     },
                     series: [{
                         name: 'Ποσοστά υποψηφίων',
+                        colorByPoint: true,
                       data: [
                         {% for entry in all_pososta %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
                       ],
-                      color: 'blue',
+                      colors: ['#f3f36b',  '#807c7a', '#a24508', '#375772', '#f1deef', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
                     }],
                     plotOptions: {
                         series: {
