@@ -1,0 +1,88 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+      {% include 'Elections/messages.html' %}
+
+
+
+          <label class="label4">Κατανομή εδρών στα Τοπικά Συμβούλια</label>
+          <label class="label7"> (Στο  {{ all_pososta.0.2 }} % των εκλ. κέντρων)</label>
+
+      <br>
+
+ <div class="row">
+
+       <div class="col-md-10 col-md-offset-1">
+
+        <div class="container">
+
+            <form method="get" name="koinotites">
+
+                <!-- <label class="label5">Κοινότητα</label> -->
+                 <select  class="sel3" id="mykoinotita" name="koinotitaoption"  onchange="koinotites.submit()">
+                    {% for p in all_koinotites %}
+                     <option  value="{{  p.koinid }}" {% if selected_koinotita ==  p.koinid  %}selected{%endif%}>{{ p.descr }}</option>
+                    {% endfor %}
+                 </select>
+
+            <!-- <input type="text" class="heighttext pull-right" id="livesearch" placeholder="live search" ></input> -->
+
+            <div class="divmargin"></div>
+
+            </form>
+
+
+
+
+                    <div class="divmargin"> </div>
+
+
+                   <table class="table table-condensed table-striped  table-hover">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Συνδυασμός</td>
+                                <td class="thick">Κοινότητα</td>
+                                <td class="thick">ΑΑ</td>
+                                <td class="thick">Πρόεδρος</td>
+                                <td class="thick">Έδρες Α γύρου (αρχικές)</td>
+                                <td class="thick">Υπόλοιπο Εδρών Α γύρου</td>
+                                <td class="thick">Έδρες Α γύρου (τελικές)</td>
+                                <td class="thick">Υπόλοιπο ψηφοδελτίων</td>
+                                <td class="thick">Ένδειξη ισοψηφίας</td>
+
+
+                        </tr>
+                        {% for p in all_eklsindkoin %}
+                              <tr>
+                                <td > {{ p.sindid }} </td>
+                                <td > {{ p.koinid }} </td>
+                                <td > {{ p.aa }} </td>
+                                <td > {% if  p.proedros is None %} {% else %} {{ p.proedros  }} {% endif %}</td>
+                                <td > {{ p.edresk }} </td>
+                                <td > {{ p.edresk_ypol }} </td>
+                                  <td class=" myfontsize"> <strong>{{ p.edresk_teliko }}</strong> </td>
+                                <td > {{ p.ypol }} </td>
+                                <td > {{ p.checkfordraw }} </td>
+
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+        </div>
+
+       </div>
+</div>
+
+{% endblock %}
+
+

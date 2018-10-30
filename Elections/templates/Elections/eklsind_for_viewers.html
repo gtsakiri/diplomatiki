@@ -1,0 +1,56 @@
+{% extends 'Elections/base.html' %}
+
+{% load staticfiles %}
+
+<!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
+
+ {% block content %}
+
+      {% include 'Elections/messages.html' %}
+
+
+
+            <label class="label4">Κατανομή εδρών για το Δημ. Συμβούλιο</label>
+            <label class="label7"> (Στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων)</label>
+ <div class="divmargin"></div>
+
+ <div class="row">
+
+       <div class="col-md-10 col-md-offset-1">
+
+                   <table class="table table-condensed table-striped  table-hover">
+
+                        <tbody >
+                        <tr>
+                                <td class="thick">Συνδυασμός</td>
+                                <td class="thick">ΑΑ</td>
+                                <td class="thick">Έδρες Α γύρου (αρχικές)</td>
+                                <td class="thick">Υπόλοιπο Εδρών Α γύρου</td>
+                                <td class="thick">Έδρες Α γύρου (τελικές)</td>
+                                <td class="thick">Έδρες Β γύρου</td>
+                                <td class="thick">Υπόλοιπο ψηφοδελτίων</td>
+
+                        </tr>
+                        {% for p in all_eklsind %}
+                              <tr>
+                                <td > {{ p.sindid }} </td>
+                                <td > {{ p.aa }} </td>
+                                <td > {{ p.edresa }} </td>
+                                <td > {{ p.edresa_ypol }} </td>
+                                <td class="myfontsize"><strong> {{ p.edresa_teliko }} </strong></td>
+                                <td > {{ p.edresb }} </td>
+                                <td > {{ p.ypol }} </td>
+                              </tr>
+                          {% endfor %}
+
+                        </tbody>
+                   </table>
+
+                    <br/>
+
+        </div>
+</div>
+
+{% endblock %}
+
+

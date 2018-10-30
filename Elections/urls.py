@@ -120,5 +120,8 @@ path('export/psifodeltiasindken/<int:eklid>/<int:sunday>/<int:selected_order>/',
 path('export/psifodeltiasindkoin/<int:eklid>/<int:selected_order>/<int:eidos>/<int:sunday>/', views.export_psifodeltiasind_koin, name='export_psifodeltiasind_koin'),
 path('export/psifoisimbken/<int:eklid>/<int:selected_order>/', views.export_psifoisimb_ken, name='export_psifoisimbken'),
 
+path('eklsindviewonly/<int:eklid>/', views.eklsind_for_viewers, name='eklsind_for_viewers'),
+path('eklsindkoinviewonly/<int:eklid>/', views.eklsindkoin_for_viewers, name='eklsindkoin_for_viewers'),
+
 ]
 
