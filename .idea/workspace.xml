@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_30_10_2018">
-      <change afterPath="$PROJECT_DIR$/Elections/migrations/0002_auto_20181031_0945.py" afterDir="false" />
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="work_31_10_2018">
+      <change afterPath="$PROJECT_DIR$/Elections/migrations/0003_simbouloi_photofield.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Elections/migrations/0004_auto_20181031_1123.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Elections/migrations/0005_auto_20181031_1124.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Elections/migrations/0006_remove_simbouloi_photofield.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0002_auto_20180827_1808.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0003_auto_20180828_1120.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0004_auto_20180828_1129.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0005_auto_20180828_1403.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0006_auto_20180829_0832.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0007_auto_20180830_1040.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0008_auto_20180831_1203.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0009_auto_20180831_1307.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0010_auto_20180902_1112.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0011_auto_20180907_1109.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0012_auto_20180907_2300.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0013_eklsumpsifoisimbwithidvw.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0014_auto_20180909_2344.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0015_auto_20180910_1456.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0016_auto_20180919_0818.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0017_auto_20180923_1121.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0018_auto_20181011_0954.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0019_eklsumpsifodeltiasindkentopikoionlyvw.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0020_auto_20181017_0122.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0021_eklsumpsifodeltiasindkoinvw.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/migrations/0022_eklsumpsifoisimbperlightvw.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
@@ -105,8 +88,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="524" column="36" selection-start-line="524" selection-start-column="36" selection-end-line="524" selection-end-column="36" />
+            <state relative-caret-position="190">
+              <caret line="1684" column="31" selection-start-line="1684" selection-start-column="26" selection-end-line="1684" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -114,8 +97,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="115" column="80" selection-start-line="115" selection-start-column="80" selection-end-line="115" selection-end-column="80" />
+            <state relative-caret-position="190">
+              <caret line="522" column="9" selection-start-line="522" selection-start-column="4" selection-end-line="522" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -123,8 +106,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="138" column="71" lean-forward="true" selection-start-line="138" selection-start-column="71" selection-end-line="138" selection-end-column="80" />
+            <state relative-caret-position="476">
+              <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -133,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/Elections/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="363">
-              <caret line="71" column="53" lean-forward="true" selection-start-line="71" selection-start-column="53" selection-end-line="71" selection-end-column="61" />
+              <caret line="71" column="64" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -145,7 +128,16 @@
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="376">
-              <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
+              <caret line="81" column="183" selection-start-line="81" selection-start-column="183" selection-end-line="81" selection-end-column="183" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="302">
+              <caret line="409" column="42" lean-forward="true" selection-start-line="409" selection-start-column="42" selection-end-line="409" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -202,9 +194,9 @@
       <find>sindiasmoi/</find>
       <find>pososta_telika</find>
       <find>sindiasmoi_ed</find>
-      <find>photo</find>
-      <find>Sindiasmoi</find>
       <find>pososta_te</find>
+      <find>Sindiasmoi</find>
+      <find>photo</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -223,7 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/edres_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/edreskoin_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsind_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/elections_form.html" />
@@ -269,10 +260,11 @@
         <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_for_viewers.html" />
-        <option value="$PROJECT_DIR$/Elections/views.py" />
-        <option value="$PROJECT_DIR$/Elections/admin.py" />
-        <option value="$PROJECT_DIR$/Elections/models.py" />
+        <option value="$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/utils.py" />
         <option value="$PROJECT_DIR$/Elections/forms.py" />
+        <option value="$PROJECT_DIR$/Elections/admin.py" />
+        <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
       </list>
     </option>
@@ -425,13 +417,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00082" summary="home_06_10_2018">
-      <created>1538827835914</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1538827835914</updated>
     </task>
     <task id="LOCAL-00083" summary="home_06_10_2018">
       <created>1538849446446</created>
@@ -769,7 +754,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540898858960</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="work_31_10_2018">
+      <created>1540972256243</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1540972256244</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TodoView">
@@ -783,7 +775,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-15" y="10" width="1935" height="1060" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.31861198" />
@@ -877,7 +868,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="home_28_9_2018" />
     <MESSAGE value="home_29_9_2018" />
     <MESSAGE value="home_30_9_2018" />
     <MESSAGE value="work_01_10_2018" />
@@ -902,17 +892,11 @@
     <MESSAGE value="home_28_10_2018" />
     <MESSAGE value="work_29_10_2018" />
     <MESSAGE value="work_30_10_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="work_30_10_2018" />
+    <MESSAGE value="work_31_10_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="work_31_10_2018" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Elections/views.py</url>
-          <line>1678</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -943,9 +927,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Elections/migrations/0007_auto_20180830_1040.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/migrations/0008_auto_20180831_1203.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1149,23 +1130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="71" column="53" lean-forward="true" selection-start-line="71" selection-start-column="53" selection-end-line="71" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="115" column="80" selection-start-line="115" selection-start-column="80" selection-end-line="115" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/migrations/0002_auto_20181031_0943.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1183,13 +1147,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="424" selection-start-line="424" selection-end-line="424" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="138" column="71" lean-forward="true" selection-start-line="138" selection-start-column="71" selection-end-line="138" selection-end-column="80" />
         </state>
       </provider>
     </entry>
@@ -1213,17 +1170,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="409" column="42" lean-forward="true" selection-start-line="409" selection-start-column="42" selection-end-line="409" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="71" column="64" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="524" column="36" selection-start-line="524" selection-start-column="36" selection-end-line="524" selection-end-column="36" />
+        <state relative-caret-position="190">
+          <caret line="1684" column="31" selection-start-line="1684" selection-start-column="26" selection-end-line="1684" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="522" column="9" selection-start-line="522" selection-start-column="4" selection-end-line="522" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
-          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
+          <caret line="81" column="183" selection-start-line="81" selection-start-column="183" selection-end-line="81" selection-end-column="183" />
         </state>
       </provider>
     </entry>

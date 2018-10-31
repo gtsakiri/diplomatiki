@@ -136,7 +136,7 @@ class SindiasmoiForm(ModelForm):
 
     class Meta:
         model=Sindiasmoi
-        fields = ['descr', 'shortdescr', 'eidos', 'koinid', 'proedros', 'photo', 'aa']
+        fields = ['descr', 'shortdescr', 'eidos', 'koinid', 'proedros', 'photofield', 'aa']
 
         EIDOS_CHOICES = (
             (1, 'Δήμο'),
@@ -148,7 +148,7 @@ class SindiasmoiForm(ModelForm):
             'eidos': _('Υποψήφιος συνδυασμός για όλο το Δήμο ή σε Τοπική Κοινότητα μόνο?'),
             'koinid': _('Κοινότητα'),
             'proedros': _('Πρόεδρος'),
-            'photo': _('Φωτογραφία'),
+            'photofield': _('Φωτογραφία'),
         }
         help_texts = {
             'shortdescr': _('Π.χ, το επίθετο του επικεφαλής μόνο'),
@@ -166,7 +166,7 @@ class SindiasmoiForm(ModelForm):
         koin = cleaned_data.get('koin')
         proedros=cleaned_data.get('proedros')
         eidos = cleaned_data.get('eidos')
-        photo = cleaned_data.get('photo')
+        photofield = cleaned_data.get('photo')
         aa = cleaned_data.get('aa')
 
     def __init__(self, *args, **kwargs):

@@ -1679,10 +1679,10 @@ def sindiasmoi_edit(request, eklid, sindid):
         if form.is_valid():
             sind_item = form.save(commit=False)
 
-            pic = form.cleaned_data['photo']
+            pic = form.cleaned_data['photofield']
             if not pic:
                 pic = 'sindiasmoi/elections.jpg'
-                sind_item.photo=pic
+                sind_item.photofield=pic
 
             sind_item.save()
 

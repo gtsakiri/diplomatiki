@@ -69,7 +69,7 @@ class SimbouloiAdmin(admin.ModelAdmin):
     list_filter = ('surname',)
 
 class SindiasmoiAdmin(admin.ModelAdmin):
-    list_display = ('sindid', 'descr', 'shortdescr', 'photo', 'eidos')
+    list_display = ('sindid', 'descr', 'shortdescr', 'photofield', 'eidos')
 
 class SistimaAdmin(admin.ModelAdmin):
     list_display = ('sisid', 'descr')

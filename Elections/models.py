@@ -113,7 +113,7 @@ class Sindiasmoi(models.Model):
     sindid = models.AutoField(db_column='sindID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
-    photo = models.ImageField(db_column='photo',upload_to='sindiasmoi',default=0,null=True, blank=True)
+    photofield = models.ImageField(upload_to='sindiasmoi',null=True, blank=True)
     eidos = models.IntegerField(default=1)
 
     def __str__(self):
@@ -520,7 +520,7 @@ class EklSumpsifodeltiasindVw(models.Model):
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
-    photo=models.ImageField(db_column='photo',null=True)
+    photofield=models.ImageField(null=True)
     sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
     sinola = models.DecimalField(max_digits=32, decimal_places=0, blank=True, null=True)
     katametrimena = models.BigIntegerField(blank=True, null=True)
