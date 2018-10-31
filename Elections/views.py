@@ -496,6 +496,7 @@ def pososta_telika(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view (μόνο καθολικοί συνδυασμοί επιλέγονται)
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
+    all_sind = Sindiasmoi.objects.filter(sindid__in=(all_pososta.values_list('sindid')))
 
     oldeklid=-1
     #Βρίσκω το id Της ακριβώς προηγούμενης αναμέτρησης
@@ -520,7 +521,8 @@ def pososta_telika(request, eklid):
                'all_pososta_prin': all_pososta_prin,
                'all_ekloges':all_ekloges,
                'selected_ekloges':selected_ekloges.eklid,
-               'oldsind_pososta_list':oldsind_pososta_list}
+               'oldsind_pososta_list':oldsind_pososta_list,
+               'all_sind': all_sind,}
 
     return render(request, 'Elections/pososta_telika.html',context)
 
@@ -553,7 +555,8 @@ def pososta_perifereies(request, eklid):
 
                'selected_ekloges': selected_ekloges.eklid,
                'all_perifereies': all_perifereies,
-               'selected_perifereia': selected_perifereia,}
+               'selected_perifereia': selected_perifereia,
+               }
     return render(request, 'Elections/pososta_perifereies.html',context)
 
 def psifoisimb_perifereies(request, eklid):

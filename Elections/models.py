@@ -113,7 +113,7 @@ class Sindiasmoi(models.Model):
     sindid = models.AutoField(db_column='sindID', primary_key=True, db_index=True)  # Field name made lowercase.
     descr = models.CharField(max_length=100)
     shortdescr = models.CharField(db_column='shortDescr', max_length=50)  # Field name made lowercase.
-    photo = models.ImageField(db_column='photo',upload_to='sindiasmoi',default='elections.jpg',null=True, blank=True)
+    photo = models.ImageField(db_column='photo',upload_to='sindiasmoi',default=0,null=True, blank=True)
     eidos = models.IntegerField(default=1)
 
     def __str__(self):
