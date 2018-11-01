@@ -61,72 +61,24 @@
                 });
               </script>
 
+       <br>
+       <br>
+
+
                 <div class="container-fluid" overflow:auto align="center">
 
-                    <div class="divmargin"></div>
+
+
 
 
                            <table class="a table table-bordered  table-striped">
 
                                 <tbody >
                                 <tr>
-                                        <td class="thick">Συνδυασμός</td>
-                                        <td class="thick">Ποσοστό </td>
-                                    {% if all_pososta_prin.count %}
-                                    <td class="thick"><center>{{ all_pososta_prin.0.eklid.descr }}</center></td>
-                                    <td class="thick"><center>Διαφορά</center></td>
-                                    {% endif %}
-                                </tr>
-                                {% for p in all_pososta %}
-                                      <tr>
-                                        <td ><center>  {% if p.sindid.photofield.url %} <img src="{{ p.sindid.photofield.url}}" alt="{{ p.sindid.shortdescr}}" width="100px" height="160px" /> {% endif %}
-                                           <br> <label class="label label-primary"> {{ p.sindid.shortdescr }} </label></center>
-                                        </td>
-                                        <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
-                                       {% if all_pososta_prin.count %}
-                                        <td class="thick "><center>
-                                            {% for item in all_pososta_prin %}
-                                                {% if item.sindid == p.sindid %}
-                                                  {{ item.posostosindiasmou }} %
-                                                {% endif %}
-                                            {%  endfor %}
-                                        </center>
-                                        </td>
-                                      <td class="thick"><center>
-                                          {% for item in all_pososta_prin %}
-                                              {% for old in oldsind_pososta_list %}
-                                                {% if p.sindid == old.0 and p.sindid == item.sindid%}
-                                                     {% if old.1 < 0 %}
-                                                        <div class="TransactionAmount NegativeTransaction">
-                                                     {% else %}
-                                                        <div class="TransactionAmount PositiveTransaction">
-                                                     {% endif %}
-                                                              {{ old.1 }} %
-                                                        </div>
-                                                {% endif %}
-                                            {%  endfor %}
-                                           {%  endfor %}
-
-                                          </center>
-
-                                      </td>
-                                      {% endif %}
-                                      </tr>
-                                  {% endfor %}
-                                </tbody>
-                           </table>
-
-                <div class="divmargin"></div>
-
-
-                           <table class="a table table-bordered  table-striped">
-
-                                <tbody >
-                                <tr>
-                                        <td class="thick">Συνδυασμός</td>
+                                        <td class="thick text-center"></td>
                                         {% for p in all_pososta %}
-                                         <td ><center>  {% if p.sindid.photofield.url %} <img src="{{ p.sindid.photofield.url}}" alt="{{ p.sindid.shortdescr}}" width="100px" height="160px" /> {% endif %}
-                                            <br> <label class="label label-primary"> {{ p.sindid.shortdescr }} </label></center>
+                                         <td class="text-center"> {% if p.sindid.photofield.url %} <img src="{{ p.sindid.photofield.url}}" alt="{{ p.sindid.shortdescr}}" width="100px" height="160px" /> {% endif %}
+                                            <br> <label class="label label-primary"> {{ p.sindid.shortdescr }} </label>
 
                                          </td>
                                        {% endfor %}
@@ -137,23 +89,48 @@
                                                 <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
                                            {% endfor %}
                                  </tr>
-                                        <td class="thick">Ποσοστό </td>
+
                                 {% if all_pososta_prin.count %}
                                     <tr>
-                                        <td class="thick"><center>{{ all_pososta_prin.0.eklid.descr }}</center></td>
-                                        {% for item in all_pososta_prin %}
-                                             <td>
-                                                {% if item.sindid == p.sindid %}
-                                                  {{ item.posostosindiasmou }} %
-                                                {% endif %}
-                                            </td>
+                                        <td class="thick">{{ all_pososta_prin.0.eklid.descr }}</td>
+                                        {% for p in all_pososta %}
+                                            {% for item in all_pososta_prin %}
+
+                                                    {% if item.sindid == p.sindid %}
+                                                        <td class="text-center"> {{ item.posostosindiasmou }} %</td>
+                                                    {% endif %}
+
+                                            {%  endfor %}
                                         {%  endfor %}
+
+                                    </tr>
+                                    <tr>
+                                    <td class="thick">Διαφορά</td>
+                                    {% for p in all_pososta %}
+                                    {% for item in all_pososta_prin %}
+                                          {% for old in oldsind_pososta_list %}
+                                            {% if p.sindid == old.0 and p.sindid == item.sindid%}
+                                                <td>
+                                                 {% if old.1 < 0 %}
+
+                                                        <div class="TransactionAmount NegativeTransaction text-center">
+                                                     {% else %}
+                                                        <div class="TransactionAmount PositiveTransaction text-center">
+                                                     {% endif %}
+                                                      {{ old.1 }} %
+                                                        </div>
+                                                </td>
+                                            {% endif %}
+                                    {%  endfor %}
+                                    {%  endfor %}
+                                    {%  endfor %}
 
                                     </tr>
                                 {% endif %}
 
                                 </tbody>
                            </table>
+
 
 
 

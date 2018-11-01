@@ -58,17 +58,17 @@
     <div class="divmargin"> </div>
     <!-- <div class="container-fluid" overflow:auto> -->
 
-      <table class="table styletd1 table-bordered table-striped  table-condensed table-hover">
+      <table class="table styletd1 table-bordered  table-condensed table-hover">
 
            <tbody >
            <tr>
-                   <td class="thick">Επίθετο </td>
-                   <td class="thick">Όνομα </td>
-                    <td class="thick"> Ον. πατρός </td>
+                   <th class="style1">Επίθετο </th>
+                   <th class="style1">Όνομα </th>
+                    <th class="style1"> Ον. πατρός </th>
                 {% if all_psifoi.0.eidoskoinotitas != 3 %}
-                    <td class="thick"> Συνδυασμός </td>
+                    <th class="style1"> Συνδυασμός </th>
                 {% endif %}
-                    <td class="thick"> Ψήφοι </td>
+                    <th class="style1"> Ψήφοι </th>
 
            </tr>
            {% for p in all_psifoi %}
