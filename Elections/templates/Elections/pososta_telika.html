@@ -116,6 +116,45 @@
                                 </tbody>
                            </table>
 
+                <div class="divmargin"></div>
+
+
+                           <table class="a table table-bordered  table-striped">
+
+                                <tbody >
+                                <tr>
+                                        <td class="thick">Συνδυασμός</td>
+                                        {% for p in all_pososta %}
+                                         <td ><center>  {% if p.sindid.photofield.url %} <img src="{{ p.sindid.photofield.url}}" alt="{{ p.sindid.shortdescr}}" width="100px" height="160px" /> {% endif %}
+                                            <br> <label class="label label-primary"> {{ p.sindid.shortdescr }} </label></center>
+
+                                         </td>
+                                       {% endfor %}
+                                 </tr>
+                                 <tr>
+                                        <td class="thick">Ποσοστό</td>
+                                           {% for p in all_pososta %}
+                                                <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
+                                           {% endfor %}
+                                 </tr>
+                                        <td class="thick">Ποσοστό </td>
+                                {% if all_pososta_prin.count %}
+                                    <tr>
+                                        <td class="thick"><center>{{ all_pososta_prin.0.eklid.descr }}</center></td>
+                                        {% for item in all_pososta_prin %}
+                                             <td>
+                                                {% if item.sindid == p.sindid %}
+                                                  {{ item.posostosindiasmou }} %
+                                                {% endif %}
+                                            </td>
+                                        {%  endfor %}
+
+                                    </tr>
+                                {% endif %}
+
+                                </tbody>
+                           </table>
+
 
 
                 <div class="divmargin"> </div>
