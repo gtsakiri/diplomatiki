@@ -181,10 +181,11 @@
                     {% endif %}
                             {% if request.user.is_superuser %}
 
-                                <li><a href="{% url 'ekloges_list' selected_ekloges  %}">Εκλ. αναμετρήσεις</a></li>
+
                                 <li><a href="{% url 'sistima_list' selected_ekloges  %}">Εκλογικά Συστήματα</a></li>
                                 <li><a href="{% url 'edres_list' selected_ekloges  %}" >Περιπτώσεις κατανομής εδρών σε Δήμους</a></li>
                                 <li><a href="{% url 'edreskoin_list' selected_ekloges  %}">Περιπτώσεις κατανομής εδρών σε Κοινότητες</a></li>
+                                <li><a href="{% url 'ekloges_list' selected_ekloges  %}">Εκλ. αναμετρήσεις</a></li>
                                 <li><a href="{% url 'typeofkoinotita_list' selected_ekloges  %}">Τύποι Κοινοτήτων</a></li>
                                 <li><a href="{% url 'perifereia_list' selected_ekloges  %}">Εκλογικές Περιφέρειες</a></li>
                                 <li><a href="{% url 'koinotites_list' selected_ekloges  %}">Κοινότητες</a></li>
