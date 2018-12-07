@@ -3,11 +3,11 @@ from django.urls import reverse
 
 
 class Edres(models.Model):
-    edrid = models.AutoField(db_column='edrID', primary_key=True, db_index=True)  # Field name made lowercase.
+    edrid = models.AutoField(db_column='edrID', primary_key=True, db_index=True)
     descr = models.CharField(max_length=45, verbose_name='Περιγραφή')
-    sinoloedrwn = models.IntegerField(db_column='sinoloEdrwn', verbose_name='Σύνολο εδρών')  # Field name made lowercase.
-    edresprwtou = models.IntegerField(db_column='edresPrwtou', verbose_name='Έδρες Πρώτου')  # Field name made lowercase.
-    edresypoloipwn = models.IntegerField(db_column='edresYpoloipwn', verbose_name='Έδρες Υπολοίπων')  # Field name made lowercase.
+    sinoloedrwn = models.IntegerField(db_column='sinoloEdrwn', verbose_name='Σύνολο εδρών')
+    edresprwtou = models.IntegerField(db_column='edresPrwtou', verbose_name='Έδρες Πρώτου')
+    edresypoloipwn = models.IntegerField(db_column='edresYpoloipwn', verbose_name='Έδρες Υπολοίπων')
 
     def __str__(self):
         return self.descr

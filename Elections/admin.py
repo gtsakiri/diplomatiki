@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import Edres, Edreskoin, Eklogestbl, Eklper, Eklperkoin, Eklsimbkoin, Eklsimbper, Eklsind
 from .models import Eklsindkoin, Eklsindsimb, Kentra, Koinotites, Perifereies, Psifodeltia, Psifoi, Simbouloi, Sindiasmoi
-from .models import Sistima, Typeofkoinotita, EklSumpsifodeltiasindVw, EklSumpsifoiKenVw
+from .models import Sistima, Typeofkoinotita
 
 
 class EdresAdmin(admin.ModelAdmin):

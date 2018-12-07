@@ -20,6 +20,7 @@
 
                         <tbody >
                         <tr>
+                                <td class="thick">Κωδικός</td>
                                 <td class="thick">Περιγραφή</td>
                                 <td class="thick">Ενέργειες</td>
 
@@ -27,6 +28,8 @@
                         </tr>
                         {% for p in all_type %}
                               <tr>
+                                <td > {{ p.tpkid}} </td>
+
                                 <td > {{ p.descr}} </td>
                                 <td .noborder>
                                     <a class="btn btn-default" href="{% url 'typeofkoinotita_edit' selected_ekloges p.tpkid%}"><span class="glyphicon glyphicon-pencil"></span></a>
