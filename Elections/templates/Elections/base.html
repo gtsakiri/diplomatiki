@@ -206,6 +206,11 @@
                             {% if request.user.is_authenticated %}
                                 <li><a href="{% url 'psifoi_list' selected_ekloges  %}">Ψήφοι Υποψηφίων ανά εκλ. κέντρο</a></li>
                             {% endif %}
+
+                            {% if request.user.is_authenticated %}
+                                <hr class="style11">
+                                <li><a href="{% url 'exec_edres_katanomi_dimos' selected_ekloges  %}"> Εκτέλεση διαδικασίας κατανομής εδρών (Δήμος) </a></li>
+                            {% endif %}
                         </ul>
 
                     </li>

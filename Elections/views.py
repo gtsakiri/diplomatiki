@@ -1,5 +1,7 @@
 import xlwt
+import mysql.connector
 from django.contrib import  messages
+from django.conf import settings
 from django.contrib.auth import  authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -7,6 +9,9 @@ from django.db.models import Q
 from django.forms import DateInput, modelformset_factory
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+
+from mysql.connector import Error
+from mysql.connector import errorcode
 
 from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Perifereies, \
     EklSumpsifoisimbPerVw, EklSumpsifoisimbKoinVw, Koinotites, EklSumpsifodeltiasindKenVw, \
@@ -3776,3 +3781,56 @@ def eklsindkoin_for_viewers(request, eklid):
                }
 
     return render(request, 'Elections/eklsindkoin_for_viewers.html' , context)
+
+'''ΚΑΤΑΝΟΜΗ ΕΔΡΩΝ Α ΚΥΡΙΑΚΗΣ ΓΙΑ ΔΗΜΟ'''
+def exec_edres_katanomiA_dimos(request, eklid):
+    '''settings.DATABASES['HOST']'''
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
+
+    mySQL_conn = mysql.connector.connect(host= settings.DATABASES['default']['HOST'],
+                                         database='ekloges',
+                                         user='root',
+                                         password='ds9000')
+
+
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    all_eklsind = selected_ekloges.eklsind_set.all().order_by('-edresa_teliko')
+    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
+               'all_eklsind': all_eklsind,
+               'all_pososta': all_pososta,
+               }
+
+    try:
+        cursor = mySQL_conn.cursor()
+        message=0
+        args=[eklid,message]
+        if selected_ekloges.sisid==1:
+            result=cursor.callproc('KATANOMH_EDRWN_A_KYRIAKHS_SISTIMA_1', args)
+        else:
+            result=cursor.callproc('KATANOMH_EDRWN_APLH_ANALOGIKH_SISTIMA_2', args)
+
+        mySQL_conn.commit()
+
+        # print out User details
+        #for result in cursor.stored_results():
+            #print(result.fetchall())
+
+        #cursor.execute('SELECT @message')
+        print(result[1]) #Το αποτέλεσμα της output variable message της stored procedure
+
+        messages.success(request, 'Επιτυχής ενημέρωση!')
+
+    except mysql.connector.Error as error:
+        print("Σφάλμα κατά την εκτέλεση της διαδικασίας! {}".format(error))
+        messages.error(request, 'Σφάλμα κατά την εκτέλεση της διαδικασίας!'.format(error))
+    finally:
+        # closing database connection.
+        if (mySQL_conn.is_connected()):
+            cursor.close()
+            mySQL_conn.close()
+            print("connection is closed")
+
+    return render(request, 'Elections/eklsind_for_viewers.html', context)
