@@ -3242,6 +3242,7 @@ def simbouloi_delete(request, eklid, simbid ):
     obj = get_object_or_404(Simbouloi, simbid=simbid)
 
     flag_found_palia = -1
+    #έλεγχος αν πρόκειται για υποψήφιο που συμμετείχε και σε παλιότερες εκλ. αναμετρήσεις
     if EklallsimbVw.objects.filter(simbid=obj.simbid).filter(eklid__lt=eklid).exists():
         flag_found_palia = 1
         # Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
@@ -3270,8 +3271,6 @@ def simbouloi_delete(request, eklid, simbid ):
                'object': obj,
                'flag_found_palia' : flag_found_palia,
                }
-
-
 
 
     return render(request, 'Elections/confirm_simbouloi_delete.html', context)
@@ -3812,9 +3811,9 @@ def exec_edres_katanomiA_dimos(request, eklid):
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
 
     mySQL_conn = mysql.connector.connect(host= settings.DATABASES['default']['HOST'],
-                                         database='ekloges',
-                                         user='root',
-                                         password='ds9000')
+                                         database=settings.DATABASES['default']['NAME'],
+                                         user=settings.DATABASES['default']['USER'],
+                                         password=settings.DATABASES['default']['PASSWORD'],)
 
 
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
@@ -3831,7 +3830,7 @@ def exec_edres_katanomiA_dimos(request, eklid):
         cursor = mySQL_conn.cursor()
         message=0
         args=[eklid,message]
-        if selected_ekloges.sisid==1:
+        if selected_ekloges.sisid.sisid == 1:
             result=cursor.callproc('KATANOMH_EDRWN_A_KYRIAKHS_SISTIMA_1', args)
         else:
             result=cursor.callproc('KATANOMH_EDRWN_APLH_ANALOGIKH_SISTIMA_2', args)
@@ -3845,7 +3844,70 @@ def exec_edres_katanomiA_dimos(request, eklid):
         #cursor.execute('SELECT @message')
         print(result[1]) #Το αποτέλεσμα της output variable message της stored procedure
 
-        messages.success(request, 'Επιτυχής ενημέρωση!')
+        if result[1] == 1:
+            msg='Επιτυχής ενημέρωση!'
+        else:
+            msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
+
+        messages.success(request, msg)
+
+    except mysql.connector.Error as error:
+        print("Σφάλμα κατά την εκτέλεση της διαδικασίας! {}".format(error))
+        messages.error(request, 'Σφάλμα κατά την εκτέλεση της διαδικασίας!'.format(error))
+    finally:
+        # closing database connection.
+        if (mySQL_conn.is_connected()):
+            cursor.close()
+            mySQL_conn.close()
+            print("connection is closed")
+
+    return render(request, 'Elections/eklsind_for_viewers.html', context)
+
+'''ΚΑΤΑΝΟΜΗ ΕΔΡΩΝ Β ΚΥΡΙΑΚΗΣ ΓΙΑ ΔΗΜΟ - ΑΦΟΡΑ ΜΟΝΟ ΤΟ ΠΑΛΙΟ ΣΥΣΤΗΜΑ ΤΟΥ ΚΑΛΛΙΚΡΑΤΗ'''
+def exec_edres_katanomiB_dimos(request, eklid):
+    '''settings.DATABASES['HOST']'''
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
+
+    mySQL_conn = mysql.connector.connect(host= settings.DATABASES['default']['HOST'],
+                                         database=settings.DATABASES['default']['NAME'],
+                                         user=settings.DATABASES['default']['USER'],
+                                         password=settings.DATABASES['default']['PASSWORD'],)
+
+
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+    all_eklsind = selected_ekloges.eklsind_set.all().order_by('-edresa')
+    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmoub')
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
+               'all_eklsind': all_eklsind,
+               'all_pososta': all_pososta,
+               }
+
+    try:
+        cursor = mySQL_conn.cursor()
+        message=0
+        args=[eklid,message]
+        if selected_ekloges.sisid.sisid == 1:
+            result=cursor.callproc('KATANOMH_EDRWN_B_KYRIAKHS_SISTIMA_1', args)
+            mySQL_conn.commit()
+            print(result[1])  # Το αποτέλεσμα της output variable message της stored procedure
+            if result[1] == 1:
+                msg = 'Επιτυχής ενημέρωση!'
+            else:
+                msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
+
+            messages.success(request, msg)
+        else:
+            messages.info(request, 'Δεν γίνεται κατανομή εδρών την Β Κυριακή στην τρέχουσα εκλ. αναμέτρηση!')
+
+
+        # print out User details
+        #for result in cursor.stored_results():
+            #print(result.fetchall())
+
+        #cursor.execute('SELECT @message')
+
 
     except mysql.connector.Error as error:
         print("Σφάλμα κατά την εκτέλεση της διαδικασίας! {}".format(error))

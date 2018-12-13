@@ -123,7 +123,8 @@ path('export/psifoisimbken/<int:eklid>/<int:selected_order>/', views.export_psif
 path('eklsindviewonly/<int:eklid>/', views.eklsind_for_viewers, name='eklsind_for_viewers'),
 path('eklsindkoinviewonly/<int:eklid>/', views.eklsindkoin_for_viewers, name='eklsindkoin_for_viewers'),
 
-path('execkatanomiaedresdimos/<int:eklid>/', views.exec_edres_katanomiA_dimos, name='exec_edres_katanomi_dimos'),
+path('execkatanomiaedresdimos/<int:eklid>/', views.exec_edres_katanomiA_dimos, name='exec_edres_katanomiA_dimos'),
+path('execkatanomibedresdimos/<int:eklid>/', views.exec_edres_katanomiB_dimos, name='exec_edres_katanomiB_dimos'),
 
 ]
 
