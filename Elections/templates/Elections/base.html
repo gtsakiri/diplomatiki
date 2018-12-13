@@ -207,10 +207,15 @@
                                 <li><a href="{% url 'psifoi_list' selected_ekloges  %}">Ψήφοι Υποψηφίων ανά εκλ. κέντρο</a></li>
                             {% endif %}
 
-                            {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
                                 <hr class="style11">
-                                <li><a href="{% url 'exec_edres_katanomi_dimos' selected_ekloges  %}"> Εκτέλεση διαδικασίας κατανομής εδρών (Δήμος) </a></li>
+                                 <li><label class="tree-toggler nav-header label8"><span class="glyphicon glyphicon-wrench"></span> ΚΑΤΑΝΟΜΗ ΕΔΡΩΝ</label>
+                                    <ul class="nav nav-list tree" style="font-size: 13px; " >
+                                 <li><a href="{% url 'exec_edres_katanomi_dimos' selected_ekloges  %}"> Εκτέλεση διαδικασίας κατανομής εδρών (Δήμος) </a></li>
+
                             {% endif %}
+
+
                         </ul>
 
                     </li>
