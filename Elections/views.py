@@ -3240,15 +3240,39 @@ def simbouloi_delete(request, eklid, simbid ):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     obj = get_object_or_404(Simbouloi, simbid=simbid)
+
+    flag_found_palia = -1
+    if EklallsimbVw.objects.filter(simbid=obj.simbid).filter(eklid__lt=eklid).exists():
+        flag_found_palia = 1
+        # Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
+    else:
+        flag_found_palia = 0
+
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
-        obj.delete()
+        if flag_found_palia == 1:
+            Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
+            Eklsimbper.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
+            Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
+            Psifoi.objects.filter(simbid=obj.simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+            #obj.delete()
+        # αλλιώς διαγράφεται από παντού, αφού υπάρχει μόνο στην τρέχουσα εκλ. αναμέτρηση (μέσω του cascade option)
+        else:
+            Simbouloi.objects.filter(simbid=obj.simbid).delete()
+
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('simbouloi_list', eklid)
+
+
+
     context = {'selected_ekloges': selected_ekloges.eklid,
                'all_ekloges': all_ekloges,
-               'object': obj
+               'object': obj,
+               'flag_found_palia' : flag_found_palia,
                }
+
+
+
 
     return render(request, 'Elections/confirm_simbouloi_delete.html', context)
 

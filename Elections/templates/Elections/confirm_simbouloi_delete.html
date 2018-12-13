@@ -14,7 +14,11 @@
               <form method="POST" action=".">
                   {% csrf_token %}
                   <div class="divmargin"></div>
-                  <p>ΠΡΟΣΟΧΗ: Όλα τα δεδομένα του Υποψηφίου (βασικά στοιχεία, ψήφοι κλπ) θα διαγραφούν!!! Είσαι σίγουρος/η για τη διαγραφή?</p>
+                  {% if flag_found_palia == 0 %}
+                     <p>ΠΡΟΣΟΧΗ: Όλα τα δεδομένα του Υποψηφίου (βασικά στοιχεία, ψήφοι κλπ) θα διαγραφούν!!! Είσαι σίγουρος/η για τη διαγραφή?</p>
+                  {% elif flag_found_palia == 1 %}
+                     <p>ΠΡΟΣΟΧΗ: θα διαγραφούν πιθανές καταχωρήσεις για τον υποψήφιο (π.χ. ψήφοι)!!! Είσαι σίγουρος/η για τη διαγραφή?</p>
+                  {%  endif %}
                   <div class="divmargin"></div>
                   <input type="submit" value="Ναι, διέγραψέ το" class="btn btn-warning">
                   <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
