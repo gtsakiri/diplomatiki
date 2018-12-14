@@ -3767,12 +3767,7 @@ def eklsindkoin_for_viewers(request, eklid):
         p = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.all()
         paramstr = p[0].koinid  # default koinid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
 
-    #try:
-    #    paramorder = int(paramorder)
-   # except:
-    #    paramorder = 4  # default ταξινόμηση
 
-    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     # φιλτράρισμα επιλεγμένου κέντρου
@@ -3920,3 +3915,86 @@ def exec_edres_katanomiB_dimos(request, eklid):
             print("connection is closed")
 
     return render(request, 'Elections/eklsind_for_viewers.html', context)
+
+'''ΚΑΤΑΝΟΜΗ ΕΔΡΩΝ ΓΙΑ ΚΟΙΝΟΤΗΤΕΣ - ΑΦΟΡΑ ΜΟΝΟ ΤΟ ΝΕΟ ΣΥΣΤΗΜΑ ΤΟΥ ΚΛΕΙΣΘΕΝΗ'''
+def exec_edres_katanomi_koinotites(request, eklid):
+
+    mySQL_conn = mysql.connector.connect(host= settings.DATABASES['default']['HOST'],
+                                         database=settings.DATABASES['default']['NAME'],
+                                         user=settings.DATABASES['default']['USER'],
+                                         password=settings.DATABASES['default']['PASSWORD'],)
+
+    selected_ekloges = Eklogestbl.objects.prefetch_related('eklsumpsifodeltiasindkoinvw_set', 'eklsindkoin_set').get(eklid=eklid)
+
+    paramstr = request.GET.get('koinotitaoption', '')
+
+    try:
+        paramstr = int(paramstr)
+    except:
+        p = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.all()
+        paramstr = p[0].koinid  # default koinid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    # φιλτράρισμα επιλεγμένου κέντρου
+    selected_koinotita = Koinotites.objects.get(koinid=paramstr).koinid
+
+    # ανάκτηση όλων των κέντρων της εκλ. αναμέτρησης
+    if selected_ekloges.sisid.sisid == 1:
+        all_koinotites = Koinotites.objects.filter(eidos__lte=2)
+    else:
+        all_koinotites = Koinotites.objects.filter(eidos=4)
+
+    # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
+    all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
+
+    all_eklsindkoin = selected_ekloges.eklsindkoin_set.filter(koinid=paramstr).order_by('-edresk_teliko')
+    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak',
+                                                                                  'plithoskentrwn',
+                                                                                  'posostokatametrimenwnkentrwnk').distinct()
+
+    context = {'all_ekloges': all_ekloges,
+               'selected_ekloges': selected_ekloges.eklid,
+               'all_eklsindkoin': all_eklsindkoin,
+               'all_pososta': all_pososta,
+               'selected_koinotita': selected_koinotita,
+               'all_koinotites': all_koinotites,
+               }
+
+    try:
+        cursor = mySQL_conn.cursor()
+        message=0
+        args=[eklid]
+        if selected_ekloges.sisid.sisid == 2:
+            result=cursor.callproc('KATANOMH_EDRWN_SE_OLES_TIS_KOINOTITES', args)
+            mySQL_conn.commit()
+            #print(result[1])  # Το αποτέλεσμα της output variable message της stored procedure
+            #if result[1] == 1:
+            #    msg = 'Επιτυχής ενημέρωση!'
+            #else:
+            #    msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
+
+            messages.success(request, 'Επιτυχής ενημέρωση!')
+        else:
+            messages.info(request, 'Δεν γίνεται κατανομή εδρών στην τρέχουσα εκλ. αναμέτρηση!')
+
+
+        # print out User details
+        #for result in cursor.stored_results():
+            #print(result.fetchall())
+
+        #cursor.execute('SELECT @message')
+
+
+    except mysql.connector.Error as error:
+        print("Σφάλμα κατά την εκτέλεση της διαδικασίας! {}".format(error))
+        messages.error(request, 'Σφάλμα κατά την εκτέλεση της διαδικασίας!'.format(error))
+    finally:
+        # closing database connection.
+        if (mySQL_conn.is_connected()):
+            cursor.close()
+            mySQL_conn.close()
+            print("connection is closed")
+
+    return render(request, 'Elections/eklsindkoin_for_viewers.html', context)

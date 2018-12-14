@@ -125,6 +125,7 @@ path('eklsindkoinviewonly/<int:eklid>/', views.eklsindkoin_for_viewers, name='ek
 
 path('execkatanomiaedresdimos/<int:eklid>/', views.exec_edres_katanomiA_dimos, name='exec_edres_katanomiA_dimos'),
 path('execkatanomibedresdimos/<int:eklid>/', views.exec_edres_katanomiB_dimos, name='exec_edres_katanomiB_dimos'),
+path('execkatanomiedreskoinotites/<int:eklid>/', views.exec_edres_katanomi_koinotites, name='exec_edres_katanomi_koinotites'),
 
 ]
 
