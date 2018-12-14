@@ -3894,7 +3894,7 @@ def exec_edres_katanomiB_dimos(request, eklid):
 
             messages.success(request, msg)
         else:
-            messages.info(request, 'Δεν γίνεται κατανομή εδρών την Β Κυριακή στην τρέχουσα εκλ. αναμέτρηση!')
+            messages.info(request, 'Δεν γίνεται κατανομή εδρών την Β Κυριακή στην επιλεγμένη εκλ. αναμέτρηση!')
 
 
         # print out User details
@@ -3976,8 +3976,9 @@ def exec_edres_katanomi_koinotites(request, eklid):
             #    msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
 
             messages.success(request, 'Επιτυχής ενημέρωση!')
+            return redirect('eklsindkoin_for_viewers', eklid)
         else:
-            messages.info(request, 'Δεν γίνεται κατανομή εδρών στην τρέχουσα εκλ. αναμέτρηση!')
+            messages.info(request, 'Δεν γίνεται κατανομή εδρών στην επιλεγμένη εκλ. αναμέτρηση!')
 
 
         # print out User details
