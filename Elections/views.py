@@ -3845,6 +3845,7 @@ def exec_edres_katanomiA_dimos(request, eklid):
             msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
 
         messages.success(request, msg)
+        return redirect('eklsind_for_viewers', eklid)
 
     except mysql.connector.Error as error:
         print("Σφάλμα κατά την εκτέλεση της διαδικασίας! {}".format(error))
@@ -3893,6 +3894,7 @@ def exec_edres_katanomiB_dimos(request, eklid):
                 msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
 
             messages.success(request, msg)
+            return redirect('eklsind_for_viewers', eklid)
         else:
             messages.info(request, 'Δεν γίνεται κατανομή εδρών την Β Κυριακή στην επιλεγμένη εκλ. αναμέτρηση!')
 
