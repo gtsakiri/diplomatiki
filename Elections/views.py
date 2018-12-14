@@ -3971,13 +3971,20 @@ def exec_edres_katanomi_koinotites(request, eklid):
         if selected_ekloges.sisid.sisid == 2:
             result=cursor.callproc('KATANOMH_EDRWN_SE_OLES_TIS_KOINOTITES', args)
             mySQL_conn.commit()
+            all_isopalies = selected_ekloges.eklsindkoin_set.filter(checkfordraw=-1).values('koinid', 'checkfordraw').distinct().order_by('koinid__descr')
             #print(result[1])  # Το αποτέλεσμα της output variable message της stored procedure
             #if result[1] == 1:
             #    msg = 'Επιτυχής ενημέρωση!'
             #else:
             #    msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
+            if all_isopalies.count == 0:
+                messages.success(request, 'Επιτυχής ενημέρωση!')
+            else:
+                koinForKlirosi = ''
 
-            messages.success(request, 'Επιτυχής ενημέρωση!')
+                for item in all_isopalies:
+                    koinForKlirosi = koinForKlirosi + Koinotites.objects.get(eklperkoin__koinid=item['koinid']).descr + ','
+                messages.success(request, 'Επιτυχής ενημέρωση! Ισοψηφίες στις κοινότητες: ' + koinForKlirosi)
             return redirect('eklsindkoin_for_viewers', eklid)
         else:
             messages.info(request, 'Δεν γίνεται κατανομή εδρών στην επιλεγμένη εκλ. αναμέτρηση!')

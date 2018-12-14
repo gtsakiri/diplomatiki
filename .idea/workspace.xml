@@ -86,8 +86,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="4000" column="77" lean-forward="true" selection-start-line="4000" selection-start-column="77" selection-end-line="4000" selection-end-column="77" />
+            <state relative-caret-position="329">
+              <caret line="3985" column="77" selection-start-line="3985" selection-start-column="77" selection-end-line="3985" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -104,8 +104,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8772">
-              <caret line="516" column="29" selection-start-line="516" selection-start-column="6" selection-end-line="516" selection-end-column="29" />
+            <state relative-caret-position="141">
+              <caret line="474" column="33" lean-forward="true" selection-start-line="474" selection-start-column="6" selection-end-line="474" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -186,8 +186,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>export</find>
-      <find>psifodeltiasind_koin</find>
       <find>eklsind_</find>
       <find>eklsind_li</find>
       <find>eklsindkoin_li</find>
@@ -216,6 +214,8 @@
       <find>confirm_simbouloi_delete</find>
       <find>EklSumpsifodeltiasindVw</find>
       <find>redirect</find>
+      <find>eklsindkoin</find>
+      <find>eklsumpsifodeltiasindkoinvw</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -563,20 +563,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
     </task>
-    <task id="LOCAL-00093" summary="home 10_10_2018">
-      <created>1539099651201</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1539099651201</updated>
-    </task>
-    <task id="LOCAL-00094" summary="work_10_10_2018">
-      <created>1539237689634</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1539237689635</updated>
-    </task>
     <task id="LOCAL-00095" summary="home_13_10_2018">
       <created>1539416433373</created>
       <option name="number" value="00095" />
@@ -906,7 +892,21 @@
       <option name="project" value="LOCAL" />
       <updated>1544735627620</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="home_14_12_2018">
+      <created>1544805147515</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1544805147531</updated>
+    </task>
+    <task id="LOCAL-00143" summary="home_14_12_2018">
+      <created>1544805770263</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1544805770263</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TodoView">
@@ -926,8 +926,8 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32793522" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.31737345" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6578125" visible="true" weight="0.3130904" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" visible="true" weight="0.317139" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.3130904" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27900913" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -1014,7 +1014,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="home_06_10_2018" />
     <MESSAGE value="work_08_10_2018" />
     <MESSAGE value="work_09_10_2018" />
     <MESSAGE value="home 10_10_2018" />
@@ -1039,7 +1038,8 @@
     <MESSAGE value="home_09_12_2018" />
     <MESSAGE value="work_13_12_2018" />
     <MESSAGE value="home_13_12_2018" />
-    <option name="LAST_COMMIT_MESSAGE" value="home_13_12_2018" />
+    <MESSAGE value="home_14_12_2018" />
+    <option name="LAST_COMMIT_MESSAGE" value="home_14_12_2018" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1288,13 +1288,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8772">
-          <caret line="516" column="29" selection-start-line="516" selection-start-column="6" selection-end-line="516" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3638">
@@ -1323,10 +1316,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="474" column="33" lean-forward="true" selection-start-line="474" selection-start-column="6" selection-end-line="474" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="4000" column="77" lean-forward="true" selection-start-line="4000" selection-start-column="77" selection-end-line="4000" selection-end-column="77" />
+        <state relative-caret-position="329">
+          <caret line="3985" column="77" selection-start-line="3985" selection-start-column="77" selection-end-line="3985" selection-end-column="77" />
         </state>
       </provider>
     </entry>
