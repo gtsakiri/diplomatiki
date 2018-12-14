@@ -3977,14 +3977,20 @@ def exec_edres_katanomi_koinotites(request, eklid):
             #    msg = 'Επιτυχής ενημέρωση!'
             #else:
             #    msg = 'Επιτυχής ενημέρωση, αλλά προέκυψε περίπτωση ισοψηφίας ή ίσων αχρ. υπολοίπων! Θα πρέπει να διενεργηθεί κλήρωση από το Πρωτοδικείο!'
+
+            #έλεγχος για την περίπτωση Κοινοτήτων όπου υπάρχει ισοπαλία
             if all_isopalies.count == 0:
                 messages.success(request, 'Επιτυχής ενημέρωση!')
             else:
                 koinForKlirosi = ''
 
                 for item in all_isopalies:
-                    koinForKlirosi = koinForKlirosi + Koinotites.objects.get(eklperkoin__koinid=item['koinid']).descr + ','
-                messages.success(request, 'Επιτυχής ενημέρωση! Ισοψηφίες στις κοινότητες: ' + koinForKlirosi)
+                    if koinForKlirosi == '':
+                        koinForKlirosi = koinForKlirosi + Koinotites.objects.get(eklperkoin__koinid=item['koinid']).descr
+                    else:
+                        koinForKlirosi = koinForKlirosi + ', ' + Koinotites.objects.get(eklperkoin__koinid=item['koinid']).descr
+
+                messages.success(request, 'Επιτυχής ενημέρωση! Ισοψηφίες ή ίδια αχρησιμοποίητα υπόλοιπα στις κοινότητες: ' + koinForKlirosi)
             return redirect('eklsindkoin_for_viewers', eklid)
         else:
             messages.info(request, 'Δεν γίνεται κατανομή εδρών στην επιλεγμένη εκλ. αναμέτρηση!')
