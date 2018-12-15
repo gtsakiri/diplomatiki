@@ -383,6 +383,7 @@ class PsifodeltiaForm(ModelForm):
     def __init__(self, eklid, *args, **kwargs):
         super(PsifodeltiaForm, self).__init__(*args, **kwargs)
 
+
         #SOS!!! κάνω override την μέθοδο Init και αρχικοποίηση του dropdown sindid με τους συνδυασμούς της επιλεγμένης εκλ. αναμέτρησης
         #self.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid__in=Eklsind.objects.filter(eklid=eklid).values_list('sindid'))
         # δημιουργία φίλτρου με τη βοήθεια του Q object

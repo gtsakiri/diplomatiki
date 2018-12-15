@@ -464,6 +464,7 @@ def Elections_list(request, eklid=0):
                                                   ).save()
 
                     messages.success(request, 'Η εγγραφή αποθηκεύτηκε!')
+                    action_label = 'Εκλ. Κέντρο ' + selected_kentro.descr + ' - ' + item.koinid.descr
                     #return redirect('Elections_list')
             else:
 
@@ -3633,6 +3634,9 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
+
+    #for form in formset:
+    #    form.fields['kenid'].disabled = True
 
     if request.method == 'POST' and formset.is_valid():
         formset.save()
