@@ -11,7 +11,12 @@
 
 
             <label class="label4">Κατανομή εδρών για το Δημ. Συμβούλιο</label>
-            <label class="label7"> (Στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων)</label>
+           {% if  all_pososta.0.posostokatametrimenwnkentrwn %}
+              <label class="label7"> (Στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων)</label>
+           {% endif %}
+
+
+
  <div class="divmargin"></div>
 
  <div class="row">
@@ -47,6 +52,15 @@
                    </table>
 
                     <br/>
+            {% if all_eklsind.count  %}
+                {% if all_eklsind.0.lastupdate  %}
+                    <label class="label9"> Τελευταία ενημέρωση  {{ all_eklsind.0.lastupdate }}</label>
+                {% else %}
+                   <label class="label9"> Αναμένεται ενημέρωση από το διαχειριστή του συστήματος !  </label>
+                {% endif %}
+             {% else %}
+               <label class="label9"> Αναμένεται ενημέρωση από το διαχειριστή του συστήματος !</label>
+            {% endif %}
 
         </div>
 </div>

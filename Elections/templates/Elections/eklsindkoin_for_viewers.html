@@ -11,7 +11,11 @@
 
 
           <label class="label4">Κατανομή εδρών στα Τοπικά Συμβούλια</label>
-          <label class="label7"> (Στο  {{ all_pososta.0.2 }} % των εκλ. κέντρων)</label>
+          {% if  all_pososta.0.2 %}
+            <label class="label7"> (Στο  {{ all_pososta.0.2 }} % των εκλ. κέντρων)</label>
+          {% endif %}
+
+
 
       <br>
 
@@ -77,6 +81,27 @@
                    </table>
 
                     <br/>
+
+
+
+            {% if all_eklsindkoin.count  %}
+
+                {% if flagDraw %}
+                 <label class="label9"> Τιμή -1 στο πεδίο "Ένδειξη ισοψηφίας", σημαίνει ότι απαιτείται κλήρωση από το αρμόδιο δικαστήριο !</label>
+                    <br/>
+                    <br/>
+                {% endif %}
+
+                {% if all_eklsindkoin.0.lastupdate  %}
+                    <label class="label9"> Τελευταία ενημέρωση  {{ all_eklsindkoin.0.lastupdate }}</label>
+                {% else %}
+                   <label class="label9"> Αναμένεται ενημέρωση από το διαχειριστή του συστήματος !  </label>
+                {% endif %}
+             {% else %}
+                {% if selected_ekloges.sisid.sisid == 2 %}
+                  <label class="label9"> Αναμένεται ενημέρωση από το διαχειριστή του συστήματος !</label>
+                {% endif %}
+             {% endif %}
 
         </div>
 

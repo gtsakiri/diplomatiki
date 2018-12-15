@@ -48,6 +48,7 @@
                                 <td class="thick">Έδρες Α γύρου (τελικές)</td>
                                 <td class="thick">Υπόλοιπο ψηφοδελτίων</td>
                                 <td class="thick">Ένδειξη ισοψηφίας</td>
+                                <td class="thick">Τελ. ενημέρωση</td>
                                 <td class="thick" width="11%">Ενέργειες </td>
 
                         </tr>
@@ -63,6 +64,7 @@
                                   <td > <strong>{{ p.edresk_teliko }}</strong> </td>
                                 <td > {{ p.ypol }} </td>
                                 <td > {{ p.checkfordraw }} </td>
+                                <td > {{ p.lastupdate }} </td>
                                 <td >
                                     <a class="btn btn-default" href="{% url 'eklsindkoin_edit' selected_ekloges p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a class="btn btn-default" href="{% url 'eklsindkoin_delete' selected_ekloges p.id%}"><span class="glyphicon glyphicon-minus"></span></a>

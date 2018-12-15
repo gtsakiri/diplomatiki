@@ -1,6 +1,7 @@
 {% extends 'Elections/base.html' %}
 
 {% load staticfiles %}
+{% load humanize %}
 
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
@@ -68,9 +69,6 @@
                 <div class="container-fluid" overflow:auto align="center">
 
 
-
-
-
                            <table class="a table table-bordered  table-striped">
 
                                 <tbody >
@@ -86,7 +84,11 @@
                                  <tr>
                                         <td class="thick">Ποσοστό</td>
                                            {% for p in all_pososta %}
-                                                <td class="myfontsize">{{ p.posostosindiasmou }} %</td>
+                                                <td class="myfontsize">
+                                                    {{ p.posostosindiasmou }} %
+                                                    <br>
+                                                    <small>({{ p.sumvotes|intcomma  }} ψήφοι)</small>
+                                                </td>
                                            {% endfor %}
                                  </tr>
 

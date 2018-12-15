@@ -190,6 +190,7 @@ class Eklsind(models.Model):
     edresa_teliko = models.IntegerField(db_column='edresA_Teliko',default=0)  # Field name made lowercase.
     edresb = models.IntegerField(db_column='edresB',default=0)  # Field name made lowercase.
     ypol = models.IntegerField(default=0)
+    lastupdate = models.DateTimeField(db_column='lastUpdate', blank=True, null=True)
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.sindid) + ' - ' + str(self.edresa_teliko)
@@ -217,6 +218,7 @@ class Eklsindkoin(models.Model):
     edresk_teliko = models.IntegerField(db_column='edresK_Teliko', default=0)  # Field name made lowercase.
     ypol = models.IntegerField(default=0)
     checkfordraw = models.IntegerField(db_column='checkForDraw', default=0)  # Field name made lowercase.
+    lastupdate = models.DateTimeField(db_column='lastUpdate', blank=True, null=True)
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.sindid) + ' - ' + str(self.koinid) + ' - ' + str(self.edresk_teliko)

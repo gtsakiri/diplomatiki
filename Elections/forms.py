@@ -101,7 +101,7 @@ class EklogestblForm(ModelForm):
             'defaultelection': _('Προεπιλεγμένη'),
         }
         help_texts = {
-            'dateofelection': _('η ημερομηνία στη μορφή Ετος-Μηνας-Μέρα παρακαλώ, π.χ. 2018-10-21'),
+            'dateofelection': _('η ημερομηνία στη μορφή dd/mm/yyyy παρακαλώ, π.χ. 21/10/2018'),
             'visible': _('Επιλέξτε ΝΑΙ αν πρέπει να είναι ορατή στην εφαρμογή, αλλιώς επιλέξτε ΟΧΙ'),
         }
         widgets = {
@@ -182,7 +182,7 @@ class EklsindForm(ModelForm):
 
     class Meta:
         model=Eklsind
-        fields = ['eklid','sindid','aa', 'edresa', 'edresa_ypol', 'edresa_teliko', 'edresb', 'ypol']
+        fields = ['eklid','sindid','aa', 'edresa', 'edresa_ypol', 'edresa_teliko', 'edresb', 'ypol', 'lastupdate']
         labels = {
             'sindid': _('Συνδυασμός'),
             'aa': _('ΑΑ'),
@@ -190,7 +190,8 @@ class EklsindForm(ModelForm):
             'edresa_ypol': _('Υπόλοιπο Εδρών Α γύρου'),
             'edresa_teliko': _('Έδρες Α γύρου (τελικές)'),
             'edresb': _('Έδρες Β γύρου'),
-            'ypol': _('Υπόλοιπο ψηφοδελτίων')
+            'ypol': _('Υπόλοιπο ψηφοδελτίων'),
+            'lastupdate': _('Τελευταία ενημέρωση')
         }
         widgets = {
             #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
@@ -209,7 +210,7 @@ class EklsindkoinForm(ModelForm):
 
     class Meta:
         model = Eklsindkoin
-        fields = ['eklid', 'koinid', 'sindid',  'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw']
+        fields = ['eklid', 'koinid', 'sindid',  'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw', 'lastupdate']
         labels = {
             'sindid': _('Συνδυασμός'),
             'koinid': _('Κοινότητα'),
@@ -219,7 +220,8 @@ class EklsindkoinForm(ModelForm):
             'edresk_ypol': _('Υπόλοιπο Εδρών Α γύρου'),
             'edresk_teliko': _('Έδρες Α γύρου (τελικές)'),
             'ypol': _('Υπόλοιπο ψηφοδελτίων'),
-            'checkfordraw': _('Ένδειξη ισοπαλίας')
+            'checkfordraw': _('Ένδειξη ισοπαλίας'),
+            'lastupdate': _('Τελευταία ενημέρωση')
 
         }
         widgets = {

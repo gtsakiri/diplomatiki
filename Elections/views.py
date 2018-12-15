@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.forms import DateInput, modelformset_factory
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+import datetime
 
 from mysql.connector import Error
 from mysql.connector import errorcode
@@ -25,6 +26,7 @@ from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, Eklsi
 from django.core.exceptions import PermissionDenied
 
 from django.db import connection
+
 
 def export_psifoiper_xls(request,eklid, selected_order):
     response = HttpResponse(content_type='application/ms-excel')
@@ -3730,18 +3732,11 @@ def logout_user(request, eklid):
 def eklsind_for_viewers(request, eklid):
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
 
-
-    #selected_ekloges = Eklogestbl.objects.prefetch_related('eklsind_set').get(eklid=eklid)
-
-    #all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername','toposeklogis', 'sindiasmos')
-
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    #all_eklsind = Eklsind.objects.filter(eklid=eklid).order_by( 'sindid__descr')
     all_eklsind = selected_ekloges.eklsind_set.all().order_by('-edresa_teliko')
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
-
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -3752,14 +3747,10 @@ def eklsind_for_viewers(request, eklid):
     return render(request, 'Elections/eklsind_for_viewers.html' , context)
 
 def eklsindkoin_for_viewers(request, eklid):
-    #selected_ekloges = Eklogestbl.objects.prefetch_related('eklsindkoin_set').get(eklid=eklid)
-
-    ######
 
     selected_ekloges = Eklogestbl.objects.prefetch_related('eklsumpsifodeltiasindkoinvw_set', 'eklsindkoin_set').get(eklid=eklid)
 
     paramstr = request.GET.get('koinotitaoption', '')
-    #paramorder = request.GET.get('orderoption', '')
 
     try:
         paramstr = int(paramstr)
@@ -3767,13 +3758,10 @@ def eklsindkoin_for_viewers(request, eklid):
         p = selected_ekloges.eklsumpsifodeltiasindkoinvw_set.all()
         paramstr = p[0].koinid  # default koinid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
 
-
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     # φιλτράρισμα επιλεγμένου κέντρου
     selected_koinotita = Koinotites.objects.get(koinid=paramstr).koinid
-
-    #selected_order = paramorder
 
     # ανάκτηση όλων των κέντρων της εκλ. αναμέτρησης
     if selected_ekloges.sisid.sisid == 1:
@@ -3789,6 +3777,10 @@ def eklsindkoin_for_viewers(request, eklid):
     all_eklsindkoin = selected_ekloges.eklsindkoin_set.filter(koinid=paramstr).order_by('-edresk_teliko')
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak', 'plithoskentrwn','posostokatametrimenwnkentrwnk').distinct()
 
+    flagDraw = 0
+    for item in all_eklsindkoin:
+        if item.checkfordraw == -1:
+            flagDraw = 1
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -3796,6 +3788,8 @@ def eklsindkoin_for_viewers(request, eklid):
                'all_pososta' : all_pososta,
                'selected_koinotita' :  selected_koinotita,
                'all_koinotites' : all_koinotites,
+               'flagDraw' : flagDraw
+
                }
 
     return render(request, 'Elections/eklsindkoin_for_viewers.html' , context)
@@ -3814,11 +3808,13 @@ def exec_edres_katanomiA_dimos(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     all_eklsind = selected_ekloges.eklsind_set.all().order_by('-edresa_teliko')
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
+    curTime = datetime.datetime.now()
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
                'all_eklsind': all_eklsind,
                'all_pososta': all_pososta,
+               'curTime': curTime,
                }
 
     try:

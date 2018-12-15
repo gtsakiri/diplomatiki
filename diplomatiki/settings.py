@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'Elections',
     'widget_tweaks',
     'debug_toolbar',
     'accounts',
-    'mathfilters'
+    'mathfilters',
+
 ]
 
 MIDDLEWARE = [
@@ -139,7 +141,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 10000000000
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'el-GR'
 
 TIME_ZONE = 'Europe/Athens'
 
@@ -150,7 +152,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 
