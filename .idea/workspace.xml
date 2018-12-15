@@ -126,11 +126,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pososta_telika.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pososta_telika.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            <state relative-caret-position="68">
+              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -144,11 +144,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+            <state relative-caret-position="339">
+              <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
             </state>
           </provider>
         </entry>
@@ -263,8 +263,8 @@
         <option value="$PROJECT_DIR$/Elections/views.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_for_viewers.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsind_for_viewers.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
         <option value="$PROJECT_DIR$/diplomatiki/settings.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
       </list>
     </option>
   </component>
@@ -436,13 +436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00098" summary="home_13_10_2018">
-      <created>1539434171939</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1539434171939</updated>
     </task>
     <task id="LOCAL-00099" summary="home_13_10_2018">
       <created>1539455977606</created>
@@ -780,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544877607272</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="home_15_12_2018">
+      <created>1544878881676</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1544878881676</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1200,17 +1200,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
+    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="339">
+          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+        <state relative-caret-position="68">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
         </state>
       </provider>
     </entry>

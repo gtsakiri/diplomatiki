@@ -1,7 +1,6 @@
 {% extends 'Elections/base.html' %}
 
 {% load staticfiles %}
-{% load humanize %}
 
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
@@ -87,7 +86,9 @@
                                                 <td class="myfontsize">
                                                     {{ p.posostosindiasmou }} %
                                                     <br>
-                                                    <small>({{ p.sumvotes|intcomma  }} ψήφοι)</small>
+
+                                                    <small>({{ p.sumvotes  }} ψήφοι)</small>
+
                                                 </td>
                                            {% endfor %}
                                  </tr>
