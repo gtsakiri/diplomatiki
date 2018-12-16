@@ -3548,6 +3548,7 @@ def edit_psifoi_kentrou(request,eklid, kenid):
         formset.save()
         messages.success(request, 'Οι αλλαγές αποθηκεύτηκαν!')
         return HttpResponseRedirect('/' + str(eklid) + '?eklogesoption=' + str(eklid) + '&eklkentrooption=' + str(selected_kentro.descr))
+    #στο serres.gr θα βάλω: return HttpResponseRedirect('/ekloges/'+str(eklid)+ '?eklogesoption=' +str(eklid)+ '&eklkentrooption='+str(selected_kentro.descr))
 
     context = {'selected_ekloges': selected_ekloges.eklid,
                 'selected_kentro':selected_kentro,
@@ -3642,6 +3643,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
         formset.save()
         messages.success(request, 'Οι αλλαγές αποθηκεύτηκαν!')
         return HttpResponseRedirect('/'+str(eklid)+ '?eklogesoption=' +str(eklid)+ '&eklkentrooption='+str(selected_kentro.descr))
+    #στο serres.gr θα βάλω: return HttpResponseRedirect('/ekloges/'+str(eklid)+ '?eklogesoption=' +str(eklid)+ '&eklkentrooption='+str(selected_kentro.descr))
 
     context = {'selected_ekloges': selected_ekloges.eklid,
                 'selected_kentro':selected_kentro,
@@ -3684,6 +3686,7 @@ def edit_psifodeltiakoin_kentrou(request,eklid, kenid):
         formset.save()
         messages.success(request, 'Οι αλλαγές αποθηκεύτηκαν!')
         return HttpResponseRedirect('/'+str(eklid)+ '?eklogesoption=' +str(eklid)+ '&eklkentrooption='+str(selected_kentro.descr))
+    #στο serres.gr θα βάλω: return HttpResponseRedirect('/ekloges/'+str(eklid)+ '?eklogesoption=' +str(eklid)+ '&eklkentrooption='+str(selected_kentro.descr))
 
     context = {'selected_ekloges': selected_ekloges.eklid,
                 'selected_kentro':selected_kentro,

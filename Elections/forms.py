@@ -101,7 +101,7 @@ class EklogestblForm(ModelForm):
             'defaultelection': _('Προεπιλεγμένη'),
         }
         help_texts = {
-            'dateofelection': _('η ημερομηνία στη μορφή dd/mm/yyyy παρακαλώ, π.χ. 21/10/2018'),
+            'dateofelection': _('η ημερομηνία στη μορφή yyyy-mm-dd παρακαλώ, π.χ. 2019-05-17'),
             'visible': _('Επιλέξτε ΝΑΙ αν πρέπει να είναι ορατή στην εφαρμογή, αλλιώς επιλέξτε ΟΧΙ'),
         }
         widgets = {
