@@ -523,11 +523,11 @@ def pososta_telika(request, eklid):
             found = False
             for itemPrin in all_pososta_prin:
                 if itemNow.sindid == itemPrin.sindid:
-                    found = True
+                    found = True   # αναζήτηση συνδυασμού στην προηγούμενη εκλ. αναμέτρηση...αν υπάρχει ενημερώνω δυο λίστες με τις διαφορές και τα ποσοστά αντίστοιχα
                     diafores_list.append([itemNow.sindid, itemNow.posostosindiasmou- itemPrin.posostosindiasmou])
                     all_pososta_prin_list.append([itemNow.sindid, itemPrin.posostosindiasmou, itemPrin.sumvotes])
             if not found:
-                diafores_list.append([itemNow.sindid,'Δεν συμμετείχε'])
+                diafores_list.append([itemNow.sindid,'Δεν συμμετείχε'])  #αν δεν υπήρχε ο συνδυασμός στην προηγούμενη εκλ. αναμέτρηση, εισάγω κατάλληλες τιμές στις λίστες
                 all_pososta_prin_list.append([itemNow.sindid, 'Δεν συμμετείχε'])
     else:#αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
         all_pososta_prin = []
