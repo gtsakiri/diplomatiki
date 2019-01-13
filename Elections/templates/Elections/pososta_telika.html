@@ -97,10 +97,18 @@
                                     <tr>
                                         <td class="thick">{{ all_pososta_prin.0.eklid.descr }}</td>
                                         {% for p in all_pososta %}
-                                            {% for item in all_pososta_prin %}
-
-                                                    {% if item.sindid == p.sindid %}
-                                                        <td class="text-center"> {{ item.posostosindiasmou }} %</td>
+                                            {% for item in all_pososta_prin_list %}
+                                                    {% if item.0 == p.sindid %}
+                                                        {% if item.2 > 0 %}
+                                                            <td class="text-center"> {{ item.1 }}  %
+                                                        {% else %}
+                                                            <td class="text-center"> {{ item.1 }}
+                                                        {% endif %}
+                                                        <br>
+                                                            {% if item.2 > 0 %}
+                                                                <small>({{ item.2 }} ψήφοι)</small>
+                                                            {%  endif %}
+                                                        </td>
                                                     {% endif %}
 
                                             {%  endfor %}
@@ -110,18 +118,21 @@
                                     <tr>
                                     <td class="thick">Διαφορά</td>
                                     {% for p in all_pososta %}
-                                    {% for item in all_pososta_prin %}
-                                          {% for old in oldsind_pososta_list %}
-                                            {% if p.sindid == old.0 and p.sindid == item.sindid%}
-                                                <td>
-                                                 {% if old.1 < 0 %}
-
+                                    {% for item in all_pososta_prin_list %}
+                                          {% for diafora in diafores_list %}
+                                            {% if p.sindid == diafora.0 and p.sindid == item.0%}
+                                                <td class="text-center">
+                                                {% if diafora.1 == 'Δεν συμμετείχε' %}
+                                                    -
+                                                {%  else %}
+                                                     {% if diafora.1 < 0 %}
                                                         <div class="TransactionAmount NegativeTransaction text-center">
                                                      {% else %}
                                                         <div class="TransactionAmount PositiveTransaction text-center">
                                                      {% endif %}
-                                                      {{ old.1 }} %
+                                                      {{ diafora.1 }} %
                                                         </div>
+                                                {% endif %}
                                                 </td>
                                             {% endif %}
                                     {%  endfor %}
