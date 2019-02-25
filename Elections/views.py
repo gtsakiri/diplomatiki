@@ -1923,9 +1923,15 @@ def eklsind_edit(request, eklid, id):
 
     #περνάω παράμετρο eklid=0, για να μπορεί να εμφανίσει στο dropdown sindid το συνδυασμό
     #γιατί διαφορετικά το αποκλείει σύμφωνα με την αρχικοποίηση που κάνω στη φόρμα EklsindForm
-    form = EklsindForm(0, request.POST or None,  instance=item)
-
+    form = EklsindForm(0, request.POST or None, request.FILES or None,  instance=item)
+    #form = SindiasmoiForm(request.POST or None, request.FILES or None, instance=sind_item)
     if form.is_valid():
+
+        pic = form.cleaned_data['photofield']
+        if not pic:
+            pic = 'sindiasmoi/elections.jpg'
+            item.photofield = pic
+
         form.save()
 
 

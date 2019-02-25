@@ -166,7 +166,7 @@ class SindiasmoiForm(ModelForm):
         koin = cleaned_data.get('koin')
         proedros=cleaned_data.get('proedros')
         eidos = cleaned_data.get('eidos')
-        photofield = cleaned_data.get('photo')
+        photofield = cleaned_data.get('photofield')
         aa = cleaned_data.get('aa')
 
     def __init__(self, *args, **kwargs):
@@ -182,21 +182,43 @@ class EklsindForm(ModelForm):
 
     class Meta:
         model=Eklsind
-        fields = ['eklid','sindid','aa', 'edresa', 'edresa_ypol', 'edresa_teliko', 'edresb', 'ypol', 'lastupdate']
+        fields = ['eklid','sindid','aa', 'edresa', 'edresa_ypol', 'edresa_teliko', 'edresb', 'ypol', 'lastupdate', 'descr', 'shortdescr', 'photofield']
         labels = {
-            'sindid': _('Συνδυασμός'),
+            'sindid': _('Συνδυασμός (Αρχική ονομασία)'),
             'aa': _('ΑΑ'),
             'edresa': _('Έδρες Α γύρου (αρχικές)'),
             'edresa_ypol': _('Υπόλοιπο Εδρών Α γύρου'),
             'edresa_teliko': _('Έδρες Α γύρου (τελικές)'),
             'edresb': _('Έδρες Β γύρου'),
             'ypol': _('Υπόλοιπο ψηφοδελτίων'),
-            'lastupdate': _('Τελευταία ενημέρωση')
+            'lastupdate': _('Τελευταία ενημέρωση'),
+            'descr': _('Περιγραφή Συνδυασμού στην τρέχουσα εκλ. αναμέτρηση'),
+            'shortdescr': _('Σύντομος τίτλος Συνδυασμού στην τρέχουσα εκλ. αναμέτρηση'),
+            'photofield': _('Φωτογραφία Υποψηφίου/Συνδυασμού στην τρέχουσα εκλ. αναμέτρηση'),
+        }
+        help_texts = {
+            'descr': _('Αν διαφέρει σε σχέση με την αρχική ονομασία του συνδυασμού όταν ιδρύθηκε, εισάγετε άλλη ονομασία'),
+            'shortdescr': _('Προτείνετε να βάλετε το όνομα του αρχηγού στην τρέχουσα εκλ. αναμέτρηση'),
+            'photofield': _('Προτείνετε να βάλετε τη φωτογραφία του αρχηγού στην τρέχουσα εκλ. αναμέτρηση'),
+
         }
         widgets = {
             #κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
             'eklid': forms.HiddenInput(),
         }
+
+    def clean(self):
+        cleaned_data = super(EklsindForm, self).clean()
+        aa = cleaned_data.get('aa')
+        edresa = cleaned_data.get('edresa')
+        edresa_ypol = cleaned_data.get('edresa_ypol')
+        edresa_teliko = cleaned_data.get('edresa_teliko')
+        edresb = cleaned_data.get('edresb')
+        ypol = cleaned_data.get('ypol')
+        lastupdate = cleaned_data.get('lastupdate')
+        descr = cleaned_data.get('descr')
+        shortdescr = cleaned_data.get('shortdescr')
+        photofield = cleaned_data.get('photofield')
 
     def __init__(self, eklid, *args, **kwargs):
         super(EklsindForm, self).__init__(*args, **kwargs)

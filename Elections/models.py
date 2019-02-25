@@ -191,6 +191,9 @@ class Eklsind(models.Model):
     edresb = models.IntegerField(db_column='edresB',default=0)  # Field name made lowercase.
     ypol = models.IntegerField(default=0)
     lastupdate = models.DateTimeField(db_column='lastUpdate', blank=True, null=True)
+    descr = models.CharField(max_length=100, null=True, blank=True)
+    shortdescr = models.CharField(db_column='shortDescr', max_length=50, null=True, blank=True)  # Field name made lowercase.
+    photofield = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.sindid) + ' - ' + str(self.edresa_teliko)
