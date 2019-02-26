@@ -30,7 +30,7 @@
                     },
                     xAxis: {
                         categories: [
-                        {% for entry in all_pososta %}'<span class="label label-primary">{{ entry.shortdescr }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                        {% for entry in all_pososta %}'<span class="label label-primary">{{ entry.shortdescrnew }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
                       ],
                         labels: {
                         style: {
@@ -74,8 +74,9 @@
                                 <tr>
                                         <td class="thick text-center"></td>
                                         {% for p in all_pososta %}
-                                         <td class="text-center"> {% if p.sindid.photofield.url %} <img src="{{ p.sindid.photofield.url}}" alt="{{ p.sindid.shortdescr}}" width="100px" height="160px" /> {% endif %}
-                                            <br> <label class="label label-primary"> {{ p.sindid.shortdescr }} </label>
+
+                                         <td class="text-center"> {% if p.photofieldnew.url %} <img src="{{ p.photofieldnew.url}}" alt="{{ p.shortdescrnew}}" width="100px" height="160px" /> {% endif %}
+                                            <br> <label class="label label-primary"> {{ p.shortdescrnew }} </label>
 
                                          </td>
                                        {% endfor %}
