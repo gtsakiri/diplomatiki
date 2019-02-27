@@ -79,7 +79,7 @@
                    </tr>
                    {% for p in all_psifodeltia %}
                          <tr>
-                            <td >{{ p.sindiasmos }}</td>
+                            <td >{{ p.sindiasmosnew }}</td>
                              {% if sunday == 1 %}
                                 <td class="myfontsize">{{ p.votes }}</td>
                              {% elif sunday == 2 %}
@@ -128,7 +128,7 @@
                         colorByPoint: true,
                       data: [
                         {% for entry in all_psifodeltia %}
-                          {name:"{{ entry.sindiasmos }}",
+                          {name:"{{ entry.sindiasmosnew }}",
                               {% if sunday == 1 %} y:{{ entry.votes }}
                               {% elif sunday == 2 %} y:{{ entry.votesb }}
                               {% else %} y:{{ entry.votesk }}

@@ -66,11 +66,11 @@ def export_psifoiper_xls(request,eklid, selected_order):
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1:
-        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmos','-sumvotes')
+        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmosnew','-sumvotes')
     elif selected_order == 2:
-        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmos','surname')
+        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmosnew','surname')
     else:
-        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('-sumvotes')
+        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('-sumvotes')
 
     for row in rows:
         row_num += 1
@@ -204,12 +204,12 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
     font_style = xlwt.XFStyle()
 
     if sunday == 1:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).values_list('kentro', 'sindiasmos', 'votes')
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).values_list('kentro', 'sindiasmosnew', 'votes')
     elif sunday == 2:
-        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).values_list('kentro', 'sindiasmos', 'votesb')
+        rows = EklSumpsifodeltiasindKenVw.objects.filter(eklid=eklid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).values_list('kentro', 'sindiasmosnew', 'votesb')
     else: #sunday=3
         #ΠΡΟΣΟΧΗ!!!: Για Κοινότητες μόνο
-        rows = EklSumpsifodeltiasindKenTopikoiOnlyVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmos', 'votesk')
+        rows = EklSumpsifodeltiasindKenTopikoiOnlyVw.objects.filter(eklid=eklid).values_list('kentro', 'sindiasmosnew', 'votesk')
 
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
@@ -223,9 +223,9 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
 
 
     elif selected_order == 2:
-        rows = rows.order_by('kentro', 'sindiasmos')
+        rows = rows.order_by('kentro', 'sindiasmosnew')
     else:
-        rows = rows.order_by('sindiasmos','kentro',)
+        rows = rows.order_by('sindiasmosnew','kentro',)
 
     for row in rows:
         row_num += 1
@@ -296,12 +296,12 @@ def export_psifodeltiasind_koin(request, eklid, selected_order, eidos, sunday):
     font_style = xlwt.XFStyle()
 
     if eidos == 0:
-        rows = EklSumpsifodeltiasindKoinVw.objects.filter(eklid=eklid).values_list('descr', 'sindiasmos', 'sumksindiasmou')
+        rows = EklSumpsifodeltiasindKoinVw.objects.filter(eklid=eklid).values_list('descr', 'sindiasmosnew', 'sumksindiasmou')
     else:
         if sunday == 1:
-            rows = EklSumpsifodeltiasindKoinVw.objects.filter(eklid=eklid).values_list('descr', 'sindiasmos', 'sumasindiasmou')
+            rows = EklSumpsifodeltiasindKoinVw.objects.filter(eklid=eklid).values_list('descr', 'sindiasmosnew', 'sumasindiasmou')
         else:
-            rows = EklSumpsifodeltiasindKoinVw.objects.filter(eklid=eklid).values_list('descr', 'sindiasmos', 'sumbsindiasmou')
+            rows = EklSumpsifodeltiasindKoinVw.objects.filter(eklid=eklid).values_list('descr', 'sindiasmosnew', 'sumbsindiasmou')
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1 or selected_order == 4:
@@ -313,9 +313,9 @@ def export_psifodeltiasind_koin(request, eklid, selected_order, eidos, sunday):
             else:
                 rows = rows.order_by('descr', '-sumbsindiasmou')
     elif selected_order == 2:
-        rows = rows.order_by('descr', 'sindiasmos')
+        rows = rows.order_by('descr', 'sindiasmosnew')
     else:
-        rows = rows.order_by('sindiasmos','descr',)
+        rows = rows.order_by('sindiasmosnew','descr',)
 
     for row in rows:
         row_num += 1
@@ -612,11 +612,11 @@ def psifoisimb_perifereies(request, eklid):
     if paramstr == 0: #επιλογή: "ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ"
         selected_perifereia = 0
         all_psifoi = selected_ekloges.eklsumpsifoisimbpervw_set.values_list('eklid', 'simbid',
-            'surname', 'firstname', 'fathername', 'sindiasmos','toposeklogisid', 'sumvotes' ).order_by('-sumvotes')
+            'surname', 'firstname', 'fathername', 'sindiasmosnew','toposeklogisid', 'sumvotes' ).order_by('-sumvotes')
     else:
         selected_perifereia = Perifereies.objects.get(perid=paramstr).perid                      #retrieve Από το EklSumpsifoisimbPerVw
         all_psifoi = selected_ekloges.eklsumpsifoisimbpervw_set.filter(toposeklogisid=paramstr).values_list('eklid', 'simbid',
-            'surname', 'firstname', 'fathername', 'sindiasmos','toposeklogisid', 'sumvotes' )
+            'surname', 'firstname', 'fathername', 'sindiasmosnew','toposeklogisid', 'sumvotes' )
 
     selected_order = paramorder
 
@@ -626,9 +626,9 @@ def psifoisimb_perifereies(request, eklid):
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
     if paramorder==1:
-        all_psifoi = all_psifoi.order_by('sindiasmos','-sumvotes')
+        all_psifoi = all_psifoi.order_by('sindiasmosnew','-sumvotes')
     elif paramorder==2 :
-        all_psifoi = all_psifoi.order_by('sindiasmos','surname')
+        all_psifoi = all_psifoi.order_by('sindiasmosnew','surname')
     else:
         all_psifoi = all_psifoi.order_by('-sumvotes')
 
@@ -889,9 +889,9 @@ def psifodeltiasindkoin(request, eklid, eidos, sunday ):
             else:
                 all_psifodeltia = all_psifodeltia.order_by('-sumbsindiasmou')
     elif paramorder == 2:
-        all_psifodeltia = all_psifodeltia.order_by('sindiasmos')
+        all_psifodeltia = all_psifodeltia.order_by('sindiasmosnew')
     else:
-        all_psifodeltia = all_psifodeltia.order_by('sindiasmos','descr')
+        all_psifodeltia = all_psifodeltia.order_by('sindiasmosnew','descr')
 
     context = {'all_psifodeltia': all_psifodeltia,
                'all_ekloges': all_ekloges,

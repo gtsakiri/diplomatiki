@@ -76,7 +76,7 @@
                    </tr>
                    {% for p in all_psifodeltia %}
                          <tr>
-                            <td >{{ p.sindiasmos }}</td>
+                            <td >{{ p.sindiasmosnew }}</td>
                              {% if eidos == 0 %}
                                 <td class="myfontsize">{{ p.sumksindiasmou }}</td>
                              {% else %}
@@ -128,7 +128,7 @@
                         colorByPoint: true,
                       data: [
                         {% for entry in all_psifodeltia %}
-                          {name:"{{ entry.sindiasmos }}",
+                          {name:"{{ entry.sindiasmosnew }}",
                               {% if sunday == 1 %} y:{{ entry.sumasindiasmou }}
                               {% elif sunday == 2 %} y:{{ entry.sumbsindiasmou }}
                               {% else %} y:{{ entry.sumksindiasmou }}

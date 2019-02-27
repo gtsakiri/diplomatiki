@@ -475,6 +475,9 @@ class EklSumpsifodeltiasindKenTopikoiOnlyVw(models.Model):
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
     eidos = models.IntegerField(db_column='eidos')
+    sindiasmosnew = models.CharField(max_length=100, null=True, blank=True)
+    shortdescrnew = models.CharField(db_column='shortDescrNew', max_length=50, null=True, blank=True)  # Field name made lowercase.
+    photofieldnew = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
 
     def __str__(self):
         return str(self.kenid) + ' - ' + self.sindiasmos
@@ -489,6 +492,9 @@ class EklSumpsifodeltiasindKoinVw(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)   # Field name made lowercase.
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100)
+    sindiasmosnew = models.CharField(max_length=100, null=True, blank=True)
+    shortdescrnew = models.CharField(db_column='shortDescrNew', max_length=50, null=True,blank=True)  # Field name made lowercase.
+    photofieldnew = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
     koinid = models.IntegerField(db_column='koinID')  # Field name made lowercase.
     descr= models.CharField(max_length=100, db_column='descr')
     eidos=models.IntegerField(db_column='eidos')  # Field name made lowercase.
@@ -655,6 +661,9 @@ class EklSumpsifoisimbPerVw(models.Model):
     toposeklogis = models.CharField(db_column='toposEklogis', max_length=100)  # Field name made lowercase.
     sindid = models.ForeignKey(Sindiasmoi, models.DO_NOTHING, db_column='sindID', db_index=True, blank=True, null=True)
     sindiasmos = models.CharField(max_length=100, blank=True, null=True)
+    sindiasmosnew = models.CharField(max_length=100, null=True, blank=True)
+    shortdescrnew = models.CharField(db_column='shortDescrNew', max_length=50, null=True,blank=True)  # Field name made lowercase.
+    photofieldnew = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
     sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 
 

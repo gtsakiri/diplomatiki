@@ -232,7 +232,7 @@ class EklsindkoinForm(ModelForm):
 
     class Meta:
         model = Eklsindkoin
-        fields = ['eklid', 'koinid', 'sindid',  'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw', 'lastupdate']
+        fields = ['eklid', 'koinid', 'sindid',  'aa', 'proedros', 'edresk', 'edresk_ypol', 'edresk_teliko', 'ypol', 'checkfordraw', 'lastupdate', 'descr', 'shortdescr', 'photofield']
         labels = {
             'sindid': _('Συνδυασμός'),
             'koinid': _('Κοινότητα'),
@@ -243,8 +243,15 @@ class EklsindkoinForm(ModelForm):
             'edresk_teliko': _('Έδρες Α γύρου (τελικές)'),
             'ypol': _('Υπόλοιπο ψηφοδελτίων'),
             'checkfordraw': _('Ένδειξη ισοπαλίας'),
-            'lastupdate': _('Τελευταία ενημέρωση')
-
+            'lastupdate': _('Τελευταία ενημέρωση'),
+            'descr': _('Περιγραφή Συνδυασμού στην τρέχουσα εκλ. αναμέτρηση'),
+            'shortdescr': _('Σύντομος τίτλος Συνδυασμού στην τρέχουσα εκλ. αναμέτρηση'),
+            'photofield': _('Φωτογραφία Υποψηφίου/Συνδυασμού στην τρέχουσα εκλ. αναμέτρηση')
+        }
+        help_texts = {
+            'descr': _('Αν διαφέρει σε σχέση με την αρχική ονομασία του συνδυασμού όταν ιδρύθηκε, εισάγετε άλλη ονομασία'),
+            'shortdescr': _('Προτείνεται να βάλετε το όνομα του αρχηγού στην τρέχουσα εκλ. αναμέτρηση'),
+            'photofield': _('Προτείνεται να βάλετε τη φωτογραφία του αρχηγού στην τρέχουσα εκλ. αναμέτρηση'),
         }
         widgets = {
             # κρυφό πεδίο αφού θα παίρνει αυτόματα τιμή από το view χωρίς την παρέμβαση του χρήστη
@@ -271,6 +278,9 @@ class EklsindkoinForm(ModelForm):
         edresk_teliko = cleaned_data.get('edresk_teliko')
         ypol = cleaned_data.get('ypol')
         checkfordraw = cleaned_data.get('checkfordraw')
+        descr = cleaned_data.get('descr')
+        shortdescr = cleaned_data.get('shortdescr')
+        photofield = cleaned_data.get('photofield')
 
 
 class PerifereiesForm(ModelForm):
