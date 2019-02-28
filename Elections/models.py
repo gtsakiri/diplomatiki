@@ -640,6 +640,9 @@ class EklSumpsifoisimbKoinVw(models.Model):
     eidoskoinotitas = models.IntegerField(db_column='eidosKoinotitas')  # Field name made lowercase.
     sindid = models.IntegerField(db_column='sindID', blank=True, null=True)  # Field name made lowercase.
     sindiasmos = models.CharField(max_length=100, blank=True, null=True)
+    sindiasmosnew = models.CharField(max_length=100, null=True, blank=True)
+    shortdescrnew = models.CharField(db_column='shortDescrNew', max_length=50, null=True, blank=True)  # Field name made lowercase.
+    photofieldnew = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
     sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
