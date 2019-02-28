@@ -395,6 +395,10 @@ class EklPsifoisimbVw(models.Model):
     eidos = models.CharField(db_column='eidos', max_length=100)
     koinotita= models.CharField(max_length=100)
     votes = models.IntegerField()
+    sindiasmosnew = models.CharField(max_length=100, null=True, blank=True)
+    shortdescrnew = models.CharField(db_column='shortDescrNew', max_length=50, null=True, blank=True)  # Field name made lowercase.
+    photofieldnew = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
+
 
     def __str__(self):
         return self.sindiasmos + ' - ' + self.surname
@@ -765,6 +769,11 @@ class EklallsimbVw(models.Model):
                                           null=True)  # Field name made lowercase.
     sindid = models.IntegerField(db_column='sindID', blank=True, null=True, db_index=True)  # Field name made lowercase.
     sindiasmos = models.CharField(db_column='sindiasmos', max_length=100, blank=True, null=True, db_index=True)
+    sindiasmosnew = models.CharField(max_length=100, null=True, blank=True)
+    shortdescrnew = models.CharField(db_column='shortDescrNew', max_length=50, null=True,blank=True)  # Field name made lowercase.
+    photofieldnew = models.ImageField(upload_to='sindiasmoi', null=True, blank=True)
+
+
     def __str__(self):
         return self.toposeklogis  + ' - ' +  self.surname
 

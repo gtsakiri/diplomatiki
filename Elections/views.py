@@ -363,15 +363,15 @@ def export_psifoisimb_ken(request,eklid, selected_order):
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1 or selected_order == 6:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmos', 'votes').order_by('kenid','sindiasmos', '-votes')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','sindiasmosnew', '-votes')
     elif selected_order == 2:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmos', 'votes').order_by('kenid', 'sindiasmos','surname')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid', 'sindiasmosnew','surname')
     elif selected_order == 3:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmos', 'votes').order_by('kenid','surname')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','surname')
     elif selected_order == 4:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmos', 'votes').order_by('kenid','-votes')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','-votes')
     else:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmos', 'votes').order_by('kenid','eidos','-votes')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','eidos','-votes')
 
     for row in rows:
         row_num += 1
@@ -943,9 +943,9 @@ def psifoisimb_ken(request, eklid):
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
     if paramorder==1 or paramorder==6:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','-votes')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmosnew','-votes')
     elif paramorder == 2:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmos','surname')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmosnew','surname')
     elif paramorder == 3:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname')
     elif paramorder == 4:
