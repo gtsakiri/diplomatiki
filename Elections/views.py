@@ -3630,6 +3630,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
     action_label='Καταχώρηση ψηφοδελτίων Υποψηφίων Συνδυασμών για το Δημοτικό Συμβούλιο'
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set','eklsind_set').get(eklid=eklid)
+    all_eklsind = selected_ekloges.eklsind_set.all()
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
@@ -3649,7 +3650,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
     formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
-        form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  #Simbouloi.objects.filter(simbid=form['simbid'].value()) Τα dropdown θα έχουν μόνο το σχετικό simbid
+        form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  # Τα dropdown θα έχουν μόνο το σχετικό sindid
 
     #for form in formset:
     #    form.fields['kenid'].disabled = True
@@ -3664,6 +3665,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
                 'selected_kentro':selected_kentro,
                'all_ekloges': all_ekloges,
                'action_label':action_label,
+               'all_eklsind':all_eklsind,
                'formset': formset
                }
 

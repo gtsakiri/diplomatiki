@@ -61,10 +61,23 @@
                                                     <div class="bg2 invalid-feedback">
                                                       {{ error }}
                                                     </div>
-                                              {% endfor %}
+                                                {% endfor %}
                                             {% else %}
+                                                    <td>
+                                                        {% render_field field onkeypress="return event.charCode >= 48" min=0 class="form-control is-valid" %}
+                                                        {% if field.name == 'sindid' %}
+                                                                {% for p in all_eklsind %}
+                                                                    {% if field.value == p.sindid.sindid %}
+                                                                     {{ p.sindid.descr }}
+                                                                    {% endif %}
 
-                                                    <td>{% render_field field onkeypress="return event.charCode >= 48" min=0 class="form-control is-valid" %} </td>
+                                                                {% endfor %}
+
+
+                                                        {% endif %}
+
+                                                    </td>
+
                                             {% endif %}
 
 
