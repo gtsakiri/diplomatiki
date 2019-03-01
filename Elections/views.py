@@ -3630,7 +3630,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
     action_label='Καταχώρηση ψηφοδελτίων Υποψηφίων Συνδυασμών για το Δημοτικό Συμβούλιο'
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set','eklsind_set').get(eklid=eklid)
-    all_eklsind = selected_ekloges.eklsind_set.all()
+    all_eklsind = selected_ekloges.eklsind_set.all().order_by('descr')
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
@@ -3647,7 +3647,7 @@ def edit_psifodeltia_kentrou(request,eklid, kenid):
 
     data = request.POST or None
     #προσοχή: φιλτράρω μόνο τους Καθολικούς συνδυασμούς!
-    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__descr'  ))
+    formset = PsifodeltiaFormSet(data=data, queryset= selected_kentro.psifodeltia_set.filter(kenid=kenid).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-sindid__eidos', 'sindid__sindid'  ))
     for form in formset:
         form.fields['kenid'].queryset = selected_ekloges.kentra_set.filter(kenid=form['kenid'].value()) #Kentra.objects.filter(kenid=form['kenid'].value())
         form.fields['sindid'].queryset = Sindiasmoi.objects.filter(sindid=form['sindid'].value())  # Τα dropdown θα έχουν μόνο το σχετικό sindid
@@ -3676,6 +3676,7 @@ def edit_psifodeltiakoin_kentrou(request,eklid, kenid):
     action_label='Καταχώρηση ψηφοδελτίων Υποψηφίων Συνδυασμών για το Τοπικό Συμβούλιο'
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
     selected_ekloges = Eklogestbl.objects.prefetch_related('kentra_set','eklsindkoin_set').get(eklid=eklid)
+    all_eklsindkoin = selected_ekloges.eklsindkoin_set.all().order_by('descr')
 
     if not request.user.is_authenticated:
         return redirect('{}?next={}'.format('/accounts/login/'+str(selected_ekloges.eklid),request.path))
@@ -3709,6 +3710,7 @@ def edit_psifodeltiakoin_kentrou(request,eklid, kenid):
                 'selected_kentro':selected_kentro,
                'all_ekloges': all_ekloges,
                'action_label':action_label,
+               'all_eklsindkoin' : all_eklsindkoin,
                'formset': formset
                }
 

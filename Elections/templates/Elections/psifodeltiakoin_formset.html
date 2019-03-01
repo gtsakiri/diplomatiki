@@ -35,15 +35,15 @@
 
                                 {% if forloop.first %}
                                     {% for field in form %}
+                                        {% if field.name != 'kenid' %} <!-- δεν βγάζω τίτλο για το kenid -->
+                                            {% if field.name == 'sindid' %}
+                                                <th><label for="id_sindid">Συνδυασμός</label> </th>
+                                            {% elif field.name == 'votesk' %}
+                                                <th><label for="id_votesk">Ψηφοδέλτια Κοινότητας</label></th>
+                                            {% elif field.name == 'kenid' %}
 
-                                        {% if field.name == 'sindid' %}
-                                            <th><label for="id_sindid">Συνδυασμός</label> </th>
-                                        {% elif field.name == 'votesk' %}
-                                            <th><label for="id_votesk">Ψηφοδέλτια Κοινότητας</label></th>
-                                        {% elif field.name == 'kenid' %}
-                                            <th><label for="id_kenid">Κέντρο</label></th>
+                                            {% endif %}
                                         {% endif %}
-
                                     {% endfor %}
                                 {% endif %}
                         </thead>
@@ -60,7 +60,27 @@
                                               {% endfor %}
                                             {% else %}
 
-                                                    <td>{% render_field field onkeypress="return event.charCode >= 48" min=0 class="form-control is-valid" %} </td>
+                                                    <td>
+                                                    {% if field.name != 'sindid' and  field.name != 'kenid'%}   <!-- κρύβω μόνο τα dropdown sindid και kenid -->
+                                                            {% render_field field onkeypress="return event.charCode >= 48" min=0 class="form-control is-valid" %}
+                                                     {% else %}
+                                                             {%   render_field field.as_hidden %}
+                                                     {% endif %}
+
+                                                    {% if field.name == 'sindid' %}  <!--ειδικά για το συνδυασμό βγάζω την ονομασία του από τον πίνακα eklsind -->
+                                                                {% for p in all_eklsindkoin %}
+                                                                    {% if field.value == p.sindid.sindid %}
+                                                                        {% if p.sindid != p.descr  %}
+                                                                           <h4> <span class="label label-info">{{ p.descr }} </span></h4>
+                                                                        {% endif %}
+                                                                    {% endif %}
+
+                                                                {% endfor %}
+
+
+                                                    {% endif %}
+
+                                                    </td>
                                             {% endif %}
 
 

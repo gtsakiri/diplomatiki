@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_28_02_2019">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_for_viewers.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsind_for_viewers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_for_viewers.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_for_viewers.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -86,11 +86,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="3667" column="41" selection-start-line="3667" selection-start-column="41" selection-end-line="3667" selection-end-column="41" />
+            <state relative-caret-position="87">
+              <caret line="3582" column="38" selection-start-line="3582" selection-start-column="38" selection-end-line="3582" selection-end-column="38" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -98,11 +98,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="psifodeltia_formset.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="psifodeltia_formset.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="70" column="81" selection-start-line="70" selection-start-column="81" selection-end-line="70" selection-end-column="81" />
+            <state relative-caret-position="272">
+              <caret line="37" column="108" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psifodeltiakoin_formset.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="45" column="51" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -119,8 +128,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="112" column="85" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="85" />
+            <state relative-caret-position="391">
+              <caret line="109" column="1" selection-start-line="109" selection-start-column="1" selection-end-line="109" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -128,7 +137,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
+            <state relative-caret-position="308">
               <caret line="425" lean-forward="true" selection-start-line="425" selection-end-line="425" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
@@ -183,12 +192,12 @@
       <find>posostaper</find>
       <find>pososta_perifereies</find>
       <find>EKL_PSIFOISIMB_VW</find>
-      <find>class Sindiasmoi(</find>
       <find>def Eklsind</find>
-      <find>editpsifodeltiakentrou</find>
-      <find>PsifodeltiaForm</find>
       <find>edit_psifodeltia_kentrou</find>
+      <find>class Sindiasmoi(</find>
+      <find>PsifodeltiaForm</find>
       <find>edit_psifodel</find>
+      <find>editpsifodeltiakentrou</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -216,7 +225,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset2.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_dropdown_list_options.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_dropdown_list_options.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/basicform.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_form.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_form.html" />
@@ -241,7 +249,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/messages.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/confirm_simbouloi_delete.html" />
-        <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
         <option value="$PROJECT_DIR$/diplomatiki/settings.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
@@ -256,8 +263,10 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsind_for_viewers.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/eklsindkoin_for_viewers.html" />
         <option value="$PROJECT_DIR$/Elections/forms.py" />
-        <option value="$PROJECT_DIR$/Elections/views.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html" />
+        <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" />
+        <option value="$PROJECT_DIR$/Elections/urls.py" />
       </list>
     </option>
   </component>
@@ -392,20 +401,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00111" summary="home_19_10_2018">
-      <created>1539984114008</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1539984114008</updated>
-    </task>
-    <task id="LOCAL-00112" summary="home_19_10_2018">
-      <created>1539987933920</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1539987933920</updated>
     </task>
     <task id="LOCAL-00113" summary="home_20_10_2018">
       <created>1540036374437</created>
@@ -736,7 +731,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551351594514</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="grafeio_28_02_2019">
+      <created>1551358505943</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1551358505943</updated>
+    </task>
+    <task id="LOCAL-00161" summary="grafeio_28_02_2019">
+      <created>1551375972262</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1551375972262</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TodoView">
@@ -757,10 +766,10 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32793522" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" visible="true" weight="0.31650895" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" visible="true" weight="0.31650895" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31230283" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19228765" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19228765" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
@@ -1161,9 +1170,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510" />
+        <state relative-caret-position="289">
+          <caret line="50" column="54" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="54" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/models.py">
@@ -1173,16 +1184,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="112" column="85" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
+        <state relative-caret-position="308">
           <caret line="425" lean-forward="true" selection-start-line="425" selection-end-line="425" />
           <folding>
             <element signature="e#0#95#0" expanded="true" />
@@ -1190,27 +1194,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="50" column="54" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="54" />
+        <state relative-caret-position="272">
+          <caret line="37" column="108" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="45" column="51" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="109" column="1" selection-start-line="109" selection-start-column="1" selection-end-line="109" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="3667" column="41" selection-start-line="3667" selection-start-column="41" selection-end-line="3667" selection-end-column="41" />
+        <state relative-caret-position="87">
+          <caret line="3582" column="38" selection-start-line="3582" selection-start-column="38" selection-end-line="3582" selection-end-column="38" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="70" column="81" selection-start-line="70" selection-start-column="81" selection-end-line="70" selection-end-column="81" />
         </state>
       </provider>
     </entry>
