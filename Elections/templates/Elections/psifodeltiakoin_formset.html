@@ -69,7 +69,7 @@
 
                                                     {% if field.name == 'sindid' %}  <!--ειδικά για το συνδυασμό βγάζω την ονομασία του από τον πίνακα eklsind -->
                                                                 {% for p in all_eklsindkoin %}
-                                                                    {% if field.value == p.sindid.sindid %}
+                                                                    {% if field.value == p.sindid.sindid and selected_kentro.koinid == p.koinid%}
                                                                         {% if p.sindid != p.descr  %}
                                                                            <h4> <span class="label label-info">{{ p.descr }} </span></h4>
                                                                         {% endif %}

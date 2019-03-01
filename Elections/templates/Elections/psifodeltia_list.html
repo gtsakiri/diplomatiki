@@ -50,14 +50,14 @@
                         </tr>
                         {% for p in all_psifodeltia %}
                               <tr>
-                                <td > {{ p.sindid}} </td>
+                                <td > {{ p.sindiasmosnew }} </td>
                                 <td > {{ p.kenid }} </td>
-                                <td > {{ p.votesa }}</td>
+                                <td > {{ p.votes }}</td>
                                 <td > {{ p.votesb }}</td>
 
                                 <td>
-                                    <a class="btn btn-default" href="{% url 'psifodeltia_edit' selected_ekloges p.id%}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges p.id%}"><span class="glyphicon glyphicon-minus"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifodeltia_edit' selected_ekloges p.sindid.sindid p.kenid.kenid%}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="{% url 'psifodeltia_delete' selected_ekloges p.sindid.sindid p.kenid.kenid%}"><span class="glyphicon glyphicon-minus"></span></a>
                                 </td>
 
                               </tr>

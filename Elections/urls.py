@@ -65,9 +65,9 @@ path('simbouloidelete/<int:eklid>/<int:simbid>/', views.simbouloi_delete, name='
 
 
 path('psifodeltia/<int:eklid>/', views.psifodeltia_list, name='psifodeltia_list'),
-path('psifodeltiaedit/<int:eklid>/<int:id>/', views.psifodeltia_edit, name='psifodeltia_edit'),
+path('psifodeltiaedit/<int:eklid>/<int:sindid>/<int:kenid>/', views.psifodeltia_edit, name='psifodeltia_edit'),
 path('psifodeltiaadd/<int:eklid>/', views.psifodeltia_add, name='psifodeltia_add'),
-path('psifodeltiadelete/<int:eklid>/<int:id>/', views.psifodeltia_delete, name='psifodeltia_delete'),
+path('psifodeltiadelete/<int:eklid>/<int:sindid>/<int:kenid>/', views.psifodeltia_delete, name='psifodeltia_delete'),
 
 path('psifodeltiakoin/<int:eklid>/', views.psifodeltiakoin_list, name='psifodeltiakoin_list'),
 path('psifodeltiakoinedit/<int:eklid>/<int:id>/', views.psifodeltiakoin_edit, name='psifodeltiakoin_edit'),

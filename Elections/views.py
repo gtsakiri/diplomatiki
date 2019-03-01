@@ -2679,7 +2679,9 @@ def psifodeltia_list(request, eklid):
     selected_kentro = Kentra.objects.get(kenid=paramstr).kenid
 
     #all_psifodeltia=Psifodeltia.objects.filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).order_by('kenid','-votesa')
-    all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-votesa')
+    #all_psifodeltia = Psifodeltia.objects.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-votesa')
+    all_psifodeltia = EklSumpsifodeltiasindKenVw.objects.filter(kenid=paramstr).filter(sindid__sindid__in=(Eklsind.objects.filter(eklid=eklid).values_list('sindid'))).order_by('-votes')
+
 
     context = {'all_ekloges': all_ekloges,
                'selected_ekloges': selected_ekloges.eklid,
@@ -2723,7 +2725,7 @@ def psifodeltia_add(request, eklid):
 
     return render(request, 'Elections/psifodeltia_form.html', context)
 
-def psifodeltia_edit(request, eklid, id):
+def psifodeltia_edit(request, eklid, sindid, kenid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
 
     if not request.user.is_authenticated:
@@ -2737,7 +2739,7 @@ def psifodeltia_edit(request, eklid, id):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     #επιλογή της συγκεκριμένης εγγραφής
-    item=get_object_or_404(Psifodeltia, id=id)
+    item=get_object_or_404(Psifodeltia, sindid=sindid, kenid=kenid)
 
     action_label = 'Ψηφοδέλτια Συνδυασμού στο εκλ. κέντρο ' + item.kenid.descr + ' - Αλλαγή εγγραφής'
 
@@ -2762,7 +2764,7 @@ def psifodeltia_edit(request, eklid, id):
 
     return render(request, 'Elections/psifodeltia_form.html', context)
 
-def psifodeltia_delete(request, eklid, id ):
+def psifodeltia_delete(request, eklid,  sindid, kenid ):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
 
     if not request.user.is_authenticated:
@@ -2774,7 +2776,7 @@ def psifodeltia_delete(request, eklid, id ):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
-    obj=get_object_or_404(Psifodeltia, id=id)
+    obj=get_object_or_404(Psifodeltia,  sindid=sindid, kenid=kenid)
 
     if request.method == 'POST':
         obj.delete()
@@ -3595,7 +3597,7 @@ def edit_psifoi_kentrou2(request,eklid, kenid):
 
     selected_kentro = Kentra.objects.prefetch_related('psifoi_set').get(kenid=kenid)
 
-    all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmos', 'shortsind', 'sindaa','eidos', 'simbaa', 'toposeklogis', 'votes', 'kenid', 'koinotita', 'id', 'kenid__perid__descr')
+    all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmosnew', 'shortdescrnew', 'sindaa','eidos', 'simbaa', 'toposeklogis', 'votes', 'kenid', 'koinotita', 'id', 'kenid__perid__descr')
     if paramorder==1 or paramorder==5:
         all_psifoi = all_psifoi.order_by('sindaa', 'eidos', 'toposeklogis', 'surname')
     elif paramorder == 2:
