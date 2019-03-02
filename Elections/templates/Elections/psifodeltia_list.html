@@ -50,7 +50,7 @@
                         </tr>
                         {% for p in all_psifodeltia %}
                               <tr>
-                                <td > {{ p.sindiasmosnew }} </td>
+                                <td > {{ p.sindiasmosnew }} {% if p.sindiasmos != p.sindiasmosnew %}({{ p.sindiasmos }}) {% endif %}</td>
                                 <td > {{ p.kenid }} </td>
                                 <td > {{ p.votes }}</td>
                                 <td > {{ p.votesb }}</td>
