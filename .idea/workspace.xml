@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_01_03_2019">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplomatiki/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplomatiki/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -87,10 +82,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
+            <state relative-caret-position="-1722">
               <caret line="2778" column="66" selection-start-line="2778" selection-start-column="66" selection-end-line="2778" selection-end-column="66" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -99,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+            <state relative-caret-position="-1842">
+              <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -173,7 +168,7 @@
       <find>Eklsumpsifodeltiasindkoin</find>
       <find>psifodeltiasindkoin</find>
       <find>Eklsind</find>
-      <find>def eklsind</find>
+      <find />
       <find>EklSumpsifodeltiasindKenVw</find>
       <find>EklSumpsifoisimbper</find>
       <find>psifoisimb_perifereies</find>
@@ -187,18 +182,18 @@
       <find>posostaper</find>
       <find>pososta_perifereies</find>
       <find>EKL_PSIFOISIMB_VW</find>
-      <find>def Eklsind</find>
+      <find />
       <find>edit_psifodeltia_kentrou</find>
-      <find>class Sindiasmoi(</find>
+      <find />
       <find>edit_psifodel</find>
       <find>eklpsifoisimbvw</find>
       <find>edit_psifoi_kentrou2</find>
       <find>edit_psifode</find>
       <find>EKL_SUMPSIFODELTIASIND_KEN_VW</find>
       <find>PsifodeltiaForm</find>
-      <find>psifodeltia_list</find>
       <find>votesa</find>
       <find>editpsifodeltiakentrou</find>
+      <find>psifodeltia_list</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -264,10 +259,10 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_formset.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_formset.html" />
         <option value="$PROJECT_DIR$/Elections/forms.py" />
-        <option value="$PROJECT_DIR$/diplomatiki/settings.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" />
         <option value="$PROJECT_DIR$/Elections/urls.py" />
         <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/diplomatiki/settings.py" />
       </list>
     </option>
   </component>
@@ -402,20 +397,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00114" summary="home_20_10_2018">
-      <created>1540068868579</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1540068868579</updated>
-    </task>
-    <task id="LOCAL-00115" summary="work_23_10_2018">
-      <created>1540279538481</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1540279538483</updated>
     </task>
     <task id="LOCAL-00116" summary="home_24_10_2018">
       <created>1540312750855</created>
@@ -746,7 +727,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551425157244</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="grafeio_01_03_2019">
+      <created>1551435099890</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1551435099890</updated>
+    </task>
+    <task id="LOCAL-00164" summary="grafeio_01_03_2019">
+      <created>1551435842186</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1551435842186</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TodoView">
@@ -759,14 +754,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-10" y="0" width="1935" height="1060" extended-state="0" />
-    <editor active="true" />
+    <frame x="-10" y="0" width="1935" height="1060" extended-state="1" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.31650895" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32793522" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3270242" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.31650895" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6578125" visible="true" weight="0.31230283" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
@@ -1195,13 +1189,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1218,11 +1205,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
+        <state relative-caret-position="-1722">
           <caret line="2778" column="66" selection-start-line="2778" selection-start-column="66" selection-end-line="2778" selection-end-column="66" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diplomatiki/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1842">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
         </state>
       </provider>
     </entry>
