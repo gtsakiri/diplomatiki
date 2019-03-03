@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_01_03_2019">
-      <change beforePath="$PROJECT_DIR$/Elections/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/models.py" afterDir="false" />
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_03_03_2019b">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -142,11 +142,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3090">
-              <caret line="157" column="57" selection-start-line="157" selection-start-column="57" selection-end-line="157" selection-end-column="57" />
+            <state relative-caret-position="293">
+              <caret line="356" column="61" lean-forward="true" selection-start-line="356" selection-start-column="61" selection-end-line="356" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psifodeltiakoin_list.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-136">
+              <caret line="28" column="147" selection-start-line="28" selection-start-column="147" selection-end-line="28" selection-end-column="147" />
             </state>
           </provider>
         </entry>
@@ -230,7 +239,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/kentra_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/koinotites_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" />
@@ -263,6 +271,7 @@
         <option value="$PROJECT_DIR$/Elections/forms.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltia_list.html" />
         <option value="$PROJECT_DIR$/Elections/models.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_list.html" />
       </list>
     </option>
   </component>
@@ -315,6 +324,13 @@
               <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
               <item name="Elections" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
+              <item name="diplomatiki" type="462c0819:PsiDirectoryNode" />
+              <item name="Elections" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Elections" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="diplomatiki" type="b2602c69:ProjectViewProjectNode" />
@@ -1173,20 +1189,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
     </task>
-    <task id="LOCAL-00116" summary="home_24_10_2018">
-      <created>1540312750855</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1540312750865</updated>
-    </task>
-    <task id="LOCAL-00117" summary="home_24_10_2018">
-      <created>1540416600180</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1540416600196</updated>
-    </task>
     <task id="LOCAL-00118" summary="home_26_10_2018">
       <created>1540577527107</created>
       <option name="number" value="00118" />
@@ -1516,7 +1518,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551435842186</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="grafeio_03_03_2019">
+      <created>1551633450032</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1551633450033</updated>
+    </task>
+    <task id="LOCAL-00166" summary="grafeio_03_03_2019b">
+      <created>1551641702506</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1551641702506</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1530,16 +1546,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="0" width="1935" height="1060" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="manage.py@diplomatiki" order="13" visible="true" weight="0.31650895" />
+      <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.31650895" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3421875" side_tool="true" weight="0.3252376" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3270242" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3270242" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.31650895" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31230283" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19228765" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19228765" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
@@ -1638,8 +1655,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="home_17_10_2018" />
-    <MESSAGE value="home_19_10_2018" />
     <MESSAGE value="home_20_10_2018" />
     <MESSAGE value="work_23_10_2018" />
     <MESSAGE value="home_24_10_2018" />
@@ -1663,7 +1678,9 @@
     <MESSAGE value="grafeio_27_02_2019" />
     <MESSAGE value="grafeio_28_02_2019" />
     <MESSAGE value="grafeio_01_03_2019" />
-    <option name="LAST_COMMIT_MESSAGE" value="grafeio_01_03_2019" />
+    <MESSAGE value="grafeio_03_03_2019" />
+    <MESSAGE value="grafeio_03_03_2019b" />
+    <option name="LAST_COMMIT_MESSAGE" value="grafeio_03_03_2019b" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1697,9 +1714,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sistima_form.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1987,8 +2001,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3090">
-          <caret line="157" column="57" selection-start-line="157" selection-start-column="57" selection-end-line="157" selection-end-column="57" />
+        <state relative-caret-position="293">
+          <caret line="356" column="61" lean-forward="true" selection-start-line="356" selection-start-column="61" selection-end-line="356" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="28" column="147" selection-start-line="28" selection-start-column="147" selection-end-line="28" selection-end-column="147" />
         </state>
       </provider>
     </entry>
