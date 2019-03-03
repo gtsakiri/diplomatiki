@@ -154,8 +154,8 @@ class Eklperkoin(models.Model):
 
 class Eklsimbkoin(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
-    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID', db_index=True)  # Field name made lowercase.
-    koinid = models.ForeignKey(Koinotites, models.DO_NOTHING, db_column='koinID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID', db_index=True)  # Field name made lowercase.
+    koinid = models.ForeignKey(Koinotites, models.CASCADE, db_column='koinID', db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.simbid) + ' - ' + str(self.koinid)
@@ -168,8 +168,8 @@ class Eklsimbkoin(models.Model):
 
 class Eklsimbper(models.Model):
     eklid = models.ForeignKey(Eklogestbl, models.DO_NOTHING, db_column='eklID', db_index=True)  # Field name made lowercase.
-    simbid = models.ForeignKey(Simbouloi, models.DO_NOTHING, db_column='simbID', db_index=True)  # Field name made lowercase.
-    perid = models.ForeignKey(Perifereies, models.DO_NOTHING, db_column='perID', db_index=True)  # Field name made lowercase.
+    simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID', db_index=True)  # Field name made lowercase.
+    perid = models.ForeignKey(Perifereies, models.CASCADE, db_column='perID', db_index=True)  # Field name made lowercase.
 
     def __str__(self):
         return str(self.eklid) + ' - ' + str(self.simbid) + ' - ' + str(self.perid)
