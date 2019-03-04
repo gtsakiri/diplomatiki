@@ -1833,15 +1833,6 @@ def sindiasmoi_delete(request, eklid, sindid ):
             # parent_obj_url=obj.content_object.get_absolute_url()
             #if flag_found_palia == 1:
             Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
-
-                    #Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
-                    #Eklsimbper.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
-                    #Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
-                    #Psifoi.objects.filter(simbid=obj.simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
-                # obj.delete()
-            # αλλιώς διαγράφεται από παντού, αφού υπάρχει μόνο στην τρέχουσα εκλ. αναμέτρηση (μέσω του cascade option)
-            #else:
-                #Simbouloi.objects.filter(simbid=obj.simbid).delete()
         ####
 
         obj.delete()
@@ -1983,14 +1974,42 @@ def eklsind_delete(request, eklid, id ):
 
         #####
 
+        #Βλέπω αν υπάρχει ο συνδυασμός και σε παλιότερες εκλ. αναμετρήσεις
+        if Eklsindsimb.objects.filter(sindid=obj.sindid).filter(eklid__lt=eklid).exists():
+            flag_found_palia = 1
+            # Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
+        else:
+            flag_found_palia = 0
+
+
+
         if request.method == 'POST':
-            Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
-            Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
-            Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
-            Psifoi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+
+            if flag_found_palia == 1:
+                #ο συνδυασμός υπάρχει σε προηγούμενες αναμετρήσεις..άρα σβήνω σχετικές εγγραφές μόνο της τρέχουσας εκλ. αναμέτρησης
+                Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
+                Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+                Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+                Psifoi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+                Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+                obj.delete()
+                #Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+            else:
+                #αν ο συνδυασμός δεν υπάρχει σε προηγούμενες αναμετρήσεις...τότε σβήνω :
+
+                # 1) τους σχετικούς συμβούλους και από πίνακα Simbouloi , ο οποίος λογω cascade θα σβήσει τις σχετικές εγγραφές και στους άλλους (EKLSIMBPER, EKLSIMBKOIN, EKLSINDSIMB, PSIFOI)
+                Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
+                # 2) το συνδυασμό και από πίνακα Sindiasmoi, ο οποίος λογω cascade θα σβήσει τις σχετικές εγγραφές και στα PSIFODELTIA
+                temp=obj   #προσωρινά αντιγραφή του obj στο temp επειδή το obj θα διαγραφεί.
+
+                obj.delete() #SOS!!! : ειδικά σ' αυτήν την περίπτωση σβήνω πρώτα το obj και μετά από τους Sindiasmoi, γιατί αλλιώς θα έχω πρόβλημα με το ξένο κλειδί που υπάρχει στον Eklsind.
+
+                Sindiasmoi.objects.filter(sindid=temp.sindid.sindid).delete()
+
+
         ####
 
-        obj.delete()
+        #obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsind_list', eklid)
     context = {'selected_ekloges': selected_ekloges.eklid,
@@ -1998,7 +2017,7 @@ def eklsind_delete(request, eklid, id ):
                'object': obj
                }
 
-    return render(request, 'Elections/confirm_delete.html', context)
+    return render(request, 'Elections/confirm_sindiasmoi_delete.html', context)
 
 
 def perifereia_list(request, eklid):
