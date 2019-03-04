@@ -1826,7 +1826,24 @@ def sindiasmoi_delete(request, eklid, sindid ):
 
     obj = get_object_or_404(Sindiasmoi, sindid=sindid)
     if request.method == 'POST':
-        # parent_obj_url=obj.content_object.get_absolute_url()
+
+        #####
+
+        if request.method == 'POST':
+            # parent_obj_url=obj.content_object.get_absolute_url()
+            #if flag_found_palia == 1:
+            Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+
+                    #Eklsindsimb.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
+                    #Eklsimbper.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
+                    #Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
+                    #Psifoi.objects.filter(simbid=obj.simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+                # obj.delete()
+            # αλλιώς διαγράφεται από παντού, αφού υπάρχει μόνο στην τρέχουσα εκλ. αναμέτρηση (μέσω του cascade option)
+            #else:
+                #Simbouloi.objects.filter(simbid=obj.simbid).delete()
+        ####
+
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('sindiasmoi_list', eklid)
@@ -1835,7 +1852,7 @@ def sindiasmoi_delete(request, eklid, sindid ):
                'object': obj
                }
 
-    return render(request, 'Elections/confirm_delete.html', context)
+    return render(request, 'Elections/confirm_sindiasmoi_delete.html', context)
 
 
 def eklsind_list(request, eklid):
@@ -1963,6 +1980,16 @@ def eklsind_delete(request, eklid, id ):
     obj = get_object_or_404(Eklsind, id=id)
     if request.method == 'POST':
         # parent_obj_url=obj.content_object.get_absolute_url()
+
+        #####
+
+        if request.method == 'POST':
+            Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
+            Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+            Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+            Psifoi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+        ####
+
         obj.delete()
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsind_list', eklid)
@@ -3164,7 +3191,7 @@ def simbouloi_edit(request, eklid, simbid):
 
                     # ΠΡΟΣΟΧΗ ΟΜΩΣ..αν από Δημοτικός έγινε Τοπικός τότε απαιτούνται 4 ενέργειες
                     else:
-                        # 1) προσθήκη εγγραφής και στον πίνακα Eklsimbperkoin
+                        # 1) προσθήκη εγγραφής και στον πίνακα Eklsimbkoin
                         Eklsimbkoin.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
                                                    simbid=simb_item,
                                                    koinid=form.cleaned_data['koinid']
