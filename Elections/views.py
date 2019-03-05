@@ -2028,7 +2028,8 @@ def eklsind_delete(request, eklid, id ):
             Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
             Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
 
-            #Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).values_list('simbid'))
+            #σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSIND
+            Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
 
             obj.delete()
         else:
