@@ -1843,7 +1843,7 @@ def sindiasmoi_delete(request, eklid, sindid ):
         if request.method == 'POST':
             # parent_obj_url=obj.content_object.get_absolute_url()
             #if flag_found_palia == 1:
-            Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
+            Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(sindid=obj).values_list('simbid')).delete()
         ####
 
         obj.delete()
@@ -2008,10 +2008,8 @@ def eklsind_delete(request, eklid, id ):
 
     obj = get_object_or_404(Eklsind, id=id)
     if request.method == 'POST':
-        # parent_obj_url=obj.content_object.get_absolute_url()
 
         #####
-
         #Βλέπω αν υπάρχει ο συνδυασμός και σε ΑΛΛΕΣ εκλ. αναμετρήσεις, και αν υπάρχει, σβήνω όλα τα σχετιζόμενα με αυτόν ΜΟΝΟ ΣΤΗΝ ΤΡΕΧΟΥΣΑ ΕΚΛ. ΑΝΑΜΕΤΡΗΣΗ
 
         if Eklsind.objects.filter(sindid=obj.sindid).exclude(eklid=eklid).exists():
@@ -2020,30 +2018,27 @@ def eklsind_delete(request, eklid, id ):
         else:
             flag_found_palia = 0
 
+        if flag_found_palia == 1:
+            #ο συνδυασμός υπάρχει σε άλλες αναμετρήσεις...άρα σβήνω σχετικές εγγραφές μόνο της τρέχουσας εκλ. αναμέτρησης
 
+            Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).values_list('simbid')).delete()
+            Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).values_list('simbid')).delete()
+            Psifoi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+            Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+            Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
+            Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
+            obj.delete()
+        else:
+            #αν ο συνδυασμός δεν υπάρχει σε προηγούμενες αναμετρήσεις...τότε σβήνω :
 
-        if request.method == 'POST':
+            # 1) τους σχετικούς συμβούλους και από πίνακα Simbouloi , ο οποίος λογω cascade θα σβήσει τις σχετικές εγγραφές και στους άλλους (EKLSIMBPER, EKLSIMBKOIN, EKLSINDSIMB, PSIFOI)
+            Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
+            # 2) το συνδυασμό και από πίνακα Sindiasmoi, ο οποίος λογω cascade θα σβήσει τις σχετικές εγγραφές και στα PSIFODELTIA
+            temp=obj   #προσωρινά αντιγραφή του obj στο temp επειδή το obj θα διαγραφεί.
 
-            if flag_found_palia == 1:
-                #ο συνδυασμός υπάρχει σε άλλες αναμετρήσεις..άρα σβήνω σχετικές εγγραφές μόνο της τρέχουσας εκλ. αναμέτρησης
-                Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
-                Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
-                Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
-                Psifoi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
-                Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
-                obj.delete()
-                #Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
-            else:
-                #αν ο συνδυασμός δεν υπάρχει σε προηγούμενες αναμετρήσεις...τότε σβήνω :
+            obj.delete() #SOS!!! : ειδικά σ' αυτήν την περίπτωση σβήνω πρώτα το obj και μετά από τους Sindiasmoi, γιατί αλλιώς θα έχω πρόβλημα με το ξένο κλειδί που υπάρχει στον Eklsind.
 
-                # 1) τους σχετικούς συμβούλους και από πίνακα Simbouloi , ο οποίος λογω cascade θα σβήσει τις σχετικές εγγραφές και στους άλλους (EKLSIMBPER, EKLSIMBKOIN, EKLSINDSIMB, PSIFOI)
-                Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
-                # 2) το συνδυασμό και από πίνακα Sindiasmoi, ο οποίος λογω cascade θα σβήσει τις σχετικές εγγραφές και στα PSIFODELTIA
-                temp=obj   #προσωρινά αντιγραφή του obj στο temp επειδή το obj θα διαγραφεί.
-
-                obj.delete() #SOS!!! : ειδικά σ' αυτήν την περίπτωση σβήνω πρώτα το obj και μετά από τους Sindiasmoi, γιατί αλλιώς θα έχω πρόβλημα με το ξένο κλειδί που υπάρχει στον Eklsind.
-
-                Sindiasmoi.objects.filter(sindid=temp.sindid.sindid).delete()
+            Sindiasmoi.objects.filter(sindid=temp.sindid.sindid).delete()
 
 
         ####
