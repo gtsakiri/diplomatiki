@@ -1586,6 +1586,11 @@ def sindiasmoi_add(request, eklid):
             sind_item = form.save(commit=False)
             sind_item.save()
 
+            pic = form.cleaned_data['photofield']
+            if not pic:
+                pic = 'sindiasmoi/elections.jpg'
+
+
             # Εισάγω και μια νέα εγγραφή στον πίνακα EKLSIND αν είναι καθολικός συνδυασμός
             if sind_item.eidos == 1:
                 Eklsind.objects.create(eklid=Eklogestbl.objects.get(eklid=eklid),
@@ -1595,6 +1600,9 @@ def sindiasmoi_add(request, eklid):
                                        edresa_ypol=0,
                                        edresa_teliko=0,
                                        edresb=0,
+                                       descr=form.cleaned_data['descr'],
+                                       shortdescr=form.cleaned_data['shortdescr'],
+                                       photofield=pic,
                                        ypol=0).save()
 
                 # Εισαγωγή εγγραφής συνδυασμού στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο της
@@ -1620,6 +1628,9 @@ def sindiasmoi_add(request, eklid):
                                        edresk_ypol=0,
                                        edresk_teliko=0,
                                        ypol=0,
+                                       descr=form.cleaned_data['descr'],
+                                       shortdescr=form.cleaned_data['shortdescr'],
+                                        photofield=pic,
                                        checkfordraw=0).save()
 
                 # Εισαγωγή εγγραφής  στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
@@ -1891,11 +1902,38 @@ def eklsind_add(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
+
+
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = EklsindForm(eklid, request.POST ) #ΠΡΟΣΟΧΗ! περνάω σαν παράμετρο το eklid, γιατί στη φόρμα γίνεται αρχικοποίηση με αυτή την παράμετρο
+        form = EklsindForm(eklid, request.POST, request.FILES ) #ΠΡΟΣΟΧΗ! περνάω σαν παράμετρο το eklid, γιατί στη φόρμα γίνεται αρχικοποίηση με αυτή την παράμετρο
         if form.is_valid():
             sind_item = form.save(commit=False)
+
+            pic = form.cleaned_data['photofield']
+            if not pic:
+                pic = 'sindiasmoi/elections.jpg'
+
+            sind_item.photofield=pic
+
             sind_item.save()
+
+            ###
+
+            # Εισαγωγή εγγραφής συνδυασμού στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο της
+            # εκλ. αναμέτρησης, αφού ο καθολικός συνδυασμός ψηφίζεται σε ΟΛΟ ΤΟ ΔΗΜΟ
+            for kentro in Kentra.objects.filter(eklid=Eklogestbl.objects.get(eklid=eklid)):
+                # μόνο αν δεν υπάρχει εγγραφή στον πίνακα Psifodeltia για το κέντρο, εισάγω εγγραφή για το συγκεκριμένο κέντρο
+                if not Psifodeltia.objects.filter(sindid=sind_item.sindid).filter(kenid=kentro).exists():
+                    Psifodeltia.objects.create(
+                        sindid=sind_item.sindid,
+                        kenid=kentro,
+                        votesa=0,
+                        votesb=0,
+                        votesk=0,
+                    ).save()
+
+            ###
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             #καλώ πάλι τη φόρμα με initial eklid την εκλ. αναμέτρηση στην οποία είμαστε συνδεδεμένο
             form = EklsindForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
@@ -1974,8 +2012,9 @@ def eklsind_delete(request, eklid, id ):
 
         #####
 
-        #Βλέπω αν υπάρχει ο συνδυασμός και σε παλιότερες εκλ. αναμετρήσεις
-        if Eklsindsimb.objects.filter(sindid=obj.sindid).filter(eklid__lt=eklid).exists():
+        #Βλέπω αν υπάρχει ο συνδυασμός και σε ΑΛΛΕΣ εκλ. αναμετρήσεις, και αν υπάρχει, σβήνω όλα τα σχετιζόμενα με αυτόν ΜΟΝΟ ΣΤΗΝ ΤΡΕΧΟΥΣΑ ΕΚΛ. ΑΝΑΜΕΤΡΗΣΗ
+
+        if Eklsind.objects.filter(sindid=obj.sindid).exclude(eklid=eklid).exists():
             flag_found_palia = 1
             # Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
         else:
@@ -1986,11 +2025,11 @@ def eklsind_delete(request, eklid, id ):
         if request.method == 'POST':
 
             if flag_found_palia == 1:
-                #ο συνδυασμός υπάρχει σε προηγούμενες αναμετρήσεις..άρα σβήνω σχετικές εγγραφές μόνο της τρέχουσας εκλ. αναμέτρησης
+                #ο συνδυασμός υπάρχει σε άλλες αναμετρήσεις..άρα σβήνω σχετικές εγγραφές μόνο της τρέχουσας εκλ. αναμέτρησης
                 Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
-                Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
-                Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
-                Psifoi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
+                Eklsimbper.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
+                Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).delete()
+                Psifoi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid.sindid).values_list('simbid')).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
                 Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
                 obj.delete()
                 #Simbouloi.objects.filter(simbid__in=EklallsimbVw.objects.filter(sindid=obj.sindid).values_list('simbid')).delete()
@@ -2175,10 +2214,31 @@ def eklsindkoin_add(request, eklid):
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
     if request.method == 'POST':    #όταν γίνει POST των δεδομένων στη βάση
-        form = EklsindkoinForm(eklid, request.POST ) #ΠΡΟΣΟΧΗ! περνάω σαν παράμετρο το eklid, γιατί στη φόρμα γίνεται αρχικοποίηση με αυτή την παράμετρο
+        form = EklsindkoinForm(eklid, request.POST, request.FILES ) #ΠΡΟΣΟΧΗ! περνάω σαν παράμετρο το eklid, γιατί στη φόρμα γίνεται αρχικοποίηση με αυτή την παράμετρο
         if form.is_valid():
             item = form.save(commit=False)
+
+            pic = form.cleaned_data['photofield']
+            if not pic:
+                pic = 'sindiasmoi/elections.jpg'
+
+            item.photofield = pic
+
             item.save()
+
+            # Εισαγωγή εγγραφής  στον πίνακα Psifodeltia με votes=0 για κάθε κέντρο ΤΗΣ ΚΟΙΝΟΤΗΤΑΣ,
+            # αφού ο ΤΟΠΙΚΟΣ συνδυασμός ψηφίζεται μόνο στην ΚΟΙΝΟΤΗΤΑ όπου είναι υποψήφιος
+            for kentro in Kentra.objects.filter(koinid=form.cleaned_data['koinid']):
+                # μόνο αν δεν υπάρχει εγγραφή στον πίνακα Psifodeltia για το κέντρο της συγκεκριμένης Κοινότητας, εισάγω εγγραφή για το συγκεκριμένο κέντρο
+                if not Psifodeltia.objects.filter(sindid=item.sindid).filter(kenid=kentro).exists():
+                    Psifodeltia.objects.create(
+                        sindid=item.sindid,
+                        kenid=kentro,
+                        votesa=0,
+                        votesb=0,
+                        votesk=0,
+                    ).save()
+
             messages.success(request, 'Η εγγραφή ολοκληρώθηκε!')
             #καλώ πάλι τη φόρμα με initial eklid την εκλ. αναμέτρηση στην οποία είμαστε συνδεδεμένο
             form = EklsindkoinForm(eklid, initial={'eklid':Eklogestbl.objects.get(eklid=eklid)})
@@ -3323,8 +3383,8 @@ def simbouloi_delete(request, eklid, simbid ):
             Eklsimbkoin.objects.filter(eklid=eklid).filter(simbid=obj.simbid).delete()
             Psifoi.objects.filter(simbid=obj.simbid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
             #obj.delete()
-        # αλλιώς διαγράφεται από παντού, αφού υπάρχει μόνο στην τρέχουσα εκλ. αναμέτρηση (μέσω του cascade option)
         else:
+            # αλλιώς διαγράφεται από παντού, αφού υπάρχει μόνο στην τρέχουσα εκλ. αναμέτρηση (μέσω του cascade option)
             Simbouloi.objects.filter(simbid=obj.simbid).delete()
 
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
