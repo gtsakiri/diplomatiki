@@ -2027,6 +2027,9 @@ def eklsind_delete(request, eklid, id ):
             Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=Kentra.objects.filter(eklid=eklid).values_list('kenid')).delete()
             Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
             Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).delete()
+
+            #Simbouloi.objects.filter(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=obj.sindid).values_list('simbid'))
+
             obj.delete()
         else:
             #αν ο συνδυασμός δεν υπάρχει σε προηγούμενες αναμετρήσεις...τότε σβήνω :
