@@ -2425,15 +2425,14 @@ def eklsindkoin_delete(request, eklid, id ):
 
             # ιι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
             # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
-            for simbitem in EklallsimbVw.objects.filter(eklid=2).filter(toposeklogisid=oldkoinid.koinid).filter(sindid=oldsindid.sindid):
+            for simbitem in EklallsimbVw.objects.filter(eklid=eklid).filter(toposeklogisid=oldkoinid.koinid).filter(sindid=oldsindid.sindid):
                 if Eklsindsimb.objects.filter(simbid=simbitem.simbid).exclude(eklid=eklid).exists(): #με το exclude παίρνω μόνο αυτούς που υπάρχουν και σε άλλες εκλογές
                     Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid.koinid))).filter(simbid=simbitem.simbid).delete()
                     Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).filter(simbid=simbitem.simbid).delete()
                     Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).filter(simbid=simbitem.simbid).delete()
 
-
-                    # σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSINDSIMB
-                    #Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
+                    #σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSINDSIMB
+                    Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
                 else:
                     Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
         else:
@@ -2469,7 +2468,7 @@ def eklsindkoin_delete(request, eklid, id ):
                'object': obj
                }
 
-    return render(request, 'Elections/confirm_delete.html', context)
+    return render(request, 'Elections/confirm_sindiasmoi_delete.html', context)
 
 def koinotites_list(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
