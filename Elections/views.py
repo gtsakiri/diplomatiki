@@ -2423,43 +2423,78 @@ def eklsindkoin_delete(request, eklid, id ):
             # ιι) Διαγραφή του συνδυασμού από τον EKLSINDKOIN για την τρέχ. Εκλ. Αναμέτρηση και για τη συγκεκριμένη Κοινότητα
             Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=oldsindid).filter(koinid=oldkoinid).delete()
 
-            # ιι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
+            # ιιι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
             # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
-            for simbitem in EklallsimbVw.objects.filter(eklid=eklid).filter(toposeklogisid=oldkoinid.koinid).filter(sindid=oldsindid.sindid):
-                if Eklsindsimb.objects.filter(simbid=simbitem.simbid).exclude(eklid=eklid).exists(): #με το exclude παίρνω μόνο αυτούς που υπάρχουν και σε άλλες εκλογές
-                    Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid.koinid))).filter(simbid=simbitem.simbid).delete()
-                    Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).filter(simbid=simbitem.simbid).delete()
-                    Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).filter(simbid=simbitem.simbid).delete()
-
-                    #σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSINDSIMB
-                    Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
-                else:
-                    Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
-        else:
-            #Αλλιώς αν είναι Τοπικός, διαγραφή των σχετικών εγγραφών από τον πίνακα Psifodeltia
-            #Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).delete()
-
-            # ι) Αν ο συνδυασμός υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συνδυασμού, αλλιώς
-            # σβήσε και το συνδυασμό (μέσω του cascade Θα σβήσουν και όλα τα σχετικά)
-            if Eklsindkoin.objects.filter(sindid=oldsindid).exclude(eklid=eklid).exists():
-                Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(sindid=oldsindid).delete()
-                Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
-            else:
-                Sindiasmoi.objects.filter(sindid=oldsindid.sindid).delete()
-
-            # ιι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε προηγούμενες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
-            # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
-            for simbitem in Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid):
-                if Eklsindsimb.objects.filter(simbid=simbitem.simbid).filter(eklid__lt=eklid).exists():
-                    Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(
-                        simbid__in=(Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid))).delete()
-                    Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
-                    Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).delete()
+            for simbitem in EklallsimbVw.objects.filter(eklid=eklid).filter(toposeklogisid=oldkoinid.koinid).filter(
+                    sindid=oldsindid.sindid):
+                if Eklsindsimb.objects.filter(simbid=simbitem.simbid).exclude(
+                        eklid=eklid).exists():  # με το exclude παίρνω μόνο αυτούς που υπάρχουν και σε άλλες εκλογές
+                    Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid.koinid))).filter(
+                        simbid=simbitem.simbid).delete()
+                    Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).filter(
+                        simbid=simbitem.simbid).delete()
+                    Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).filter(
+                        simbid=simbitem.simbid).delete()
 
                     # σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSINDSIMB
                     Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
                 else:
                     Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
+
+        else:
+            #Αλλιώς αν είναι Τοπικός, διαγραφή των σχετικών εγγραφών από τον πίνακα Psifodeltia
+            #Psifodeltia.objects.filter(sindid=obj.sindid).filter(kenid__in=(Kentra.objects.filter(eklid=eklid))).delete()
+
+            # ι) Αν ο συνδυασμός υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συνδυασμού
+            if Eklsindkoin.objects.filter(sindid=oldsindid).exclude(eklid=eklid).exists():
+                # σβήσε τα records από Psifodeltia για το συνδυασμό και την τρεχ. εκλ. αναμέτρηση
+                Psifodeltia.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid))).filter(sindid=oldsindid).delete()
+                # σβήσε τα records από Eklsindkoin για το συνδυασμό και την τρεχ. εκλ. αναμέτρηση
+                Eklsindkoin.objects.filter(eklid=eklid).filter(sindid=oldsindid).delete()
+
+                # Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
+                # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
+                for simbitem in EklallsimbVw.objects.filter(eklid=eklid).filter(toposeklogisid=oldkoinid.koinid).filter(
+                        sindid=oldsindid.sindid):
+                    if Eklsindsimb.objects.filter(simbid=simbitem.simbid).exclude(
+                            eklid=eklid).exists():  # με το exclude παίρνω μόνο αυτούς που υπάρχουν και σε άλλες εκλογές
+                        Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid.koinid))).filter(
+                            simbid=simbitem.simbid).delete()
+                        Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).filter(
+                            simbid=simbitem.simbid).delete()
+                        Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).filter(
+                            simbid=simbitem.simbid).delete()
+
+                        # σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSINDSIMB
+                        Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
+                    else:
+                        Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
+
+            else:
+                #αλλιώς αν ο συνδυασμόσ υπάρχει μόνο σ' αυτήν την εκλ. αναμέτρηση:
+
+                # ι) Αν ο σύμβουλος του πρώην συνδυασμού υπάρχει σε άλλες εκλ. αναμετρήσεις, σβήσε μόνο τα απαραίτητα στους σχετικούς πίνακες του συμβούλου, αλλιώς
+                # σβήσε και το σύμβουλο (μέσω του cascade Θα σβήσουν και όλα τα σχετικά). Αυτό γίνεται για κάθε σύμβουλο του πρωην συνδυασμού
+                for simbitem in EklallsimbVw.objects.filter(eklid=eklid).filter(toposeklogisid=oldkoinid.koinid).filter(
+                        sindid=oldsindid.sindid):
+                    if Eklsindsimb.objects.filter(simbid=simbitem.simbid).exclude(
+                            eklid=eklid).exists():  # με το exclude παίρνω μόνο αυτούς που υπάρχουν και σε άλλες εκλογές
+                        Psifoi.objects.filter(kenid__in=(Kentra.objects.filter(koinid=oldkoinid.koinid))).filter(
+                            simbid=simbitem.simbid).delete()
+                        Eklsimbkoin.objects.filter(eklid=eklid).filter(koinid=oldkoinid).filter(
+                            simbid=simbitem.simbid).delete()
+                        Eklsindsimb.objects.filter(eklid=eklid).filter(sindid=oldsindid).filter(
+                            simbid=simbitem.simbid).delete()
+
+                        # σβήνω εν τέλει και  "ορφανές" εγγραφές  από τον πίνακα simbouloi (που δεν έχουν δηλαδή αντίστοιχη εγγραφή στον πίνακα EKLSINDSIMB
+                        Simbouloi.objects.exclude(simbid__in=(Eklsindsimb.objects.all()).values_list('simbid')).delete()
+                    else:
+                        Simbouloi.objects.filter(simbid=simbitem.simbid.simbid).delete()
+                # ιι) σβήσε και το συνδυασμό (μέσω του cascade Θα σβήσουν και όλα τα σχετικά(EKLSINDKOIN, EKLSINDSIMB, PSIFODELTIA))
+                Sindiasmoi.objects.filter(sindid=oldsindid.sindid).delete()
+
+
+
 
         messages.success(request, "Η διαγραφή ολοκληρώθηκε")
         return redirect('eklsindkoin_list', eklid)
@@ -3372,8 +3407,8 @@ def simbouloi_delete(request, eklid, simbid ):
     obj = get_object_or_404(Simbouloi, simbid=simbid)
 
     flag_found_palia = -1
-    #έλεγχος αν πρόκειται για υποψήφιο που συμμετείχε και σε παλιότερες εκλ. αναμετρήσεις
-    if EklallsimbVw.objects.filter(simbid=obj.simbid).filter(eklid__lt=eklid).exists():
+    #έλεγχος αν πρόκειται για υποψήφιο που συμμετείχε και σε άλλε΅ς εκλ. αναμετρήσεις
+    if EklallsimbVw.objects.filter(simbid=obj.simbid).exclude(eklid=eklid).exists():
         flag_found_palia = 1
         # Simbouloi.objects.filter(simbid=simb_item.simbid).delete()
     else:
@@ -3455,8 +3490,8 @@ def load_simbouloi(request, eklid):
     firstname = request.GET.get('firstname')
     fathername = request.GET.get('fathername')
 
-    #Ψάχνω σε προηγούμενες εκλ. αναμετρήσεις υποψήφιο με ίδιο surname, firstname, fathername και δεν έχουν εισαχθεί ακόμη στην τρέχουσα εκλ. αναμέτρηση
-    simbouloi = EklallsimbVw.objects.filter(eklid__lt=eklid). \
+    #Ψάχνω σε άλλε΅ς εκλ. αναμετρήσεις υποψήφιο με ίδιο surname, firstname, fathername και δεν έχουν εισαχθεί ακόμη στην τρέχουσα εκλ. αναμέτρηση
+    simbouloi = EklallsimbVw.objects.exclude(eklid=eklid). \
         filter(surname__icontains=surname).filter(firstname__icontains=firstname). \
         filter(fathername__icontains=fathername). \
         exclude(simbid__in=Eklsindsimb.objects.filter(eklid=eklid).values_list('simbid',flat=True)). \
