@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_10_03_2019">
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_11_03_2019">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -413,13 +412,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
     </task>
-    <task id="LOCAL-00129" summary="work_29_10_2018">
-      <created>1540833961662</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1540833961663</updated>
-    </task>
     <task id="LOCAL-00130" summary="work_30_10_2018">
       <created>1540898858958</created>
       <option name="number" value="00130" />
@@ -756,7 +748,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552213180823</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="grafeio_11_03_2019">
+      <created>1552297027040</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1552297027042</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TodoView">
@@ -864,7 +863,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="work_29_10_2018" />
     <MESSAGE value="work_30_10_2018" />
     <MESSAGE value="work_31_10_2018" />
     <MESSAGE value="home_31_10_2018" />
@@ -889,7 +887,8 @@
     <MESSAGE value="grafeio_06_03_2019" />
     <MESSAGE value="grafeio_07_03_2019" />
     <MESSAGE value="grafeio_10_03_2019" />
-    <option name="LAST_COMMIT_MESSAGE" value="grafeio_10_03_2019" />
+    <MESSAGE value="grafeio_11_03_2019" />
+    <option name="LAST_COMMIT_MESSAGE" value="grafeio_11_03_2019" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
