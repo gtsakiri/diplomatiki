@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_11_03_2019">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_12_03_2019" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -446,13 +440,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
     </task>
-    <task id="LOCAL-00132" summary="work_31_10_2018">
-      <created>1540986429633</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1540986429634</updated>
-    </task>
     <task id="LOCAL-00133" summary="home_31_10_2018">
       <created>1541015877969</created>
       <option name="number" value="00133" />
@@ -789,7 +776,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552333575317</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="grafeio_12_03_2019">
+      <created>1552373626013</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1552373626016</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TodoView">
@@ -810,7 +804,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3270242" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.31650895" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" visible="true" weight="0.31230283" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31230283" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14799374" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -897,7 +891,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="work_30_10_2018" />
     <MESSAGE value="work_31_10_2018" />
     <MESSAGE value="home_31_10_2018" />
     <MESSAGE value="home_01_11_2018" />
@@ -922,7 +915,8 @@
     <MESSAGE value="grafeio_07_03_2019" />
     <MESSAGE value="grafeio_10_03_2019" />
     <MESSAGE value="grafeio_11_03_2019" />
-    <option name="LAST_COMMIT_MESSAGE" value="grafeio_11_03_2019" />
+    <MESSAGE value="grafeio_12_03_2019" />
+    <option name="LAST_COMMIT_MESSAGE" value="grafeio_12_03_2019" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
