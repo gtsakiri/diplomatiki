@@ -527,8 +527,8 @@ def pososta_telika(request, eklid):
                     diafores_list.append([itemNow.sindid, itemNow.posostosindiasmou- itemPrin.posostosindiasmou])
                     all_pososta_prin_list.append([itemNow.sindid, itemPrin.posostosindiasmou, itemPrin.sumvotes])
             if not found:
-                diafores_list.append([itemNow.sindid,'Δεν συμμετείχε'])  #αν δεν υπήρχε ο συνδυασμός στην προηγούμενη εκλ. αναμέτρηση, εισάγω κατάλληλες τιμές στις λίστες
-                all_pososta_prin_list.append([itemNow.sindid, 'Δεν συμμετείχε'])
+                diafores_list.append([itemNow.sindid,'Δεν συμμετείχε ως υποψήφιος συνδυασμός'])  #αν δεν υπήρχε ο συνδυασμός στην προηγούμενη εκλ. αναμέτρηση, εισάγω κατάλληλες τιμές στις λίστες
+                all_pososta_prin_list.append([itemNow.sindid, 'Δεν συμμετείχε ως υποψήφιος συνδυασμός'])
     else:#αν δεν υπάρχουν προηγούνες εκλ. αναμετρήσεις δεν επιστρέφω κάτι
         all_pososta_prin = []
 

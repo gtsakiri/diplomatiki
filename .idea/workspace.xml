@@ -4,6 +4,9 @@
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_11_03_2019">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elections/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -83,20 +86,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="2449" column="18" selection-start-line="2449" selection-start-column="18" selection-end-line="2449" selection-end-column="18" />
+            <state relative-caret-position="89">
+              <caret line="2776" column="14" selection-start-line="2776" selection-start-column="4" selection-end-line="2776" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sindiasmoi_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="18" column="7" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="18" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#label#0;n#h4#0;n#center#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="194" column="157" selection-start-line="194" selection-start-column="157" selection-end-line="194" selection-end-column="157" />
+            <state relative-caret-position="399">
+              <caret line="316" column="165" selection-start-line="316" selection-start-column="165" selection-end-line="316" selection-end-column="165" />
+              <folding>
+                <element signature="n#style#0;n#label#0;n#h4#0;n#center#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pososta_telika.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="106" />
             </state>
           </provider>
         </entry>
@@ -122,8 +149,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Elections/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1904">
-              <caret line="112" column="76" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="85" />
+            <state relative-caret-position="85">
+              <caret line="97" column="15" selection-start-line="97" selection-start-column="15" selection-end-line="97" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -168,10 +195,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>EKL_PSIFOISIMB_VW</find>
-      <find>edit_psifodel</find>
-      <find>eklpsifoisimbvw</find>
-      <find>edit_psifoi_kentrou2</find>
       <find>edit_psifode</find>
       <find>EKL_SUMPSIFODELTIASIND_KEN_VW</find>
       <find>PsifodeltiaForm</find>
@@ -198,6 +221,10 @@
       <find>add_simbouloia</find>
       <find>simbouloi</find>
       <find>simbouloi_found</find>
+      <find>exclude</find>
+      <find>eklid=</find>
+      <find>eklid =</find>
+      <find>sindiasmoi_dele</find>
     </findStrings>
     <replaceStrings>
       <replace>id</replace>
@@ -235,7 +262,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/simbouloi_list.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/sistima_list.html" />
         <option value="$PROJECT_DIR$/Elections/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/Elections/templatetags/elections_extras.py" />
@@ -246,7 +272,6 @@
         <option value="$PROJECT_DIR$/Elections/templates/Elections/messages.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/typeofkoinotita_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/confirm_simbouloi_delete.html" />
-        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_perifereies.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_koin.html" />
@@ -265,8 +290,10 @@
         <option value="$PROJECT_DIR$/Elections/models.py" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/psifodeltiakoin_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/confirm_sindiasmoi_delete.html" />
-        <option value="$PROJECT_DIR$/Elections/views.py" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html" />
         <option value="$PROJECT_DIR$/Elections/templates/Elections/base.html" />
+        <option value="$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html" />
+        <option value="$PROJECT_DIR$/Elections/views.py" />
       </list>
     </option>
   </component>
@@ -418,13 +445,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00131" summary="work_31_10_2018">
-      <created>1540972256243</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1540972256244</updated>
     </task>
     <task id="LOCAL-00132" summary="work_31_10_2018">
       <created>1540986429633</created>
@@ -762,7 +782,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552331720814</updated>
     </task>
-    <option name="localTasksCounter" value="180" />
+    <task id="LOCAL-00180" summary="grafeio_11_03_2019">
+      <created>1552333575313</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1552333575317</updated>
+    </task>
+    <option name="localTasksCounter" value="181" />
     <servers />
   </component>
   <component name="TodoView">
@@ -783,7 +810,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3270242" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.31650895" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31230283" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" visible="true" weight="0.31230283" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14799374" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -806,25 +833,25 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21946308" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.3243626" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="manage.py@diplomatiki" order="13" weight="0.32719547" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.46174496" weight="0.39943343" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25838926" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295302" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.32719547" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -929,7 +956,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Elections/migrations/0007_eklsind_lastupdate.py" />
     <entry file="file://$PROJECT_DIR$/diplomatiki/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1009,13 +1035,6 @@
     <entry file="file://C:/Python/Python36-32/Lib/threading.py" />
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/perifereia_list.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="136" selection-start-line="77" selection-start-column="136" selection-end-line="77" selection-end-column="136" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifodeltiasind_ken.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -1173,13 +1192,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="112" column="76" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/psifoi_formset2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1785" />
@@ -1216,17 +1228,44 @@
         <state relative-caret-position="-1530" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/sindiasmoi_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="2449" column="18" selection-start-line="2449" selection-start-column="18" selection-end-line="2449" selection-end-column="18" />
+        <state relative-caret-position="303">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="18" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#label#0;n#h4#0;n#center#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="194" column="157" selection-start-line="194" selection-start-column="157" selection-end-line="194" selection-end-column="157" />
+        <state relative-caret-position="399">
+          <caret line="316" column="165" selection-start-line="316" selection-start-column="165" selection-end-line="316" selection-end-column="165" />
+          <folding>
+            <element signature="n#style#0;n#label#0;n#h4#0;n#center#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="97" column="15" selection-start-line="97" selection-start-column="15" selection-end-line="97" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/pososta_telika.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Elections/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="2776" column="14" selection-start-line="2776" selection-start-column="4" selection-end-line="2776" selection-end-column="14" />
         </state>
       </provider>
     </entry>
