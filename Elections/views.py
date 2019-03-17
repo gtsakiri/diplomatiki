@@ -3091,16 +3091,16 @@ def simbouloi_list(request, eklid):
     if not request.user.has_perm('Elections.view_simbouloi'):
         raise PermissionDenied
 
-    all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sindiasmos')
+    all_simbouloi = selected_ekloges.eklallsimbvw_set.all().values_list('simbid', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sindiasmosnew')
 
     if paramorder==1 or paramorder==6:
         all_simbouloi = all_simbouloi.order_by('surname', 'firstname','fathername')
     elif paramorder == 2:
-        all_simbouloi = all_simbouloi.order_by('sindiasmos', 'surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by('sindiasmosnew', 'surname', 'firstname','fathername')
     elif paramorder == 3:
-        all_simbouloi = all_simbouloi.order_by('sindiasmos', 'toposeklogis', 'surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by('sindiasmosnew', 'toposeklogis', 'surname', 'firstname','fathername')
     elif paramorder == 4:
-        all_simbouloi = all_simbouloi.order_by( 'toposeklogis','sindiasmos','surname', 'firstname','fathername')
+        all_simbouloi = all_simbouloi.order_by( 'toposeklogis','sindiasmosnew','surname', 'firstname','fathername')
     else:
         all_simbouloi = all_simbouloi.order_by('toposeklogis', 'surname','firstname', 'fathername')
 
