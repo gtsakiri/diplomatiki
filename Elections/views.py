@@ -259,7 +259,13 @@ def export_psifodeltiasind_koin(request, eklid, selected_order, eidos, sunday):
 
     row_num += 2
 
-    firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak', 'plithoskentrwn','posostokatametrimenwnkentrwnk').distinct()
+    if eidos == 0:
+        firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak', 'plithoskentrwn','posostokatametrimenwnkentrwnk').distinct()
+    else:
+        if sunday == 1:
+            firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
+        else:
+            firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenab','plithoskentrwn', 'posostokatametrimenwnkentrwnb').distinct()
 
     # for col_num in range(len(firstrow[0])):
 
