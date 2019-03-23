@@ -771,6 +771,8 @@ def psifodeltiasindken(request, eklid, sunday):
 
     # φιλτράρισμα επιλεγμένου κέντρου
     selected_kentro = selected_ekloges.kentra_set.get(kenid=paramstr).kenid
+    selected_kentro_details = selected_ekloges.kentra_set.get(kenid=paramstr)
+
 
     selected_order = paramorder
 
@@ -822,6 +824,7 @@ def psifodeltiasindken(request, eklid, sunday):
                'selected_ekloges':selected_ekloges.eklid,
                'all_kentra':all_kentra,
                'selected_kentro': selected_kentro,
+               'selected_kentro_details' : selected_kentro_details,
                'selected_order':selected_order,
                'sumpsifodeltia':sumpsifodeltia,
                }

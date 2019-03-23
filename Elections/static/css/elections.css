@@ -37,7 +37,7 @@ body {
 
 #div1 {
     text-align: left;
-    background-color: #337ab7φ;
+    background-color: #337ab7;
 	/* border-bottom:1px solid #2e81ff;*/
 }
 
@@ -279,7 +279,7 @@ td.thick {
 
 td.myfontsize { 
 font-size: 14px ; 
-text-align: center;
+/*text-align: center;*/
 font-weight: bold;
 white-space: nowrap;
 color: blue;
@@ -306,7 +306,7 @@ div.bg2 {
 
 select.sel1 {
 font-size: 18px;
-font: bold;
+font-weight: bold;
 background-repeat:no-repeat;
 background-position:300px;
 width:300px;
@@ -322,13 +322,13 @@ color:#1c1a1a;
 }
 select.sel2{
 font-size: 14px;
-font: bold;
+font-weight: bold;
 color:blue;
 }
 
 select.sel3 {
 font-size: 14px;
-font: bold;
+font-weight: bold;
 background-repeat:no-repeat;
 background-position:300px;
 
@@ -343,14 +343,14 @@ color:#1c1a1a;
 
 
 
-tr.hide_all > td, td.hide_all{
+tr.hide_all > td, td.hide_all {
         border-style:hidden;
       }
 	  
 table.styletd1 td
 {
     width: 1px;
-    /*white-space: nowrap;  /* ΜΕ ΑΝΑΠΙΔΠΩΣΗ του κειμένου μέσα στο κελί */ */
+    /*white-space: nowrap;  /* ΜΕ ΑΝΑΠΙΔΠΩΣΗ του κειμένου μέσα στο κελί */
 }
 
 table.styletd2 td
@@ -395,13 +395,13 @@ table.d {
 
 .heighttext {
 font-size: 14px;
-font: bold;
+font-weight: bold;
 background-repeat:no-repeat;
 background-position:300px;
 padding:2px;
 margin-top:8px;
-padding:2px;
-font-family:Calibri;
+padding: 2px;
+font-family : Calibri;
 line-height:2;
 border-radius:5px;
 background-color:#d9edf7;
@@ -419,13 +419,10 @@ color:#1c1a1a;
  }
  
 .field_error {
- color:red;	
+    color: red;
 }
 
-<style>
-* {
-    box-sizing: border-box;
-}
+
 
 /* Create two unequal columns that floats next to each other */
 .column {

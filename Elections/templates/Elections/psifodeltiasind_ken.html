@@ -67,7 +67,57 @@
                  {% endif %}
              </div>
 
-            <div class="divmargin"></div>
+
+
+            <br>
+
+            <table class="table table-bordered table-condensed  text-left">
+
+                   <tbody >
+
+                   {% if sunday == 1 %}
+
+                         <tr>
+                            <td >Εγγεγραμμένοι : {{ selected_kentro_details.eggegrammenoia }}</td>
+                            <td >Ψήφισαν : {{ selected_kentro_details.psifisana }}</td>
+                            <td class="myfontsize">Έγκυρα : {{ selected_kentro_details.egkiraa }}</td>
+                         </tr>
+                         <tr>
+                            <td >Άκυρα : {{ selected_kentro_details.akiraa }}</td>
+                            <td >Λευκά : {{ selected_kentro_details.lefkaa }}</td>
+                            <td >Σύνολο Άκυρα/Λευκά : {{ selected_kentro_details.sinoloakiralefkaa }}</td>
+                         </tr>
+                     {%  elif sunday == 2 %}
+                         <tr>
+                            <td >Εγγεγραμμένοι : {{ selected_kentro_details.eggegrammenoib }}</td>
+                            <td >Ψήφισαν : {{ selected_kentro_details.psifisanb }}</td>
+                            <td class="myfontsize">Έγκυρα : {{ selected_kentro_details.egkirab }}</td>
+                         </tr>
+                         <tr>
+                            <td >Άκυρα : {{ selected_kentro_details.akirab }}</td>
+                            <td >Λευκά : {{ selected_kentro_details.lefkab }}</td>
+                            <td >Σύνολο Άκυρα/Λευκά : {{ selected_kentro_details.sinoloakiralefkab }}</td>
+                         </tr>
+
+                     {%  else %}
+                        <tr>
+                            <td >Εγγεγραμμένοι : {{ selected_kentro_details.eggegrammenoik }}</td>
+                            <td >Ψήφισαν : {{ selected_kentro_details.psifisank }}</td>
+                            <td class="myfontsize">Έγκυρα : {{ selected_kentro_details.egkirak }}</td>
+                         </tr>
+                         <tr>
+                            <td >Άκυρα : {{ selected_kentro_details.akirak }}</td>
+                            <td >Λευκά : {{ selected_kentro_details.lefkak }}</td>
+                            <td >Σύνολο Άκυρα/Λευκά : {{ selected_kentro_details.sinoloakiralefkab }}</td>
+                         </tr>
+
+                     {% endif %}
+
+                   </tbody>
+
+
+                </table>
+
 
 
                  <table class="table table-bordered table-condensed table-hover">
@@ -79,7 +129,7 @@
                    </tr>
                    {% for p in all_psifodeltia %}
                          <tr>
-                            <td >{{ p.sindiasmosnew }}</td>
+                            <td ><h6>{{ p.sindiasmosnew }}</h6></td>
                              {% if sunday == 1 %}
                                 <td class="myfontsize">{{ p.votes }}</td>
                              {% elif sunday == 2 %}
@@ -163,6 +213,8 @@
      </div>
 
 
+
+ </div>
 
  </div>
 
