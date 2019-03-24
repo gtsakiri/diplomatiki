@@ -511,6 +511,7 @@ def pososta_telika(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view (μόνο καθολικοί συνδυασμοί επιλέγονται)
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
     all_sind = Sindiasmoi.objects.filter(sindid__in=(all_pososta.values_list('sindid')))
+    all_eklsind= Eklsind.objects.filter(eklid=eklid)
 
     oldeklid=-1
     #Βρίσκω το id Της ακριβώς προηγούμενης αναμέτρησης
@@ -545,7 +546,8 @@ def pososta_telika(request, eklid):
                'all_pososta_prin': all_pososta_prin,
                'all_pososta_prin_list': all_pososta_prin_list,
                'diafores_list': diafores_list,
-               'all_sind': all_sind,}
+               'all_sind': all_sind,
+               'all_eklsind': all_eklsind,}
 
     return render(request, 'Elections/pososta_telika.html',context)
 

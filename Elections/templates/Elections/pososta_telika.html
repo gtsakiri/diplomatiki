@@ -22,7 +22,11 @@
                         type: 'column'
                     },
                     title: {
-                        text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων (για Δημ. Συμβούλιο)</span>',
+                        {% if all_pososta.count > 0 %}
+                           text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων (για Δημ. Συμβούλιο)</span>',
+                        {% else %}
+                           text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  0 % των εκλ. κέντρων (για Δημ. Συμβούλιο)</span>',
+                        {% endif %}
                         style: {
                             color: 'red',
                             fontSize:'20px'
@@ -30,7 +34,11 @@
                     },
                     xAxis: {
                         categories: [
+                            {% if all_pososta.count > 0 %}
                         {% for entry in all_pososta %}'<span class="label label-primary">{{ entry.shortdescrnew }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                            {% else %}
+                                {% for entry in all_eklsind %}'<span class="label label-primary">{{ entry.shortdescr}}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                            {% endif %}
                       ],
                         labels: {
                         style: {
@@ -44,7 +52,11 @@
                         name: 'Ποσοστά υποψηφίων',
                         colorByPoint: true,
                       data: [
-                        {% for entry in all_pososta %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                          {% if all_pososta.count > 0 %}
+                                {% for entry in all_pososta %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                          {% else %}
+                                {% for entry in all_eklsind %}'<span class="label label-primary"> 0 </span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                          {% endif %}
                       ],
                       colors: ['#f3f36b',  '#807c7a', '#a24508', '#375772', '#f1deef', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
                     }],
@@ -67,8 +79,9 @@
 
                 <div class="container-fluid" overflow:auto align="center">
 
+                          {% if all_pososta.count > 0 %}
 
-                           <table class="a table table-bordered  table-striped">
+                            <table class="a table table-bordered  table-striped">
 
                                 <tbody >
                                 <tr>
@@ -145,6 +158,8 @@
 
                                 </tbody>
                            </table>
+
+                         {% endif %}
 
 
 
