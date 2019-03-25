@@ -48,8 +48,10 @@ def export_psifoiper_xls(request,eklid, selected_order):
 
     firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
     # for col_num in range(len(firstrow[0])):
-    ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
-
+    if firstrow:
+        ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
+    else:
+        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
     font_style.font.bold = True
@@ -102,7 +104,10 @@ def export_psifoikoin_xls(request,eklid, selected_order):
 
     firstrow=EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
     #for col_num in range(len(firstrow[0])):
-    ws.write(row_num, 0, 'Στα ' + str(firstrow[0][0])+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2])+'%)', font_style)
+    if firstrow:
+        ws.write(row_num, 0, 'Στα ' + str(firstrow[0][0])+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2])+'%)', font_style)
+    else:
+        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -170,24 +175,27 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
         firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak', 'plithoskentrwn','posostokatametrimenwnkentrwnk').distinct()
 
     # for col_num in range(len(firstrow[0])):
+    if firstrow:
+        if firstrow[0][0] is not None:
+            katametrimena = firstrow[0][0]
+        else:
+            katametrimena = 0
 
-    if firstrow[0][0] is not None:
-        katametrimena = firstrow[0][0]
+        if firstrow[0][1] is not None:
+            sinoloKentrwn = firstrow[0][1]
+        else:
+            sinoloKentrwn = 0
+
+        if firstrow[0][2] is not None:
+            pososto_katametrimenwn = firstrow[0][2]
+        else:
+            pososto_katametrimenwn = 0
+
+        ws.write(row_num, 0,'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
     else:
-        katametrimena = 0
-
-    if firstrow[0][1] is not None:
-        sinoloKentrwn = firstrow[0][1]
-    else:
-        sinoloKentrwn = 0
-
-    if firstrow[0][2] is not None:
-        pososto_katametrimenwn = firstrow[0][2]
-    else:
-        pososto_katametrimenwn = 0
+        ws.write(row_num, 0,'Δεν υπάρχουν καταχωρήσεις!', font_style)
 
 
-    ws.write(row_num, 0,'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -268,24 +276,26 @@ def export_psifodeltiasind_koin(request, eklid, selected_order, eidos, sunday):
             firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenab','plithoskentrwn', 'posostokatametrimenwnkentrwnb').distinct()
 
     # for col_num in range(len(firstrow[0])):
+    if firstrow:
+        if firstrow[0][0] is not None:
+            katametrimena = firstrow[0][0]
+        else:
+            katametrimena = 0
 
-    if firstrow[0][0] is not None:
-        katametrimena = firstrow[0][0]
+        if firstrow[0][1] is not None:
+            sinoloKentrwn = firstrow[0][1]
+        else:
+            sinoloKentrwn = 0
+
+        if firstrow[0][2] is not None:
+            pososto_katametrimenwn = firstrow[0][2]
+        else:
+            pososto_katametrimenwn = 0
+
+        ws.write(row_num, 0, 'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
+
     else:
-        katametrimena = 0
-
-    if firstrow[0][1] is not None:
-        sinoloKentrwn = firstrow[0][1]
-    else:
-        sinoloKentrwn = 0
-
-    if firstrow[0][2] is not None:
-        pososto_katametrimenwn = firstrow[0][2]
-    else:
-        pososto_katametrimenwn = 0
-
-
-    ws.write(row_num, 0,'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
+        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -351,7 +361,11 @@ def export_psifoisimb_ken(request,eklid, selected_order):
 
     firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
     # for col_num in range(len(firstrow[0])):
-    ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
+
+    if firstrow:
+        ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
+    else:
+        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -3762,6 +3776,11 @@ def edit_psifoi_kentrou2(request,eklid, kenid):
         all_psifoi = all_psifoi.order_by('eidos', 'surname')
     else:
         all_psifoi = all_psifoi.order_by('surname')
+
+    ####
+
+
+    ####
 
 
 
