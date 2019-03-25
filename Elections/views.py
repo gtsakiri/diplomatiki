@@ -51,7 +51,10 @@ def export_psifoiper_xls(request,eklid, selected_order):
     if firstrow:
         ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
     else:
-        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+        return redirect('psifoisimb_perifereies', eklid)
+
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
     font_style.font.bold = True
@@ -82,7 +85,7 @@ def export_psifoiper_xls(request,eklid, selected_order):
     wb.save(response)
     return response
 
-def export_psifoikoin_xls(request,eklid, selected_order):
+def export_psifoikoin_xls(request,eklid, selected_order, eidoskoinotitas):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="psifoikoin.xls"'
 
@@ -107,7 +110,9 @@ def export_psifoikoin_xls(request,eklid, selected_order):
     if firstrow:
         ws.write(row_num, 0, 'Στα ' + str(firstrow[0][0])+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2])+'%)', font_style)
     else:
-        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+        return redirect('psifoisimb_koinotites', eklid, eidoskoinotitas)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -125,15 +130,15 @@ def export_psifoikoin_xls(request,eklid, selected_order):
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','-sumvotes')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','-sumvotes')
     elif selected_order == 2:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','surname')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','surname')
     elif selected_order == 3:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','-sumvotes')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','-sumvotes')
     elif selected_order == 4:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis','sumvotes').order_by('toposeklogis', 'surname')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis','sumvotes').order_by('toposeklogis', 'surname')
     else:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','-sumvotes')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','-sumvotes')
 
     for row in rows:
         row_num += 1
@@ -191,9 +196,16 @@ def export_psifodeltiasind_ken(request, eklid, sunday, selected_order):
         else:
             pososto_katametrimenwn = 0
 
+
+        if katametrimena==0:
+            messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+            return redirect('psifodeltiasind_ken', eklid, sunday)
+
         ws.write(row_num, 0,'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
     else:
-        ws.write(row_num, 0,'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        #ws.write(row_num, 0,'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+        return redirect('psifodeltiasind_ken',eklid,sunday)
 
 
 
@@ -292,10 +304,16 @@ def export_psifodeltiasind_koin(request, eklid, selected_order, eidos, sunday):
         else:
             pososto_katametrimenwn = 0
 
+        if katametrimena==0:
+            messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+            return redirect('psifodeltiasind_koin', eklid, eidos,sunday)
+
         ws.write(row_num, 0, 'Στα ' + str(katametrimena) + ' από τα ' + str(sinoloKentrwn) + ' εκλ. κέντρα (Ποσοστό ' + str(pososto_katametrimenwn) + '%)', font_style)
 
     else:
-        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+        return redirect('psifodeltiasind_koin', eklid, eidos,sunday)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -365,7 +383,9 @@ def export_psifoisimb_ken(request,eklid, selected_order):
     if firstrow:
         ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
     else:
-        ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
+        messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
+        return redirect('psifoisimb_ken', eklid)
 
     font_style = xlwt.XFStyle()
     font_style.font.height = 240
@@ -709,7 +729,11 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
         paramstr = int(paramstr)
     except:
         p = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).order_by('toposeklogisid')
-        paramstr=p[0].toposeklogisid  # default toposeklogisid θα είναι ο πρώτος της λίστας αν δεν δοθεί κάτι
+        if p:
+            paramstr=p[0].toposeklogisid  # default toposeklogisid θα είναι ο πρώτος της λίστας αν δεν δοθεί κάτι
+        else:
+            paramstr=Kentra.objects.filter(eklid=eklid).order_by('kenid')
+            paramstr=paramstr[0].kenid
 
     try:
         paramorder = int(paramorder)
@@ -758,6 +782,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
                'all_koinotites':all_koinotites,
                'selected_koinotita': selected_koinotita,
                'selected_order':selected_order,
+               'eidoskoinotitas': eidoskoinotitas,
                'selected_menu':selected_menu,}
     return render(request, 'Elections/psifoisimb_koinotites.html',context)
 
@@ -946,7 +971,13 @@ def psifoisimb_ken(request, eklid):
     except:
         p = selected_ekloges.eklpsifoisimbvw_set.all().order_by('kentro')
         #EklPsifoisimbVw.objects.filter(eklid=eklid).order_by('kentro')
-        paramstr=p[0].kenid.kenid  # default kenid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
+        if p:
+            paramstr = p[0].kenid.kenid  # default kenid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
+        else:
+            paramstr=Kentra.objects.filter(eklid=eklid).order_by('kenid')
+            paramstr=paramstr[0].kenid
+        #paramstr=p[0].kenid.kenid  # default kenid θα είναι το πρώτο της λίστας αν δεν δοθεί κάτι
+
 
     try:
         paramorder = int(paramorder)

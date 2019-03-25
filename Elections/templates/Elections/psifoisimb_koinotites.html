@@ -6,6 +6,8 @@
 
  {% block content %}
 
+     {% include 'Elections/messages.html' %}
+
 <div class="divmargin">
 <label class="label4">Κατάταξη υποψηφίων συμβούλων κοινοτήτων {{ selected_menu }}</label>
 </div>
@@ -45,7 +47,7 @@
              <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατά Σύνολο ψήφων</option>
          </select>
 
-        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order %}"> <i class="far fa-file-excel"></i> <label class="label5"> Εξαγωγή όλων σε excel</label></a>
+        <a style="color: blue;  font-family:Calibri;" class="pull-right" href="{% url 'export_psifoikoin_xls' selected_ekloges selected_order eidoskoinotitas%}"> <i class="far fa-file-excel"></i> <label class="label5"> Εξαγωγή όλων σε excel</label></a>
 
         </div>
 
