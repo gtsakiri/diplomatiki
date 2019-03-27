@@ -23,7 +23,15 @@
                     },
                     title: {
                         {% if all_pososta.count > 0 %}
-                           text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων (για Δημ. Συμβούλιο)</span>',
+                            {% if sunday == 1 %}
+                                text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων (για Δημ. Συμβούλιο - Α Κυριακή)</span>',
+                            {% else %}
+                                {% if all_pososta.0.posostokatametrimenwnkentrwnb > 0 %}
+                                    text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwnb }} % των εκλ. κέντρων (για Δημ. Συμβούλιο - Β Κυριακή)</span>',
+                                {% else %}
+                                    text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  0 % των εκλ. κέντρων (για Δημ. Συμβούλιο - Β Κυριακή)</span>',
+                                {% endif %}
+                            {%  endif %}
                         {% else %}
                            text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  0 % των εκλ. κέντρων (για Δημ. Συμβούλιο)</span>',
                         {% endif %}
@@ -35,7 +43,7 @@
                     xAxis: {
                         categories: [
                             {% if all_pososta.count > 0 %}
-                        {% for entry in all_pososta %}'<span class="label label-primary">{{ entry.shortdescrnew }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
+                                {% for entry in all_pososta %}'<span class="label label-primary">{{ entry.shortdescrnew }}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
                             {% else %}
                                 {% for entry in all_eklsind %}'<span class="label label-primary">{{ entry.shortdescr}}</span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
                             {% endif %}
@@ -53,7 +61,11 @@
                         colorByPoint: true,
                       data: [
                           {% if all_pososta.count > 0 %}
-                                {% for entry in all_pososta %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                              {% if sunday == 1 %}
+                                 {% for entry in all_pososta %}{{ entry.posostosindiasmou }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                              {% else %}
+                                  {% for entry in all_pososta %}{{ entry.posostosindiasmoub }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                              {% endif %}
                           {% else %}
                                 {% for entry in all_eklsind %}'<span class="label label-primary"> 0 </span> ' {% if not forloop.last %}, {% endif %}{% endfor %}
                           {% endif %}
@@ -98,16 +110,22 @@
                                         <td class="thick">Ποσοστό</td>
                                            {% for p in all_pososta %}
                                                 <td class="myfontsize text-center">
-                                                    {{ p.posostosindiasmou }} %
+                                                    {% if sunday == 1 %}
+                                                        {{ p.posostosindiasmou }} %
+                                                    {% else %}
+                                                        {{ p.posostosindiasmoub }} %
+                                                    {% endif %}
                                                     <br>
-
-                                                    <small>({{ p.sumvotes  }} ψήφοι)</small>
-
+                                                    {% if sunday == 1 %}
+                                                        <small>({{ p.sumvotes  }} ψήφοι)</small>
+                                                    {% else %}
+                                                        <small>({{ p.sumvotesb  }} ψήφοι)</small>
+                                                    {% endif %}
                                                 </td>
                                            {% endfor %}
                                  </tr>
 
-                                {% if all_pososta_prin.count %}
+                                {% if all_pososta_prin.count and sunday == 1 %}
                                     <tr>
                                         <td class="thick">{{ all_pososta_prin.0.eklid.descr }}</td>
                                         {% for p in all_pososta %}

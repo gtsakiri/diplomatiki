@@ -143,7 +143,7 @@
 
                     <li><label class="tree-toggler nav-header label8"><span class="glyphicon glyphicon-stats"></span> ΑΠΟΤΕΛΕΣΜΑΤΑ</label>
                         <ul class=" nav nav-list tree" style="font-size: 13px; ">
-                            <li><a href="{% url 'pososta_telika' selected_ekloges %} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά Α' Κυριακής)</a></li>
+                            <li><a href="{% url 'pososta_telika' selected_ekloges 1%} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά Α' Κυριακής)</a></li>
                             <li><a href="{% url 'pososta_perifereies' selected_ekloges  %}" id="m2">Ποσοστά συνδυασμών ανά εκλ. περιφέρεια (συγκεντρωτικά Α' Κυριακής)</a></li>
 
                         <hr class="style11">
@@ -151,7 +151,7 @@
                             <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 1%}" id="m9">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά εκλ. κέντρο (Α' Κυριακή)</a></li>
                             <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 1 1%}" id="m10">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά Κοινότητα (Α' Κυριακή)</a></li>
                         <hr class="style11">
-
+                            <li><a href="{% url 'pososta_telika' selected_ekloges 2%} "  id="m1">Ποσοστά συνδυασμών (συγκεντρωτικά Β' Κυριακής)</a></li>
                             <li><a href="{% url 'psifodeltiasind_ken' selected_ekloges 2%}" id="m11">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά εκλ. κέντρο (Β' Κυριακή)</a></li>
                             <li><a href="{% url 'psifodeltiasind_koin' selected_ekloges 1 2%}" id="m12">Ψηφοδέλτια συνδυασμών για την εκλογή Δημοτικής Αρχής ανά Κοινότητα (Β' Κυριακή)</a></li>
                         <hr class="style11">

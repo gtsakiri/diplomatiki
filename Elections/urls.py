@@ -95,7 +95,7 @@ path('eklogesedit/<int:eklid>/<int:cureklid>/', views.ekloges_edit, name='ekloge
 path('eklogesadd/<int:eklid>/', views.ekloges_add, name='ekloges_add'),
 path('eklogesdelete/<int:eklid>/<int:cureklid>/', views.ekloges_delete, name='ekloges_delete'),
 
-path('pososta/<int:eklid>/', views.pososta_telika, name='pososta_telika'),
+path('pososta/<int:eklid>/<int:sunday>/', views.pososta_telika, name='pososta_telika'),
 path('posostaper/<int:eklid>/', views.pososta_perifereies, name='pososta_perifereies'),
 
 path('psifoisimbperifereies/<int:eklid>/', views.psifoisimb_perifereies, name='psifoisimb_perifereies'),

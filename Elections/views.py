@@ -534,7 +534,7 @@ def Elections_list(request, eklid=0):
     return render(request, 'Elections/Elections_list.html',context)
 
 
-def pososta_telika(request, eklid):
+def pososta_telika(request, eklid, sunday):
 
 #ΠΟΣΟΣΤΑ ΣΥΝΔΥΑΣΜΩΝ ΣΕ ΟΛΟ ΤΟ ΔΗΜΟ
 
@@ -542,8 +542,14 @@ def pososta_telika(request, eklid):
     selected_ekloges = Eklogestbl.objects.get(eklid=eklid)
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
-    #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view (μόνο καθολικοί συνδυασμοί επιλέγονται)
-    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
+
+    if sunday == 1:
+        #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view (μόνο καθολικοί συνδυασμοί επιλέγονται)
+        all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).order_by('-posostosindiasmou')
+    else:
+        #παίρνουμε μόνο τους συνδυασμούς της Β Κυριακής (ποσοστό>0)
+        all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid, eidos=1).filter(posostosindiasmoub__gt=0).order_by('-posostosindiasmou')
+
     all_sind = Sindiasmoi.objects.filter(sindid__in=(all_pososta.values_list('sindid')))
     all_eklsind= Eklsind.objects.filter(eklid=eklid)
 
@@ -581,7 +587,8 @@ def pososta_telika(request, eklid):
                'all_pososta_prin_list': all_pososta_prin_list,
                'diafores_list': diafores_list,
                'all_sind': all_sind,
-               'all_eklsind': all_eklsind,}
+               'all_eklsind': all_eklsind,
+               'sunday' : sunday,}
 
     return render(request, 'Elections/pososta_telika.html',context)
 
