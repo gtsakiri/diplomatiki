@@ -59,17 +59,22 @@
             <br>
             <hr>
 
+            <div class="text-center small">
+                <label>{{  selected_koinotita }} (</label>
 
-                <div class="text-center">
+
+
                  {% if sunday == 1 %}
-                    <label class="label6 pull-center">Α' Κυριακή</label>
+                    <label class="pull-center">Α' Κυριακή</label>
                  {% elif sunday == 2 %}
-                    <label class="label6 pull-center">Β' Κυριακή</label>
-                 {% else %}<div class="text-center">
-                    <label class="label6 pull-center">Για το τοπικό Συμβούλιο </label>
+                    <label class="pull-center">Β' Κυριακή</label>
+                 {% else %} <label class="text-center">
+                    <label class="pull-center">Για το τοπικό Συμβούλιο </label>
                  {% endif %}
-                </div>
-             </div>
+                )
+            </div>
+
+            </div>
 
 
 
@@ -122,9 +127,7 @@
 
                 </table>
 
-                <div class="text-center small">
-                <label>{{  selected_koinotita }}</label>
-                </div>
+
 
                  <table class="table table-bordered table-condensed table-hover">
 
@@ -158,9 +161,9 @@
      <div id="container" >
      <!--style="min-width: 410px; height: 400px; max-width: 800px; margin: 0 auto" -->
 
-     <script src="https://code.highcharts.com/highcharts.src.js"></script>
-     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-     <script src="https://code.highcharts.com/modules/export-data.js"></script>
+         <script src="https://code.highcharts.com/highcharts.src.js"></script>
+         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+         <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
               <script>
               if ({{ sumpsifodeltia }}>0) {  /* Μόνο αν υπάρχουν ψηφοδέλτια καταχωρημένα δείχνω και την πίτα */
