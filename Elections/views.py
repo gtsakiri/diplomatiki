@@ -873,6 +873,7 @@ def psifodeltiasindken(request, eklid, sunday):
                'all_kentra':all_kentra,
                'selected_kentro': selected_kentro,
                'selected_kentro_details' : selected_kentro_details,
+               'selected_koinotita':selected_kentro_details.koinid.descr,
                'selected_order':selected_order,
                'sumpsifodeltia':sumpsifodeltia,
                }

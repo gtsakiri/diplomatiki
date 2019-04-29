@@ -16,6 +16,7 @@
     {%  endif  %}
 
 
+
 <div class="divmargin"> </div>
 
 
@@ -59,14 +60,15 @@
             <hr>
 
 
-             <div class="text-center">
+                <div class="text-center">
                  {% if sunday == 1 %}
                     <label class="label6 pull-center">Α' Κυριακή</label>
                  {% elif sunday == 2 %}
                     <label class="label6 pull-center">Β' Κυριακή</label>
-                 {% else %}
+                 {% else %}<div class="text-center">
                     <label class="label6 pull-center">Για το τοπικό Συμβούλιο </label>
                  {% endif %}
+                </div>
              </div>
 
 
@@ -120,7 +122,9 @@
 
                 </table>
 
-
+                <div class="text-center small">
+                <label>{{  selected_koinotita }}</label>
+                </div>
 
                  <table class="table table-bordered table-condensed table-hover">
 
@@ -146,6 +150,8 @@
                 </table>
 
             <br>
+
+            </div>
 
 
 
