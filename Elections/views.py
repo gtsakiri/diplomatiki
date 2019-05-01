@@ -3574,7 +3574,10 @@ def update_psifoi(request):
     simbid= int(request.GET.get('simbid',''))
     kenid= int(request.GET.get('kenid',''))
 
-    Psifoi.objects.filter(kenid=kenid, simbid=simbid).update(votes=votes)
+    #Psifoi.objects.filter(kenid=kenid, simbid=simbid).update(votes=votes)
+    ps=Psifoi.objects.get(kenid=kenid, simbid=simbid)
+    ps.votes=votes
+    ps.save()
     return HttpResponse('');
 
 
