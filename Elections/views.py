@@ -3578,7 +3578,7 @@ def update_psifoi(request):
     ps=Psifoi.objects.get(kenid=kenid, simbid=simbid)
     ps.votes=votes
     ps.save()
-    return HttpResponse('');
+    return HttpResponse('')
 
 
 
