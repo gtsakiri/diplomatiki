@@ -1,4 +1,5 @@
 from django.contrib import admin
+from simple_history.admin import SimpleHistoryAdmin
 
 from .models import Edres, Edreskoin, Eklogestbl, Eklper, Eklperkoin, Eklsimbkoin, Eklsimbper, Eklsind
 from .models import Eklsindkoin, Eklsindsimb, Kentra, Koinotites, Perifereies, Psifodeltia, Psifoi, Simbouloi, Sindiasmoi
@@ -54,13 +55,15 @@ class PerifereiesAdmin(admin.ModelAdmin):
     list_display = ('perid', 'descr')
     list_filter = ('descr',)
 
-class PsifodeltiaAdmin(admin.ModelAdmin):
+class PsifodeltiaHistoryAdmin(SimpleHistoryAdmin):
     list_display = ('id', 'sindid', 'kenid', 'votesa', 'votesb', 'votesk')
+    history_list_display = ["status"]
     list_filter = ('sindid', )
 
 
-class PsifoiAdmin(admin.ModelAdmin):
+class PsifoiHistoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'simbid', 'kenid', 'votes')
+    history_list_display = ["status"]
     list_filter = ('kenid', )
 
 
@@ -92,8 +95,8 @@ admin.site.register(Eklsindsimb, EklsindsimbAdmin)
 admin.site.register(Kentra, KentraAdmin)
 admin.site.register(Koinotites, KoinotitesAdmin)
 admin.site.register(Perifereies, PerifereiesAdmin)
-admin.site.register(Psifodeltia, PsifodeltiaAdmin)
-admin.site.register(Psifoi, PsifoiAdmin)
+admin.site.register(Psifodeltia, PsifodeltiaHistoryAdmin)
+admin.site.register(Psifoi, PsifoiHistoryAdmin)
 admin.site.register(Simbouloi, SimbouloiAdmin)
 admin.site.register(Sindiasmoi, SindiasmoiAdmin)
 admin.site.register(Sistima, SistimaAdmin)

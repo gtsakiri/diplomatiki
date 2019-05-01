@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from simple_history.models import HistoricalRecords
 
 
 class Edres(models.Model):
@@ -293,6 +294,7 @@ class Psifodeltia(models.Model):
     votesa = models.IntegerField(db_column='votesA', default=0)  # Field name made lowercase.
     votesb = models.IntegerField(db_column='votesB', default=0)  # Field name made lowercase.
     votesk = models.IntegerField(db_column='votesK', default=0)  # Field name made lowercase.
+    history = HistoricalRecords()
 
     def __str__(self):
         return  str(self.sindid) +  ' - ' + str(self.kenid)
@@ -308,6 +310,7 @@ class Psifoi(models.Model):
     simbid = models.ForeignKey(Simbouloi, models.CASCADE, db_column='simbID', db_index=True)  # Field name made lowercase.
     votes = models.IntegerField(default=0)
     kenid = models.ForeignKey(Kentra, models.CASCADE, db_column='kenID', db_index=True)  # Field name made lowercase.
+    history = HistoricalRecords()
 
     def __str__(self):
         return  str(self.simbid) + ' - ' +  str(self.kenid) + ' - ' + str(self.votes)
