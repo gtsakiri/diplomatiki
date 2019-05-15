@@ -32,8 +32,8 @@
 
                  <select   class="sel3" name="orderoption"  onchange="psifoi.submit()">
                      <option  value="6" {% if selected_order ==  5  %}selected{%endif%}>-----------------------Επιλογή ταξινόμησης-----------------------</option>
-                     <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>ΑΑ Συνδυασμού/Κατηγορία/Περιοχή εκλογής/Επώνυμο</option>
-                     <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>ΑΑ Συνδυασμού/Κατηγορία/Επώνυμο</option>
+                     <option  value="1" {% if selected_order ==  1  %}selected{%endif%}>Συνδυασμό/Κατηγορία/Περιοχή εκλογής/Επώνυμο</option>
+                     <option  value="2" {% if selected_order ==  2  %}selected{%endif%}>Συνδυασμό/Κατηγορία/Επώνυμο</option>
                      <option  value="3" {% if selected_order ==  3  %}selected{%endif%}>Κατηγορία/Επώνυμο</option>
                      <option  value="4" {% if selected_order ==  4  %}selected{%endif%}>Επώνυμο</option>
                  </select>
@@ -55,7 +55,6 @@
                         <td class="thick">Όνομα</td>
                         <td class="thick">Όν. Πατρός</td>
                         <td class="thick">Συνδυασμός</td>
-                        <td class="thick">ΑΑ Συνδυασμού</td>
                         <td class="thick">Κατηγορία Υποψηφίου</td>
                         <td class="thick">Περιοχή εκλογής</td>
                         <td class="thick">Ψήφοι</td>
@@ -67,7 +66,6 @@
                         <td class="firstname"> {{ p.2 }} </td>
                         <td class="fathername"> {{ p.3 }}</td>
                         <td class="shortsind"> {{ p.5 }}</td>
-                        <td class="sindaa"> {{ p.6 }}</td>
                         <td class="eidos"> {{ p.7 }}</td>
                         <td class="toposeklogis"> {{ p.9 }}</td>
                         <td class="votes"> <input type="number" id="votes{{ p.13 }}" onkeypress="return event.charCode >= 48" min=0 class="form-control input-sm" name="votes" value="{{ p.10}}">
