@@ -38,13 +38,14 @@
 
   </head>
 
-  <body  background="media/bgekloges.png" class="img-fluid" alt="Responsive image">
+  <body  background="media/bgekloges2.jpg" class="img-fluid" alt="Responsive image">
 
   <nav class="navbar navbar-default">
 
     <div class="container-fluid">
 
         <!-- header -->
+    <center><label class="navbar-center"   style="color: white; font-size:18px"; > Σύστημα διαχείρισης δημοτικών εκλογών  - Δήμος Σερρών 2019</label></center>
         <div class="navbar-header">
 
             <!-- δημιουργία κουμπιού sandwich όπως στο android-->
@@ -55,7 +56,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'Elections_list' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+
+
+            <!--<a class="navbar-brand" href="{% url 'Elections_list' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> -->
+            <a href="{% url 'Elections_list' %}">  <img src="/media/serresgr-logo3.png" > </a>
 
         </div>
 
@@ -75,8 +79,10 @@
 -->
         <!--
                <center><label style="color: orangered; font-size: 22px "; > Δοκιμαστικό περιβάλλον !</label></center>
+                <center><h4><label style="color: orangered;"; > Τα στοιχεία που έχουν καταχωρηθεί για το 2019 αποτελούν δεδομένα για δοκιμαστική χρήση μόνο!</label></h4></center>
          -->
-         <center><h4><label style="color: orangered;"; > Τα στοιχεία που έχουν καταχωρηθεί για το 2019 αποτελούν δεδομένα για δοκιμαστική χρήση μόνο!</label></h4></center>
+
+
 
                 <ul class="nav navbar-nav navbar-right">
 
