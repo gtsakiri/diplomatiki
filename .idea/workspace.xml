@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_15_05_2019">
+    <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="grafeio_16_05_2019">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
     </list>
@@ -122,8 +122,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+            <state relative-caret-position="578">
+              <caret line="61" column="76" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
               <folding>
                 <element signature="n#style#0;n#label#0;n#center#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#3842#3848#0#HTML" expanded="true" />
@@ -430,20 +430,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00146" summary="home_15_12_2018">
-      <created>1544877607272</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1544877607272</updated>
-    </task>
-    <task id="LOCAL-00147" summary="home_15_12_2018">
-      <created>1544878881676</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1544878881676</updated>
     </task>
     <task id="LOCAL-00148" summary="home_15_12_2018">
       <created>1544881441043</created>
@@ -774,7 +760,21 @@
       <option name="project" value="LOCAL" />
       <updated>1557920345550</updated>
     </task>
-    <option name="localTasksCounter" value="195" />
+    <task id="LOCAL-00195" summary="grafeio_16_05_2019">
+      <created>1557993966140</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1557993966141</updated>
+    </task>
+    <task id="LOCAL-00196" summary="grafeio_16_05_2019">
+      <created>1557995107106</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1557995107106</updated>
+    </task>
+    <option name="localTasksCounter" value="197" />
     <servers />
   </component>
   <component name="TodoView">
@@ -883,7 +883,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="home_13_01_2019" />
     <MESSAGE value="grafeio_25_02_2019" />
     <MESSAGE value="grafeio_26_02_2019" />
     <MESSAGE value="grafeio_27_02_2019" />
@@ -908,7 +907,8 @@
     <MESSAGE value="home_29_04_2019" />
     <MESSAGE value="grafeio_02_05_2019" />
     <MESSAGE value="grafeio_15_05_2019" />
-    <option name="LAST_COMMIT_MESSAGE" value="grafeio_15_05_2019" />
+    <MESSAGE value="grafeio_16_05_2019" />
+    <option name="LAST_COMMIT_MESSAGE" value="grafeio_16_05_2019" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1279,8 +1279,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+        <state relative-caret-position="578">
+          <caret line="61" column="76" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
           <folding>
             <element signature="n#style#0;n#label#0;n#center#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#3842#3848#0#HTML" expanded="true" />
