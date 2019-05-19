@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="587e42e5-e1c5-4be5-955c-bf1e85a89d27" name="Default Changelist" comment="home_18_05_2019">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/static/css/elections.css" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/static/css/elections.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elections/templates/Elections/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Elections/templates/Elections/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -140,8 +138,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="103" column="412" lean-forward="true" selection-start-line="103" selection-start-column="412" selection-end-line="103" selection-end-column="446" />
+            <state relative-caret-position="296">
+              <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
               <folding>
                 <element signature="e#4837#4843#0#HTML" expanded="true" />
                 <element signature="e#4844#4850#0#HTML" expanded="true" />
@@ -404,13 +402,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533926567464</updated>
-    </task>
-    <task id="LOCAL-00151" summary="home_13_01_2019">
-      <created>1547411023789</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
-      <option name="project" value="LOCAL" />
-      <updated>1547411023789</updated>
     </task>
     <task id="LOCAL-00152" summary="grafeio_25_02_2019">
       <created>1551098464559</created>
@@ -748,7 +739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558180405446</updated>
     </task>
-    <option name="localTasksCounter" value="200" />
+    <task id="LOCAL-00200" summary="home_18_05_2019">
+      <created>1558206933046</created>
+      <option name="number" value="00200" />
+      <option name="presentableId" value="LOCAL-00200" />
+      <option name="project" value="LOCAL" />
+      <updated>1558206933047</updated>
+    </task>
+    <option name="localTasksCounter" value="201" />
     <servers />
   </component>
   <component name="TodoView">
@@ -770,7 +768,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3270242" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.74161077" weight="0.3144059" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6578125" visible="true" weight="0.31039137" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6578125" weight="0.31039137" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23011734" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -1249,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Elections/templates/Elections/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="103" column="412" lean-forward="true" selection-start-line="103" selection-start-column="412" selection-end-line="103" selection-end-column="446" />
+        <state relative-caret-position="296">
+          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
           <folding>
             <element signature="e#4837#4843#0#HTML" expanded="true" />
             <element signature="e#4844#4850#0#HTML" expanded="true" />
