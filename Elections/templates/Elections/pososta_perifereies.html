@@ -42,7 +42,8 @@
                    type: 'column'
                },
                title: {
-                   text: '<span class="label label-primary">' + 'Ποσοστά συνδυασμών ' +   ' στο ' + {{ all_pososta.0.posostokatametrimenwnkentrwn }} + ' % των εκλ. κέντρων (Α Κυριακής)' +
+                   text: '<span class="label label-primary">' + 'Ποσοστά συνδυασμών ' +   ' στο ' +
+                   {% if all_pososta.0.posostokatametrimenwnkentrwn > 0 %} {{  all_pososta.0.posostokatametrimenwnkentrwn }}{% else %} 0 {% endif %}+ ' % των εκλ. κέντρων (Α Κυριακής)' +
                         '<br>'  + '(' + perifereia + ')' + '</span>',
                    style: {
                        color: 'red',
