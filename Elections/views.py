@@ -73,7 +73,7 @@ def export_psifoiper_xls(request,eklid, selected_order):
     if selected_order == 1:
         rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmosnew','-sumvotes')
     elif selected_order == 2:
-        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmosnew','surname')
+        rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('sindiasmosnew','surname', 'firstname')
     else:
         rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('-sumvotes')
 
@@ -132,11 +132,11 @@ def export_psifoikoin_xls(request,eklid, selected_order, eidoskoinotitas):
     if selected_order == 1:
         rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','-sumvotes')
     elif selected_order == 2:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','surname')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','sindiasmosnew','surname',  'firstname')
     elif selected_order == 3:
         rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','-sumvotes')
     elif selected_order == 4:
-        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis','sumvotes').order_by('toposeklogis', 'surname')
+        rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis','sumvotes').order_by('toposeklogis', 'surname', 'firstname')
     else:
         rows = EklSumpsifoisimbKoinVw.objects.filter(eklid=eklid).filter(eidoskoinotitas=eidoskoinotitas).values_list('sindiasmosnew', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes').order_by('toposeklogis','-sumvotes')
 
@@ -405,9 +405,9 @@ def export_psifoisimb_ken(request,eklid, selected_order):
     if selected_order == 1 or selected_order == 6:
         rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','sindiasmosnew', '-votes')
     elif selected_order == 2:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid', 'sindiasmosnew','surname')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid', 'sindiasmosnew','surname', 'firstname')
     elif selected_order == 3:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','surname')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','surname','firstname')
     elif selected_order == 4:
         rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','-votes')
     else:
@@ -677,7 +677,7 @@ def psifoisimb_perifereies(request, eklid):
     if paramorder==1:
         all_psifoi = all_psifoi.order_by('sindiasmosnew','-sumvotes')
     elif paramorder==2 :
-        all_psifoi = all_psifoi.order_by('sindiasmosnew','surname')
+        all_psifoi = all_psifoi.order_by('sindiasmosnew','surname', 'firstname')
     else:
         all_psifoi = all_psifoi.order_by('-sumvotes')
 
@@ -774,11 +774,11 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
     if paramorder==1:
         all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('sindiasmosnew','-sumvotes')
     elif paramorder==2 :
-        all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('sindiasmosnew','surname')
+        all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('sindiasmosnew','surname', 'firstname')
     elif paramorder==3:
         all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('-sumvotes')
     elif paramorder==4:
-        all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('surname')
+        all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('surname', 'firstname')
     else:
         all_psifoi = EklSumpsifoisimbKoinVw.objects.filter(toposeklogisid=paramstr).order_by('-sumvotes')
 
@@ -1009,9 +1009,9 @@ def psifoisimb_ken(request, eklid):
     if paramorder==1 or paramorder==6:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmosnew','-votes')
     elif paramorder == 2:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmosnew','surname')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('sindiasmosnew','surname', 'firstname')
     elif paramorder == 3:
-        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname')
+        all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('surname', 'firstname')
     elif paramorder == 4:
         all_psifoi = EklPsifoisimbVw.objects.filter(kenid=paramstr).order_by('-votes')
     else:
@@ -3811,13 +3811,13 @@ def edit_psifoi_kentrou2(request,eklid, kenid):
 
     all_psifoi=selected_ekloges.eklpsifoisimbvw_set.filter(kenid=kenid).values_list('simbid', 'surname', 'firstname', 'fathername', 'sindiasmosnew', 'shortdescrnew', 'sindaa','eidos', 'simbaa', 'toposeklogis', 'votes', 'kenid', 'koinotita', 'id', 'kenid__perid__descr')
     if paramorder==1 or paramorder==5:
-        all_psifoi = all_psifoi.order_by('sindiasmosnew', 'eidos', 'toposeklogis', 'surname')
+        all_psifoi = all_psifoi.order_by('sindiasmosnew', 'eidos', 'toposeklogis', 'surname', 'firstname')
     elif paramorder == 2:
-        all_psifoi = all_psifoi.order_by('sindiasmosnew', 'eidos', 'surname')
+        all_psifoi = all_psifoi.order_by('sindiasmosnew', 'eidos', 'surname', 'firstname')
     elif paramorder == 3:
-        all_psifoi = all_psifoi.order_by('eidos', 'surname')
+        all_psifoi = all_psifoi.order_by('eidos', 'surname', 'firstname')
     else:
-        all_psifoi = all_psifoi.order_by('surname')
+        all_psifoi = all_psifoi.order_by('surname', 'firstname')
 
     ####
 
