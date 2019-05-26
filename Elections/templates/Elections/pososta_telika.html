@@ -24,10 +24,10 @@
                     title: {
                         {% if all_pososta.count > 0 %}
                             {% if sunday == 1 %}
-                                text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % των εκλ. κέντρων (για Δημ. Συμβούλιο - Α Κυριακή)</span>',
+                                text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwn }} % ({{ all_pososta.0.katametrimena }} από  {{ all_pososta.0.plithoskentrwn }}) των εκλ. κέντρων (για Δημ. Συμβούλιο - Α Κυριακή)</span>',
                             {% else %}
                                 {% if all_pososta.0.posostokatametrimenwnkentrwnb > 0 %}
-                                    text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwnb }} % των εκλ. κέντρων (για Δημ. Συμβούλιο - Β Κυριακή)</span>',
+                                    text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  {{ all_pososta.0.posostokatametrimenwnkentrwnb }} % ({{ all_pososta.0.katametrimenab }} από  {{ all_pososta.0.plithoskentrwn }}) των εκλ. κέντρων (για Δημ. Συμβούλιο - Β Κυριακή)</span>',
                                 {% else %}
                                     text: '<span class="label label-primary">Συγκεντρωτικά ποσοστά συνδυασμών στο  0 % των εκλ. κέντρων (για Δημ. Συμβούλιο - Β Κυριακή)</span>',
                                 {% endif %}
