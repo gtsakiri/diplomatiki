@@ -79,6 +79,7 @@
         <table class="table styletd1 table-bordered table-condensed  table-hover">
            <tbody >
            <tr>
+                   <th class="style1">Α/Α</th>
                    <th class="style1">Επίθετο</th>
                    <th class="style1">Όνομα </th>
                     <th class="style1">Ον. πατρός  </th>
@@ -91,6 +92,7 @@
            </tr>
            {% for p in all_psifoi %}
                  <tr>
+                    <td>{{ forloop.counter }} </td>
                     <td>{{ p.2 }} </td>
                     <td >{{ p.3 }}</td>
                     <td>{{ p.4 }} </td>

@@ -64,6 +64,7 @@
 
            <tbody >
            <tr>
+                   <th class="style1">Α/Α</th>
                    <th class="style1">Επίθετο </th>
                    <th class="style1">Όνομα </th>
                     <th class="style1"> Ον. πατρός </th>
@@ -75,6 +76,7 @@
            </tr>
            {% for p in all_psifoi %}
                  <tr>
+                    <td>{{ forloop.counter }} </td>
                     <td>{{ p.surname }} </td>
                     <td >{{ p.firstname }}</td>
                     <td>{{ p.fathername }} </td>
