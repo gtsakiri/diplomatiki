@@ -19,7 +19,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
     Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
-    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw
+    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm, \
     PsifodeltiaKoinForm
@@ -669,6 +669,8 @@ def psifoisimb_perifereies(request, eklid):
 
     selected_order = paramorder
 
+    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
+
     #ανάκτηση όλων των περιφερειών
     all_perifereies=Perifereies.objects.all()
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
@@ -720,6 +722,7 @@ def psifoisimb_perifereies(request, eklid):
                'all_perifereies':all_perifereies,
                'selected_perifereia': selected_perifereia,
                'selected_order':selected_order,
+               'katametrimena_psifoi':katametrimena_psifoi,
                'sigritika' : sigritika}
 
     return render(request, 'Elections/psifoisimb_perifereies.html',context)
