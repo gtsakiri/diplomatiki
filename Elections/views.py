@@ -46,10 +46,11 @@ def export_psifoiper_xls(request,eklid, selected_order):
 
     row_num += 2
 
+    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
     firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
     # for col_num in range(len(firstrow[0])):
     if firstrow:
-        ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
+        ws.write(row_num, 0,'Στα ' + str(katametrimena_psifoi) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα', font_style)
     else:
         #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
         messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
@@ -103,12 +104,11 @@ def export_psifoikoin_xls(request,eklid, selected_order, eidoskoinotitas):
 
     row_num+=2
 
-
-
+    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
     firstrow=EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
     #for col_num in range(len(firstrow[0])):
     if firstrow:
-        ws.write(row_num, 0, 'Στα ' + str(firstrow[0][0])+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2])+'%)', font_style)
+        ws.write(row_num, 0, 'Στα ' + str(katametrimena_psifoi)+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα' , font_style)
     else:
         #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
         messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
@@ -377,11 +377,13 @@ def export_psifoisimb_ken(request,eklid, selected_order):
 
     row_num += 2
 
+    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
     firstrow = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
+
     # for col_num in range(len(firstrow[0])):
 
     if firstrow:
-        ws.write(row_num, 0,'Στα ' + str(firstrow[0][0]) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα (Ποσοστό ' + str(firstrow[0][2]) + '%)', font_style)
+        ws.write(row_num, 0,'Στα ' + str(katametrimena_psifoi) + ' από τα ' + str(firstrow[0][1]) + ' εκλ. κέντρα', font_style)
     else:
         #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
         messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
@@ -768,6 +770,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
         selected_menu = ' (> 300 κάτοικοι)'
 
     selected_order = paramorder
+    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
 
     #ανάκτηση όλων των κοινοτητων
     all_koinotites=Koinotites.objects.all().filter(eidos=eidoskoinotitas)
@@ -793,6 +796,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
                'selected_koinotita': selected_koinotita,
                'selected_order':selected_order,
                'eidoskoinotitas': eidoskoinotitas,
+               'katametrimena_psifoi' : katametrimena_psifoi,
                'selected_menu':selected_menu,}
     return render(request, 'Elections/psifoisimb_koinotites.html',context)
 
