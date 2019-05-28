@@ -683,12 +683,12 @@ def psifoisimb_perifereies(request, eklid):
     if paramorder == 1:
         all_psifoi = all_psifoi.order_by('sindiasmosnew', '-sumvotes')
         cursind = 'aaa'
-        counter = 0
+        counter = 0    #δημιουργία λίστας που θα έχει τα αα των συμβούλων για το template
         for item in all_psifoi:
-            if cursind == item[5]:
+            if cursind == item[5]:     #όποτε εμφανίζεται ο ιδιος συνδυασμός ο counter αυξάνεται...
                 counter = counter + 1
                 listaa.append(counter)
-            else:
+            else:                       # αλλιώς ξεκιναει απο την αρχη...
                 counter = 1
                 listaa.append(counter)
             cursind = item[5]
