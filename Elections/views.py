@@ -678,13 +678,24 @@ def psifoisimb_perifereies(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
-    if paramorder==1:
-        all_psifoi = all_psifoi.order_by('sindiasmosnew','-sumvotes')
-    elif paramorder==2 :
-        all_psifoi = all_psifoi.order_by('sindiasmosnew','surname', 'firstname')
+
+    listaa = []
+    if paramorder == 1:
+        all_psifoi = all_psifoi.order_by('sindiasmosnew', '-sumvotes')
+        cursind = 'aaa'
+        counter = 0
+        for item in all_psifoi:
+            if cursind == item[5]:
+                counter = counter + 1
+                listaa.append(counter)
+            else:
+                counter = 1
+                listaa.append(counter)
+            cursind = item[5]
+    elif paramorder == 2:
+        all_psifoi = all_psifoi.order_by('sindiasmosnew', 'surname', 'firstname')
     else:
         all_psifoi = all_psifoi.order_by('-sumvotes')
-
 
     oldsimb_psifoi_list = []
     all_psifoi_prin = []
@@ -725,6 +736,7 @@ def psifoisimb_perifereies(request, eklid):
                'selected_perifereia': selected_perifereia,
                'selected_order':selected_order,
                'katametrimena_psifoi':katametrimena_psifoi,
+               'listaa' : listaa,
                'sigritika' : sigritika}
 
     return render(request, 'Elections/psifoisimb_perifereies.html',context)

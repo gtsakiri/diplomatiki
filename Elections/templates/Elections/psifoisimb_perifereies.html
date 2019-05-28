@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load elections_extras %}
 
+
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
  {% block content %}
@@ -92,7 +93,12 @@
            </tr>
            {% for p in all_psifoi %}
                  <tr>
-                    <td>{{ forloop.counter }} </td>    <!-- counter a/a -->
+                    {% if selected_order == 1 %}
+                       <td>{{ listaa|index:forloop.counter0 }} </td>    <!-- counter a/a -->
+                    {% else %}
+                       <td>{{ forloop.counter }} </td>
+                    {%  endif %}
+
                     <td>{{ p.2 }} </td>
                     <td >{{ p.3 }}</td>
                     <td>{{ p.4 }} </td>
