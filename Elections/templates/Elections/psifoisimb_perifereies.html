@@ -111,7 +111,19 @@
                     <td>{{ p.2 }} </td>
                     <td >{{ p.3 }}</td>
                     <td>{{ p.4 }} </td>
-                    <td>{{ p.8 }} </td>
+                    {% if p.8 == 'ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ ΣΕΡΡΩΝ' %}
+                        <td bgcolor="#faebd7">{{ p.8 }} </td>
+                    {% elif p.8 == 'ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ ΛΕΥΚΩΝΑ' %}
+                        <td bgcolor="#f4f9f9">{{ p.8 }} </td>
+                    {% elif p.8 == 'ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ ΑΝΩ ΒΡΟΝΤΟΥΣ' %}
+                        <td bgcolor="#fcedf2">{{ p.8 }} </td>
+                     {% elif p.8 == 'ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ ΣΚΟΥΤΑΡΕΩΣ' %}
+                        <td bgcolor="#f2edfc">{{ p.8 }} </td>
+                     {% elif p.8 == 'ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ ΚΑΠΕΤΑΝ ΜΗΤΡΟΥΣΙΟΥ' %}
+                        <td bgcolor="#edc9ce">{{ p.8 }} </td>
+                    {% elif p.8 == 'ΕΚΛΟΓΙΚΗ ΠΕΡΙΦΕΡΕΙΑ ΟΡΕΙΝΗΣ' %}
+                        <td bgcolor="#f2edfc">{{ p.8 }} </td>
+                     {% endif %}
                      <td >{{ p.5 }}</td>
                     <td class="myfontsize">{{ p.7 }}</td>
                      {% if all_psifoi_prin.count %}
