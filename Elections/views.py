@@ -663,11 +663,11 @@ def psifoisimb_perifereies(request, eklid):
     if paramstr == 0: #επιλογή: "ΑΝΕΞΑΡΤΗΤΟΥ ΕΚΛ. ΠΕΡΙΦΕΡΕΙΑΣ"
         selected_perifereia = 0
         all_psifoi = selected_ekloges.eklsumpsifoisimbpervw_set.values_list('eklid', 'simbid',
-            'surname', 'firstname', 'fathername', 'sindiasmosnew','toposeklogisid', 'sumvotes' ).order_by('-sumvotes')
+            'surname', 'firstname', 'fathername', 'sindiasmosnew','toposeklogisid', 'sumvotes', 'toposeklogis' ).order_by('-sumvotes')
     else:
         selected_perifereia = Perifereies.objects.get(perid=paramstr).perid                      #retrieve Από το EklSumpsifoisimbPerVw
         all_psifoi = selected_ekloges.eklsumpsifoisimbpervw_set.filter(toposeklogisid=paramstr).values_list('eklid', 'simbid',
-            'surname', 'firstname', 'fathername', 'sindiasmosnew','toposeklogisid', 'sumvotes' )
+            'surname', 'firstname', 'fathername', 'sindiasmosnew','toposeklogisid', 'sumvotes', 'toposeklogis' )
 
     selected_order = paramorder
 
