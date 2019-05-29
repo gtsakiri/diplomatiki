@@ -19,7 +19,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
     Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
-    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw
+    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw, EklSumpsifoiKenVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm, \
     PsifodeltiaKoinForm
@@ -678,6 +678,10 @@ def psifoisimb_perifereies(request, eklid):
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
     all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
 
+    akataxorita = EklSumpsifoiKenVw.objects.filter(eklid=eklid).filter(sumvotes=0)
+    listakataxorita = []
+    for item in akataxorita:
+        listakataxorita.append(item.kentro)
 
     listaa = []
     if paramorder == 1:
@@ -737,6 +741,7 @@ def psifoisimb_perifereies(request, eklid):
                'selected_order':selected_order,
                'katametrimena_psifoi':katametrimena_psifoi,
                'listaa' : listaa,
+               'listakataxorita': listakataxorita,
                'sigritika' : sigritika}
 
     return render(request, 'Elections/psifoisimb_perifereies.html',context)
