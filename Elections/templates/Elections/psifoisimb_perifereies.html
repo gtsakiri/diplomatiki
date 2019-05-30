@@ -73,19 +73,21 @@
 
         </form>
 
-        <div class="divmargin">
+         <div style="border: thick solid red">
         {% if listakataxorita %}
             <label class="label6">Δεν καταχωρήθηκε σταυροδοσία για τα εκλ. κέντρα:</label>
             {% for i in listakataxorita %}
               {{ listakataxorita|index:forloop.counter0 }}
-                {% if not forloop.last %},{% endif %}
+                 {% if not forloop.last %},{% endif %}
             {% endfor %}
         {% endif %}
 
-        </div>
-        <div><label class="label6">Στην παρούσα σελίδα θα ανακοινωθεί η λήξη της καταχώρισης της σταυροδοσίας από το Δήμο Σερρών. Μέχρι τότε ενδέχεται να γίνονται ακόμα προσθήκες ή διορθώσεις!</label></div>
 
         <br>
+
+         <label class="label6">Στην παρούσα σελίδα θα ανακοινωθεί η λήξη της καταχώρησης της σταυροδοσίας από το Δήμο Σερρών. Μέχρι τότε ενδέχεται να γίνονται ακόμα προσθήκες ή διορθώσεις!</label>
+         </div>
+         <div class="divmargin"></div>
 
         <table class="table styletd1 table-bordered table-condensed  table-hover">
            <tbody >
