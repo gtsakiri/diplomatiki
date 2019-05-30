@@ -4034,6 +4034,7 @@ def eklsindkoin_for_viewers(request, eklid):
     # φιλτράρισμα επιλεγμένου κέντρου
     selected_koinotita = Koinotites.objects.get(koinid=paramstr).koinid
 
+
     # ανάκτηση όλων των κέντρων της εκλ. αναμέτρησης
     if selected_ekloges.sisid.sisid == 1:
         all_koinotites = Koinotites.objects.filter(eidos__lte=2)
@@ -4045,8 +4046,12 @@ def eklsindkoin_for_viewers(request, eklid):
     # επιλογή όλων των εκλ. αναμετρήσεων με visible=1 και κάνω φθίνουσα ταξινόμηση  αν δεν δοθεί παράμετρος
     all_ekloges = Eklogestbl.objects.filter(visible=1).order_by('-eklid')
 
+    katametrimena_koinotites = EklKatametrimenaPsifoiKoinotitesOnlyVw.objects.get(eklid=eklid).katametrimena_koinotites
+    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).order_by('-posostosindiasmou')
+
+
     all_eklsindkoin = selected_ekloges.eklsindkoin_set.filter(koinid=paramstr).order_by('-edresk_teliko')
-    all_pososta = EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimenak', 'plithoskentrwn','posostokatametrimenwnkentrwnk').distinct()
+
 
     flagDraw = 0
     for item in all_eklsindkoin:
@@ -4059,6 +4064,7 @@ def eklsindkoin_for_viewers(request, eklid):
                'all_pososta' : all_pososta,
                'selected_koinotita' :  selected_koinotita,
                'all_koinotites' : all_koinotites,
+               'katametrimena_koinotites' : katametrimena_koinotites,
                'flagDraw' : flagDraw
 
                }
