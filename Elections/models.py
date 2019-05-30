@@ -347,14 +347,25 @@ class EklKatametrimenaPsifoiVw(models.Model):
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_KATAMETRIMENA_PSIFOI_VW'
 
+class EklKatametrimenaPsifoiKoinotitesOnlyVw(models.Model):
+    id = models.IntegerField(primary_key=True)
+    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
+    katametrimena_koinotites = models.BigIntegerField()
+
+    def __str__(self):
+        return str(self.eklid) + ' - ' + str(self.katametrimena_koinotites)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'EKL_KATAMETRIMENA_PSIFOI_KOINOTHTES_ONLY'
 
 class EklKatametrimenaVw(models.Model):
     id = models.IntegerField(primary_key=True)
     eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
-    katametrimena = models.BigIntegerField()
+    katametrimena_psifoi = models.BigIntegerField()
 
     def __str__(self):
-        return str(self.eklid) + ' - ' + str(self.katametrimena)
+        return str(self.eklid) + ' - ' + str(self.katametrimena_psifoi)
 
     class Meta:
         managed = False  # Created from a view. Don't remove.

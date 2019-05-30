@@ -19,7 +19,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
     Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
-    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw, EklSumpsifoiKenVw
+    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw, EklSumpsifoiKenVw, EklKatametrimenaPsifoiKoinotitesOnlyVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm, \
     PsifodeltiaKoinForm
@@ -104,11 +104,11 @@ def export_psifoikoin_xls(request,eklid, selected_order, eidoskoinotitas):
 
     row_num+=2
 
-    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
+    katametrimena_koinotites = EklKatametrimenaPsifoiKoinotitesOnlyVw.objects.get(eklid=eklid).katametrimena_koinotites
     firstrow=EklSumpsifodeltiasindVw.objects.filter(eklid=eklid).values_list('katametrimena', 'plithoskentrwn','posostokatametrimenwnkentrwn').distinct()
     #for col_num in range(len(firstrow[0])):
     if firstrow:
-        ws.write(row_num, 0, 'Στα ' + str(katametrimena_psifoi)+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα' , font_style)
+        ws.write(row_num, 0, 'Στα ' + str(katametrimena_koinotites)+ ' από τα '+ str(firstrow[0][1]) + ' εκλ. κέντρα' , font_style)
     else:
         #ws.write(row_num, 0, 'Δεν υπάρχουν καταχωρήσεις!', font_style)
         messages.error(request, 'Δεν υπάρχουν καταχωρήσεις!')
@@ -787,7 +787,9 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
         selected_menu = ' (> 300 κάτοικοι)'
 
     selected_order = paramorder
-    katametrimena_psifoi = EklKatametrimenaPsifoiVw.objects.get(eklid=eklid).katametrimena
+
+
+    katametrimena_koinotites = EklKatametrimenaPsifoiKoinotitesOnlyVw.objects.get(eklid=eklid).katametrimena_koinotites
 
     #ανάκτηση όλων των κοινοτητων
     all_koinotites=Koinotites.objects.all().filter(eidos=eidoskoinotitas)
@@ -813,7 +815,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
                'selected_koinotita': selected_koinotita,
                'selected_order':selected_order,
                'eidoskoinotitas': eidoskoinotitas,
-               'katametrimena_psifoi' : katametrimena_psifoi,
+               'katametrimena_koinotites' : katametrimena_koinotites,
                'selected_menu':selected_menu,}
     return render(request, 'Elections/psifoisimb_koinotites.html',context)
 
