@@ -1,6 +1,7 @@
 {% extends 'Elections/base.html' %}
 
 {% load staticfiles %}
+{% load elections_extras %}
 
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
@@ -51,7 +52,33 @@
 
         </form>
 
-          </div>
+        </div>
+
+       {% if listakataxoritaPer or  listakataxoritaKoin %}
+
+        <div style="border: thick solid red">
+        {% if listakataxoritaPer %}
+            <label class="label6">Δεν καταχωρήθηκε σταυροδοσία για τους υποψ. δημοτικούς συμβούλους σταεκλ. κέντρα:</label>
+            {% for i in listakataxoritaPer %}
+              {{ listakataxoritaPer|index:forloop.counter0 }}
+                 {% if not forloop.last %},{% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <br>
+
+        {% if listakataxoritaKoin %}
+            <label class="label6">Δεν καταχωρήθηκε η σταυροδοσία για τους υποψ. τοπικούς συμβούλους στα εκλ. κέντρα:</label>
+            {% for i in listakataxoritaKoin %}
+              {{ listakataxoritaKoin|index:forloop.counter0 }}
+                 {% if not forloop.last %},{% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+
+       {% endif %}
+
+
 
         <div class="divmargin"></div>
 

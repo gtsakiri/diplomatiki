@@ -812,3 +812,18 @@ class EklSumpsifoiKenVw(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'EKL_SUMPSIFOI_KEN_VW'
+
+class EklSumpsifoiKoinVw(models.Model):
+    id = models.IntegerField(primary_key=True)
+    eklid = models.IntegerField(db_column='eklID')  # Field name made lowercase.
+    kentro = models.CharField(max_length=45)
+    kenid = models.IntegerField(db_column='kenID')  # Field name made lowercase.
+    sumvotes = models.DecimalField(db_column='sumVotes', max_digits=32, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+
+
+    def __str__(self):
+        return self.kentro   + ' - ' +  str(self.sumvotes)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'EKL_SUMPSIFOI_KOIN_VW'

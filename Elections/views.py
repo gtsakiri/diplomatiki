@@ -19,7 +19,7 @@ from .models import Eklogestbl, EklSumpsifodeltiasindVw, EklPosostasindPerVw, Pe
     Kentra, EklPsifoisimbVw, Edres, Sistima, Sindiasmoi, Eklsind, Eklper, Edreskoin, Typeofkoinotita, Eklperkoin, \
     Eklsindkoin, Psifodeltia, Simbouloi, EklSumpsifoisimbWithIdVw, Eklsimbper, Eklsindsimb, Eklsimbkoin, EklallsimbVw, \
     Psifoi, EklSumpsifoisimbVw, EklSumpsifodeltiasindKoinVw, EklSumpsifodeltiasindKoinVw, \
-    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw, EklSumpsifoiKenVw, EklKatametrimenaPsifoiKoinotitesOnlyVw
+    EklSumpsifodeltiasindKenTopikoiOnlyVw, EklSumpsifoisimbPerLightVw, EklKatametrimenaPsifoiVw, EklSumpsifoiKenVw, EklKatametrimenaPsifoiKoinotitesOnlyVw, EklSumpsifoiKoinVw
 from .forms import EdresForm, SistimaForm, EklogestblForm, SindiasmoiForm, EklsindForm, PerifereiesForm, EdresKoinForm, \
     TypeofkoinotitaForm, KoinotitesForm, EklsindkoinForm, KentraForm, PsifodeltiaForm, SimbouloiForm, PsifoiForm, \
     PsifodeltiaKoinForm
@@ -395,7 +395,7 @@ def export_psifoisimb_ken(request,eklid, selected_order):
 
     row_num += 2
 
-    columns = ['Εκλ. Κέντρο', 'Επώνυμο', 'Όνομα', 'Όν. Πατρός', 'Είδος', 'Συνδυασμός', 'Ψήφοι']
+    columns = ['Εκλ. Κέντρο', 'Κοινότητα', 'Επώνυμο', 'Όνομα', 'Όν. Πατρός', 'Είδος', 'Συνδυασμός', 'Ψήφοι']
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
@@ -405,15 +405,15 @@ def export_psifoisimb_ken(request,eklid, selected_order):
 
     #rows = EklSumpsifoisimbPerVw.objects.filter(eklid=eklid).values_list('sindiasmos', 'surname', 'firstname', 'fathername', 'toposeklogis', 'sumvotes')
     if selected_order == 1 or selected_order == 6:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','sindiasmosnew', '-votes')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro','koinotita', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','sindiasmosnew', '-votes')
     elif selected_order == 2:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid', 'sindiasmosnew','surname', 'firstname')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro','koinotita', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid', 'sindiasmosnew','surname', 'firstname')
     elif selected_order == 3:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','surname','firstname')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro','koinotita', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','surname','firstname')
     elif selected_order == 4:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','-votes')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro','koinotita', 'surname', 'firstname', 'fathername','eidos', 'sindiasmosnew', 'votes').order_by('kenid','-votes')
     else:
-        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','eidos','-votes')
+        rows = EklPsifoisimbVw.objects.filter(eklid=eklid).values_list('kentro','koinotita', 'surname', 'firstname', 'fathername', 'eidos', 'sindiasmosnew', 'votes').order_by('kenid','eidos','-votes')
 
     for row in rows:
         row_num += 1
@@ -791,6 +791,11 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
 
     katametrimena_koinotites = EklKatametrimenaPsifoiKoinotitesOnlyVw.objects.get(eklid=eklid).katametrimena_koinotites
 
+    akataxorita = EklSumpsifoiKoinVw.objects.filter(eklid=eklid).filter(sumvotes=0).order_by('kentro')
+    listakataxorita = []
+    for item in akataxorita:
+        listakataxorita.append(item.kentro)
+
     #ανάκτηση όλων των κοινοτητων
     all_koinotites=Koinotites.objects.all().filter(eidos=eidoskoinotitas)
     #ανάκτηση εγγραφών επιλεγμένης εκλ. αναμέτρησης από το σχετικό database view
@@ -816,6 +821,7 @@ def psifoisimb_koinotites(request, eklid, eidoskoinotitas):
                'selected_order':selected_order,
                'eidoskoinotitas': eidoskoinotitas,
                'katametrimena_koinotites' : katametrimena_koinotites,
+               'listakataxorita' : listakataxorita,
                'selected_menu':selected_menu,}
     return render(request, 'Elections/psifoisimb_koinotites.html',context)
 
@@ -1025,6 +1031,18 @@ def psifoisimb_ken(request, eklid):
     # φιλτράρισμα επιλεγμένου κέντρου
     selected_kentro = selected_ekloges.kentra_set.get(kenid=paramstr).kenid
 
+    #Κέντρα όπου δεν περάστηκε σταυροδοσία (Δημ. Συμβουλοι)
+    akataxoritaPer = EklSumpsifoiKenVw.objects.filter(eklid=eklid).filter(sumvotes=0)
+    listakataxoritaPer = []
+    for item in akataxoritaPer:
+        listakataxoritaPer.append(item.kentro)
+
+    #Κέντρα όπου δεν περάστηκε σταυροδοσία (Τοπ. Συμβουλοι)
+    akataxoritaKoin = EklSumpsifoiKoinVw.objects.filter(eklid=eklid).filter(sumvotes=0).order_by('kentro')
+    listakataxoritaKoin = []
+    for item in akataxoritaKoin:
+        listakataxoritaKoin.append(item.kentro)
+
     selected_order = paramorder
 
     #ανάκτηση όλων των κέντρων της εκλ. αναμέτρησης
@@ -1050,6 +1068,8 @@ def psifoisimb_ken(request, eklid):
                'selected_ekloges':selected_ekloges.eklid,
                'all_kentra':all_kentra,
                'selected_kentro': selected_kentro,
+               'listakataxoritaPer' : listakataxoritaPer,
+               'listakataxoritaKoin' : listakataxoritaKoin,
                'selected_order':selected_order,
                }
     return render(request, 'Elections/psifoisimb_ken.html',context)

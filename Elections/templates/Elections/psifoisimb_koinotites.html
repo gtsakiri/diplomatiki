@@ -1,6 +1,7 @@
 {% extends 'Elections/base.html' %}
 
 {% load staticfiles %}
+{% load elections_extras %}
 
 <!-- καλούμε το base.html που προσθέτει το σταθερό Menu -->
 
@@ -58,7 +59,19 @@
 
         </div>
 
-       <div class="divmargin"> </div>
+       {% if listakataxorita %}
+
+        <div style="border: thick solid red">
+
+            <label class="label6">Δεν καταχωρήθηκε η σταυροδοσία για τους τοπικούς συμβούλους στα εκλ. κέντρα:</label>
+            {% for i in listakataxorita %}
+              {{ listakataxorita|index:forloop.counter0 }}
+                 {% if not forloop.last %},{% endif %}
+            {% endfor %}
+
+        </div>
+
+       {% endif %}
 
     <div class="divmargin"> </div>
     <!-- <div class="container-fluid" overflow:auto> -->
