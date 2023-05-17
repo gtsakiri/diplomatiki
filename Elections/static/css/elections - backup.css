@@ -3,63 +3,23 @@
 }
 
 body {
-    padding-left : 45px;
-    display : grid ;
-
-    grid-template: 1fr 10fr 0.5fr 0.5fr/ 1fr 4fr;
+    padding-left : 15px;
     font-family : 'Arial' ;
     background-color: rgba(164, 209, 252, 0.01); /* Black Gray */
 }
 
 .sidenav {
   height: 100%;
-  /*width: 350px;*/
+  width: 350px;
  /* position: fixed;*/
-  /*z-index: 1;*/
-  /*top: 0;*/
-  /*left: 0;*/
-    padding: 1em;
+  z-index: 1;
+  top: 0;
+  left: 0;
   background-color: #337ab7;
   overflow-x: hidden;
   /*padding-top: 5px;*/
   padding-bottom: 0px !important;
-    grid-column: 1;
-   grid-row: 2 / 3;
 }
-
-
-.maincontent {
-
-    grid-column: 2 / 4;
-    grid-row:  2 ;
-    gap:0.5em;
-    justify-content: stretch;
-    flex-direction: column;
-    padding-left: 2em;
-    padding-right: 2em;
-}
-
-
-.visitors {
-    /*background-color : #3beb89;*/
-    border: #0c0b0b;
-    grid-column: 1 / 4;
-    grid-row:  3;
-}
-
-.visitor-items {
-    display : flex;
-    border: #0c0b0b;
-    /*background-color : #990000;*/
-}
-
-
-.basefooter {
-    grid-column: 1 / 4;
-    grid-row:  4;
-}
-
-
 
 .sidenav a {
     padding: 3px 3px  !important;
@@ -94,7 +54,6 @@ body {
 .navbar-default {
     background-color: #337ab7;
     border-color: #E7E7E7;
-    grid-column: 1 / 4;
 }
 
 

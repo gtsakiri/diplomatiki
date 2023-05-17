@@ -38,9 +38,7 @@
 
   </head>
 
-{#  <body  background="media/bgekloges3.jpg" class="img-fluid" alt="Responsive image">#}
-
-   <body  >
+  <body  background="media/bgekloges3.jpg" class="img-fluid" alt="Responsive image">
 
 
   <nav class="navbar navbar-default">
@@ -125,14 +123,13 @@
      <!-- end of header -->
 
 
-{#  <div class="container-fluid">#}
-{#      <div class="row">#}
+  <div class="container-fluid">
+      <div class="row">
 
               <!-- start of side bar -->
          <!--   <nav class="col-sm-4 col-md-3 d-none d-sm-block bg-light sidebar"> -->
-  <div class="sidenav">
-           <div  style="overflow-x: hidden; overflow-y: hidden; ">
-     {#  width: 300px; height : 100%;#}
+        <div class="sidenav col-sm-4 col-md-3 d-none d-sm-block">
+            <div  style="overflow-x: hidden; overflow-y: hidden; width: 300px; height : 100%;">
 
                 <!--<p id="demo1" type="hidden" ></p> -->
                 <div class="sidebar-header">
@@ -298,16 +295,15 @@
 
 
         <!-- </nav> -->
-  </div>
+        </div>
          <!-- end of side bar -->
 
 
          <!-- start of main window  -->
 
-{#        <main role="main" class="col-sm-7 col-md-8 pt-1">#}
-           <!-- ΑΝΤΙΣΤΡΟΦΗ ΜΕΤΡΗΣΗ  -->
-  <div class="maincontent">
-         <p style="font-size: 24px; color: fuchsia; text-align: center" id="democounter"></p>
+        <main role="main" class="col-sm-7 col-md-8 pt-1">
+ <!-- ΑΝΤΙΣΤΡΟΦΗ ΜΕΤΡΗΣΗ  -->
+<p style="font-size: 24px; color: fuchsia; text-align: center" id="democounter"></p>
 
                 <div class="text-center">
                 {%  if all_ekloges %}
@@ -323,12 +319,9 @@
 
         {% endblock %}
 
-
-  </div>
-
-{#        </main>#}
-{#      </div>    <!-- end of <div class="row"> -->#}
-{#    </div>    <!-- end of <div class="container-fluid"> -->#}
+        </main>
+      </div>    <!-- end of <div class="row"> -->
+    </div>    <!-- end of <div class="container-fluid"> -->
 
 
 
@@ -386,33 +379,28 @@
 
   <br>
 
-  <div  class="visitors" style="overflow-x: hidden; overflow-y: hidden;">
-      <div class="visitor-items">
+  <div  style="overflow-x: hidden; overflow-y: hidden; width: 200px; height : 100%;">
+      <br>
       <b>Επισκέπτες:</b>
 
        <!-- Start of CuterCounter Code -->
       <a href="http://www.cutercounter.com/" target="_blank"><img src="http://www.cutercounter.com/hits.php?id=gmrpncco&nd=7&style=15" border="0" alt="visitor counter"></a>
-          <!-- End of CuterCounter Code -->
-      </div>
+       <!-- End of CuterCounter Code -->
 
 
   </div>
 
 
-    <footer class="basefooter bg-4 text-center">
+
+
+  </body>
+
+  <br>
+    <footer class="container-fluid bg-4 text-center">
      <div id="footer-content">
      <p>Σχεδιασμός – Υλοποίηση: Τσακιρίδης Γεώργιος (Στα πλαίσια Μεταπτυχιακής Διπλωματικής εργασίας για το ΠΜΣ Εφαρμοσμένη Πληροφορική του ΤΕΙ Κεντρικής Μακεδονίας)</p>
     </div>
     </footer>
 
-
-   </body>
-
 </html>
-
-
-
-
-
-
 
